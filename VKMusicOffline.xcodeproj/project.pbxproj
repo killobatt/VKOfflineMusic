@@ -1,0 +1,416 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CBB7A90419CD844100E95307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7A90319CD844100E95307 /* AppDelegate.swift */; };
+		CBB7A90619CD844100E95307 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7A90519CD844100E95307 /* MasterViewController.swift */; };
+		CBB7A90819CD844100E95307 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7A90719CD844100E95307 /* DetailViewController.swift */; };
+		CBB7A90B19CD844100E95307 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBB7A90919CD844100E95307 /* Main.storyboard */; };
+		CBB7A90D19CD844100E95307 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBB7A90C19CD844100E95307 /* Images.xcassets */; };
+		CBB7A91919CD844200E95307 /* VKMusicOfflineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7A91819CD844200E95307 /* VKMusicOfflineTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CBB7A91319CD844200E95307 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB7A8F619CD844100E95307 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CBB7A8FD19CD844100E95307;
+			remoteInfo = VKMusicOffline;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CBB7A8FE19CD844100E95307 /* VKMusicOffline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKMusicOffline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBB7A90219CD844100E95307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBB7A90319CD844100E95307 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CBB7A90519CD844100E95307 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		CBB7A90719CD844100E95307 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		CBB7A90A19CD844100E95307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CBB7A90C19CD844100E95307 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CBB7A91219CD844200E95307 /* VKMusicOfflineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VKMusicOfflineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBB7A91719CD844200E95307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBB7A91819CD844200E95307 /* VKMusicOfflineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKMusicOfflineTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CBB7A8FB19CD844100E95307 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CBB7A90F19CD844200E95307 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CBB7A8F519CD844100E95307 = {
+			isa = PBXGroup;
+			children = (
+				CBB7A90019CD844100E95307 /* VKMusicOffline */,
+				CBB7A91519CD844200E95307 /* VKMusicOfflineTests */,
+				CBB7A8FF19CD844100E95307 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CBB7A8FF19CD844100E95307 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CBB7A8FE19CD844100E95307 /* VKMusicOffline.app */,
+				CBB7A91219CD844200E95307 /* VKMusicOfflineTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CBB7A90019CD844100E95307 /* VKMusicOffline */ = {
+			isa = PBXGroup;
+			children = (
+				CBB7A90319CD844100E95307 /* AppDelegate.swift */,
+				CBB7A90519CD844100E95307 /* MasterViewController.swift */,
+				CBB7A90719CD844100E95307 /* DetailViewController.swift */,
+				CBB7A90919CD844100E95307 /* Main.storyboard */,
+				CBB7A90C19CD844100E95307 /* Images.xcassets */,
+				CBB7A90119CD844100E95307 /* Supporting Files */,
+			);
+			path = VKMusicOffline;
+			sourceTree = "<group>";
+		};
+		CBB7A90119CD844100E95307 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CBB7A90219CD844100E95307 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CBB7A91519CD844200E95307 /* VKMusicOfflineTests */ = {
+			isa = PBXGroup;
+			children = (
+				CBB7A91819CD844200E95307 /* VKMusicOfflineTests.swift */,
+				CBB7A91619CD844200E95307 /* Supporting Files */,
+			);
+			path = VKMusicOfflineTests;
+			sourceTree = "<group>";
+		};
+		CBB7A91619CD844200E95307 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CBB7A91719CD844200E95307 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CBB7A8FD19CD844100E95307 /* VKMusicOffline */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBB7A91C19CD844200E95307 /* Build configuration list for PBXNativeTarget "VKMusicOffline" */;
+			buildPhases = (
+				CBB7A8FA19CD844100E95307 /* Sources */,
+				CBB7A8FB19CD844100E95307 /* Frameworks */,
+				CBB7A8FC19CD844100E95307 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VKMusicOffline;
+			productName = VKMusicOffline;
+			productReference = CBB7A8FE19CD844100E95307 /* VKMusicOffline.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CBB7A91119CD844200E95307 /* VKMusicOfflineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBB7A91F19CD844200E95307 /* Build configuration list for PBXNativeTarget "VKMusicOfflineTests" */;
+			buildPhases = (
+				CBB7A90E19CD844200E95307 /* Sources */,
+				CBB7A90F19CD844200E95307 /* Frameworks */,
+				CBB7A91019CD844200E95307 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CBB7A91419CD844200E95307 /* PBXTargetDependency */,
+			);
+			name = VKMusicOfflineTests;
+			productName = VKMusicOfflineTests;
+			productReference = CBB7A91219CD844200E95307 /* VKMusicOfflineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CBB7A8F619CD844100E95307 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Vjacheslav Volodko";
+				TargetAttributes = {
+					CBB7A8FD19CD844100E95307 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					CBB7A91119CD844200E95307 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = CBB7A8FD19CD844100E95307;
+					};
+				};
+			};
+			buildConfigurationList = CBB7A8F919CD844100E95307 /* Build configuration list for PBXProject "VKMusicOffline" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CBB7A8F519CD844100E95307;
+			productRefGroup = CBB7A8FF19CD844100E95307 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CBB7A8FD19CD844100E95307 /* VKMusicOffline */,
+				CBB7A91119CD844200E95307 /* VKMusicOfflineTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CBB7A8FC19CD844100E95307 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBB7A90B19CD844100E95307 /* Main.storyboard in Resources */,
+				CBB7A90D19CD844100E95307 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CBB7A91019CD844200E95307 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CBB7A8FA19CD844100E95307 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBB7A90819CD844100E95307 /* DetailViewController.swift in Sources */,
+				CBB7A90619CD844100E95307 /* MasterViewController.swift in Sources */,
+				CBB7A90419CD844100E95307 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CBB7A90E19CD844200E95307 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBB7A91919CD844200E95307 /* VKMusicOfflineTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CBB7A91419CD844200E95307 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CBB7A8FD19CD844100E95307 /* VKMusicOffline */;
+			targetProxy = CBB7A91319CD844200E95307 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CBB7A90919CD844100E95307 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CBB7A90A19CD844100E95307 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CBB7A91A19CD844200E95307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CBB7A91B19CD844200E95307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CBB7A91D19CD844200E95307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = VKMusicOffline/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CBB7A91E19CD844200E95307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = VKMusicOffline/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CBB7A92019CD844200E95307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VKMusicOffline.app/VKMusicOffline";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = VKMusicOfflineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		CBB7A92119CD844200E95307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VKMusicOffline.app/VKMusicOffline";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = VKMusicOfflineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CBB7A8F919CD844100E95307 /* Build configuration list for PBXProject "VKMusicOffline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBB7A91A19CD844200E95307 /* Debug */,
+				CBB7A91B19CD844200E95307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CBB7A91C19CD844200E95307 /* Build configuration list for PBXNativeTarget "VKMusicOffline" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBB7A91D19CD844200E95307 /* Debug */,
+				CBB7A91E19CD844200E95307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CBB7A91F19CD844200E95307 /* Build configuration list for PBXNativeTarget "VKMusicOfflineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBB7A92019CD844200E95307 /* Debug */,
+				CBB7A92119CD844200E95307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CBB7A8F619CD844100E95307 /* Project object */;
+}
