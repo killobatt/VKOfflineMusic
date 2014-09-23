@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import VK
+
+let kVKApplicationID = "4557517"
+let kVKApplicationSecretKey = "284RSWeVjNwxMwk5nX5w"
+
+let kVKAuthScopeFriends = "friends"
+let kVKAuthScopeAudio = "audio"
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
 
+    // MARK: - UIApplicationDelegate
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
@@ -20,6 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
         navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
+        splitViewController.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+        
+        VKSdk.initializeWithDelegate(self, andAppId:kVKApplicationID)
+        if (VKSdk.wakeUpSession() == false) {
+            self.vkAuthorize()
+        } else if (VKSdk.isLoggedIn() == false) {
+            self.vkAuthorize()
+        }
         return true
     }
 
@@ -47,16 +63,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     // MARK: - Split view
 
-    func splitViewController(splitViewController: UISplitViewController!, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
-        if let secondaryAsNavController = secondaryViewController as? UINavigationController {
-            if let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController {
-                if !topAsDetailController.detailItem {
-                    // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-                    return true
-                }
-            }
-        }
-        return false
+//    func splitViewController(splitViewController: UISplitViewController!, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
+//        if let secondaryAsNavController = secondaryViewController as? UINavigationController {
+//            if let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController {
+//                if !topAsDetailController.detailItem {
+//                    // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+//                    return true
+//                }
+//            }
+//        }
+//        return false
+//    }
+    
+    func application(application: UIApplication!, openURL url: NSURL!, sourceApplication: String!, annotation: AnyObject!) -> Bool {
+        VKSdk.processOpenURL(url, fromApplication:sourceApplication)
+        return true
+    }
+    
+    // MARK: - VKSDK Delegate
+    
+    /**
+    Calls when user must perform captcha-check
+    @param captchaError error returned from API. You can load captcha image from <b>captchaImg</b> property.
+    After user answered current captcha, call answerCaptcha: method with user entered answer.
+    */
+    func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
+        var vc : VKCaptchaViewController = VKCaptchaViewController.captchaControllerWithError(captchaError)
+        self.window?.rootViewController.presentViewController(vc, animated: true, completion:nil)
+    }
+    
+    /**
+    Notifies delegate about existing token has expired
+    @param expiredToken old token that has expired
+    */
+    func vkSdkTokenHasExpired(expiredToken: VKAccessToken!) {
+        self.vkAuthorize()
+    }
+    
+    /**
+    Notifies delegate about user authorization cancelation
+    @param authorizationError error that describes authorization error
+    */
+    func vkSdkUserDeniedAccess(authorizationError: VKError!) {
+        
+    }
+    
+    /**
+    Pass view controller that should be presented to user. Usually, it's an authorization window
+    @param controller view controller that must be shown to user
+    */
+    func vkSdkShouldPresentViewController(controller: UIViewController!) {
+        self.window?.rootViewController.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    /**
+    Notifies delegate about receiving new access token
+    @param newToken new token for API requests
+    */
+    func vkSdkReceivedNewToken(newToken: VKAccessToken!) {
+        
+    }
+    
+    
+    func vkAuthorize() {
+        VKSdk.authorize([kVKAuthScopeFriends, kVKAuthScopeAudio], revokeAccess:false, forceOAuth:false, inApp:false)
     }
 
 }
