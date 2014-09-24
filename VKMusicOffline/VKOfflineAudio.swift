@@ -9,7 +9,7 @@
 import UIKit
 import VK
 
-class VKOfflineAudio: NSObject {
+class VKOfflineAudio: NSObject, NSCoding {
     var id : NSNumber!
     var ownerID : NSNumber!
     var artist : NSString!
@@ -50,5 +50,31 @@ class VKOfflineAudio: NSObject {
             self.duration = 0
         }        
     }
- 
+    
+    // MARK: - NSCoding interface implementation
+    
+    func encodeWithCoder(aCoder: NSCoder!) {
+        aCoder.encodeInteger(self.id.integerValue, forKey: "id")
+        aCoder.encodeInteger(self.ownerID.integerValue, forKey: "ownerID")
+        aCoder.encodeObject(self.artist, forKey: "artist")
+        aCoder.encodeObject(self.title, forKey: "title")
+        aCoder.encodeObject(self.URL, forKey: "URL")
+        aCoder.encodeObject(self.localURL, forKey: "localURL")
+        aCoder.encodeObject(self.lyricsID, forKey: "lyricsID")
+        aCoder.encodeObject(self.albumID, forKey: "ownerID")
+        aCoder.encodeInteger(self.duration, forKey: "duration")
+    }
+    
+    init(coder aDecoder: NSCoder!) {
+        self.id = NSNumber(int: aDecoder.decodeIntForKey("id"))
+        self.ownerID = NSNumber(int: aDecoder.decodeIntForKey("ownerID"))
+        self.artist = aDecoder.decodeObjectForKey("artist") as NSString
+        self.title = aDecoder.decodeObjectForKey("title") as NSString
+        self.URL = aDecoder.decodeObjectForKey("URL") as NSURL
+        self.localURL = aDecoder.decodeObjectForKey("localURL") as NSURL
+        self.lyricsID = aDecoder.decodeObjectForKey("lyricsID") as NSNumber
+        self.albumID = aDecoder.decodeObjectForKey("albumID") as NSNumber
+        self.duration = NSNumber(int: aDecoder.decodeIntForKey("artist"))
+    }
+    
 }
