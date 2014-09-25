@@ -8,13 +8,14 @@
 
 import UIKit
 import VK
+import UIViews
 
 class MenuUserInfoCell: UITableViewCell {
     
     // MARK: - IBOutlets
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var lastNameLabel: UILabel!
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userImageView: URLImageView!
     
     // MARK: - VKUser
     var user : VKUser! {
@@ -22,11 +23,7 @@ class MenuUserInfoCell: UITableViewCell {
             if (newUser != nil) {
                 self.firstNameLabel.text = newUser.first_name
                 self.lastNameLabel.text = newUser.last_name
-                NSURLSession.sharedSession().dataTaskWithURL(NSURL.URLWithString(newUser.photo_100),
-                    completionHandler: {(data: NSData!, response: NSURLResponse!, error: NSError!) -> Void in
-                        let img: UIImage = UIImage(data: data)
-                        self.userImageView.image = img
-                })
+                self.userImageView.imageURL = NSURL(string: newUser.photo_100)
             }
         }
     }
