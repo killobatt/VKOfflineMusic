@@ -13,20 +13,25 @@ class VKSearchAudioList: VKOnlineAudioList {
     
     var searchTerm: NSString!
     
-    override var request: VKRequest! {
-    get {
-        let parameters = [
-            VK_API_Q: self.searchTerm,
-            VK_API_SORT: 2,
-            VK_API_OFFSET: self.currentPage,
-            VK_API_COUNT: self.pageSize,
-            "search_own": 1,
-            "auto_complete": 1,
-        ];
-        return VKApi.requestWithMethod("audio.search",
-            andParameters:parameters,
-            andHttpMethod:"GET")
+    override var parameters: NSDictionary {
+        get {
+            let parameters: NSMutableDictionary = [
+                VK_API_Q: self.searchTerm,
+                VK_API_SORT: 2,
+                "search_own": 1,
+                "auto_complete": 1,
+            ];
+            parameters.addEntriesFromDictionary(super.parameters)
+            return parameters
+        }
     }
+    
+    override var request: VKRequest! {
+        get {
+            return VKApi.requestWithMethod("audio.search",
+                andParameters:self.parameters,
+                andHttpMethod:"GET")
+        }
     }
     
     init(with searchTerm: NSString!) {

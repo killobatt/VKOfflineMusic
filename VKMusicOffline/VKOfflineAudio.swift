@@ -38,13 +38,13 @@ class VKOfflineAudio: NSObject, NSCoding {
         self.ownerID = audio.owner_id
         self.artist = audio.artist
         self.title = audio.title
-        if (audio.url) {
+        if (audio.url != nil) {
             self.URL = NSURL.URLWithString(audio.url)
         }
         self.lyricsID = audio.lyrics_id
         self.albumID = audio.album_id
         self.genreID = audio.genre_id
-        if (audio.duration) {
+        if (audio.duration != nil) {
             self.duration = audio.duration.integerValue
         } else {
             self.duration = 0
@@ -53,7 +53,7 @@ class VKOfflineAudio: NSObject, NSCoding {
     
     // MARK: - NSCoding interface implementation
     
-    func encodeWithCoder(aCoder: NSCoder!) {
+    func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeInteger(self.id.integerValue, forKey: "id")
         aCoder.encodeInteger(self.ownerID.integerValue, forKey: "ownerID")
         aCoder.encodeObject(self.artist, forKey: "artist")
@@ -65,7 +65,7 @@ class VKOfflineAudio: NSObject, NSCoding {
         aCoder.encodeInteger(self.duration, forKey: "duration")
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         self.id = NSNumber(int: aDecoder.decodeIntForKey("id"))
         self.ownerID = NSNumber(int: aDecoder.decodeIntForKey("ownerID"))
         self.artist = aDecoder.decodeObjectForKey("artist") as NSString

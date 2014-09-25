@@ -9,9 +9,9 @@
 import UIKit
 import VK
 
-class DetailViewController: UITableViewController {
+class AudioListViewController: UITableViewController {
 
-    var audios: NSMutableArray = []
+    var audioList: VKAudioList! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,17 +31,17 @@ class DetailViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
-        return 1
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return (self.audioList != nil) ? 1 : 0
     }
 
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.audios.count
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.audioList.count
     }
 
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!{
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AudioCell", forIndexPath: indexPath) as AudioCell
-        cell.audio = self.audios[indexPath.row] as VKOfflineAudio
+        cell.audio = self.audioList[indexPath.row]
         
         return cell
     }

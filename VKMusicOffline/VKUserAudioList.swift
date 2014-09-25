@@ -12,15 +12,21 @@ import VK
 class VKUserAudioList: VKOnlineAudioList {
     
     var user: VKUser
+    
+    override var parameters: NSDictionary {
+        get {
+            let parameters: NSMutableDictionary = [
+                VK_API_OWNER_ID: self.user.id,
+            ];
+            parameters.addEntriesFromDictionary(super.parameters)
+            return parameters
+        }
+    }
+    
     override var request: VKRequest! {
         get {
-            let parameters = [
-                VK_API_OWNER_ID: self.user.id,
-                VK_API_OFFSET: self.currentPage,
-                VK_API_COUNT: self.pageSize,
-            ];
             return VKApi.requestWithMethod("audio.get",
-                andParameters:parameters,
+                andParameters:self.parameters,
                 andHttpMethod:"GET")
         }
     }

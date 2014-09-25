@@ -131,10 +131,14 @@ static NSString *const kCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*"
 - (NSString *)queryStringFromParams:(NSDictionary *)params {
 	NSMutableArray *array = [NSMutableArray arrayWithCapacity:params.count];
 	for (NSString *key in params) {
-		if ([params[key] isKindOfClass:[NSString class]])
+        if ([params[key] isKindOfClass:[NSString class]]) {
 			[array addObject:[NSString stringWithFormat:@"%@=%@", key, [self escapeString:params[key]]]];
-		else
+        } else if ([params[key] isKindOfClass:[NSArray class]]) {
+            NSString *arrayStringValue = [(NSArray *)params[key] componentsJoinedByString:@","];
+            [array addObject:[NSString stringWithFormat:@"%@=%@", key, arrayStringValue]];
+        } else {
 			[array addObject:[NSString stringWithFormat:@"%@=%@", key, params[key]]];
+        }
 	}
 	return [array componentsJoinedByString:@"&"];
 }

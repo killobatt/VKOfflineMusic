@@ -13,11 +13,11 @@ class AudioCell: UITableViewCell {
     // MARK: - Audio
     var audio: VKOfflineAudio! {
         willSet(newAudio) {
-            if (newAudio) {
+            if (newAudio != nil) {
                 self.artistNameLabel.text = newAudio.artist
                 self.trackNameLabel.text = newAudio.title
                 self.trackDurationLabel.text = newAudio.durationString
-                if (newAudio.lyricsID) {
+                if (newAudio.lyricsID != nil) {
                     self.lyricsButton.enabled = true
                 } else {
                     self.lyricsButton.enabled = false
@@ -35,9 +35,13 @@ class AudioCell: UITableViewCell {
     
     // MARK: - Overrides
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String) {
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // Initialization code
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     override func awakeFromNib() {

@@ -17,8 +17,27 @@ let kVKAuthScopeAudio = "audio"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitViewControllerDelegate {
-
+    
+    // MARK: - View Controllers
     var window: UIWindow?
+    var splitViewController: UISplitViewController {
+        get {
+            return self.window!.rootViewController as UISplitViewController
+        }
+    }
+    var menuViewController: MenuViewController {
+        get {
+            let navigationController = self.splitViewController.viewControllers.last as UINavigationController
+            return navigationController.viewControllers.first as MenuViewController
+        }
+    }
+    var audioListViewController: AudioListViewController {
+        get {
+            let navigationController = self.splitViewController.viewControllers.first as UINavigationController
+            return navigationController.viewControllers.first as AudioListViewController
+        }
+    }
+    
 
     // MARK: - UIApplicationDelegate
 
@@ -33,7 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
         VKSdk.initializeWithDelegate(self, andAppId:kVKApplicationID)
         if (VKSdk.wakeUpSession() == false) {
             self.vkAuthorize()
-        } else if (VKSdk.isLoggedIn() == false) {
+        } else if (VKSdk.isLoggedIn() == true) {
+            self.vkGetUserInfo()
+        } else {
             self.vkAuthorize()
         }
         return true
@@ -89,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     */
     func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
         var vc : VKCaptchaViewController = VKCaptchaViewController.captchaControllerWithError(captchaError)
-        self.window?.rootViewController.presentViewController(vc, animated: true, completion:nil)
+        self.window?.rootViewController?.presentViewController(vc, animated: true, completion:nil)
     }
     
     /**
@@ -113,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     @param controller view controller that must be shown to user
     */
     func vkSdkShouldPresentViewController(controller: UIViewController!) {
-        self.window?.rootViewController.presentViewController(controller, animated: true, completion: nil)
+        self.window?.rootViewController?.presentViewController(controller, animated: true, completion: nil)
     }
     
     /**
@@ -121,13 +142,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     @param newToken new token for API requests
     */
     func vkSdkReceivedNewToken(newToken: VKAccessToken!) {
-        
+        self.vkGetUserInfo()
     }
     
+    // MARK - VK User
     
     func vkAuthorize() {
         VKSdk.authorize([kVKAuthScopeFriends, kVKAuthScopeAudio], revokeAccess:false, forceOAuth:false, inApp:false)
     }
-
+    
+    func vkGetUserInfo() {
+        let parameters = [
+            VK_API_USER_ID: VKSdk.getAccessToken().userId,
+            VK_API_FIELDS : ["first_name", "last_name", "photo_100", "status"]
+        ]
+        let userRequest = VKApi.users().get(parameters)
+        userRequest.executeWithResultBlock({(response: VKResponse!) -> Void in
+            println(response.json)
+            println(response.parsedModel)
+            if (response.parsedModel is VKUsersArray) {
+                let userList : VKUsersArray = response.parsedModel as VKUsersArray
+                if (userList.count > 0) {
+                    let user = userList[0] as VKUser
+                    self.menuViewController.user = user
+                }
+            }
+            }, errorBlock:{(error: NSError!) -> Void in
+                println(error)
+        })
+    }
 }
 

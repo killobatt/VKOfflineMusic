@@ -11,21 +11,38 @@ import VK
 
 class VKOnlineAudioList: VKAudioList {
 
-    var pageSize: Int = 20
-    var currentPage: Int = 0
+    var pageSize: UInt = 20
+    var currentPage: UInt = 0
+    private var totalCount: UInt = 0
     
+    override var count: Int {
+        get {
+            return Int(self.totalCount)
+        }
+    }
+    
+    var parameters: NSDictionary {
+        get {
+            return [
+                VK_API_OFFSET: self.currentPage,
+                VK_API_COUNT: self.pageSize,
+            ]
+        }
+    }
+
     var request: VKRequest! {
         get {
             return nil
         }
     }
-
+    
     func loadNextPage(#completion:((NSError!) -> Void)?) -> Void {
         self.currentPage++
-        if (self.request) {
+        if (self.request != nil) {
             self.request.executeWithResultBlock({(response: VKResponse!) -> Void in
                 let audios = VKAudios(dictionary:response.json as NSDictionary)
-                for (var i: UInt = 0; i < audios.count; i++) {
+                self.totalCount = audios.count
+                for (var i: UInt = 0; i < self.pageSize; i++) {
                     let audio = audios[i] as VKAudio
                     self.audios.append(VKOfflineAudio(with: audio))
                 }

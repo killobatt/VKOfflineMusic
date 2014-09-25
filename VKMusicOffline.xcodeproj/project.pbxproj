@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CB85503B19D2186600B4EF0A /* VKOfflineAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85503A19D2186600B4EF0A /* VKOfflineAudioList.swift */; };
-		CB9996D019CDC5410076D5E8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9996CF19CDC5410076D5E8 /* DetailViewController.swift */; };
+		CB9996D019CDC5410076D5E8 /* AudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9996CF19CDC5410076D5E8 /* AudioListViewController.swift */; };
 		CB9996D219CDD2FD0076D5E8 /* VKAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9996D119CDD2FD0076D5E8 /* VKAudioList.swift */; };
 		CB9996D519CDD9730076D5E8 /* AudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9996D419CDD9730076D5E8 /* AudioCell.swift */; };
 		CB9996D719CDD98B0076D5E8 /* AudioPlayingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9996D619CDD98B0076D5E8 /* AudioPlayingCell.swift */; };
@@ -17,10 +17,12 @@
 		CBAED45919CE249F00CF634D /* VKUserAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAED45819CE249F00CF634D /* VKUserAudioList.swift */; };
 		CBAED45B19CE285A00CF634D /* VKSearchAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAED45A19CE285A00CF634D /* VKSearchAudioList.swift */; };
 		CBB7A90419CD844100E95307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7A90319CD844100E95307 /* AppDelegate.swift */; };
-		CBB7A90619CD844100E95307 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7A90519CD844100E95307 /* MasterViewController.swift */; };
+		CBB7A90619CD844100E95307 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7A90519CD844100E95307 /* MenuViewController.swift */; };
 		CBB7A90B19CD844100E95307 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBB7A90919CD844100E95307 /* Main.storyboard */; };
 		CBB7A90D19CD844100E95307 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBB7A90C19CD844100E95307 /* Images.xcassets */; };
 		CBB7A91919CD844200E95307 /* VKMusicOfflineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7A91819CD844200E95307 /* VKMusicOfflineTests.swift */; };
+		CBB8A21819D36F0D00FD7251 /* MenuAudioListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB8A21719D36F0D00FD7251 /* MenuAudioListCell.swift */; };
+		CBB8A21A19D36F3200FD7251 /* MenuUserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB8A21919D36F3200FD7251 /* MenuUserInfoCell.swift */; };
 		CBBF901119CD9408005CB421 /* VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF8FF819CD9216005CB421 /* VK.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +73,7 @@
 
 /* Begin PBXFileReference section */
 		CB85503A19D2186600B4EF0A /* VKOfflineAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKOfflineAudioList.swift; sourceTree = "<group>"; };
-		CB9996CF19CDC5410076D5E8 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		CB9996CF19CDC5410076D5E8 /* AudioListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioListViewController.swift; sourceTree = "<group>"; };
 		CB9996D119CDD2FD0076D5E8 /* VKAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKAudioList.swift; sourceTree = "<group>"; };
 		CB9996D419CDD9730076D5E8 /* AudioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioCell.swift; sourceTree = "<group>"; };
 		CB9996D619CDD98B0076D5E8 /* AudioPlayingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayingCell.swift; sourceTree = "<group>"; };
@@ -82,13 +84,15 @@
 		CBB7A8FE19CD844100E95307 /* VKMusicOffline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKMusicOffline.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB7A90219CD844100E95307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBB7A90319CD844100E95307 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CBB7A90519CD844100E95307 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		CBB7A90519CD844100E95307 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		CBB7A90A19CD844100E95307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CBB7A90C19CD844100E95307 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CBB7A91219CD844200E95307 /* VKMusicOfflineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VKMusicOfflineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB7A91719CD844200E95307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBB7A91819CD844200E95307 /* VKMusicOfflineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKMusicOfflineTests.swift; sourceTree = "<group>"; };
 		CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sdk.xcodeproj; path = "VKMusicOffline/SDKs/vk-ios-sdk-master/sdk/sdk.xcodeproj"; sourceTree = "<group>"; };
+		CBB8A21719D36F0D00FD7251 /* MenuAudioListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuAudioListCell.swift; sourceTree = "<group>"; };
+		CBB8A21919D36F3200FD7251 /* MenuUserInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuUserInfoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,10 +151,10 @@
 			children = (
 				CB9996D319CDD3090076D5E8 /* Model */,
 				CBB7A90319CD844100E95307 /* AppDelegate.swift */,
-				CBB7A90519CD844100E95307 /* MasterViewController.swift */,
+				CBB8A21B19D36F3E00FD7251 /* Menu */,
 				CB9996D419CDD9730076D5E8 /* AudioCell.swift */,
 				CB9996D619CDD98B0076D5E8 /* AudioPlayingCell.swift */,
-				CB9996CF19CDC5410076D5E8 /* DetailViewController.swift */,
+				CB9996CF19CDC5410076D5E8 /* AudioListViewController.swift */,
 				CBB7A90919CD844100E95307 /* Main.storyboard */,
 				CBB7A90C19CD844100E95307 /* Images.xcassets */,
 				CBB7A90119CD844100E95307 /* Supporting Files */,
@@ -208,6 +212,16 @@
 				CBBF8FFA19CD9216005CB421 /* VKTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CBB8A21B19D36F3E00FD7251 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				CBB7A90519CD844100E95307 /* MenuViewController.swift */,
+				CBB8A21919D36F3200FD7251 /* MenuUserInfoCell.swift */,
+				CBB8A21719D36F0D00FD7251 /* MenuAudioListCell.swift */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,11 +362,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB9996D919CDDC430076D5E8 /* VKOfflineAudio.swift in Sources */,
-				CB9996D019CDC5410076D5E8 /* DetailViewController.swift in Sources */,
-				CBB7A90619CD844100E95307 /* MasterViewController.swift in Sources */,
+				CB9996D019CDC5410076D5E8 /* AudioListViewController.swift in Sources */,
+				CBB7A90619CD844100E95307 /* MenuViewController.swift in Sources */,
 				CBAED45B19CE285A00CF634D /* VKSearchAudioList.swift in Sources */,
 				CBB7A90419CD844100E95307 /* AppDelegate.swift in Sources */,
+				CBB8A21819D36F0D00FD7251 /* MenuAudioListCell.swift in Sources */,
 				CB85503B19D2186600B4EF0A /* VKOfflineAudioList.swift in Sources */,
+				CBB8A21A19D36F3200FD7251 /* MenuUserInfoCell.swift in Sources */,
 				CB9996D219CDD2FD0076D5E8 /* VKAudioList.swift in Sources */,
 				CBAED45919CE249F00CF634D /* VKUserAudioList.swift in Sources */,
 				CB9996D519CDD9730076D5E8 /* AudioCell.swift in Sources */,
