@@ -152,24 +152,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     }
     
     func vkGetUserInfo() {
-        let parameters = [
-            VK_API_USER_ID: VKSdk.getAccessToken().userId,
-            VK_API_FIELDS : ["first_name", "last_name", "photo_100", "status"]
-        ]
-        let userRequest = VKApi.users().get(parameters)
-        userRequest.executeWithResultBlock({(response: VKResponse!) -> Void in
-            println(response.json)
-            println(response.parsedModel)
-            if (response.parsedModel is VKUsersArray) {
-                let userList : VKUsersArray = response.parsedModel as VKUsersArray
-                if (userList.count > 0) {
-                    let user = userList[0] as VKUser
-                    self.menuViewController.user = user
-                }
-            }
-            }, errorBlock:{(error: NSError!) -> Void in
-                println(error)
-        })
+        VMUserManager.sharedInstance.loadCurrentUser(completionBlock: { (user: VKUser) -> Void in
+            
+        }) { (error: NSError!) -> Void in
+            
+        }
+        VMUserManager.sharedInstance.loadCurrentUser(completionBlock: { (user: VKUser) -> Void in
+            
+        }) { (error: NSError!) -> Void in
+            
+        }
     }
 }
 

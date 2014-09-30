@@ -69,23 +69,15 @@ class VMMenuViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if (VKSdk.isLoggedIn() && self.user == nil) {
-            let parameters = [
-                VK_API_USER_ID: VKSdk.getAccessToken().userId,
-                VK_API_FIELDS : ["first_name", "last_name", "photo_100", "status"]
-            ]
-            let userRequest = VKApi.users().get(parameters)
-            userRequest.executeWithResultBlock({(response: VKResponse!) -> Void in
-                println(response.json)
-                println(response.parsedModel)
-                if (response.parsedModel is VKUsersArray) {
-                    let userList : VKUsersArray = response.parsedModel as VKUsersArray
-                    if (userList.count > 0) {
-                        self.user = userList[0] as VKUser
-                    }
-                }
-                }, errorBlock:{(error: NSError!) -> Void in
-                    println(error)
-            })
+            if (VMUserManager.sharedInstance.currentUser != nil) {
+                self.user = VMUserManager.sharedInstance.currentUser
+            } else {
+                VMUserManager.sharedInstance.loadCurrentUser(completionBlock: { (user:VKUser) -> Void in
+                    self.user = user
+                }, errorBlock: { (error:NSError!) -> Void in
+                    
+                })
+            }
         }
     }
 
@@ -138,6 +130,7 @@ class VMMenuViewController: UITableViewController {
             return 44.0
         }
     }
+    
     
 }
 
