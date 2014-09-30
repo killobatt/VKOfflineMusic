@@ -1,15 +1,15 @@
 //
-//  VKSearchAudioList.swift
+//  VMSearchAudioList.swift
 //  VKMusicOffline
 //
 //  Created by Vjacheslav Volodjko on 21.09.14.
 //  Copyright (c) 2014 Vjacheslav Volodko. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import VK
 
-class VKSearchAudioList: VKOnlineAudioList {
+class VMSearchAudioList: VMOnlineAudioList {
     
     var searchTerm: NSString!
     

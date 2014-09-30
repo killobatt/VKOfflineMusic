@@ -1,5 +1,5 @@
 //
-//  MenuAudioListCell.swift
+//  VMMenuAudioListCell.swift
 //  VKMusicOffline
 //
 //  Created by Vjacheslav Volodjko on 25.09.14.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class MenuAudioListCell: UITableViewCell {
+class VMMenuAudioListCell: UITableViewCell {
 
     // MARK: - IBOutlets
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
     
-    // MARK: - VKAudioList
-    var audioList: VKAudioList! {
+    // MARK: - VMAudioList
+    var audioList: VMAudioList! {
         willSet (newValue) {
             if let list = newValue {
                 self.titleLabel.text = list.title

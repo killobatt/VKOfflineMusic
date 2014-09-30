@@ -9,7 +9,7 @@
 import UIKit
 import VK
 
-class MenuViewController: UITableViewController {
+class VMMenuViewController: UITableViewController {
     
     // MARK: - IBOutlets
     
@@ -17,24 +17,24 @@ class MenuViewController: UITableViewController {
     var user : VKUser! {
         willSet (newUser) {
             if (newUser != nil) {
-                self.userAudioList = VKUserAudioList(with: newUser)
+                self.userAudioList = VMUserAudioList(with: newUser)
                 self.userAudioList.title = "Мои аудиозаписи"
                 self.userAudioList.loadNextPage(completion: nil)
-                self.searchAudioList = VKSearchAudioList(with: "")
+                self.searchAudioList = VMSearchAudioList(with: "")
                 self.searchAudioList.title = "Поиск"
                 self.tableView.reloadData()
             }
         }
     }
     
-    // MARK: - VKAudioLists
-    var userAudioList: VKUserAudioList!
-    var searchAudioList: VKSearchAudioList!
-    var resentAudioList: VKOfflineAudioList!
-    var allOfflineAudioList: VKOfflineAudioList!
-    var audioLists: Array<VKAudioList> {
+    // MARK: - VMAudioLists
+    var userAudioList: VMUserAudioList!
+    var searchAudioList: VMSearchAudioList!
+    var resentAudioList: VMAudioList!
+    var allOfflineAudioList: VMAudioList!
+    var audioLists: Array<VMAudioList> {
         get {
-            var lists: Array<VKAudioList> = []
+            var lists: Array<VMAudioList> = []
             if self.userAudioList != nil {
                 lists.append(self.userAudioList)
             }
@@ -98,8 +98,8 @@ class MenuViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            let controller = (segue.destinationViewController as UINavigationController).topViewController as AudioListViewController
-            let cell = sender as MenuAudioListCell
+            let controller = (segue.destinationViewController as UINavigationController).topViewController as VMAudioListViewController
+            let cell = sender as VMMenuAudioListCell
             controller.audioList = cell.audioList
         }
     }
@@ -121,13 +121,13 @@ class MenuViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("MenuUserInfoCell", forIndexPath: indexPath) as MenuUserInfoCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuUserInfoCell", forIndexPath: indexPath) as VMMenuUserInfoCell
             cell.user = self.user
             return cell
         } else { // if indexPath.section == 1
-            let cell = tableView.dequeueReusableCellWithIdentifier("MenuAudioListCell", forIndexPath: indexPath) as MenuAudioListCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuAudioListCell", forIndexPath: indexPath) as VMMenuAudioListCell
             cell.audioList = self.audioLists[indexPath.row]
-            return cell // MenuAudioListCell
+            return cell // VMMenuAudioListCell
         }
     }
     

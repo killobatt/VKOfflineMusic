@@ -1,5 +1,5 @@
 //
-//  AudioCell.swift
+//  VMAudioCell.swift
 //  VKMusicOffline
 //
 //  Created by Vjacheslav Volodjko on 20.09.14.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class AudioCell: UITableViewCell {
+class VMAudioCell: UITableViewCell {
     
     // MARK: - Audio
-    var audio: VKOfflineAudio! {
+    var audio: VMAudio! {
         willSet(newAudio) {
             if (newAudio != nil) {
                 self.artistNameLabel.text = newAudio.artist

@@ -1,15 +1,15 @@
 //
-//  VKOfflineAudio.swift
+//  VMAudio.swift
 //  VKMusicOffline
 //
 //  Created by Vjacheslav Volodjko on 20.09.14.
 //  Copyright (c) 2014 Vjacheslav Volodko. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import VK
 
-class VKOfflineAudio: NSObject, NSCoding {
+class VMAudio: NSObject, NSCoding {
     var id : NSNumber!
     var ownerID : NSNumber!
     var artist : NSString!

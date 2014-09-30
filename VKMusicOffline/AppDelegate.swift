@@ -25,16 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
             return self.window!.rootViewController as UISplitViewController
         }
     }
-    var menuViewController: MenuViewController {
-        get {
-            let navigationController = self.splitViewController.viewControllers.first as UINavigationController
-            return navigationController.viewControllers.first as MenuViewController
-        }
-    }
-    var audioListViewController: AudioListViewController {
+    var menuViewController: VMMenuViewController {
         get {
             let navigationController = self.splitViewController.viewControllers.last as UINavigationController
-            return navigationController.viewControllers.first as AudioListViewController
+            return navigationController.viewControllers.first as VMMenuViewController
+        }
+    }
+    var audioListViewController: VMAudioListViewController {
+        get {
+            let navigationController = self.splitViewController.viewControllers.first as UINavigationController
+            return navigationController.viewControllers.first as VMAudioListViewController
         }
     }
     

@@ -9,9 +9,9 @@
 import UIKit
 import VK
 
-class AudioListViewController: UITableViewController {
+class VMAudioListViewController: UITableViewController {
 
-    var audioList: VKAudioList! = nil
+    var audioList: VMAudioList! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class AudioListViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("AudioCell", forIndexPath: indexPath) as AudioCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as VMAudioCell
         cell.audio = self.audioList[indexPath.row]
         
         return cell

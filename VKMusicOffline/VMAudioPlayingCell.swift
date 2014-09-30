@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AudioPlayingCell: AudioCell {
+class AudioPlayingCell: VMAudioCell {
     
     // MARK: - Outlets
 

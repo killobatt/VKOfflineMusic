@@ -1,5 +1,5 @@
 //
-//  MenuUserInfoCell.swift
+//  VMMenuUserInfoCell.swift
 //  VKMusicOffline
 //
 //  Created by Vjacheslav Volodjko on 25.09.14.
@@ -10,7 +10,7 @@ import UIKit
 import VK
 import UIViews
 
-class MenuUserInfoCell: UITableViewCell {
+class VMMenuUserInfoCell: UITableViewCell {
     
     // MARK: - IBOutlets
     @IBOutlet weak var firstNameLabel: UILabel!

@@ -1,21 +1,21 @@
 //
-//  VKAudioList.swift
+//  VMAudioList.swift
 //  VKMusicOffline
 //
 //  Created by Vjacheslav Volodjko on 20.09.14.
 //  Copyright (c) 2014 Vjacheslav Volodko. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import VK
 
-class VKAudioList: NSObject {
+class VMAudioList: NSObject {
     
-    var audios : Array< VKOfflineAudio > = []
+    var audios : Array< VMAudio > = []
     
     var title : NSString!
     
-    subscript(index: Int) -> VKOfflineAudio {
+    subscript(index: Int) -> VMAudio {
         get {
             return audios[index]
         }

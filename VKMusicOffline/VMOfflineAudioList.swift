@@ -1,14 +1,14 @@
 //
-//  VKOfflineAudioList.swift
+//  VMAudioList.swift
 //  VKMusicOffline
 //
 //  Created by Vjacheslav Volodjko on 24.09.14.
 //  Copyright (c) 2014 Vjacheslav Volodko. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class VKOfflineAudioList: VKAudioList, NSCoding {
+class VMOfflineAudioList: VMAudioList, NSCoding {
     
     var name: NSString!
     var identifier: NSUUID

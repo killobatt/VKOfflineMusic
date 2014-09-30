@@ -1,15 +1,15 @@
 //
-//  VKOnlineAudioList.swift
+//  VMOnlineAudioList.swift
 //  VKMusicOffline
 //
 //  Created by Vjacheslav Volodjko on 20.09.14.
 //  Copyright (c) 2014 Vjacheslav Volodko. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import VK
 
-class VKOnlineAudioList: VKAudioList {
+class VMOnlineAudioList: VMAudioList {
 
     var pageSize: UInt = 20
     var currentPage: UInt = 0
@@ -44,7 +44,7 @@ class VKOnlineAudioList: VKAudioList {
                 self.totalCount = audios.count
                 for (var i: UInt = 0; i < self.pageSize; i++) {
                     let audio = audios[i] as VKAudio
-                    self.audios.append(VKOfflineAudio(with: audio))
+                    self.audios.append(VMAudio(with: audio))
                 }
                 if let _completion = completion {
                     _completion(nil)
