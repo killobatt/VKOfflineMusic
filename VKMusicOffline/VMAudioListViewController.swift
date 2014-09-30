@@ -46,6 +46,16 @@ class VMAudioListViewController: UITableViewController {
         return cell
     }
 
+
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.row == self.audioList.count - 1 &&
+            self.audioList.hasNextPage()) {
+            self.audioList.loadNextPage(completion: { (error: NSError!) -> Void in
+                tableView.reloadData()
+            })
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {

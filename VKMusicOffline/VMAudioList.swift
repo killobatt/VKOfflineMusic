@@ -29,4 +29,7 @@ class VMAudioList: NSObject {
             return self.audios.count
         }
     }
+    
+    func hasNextPage() -> Bool { return false }
+    func loadNextPage(#completion:((NSError!) -> Void)?) -> Void { }
 }
