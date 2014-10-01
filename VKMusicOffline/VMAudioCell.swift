@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol VMAudioCellDelegate {
+    func audioCellLyricsButtonPressed(cell: VMAudioCell)
+}
+
 class VMAudioCell: UITableViewCell {
     
     // MARK: - Audio
@@ -17,7 +21,7 @@ class VMAudioCell: UITableViewCell {
                 self.artistNameLabel.text = newAudio.artist
                 self.trackNameLabel.text = newAudio.title
                 self.trackDurationLabel.text = newAudio.durationString
-                if (newAudio.lyricsID != nil) {
+                if (newAudio.lyrics != nil) {
                     self.lyricsButton.enabled = true
                 } else {
                     self.lyricsButton.enabled = false
@@ -25,6 +29,8 @@ class VMAudioCell: UITableViewCell {
             }
         }
     }
+    
+    var delegate: VMAudioCellDelegate?
     
     // MARK: - IBOutlets
 
@@ -58,5 +64,8 @@ class VMAudioCell: UITableViewCell {
     // MARK: - Actions
     
     @IBAction func lyricsButtonPressed(sender: AnyObject) {
+        if let delegate = self.delegate {
+            delegate.audioCellLyricsButtonPressed(self)
+        }
     }
 }

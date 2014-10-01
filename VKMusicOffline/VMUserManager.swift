@@ -35,7 +35,8 @@ class VMUserManager: NSObject {
         }
     }
     
-    func loadCurrentUser(#completionBlock:((VKUser) -> Void), errorBlock:((NSError!) -> Void)) -> Void {        
+    func loadCurrentUser(#completionBlock:((VKUser) -> Void), errorBlock:((NSError!) -> Void)) -> Void {
+        NSLog("VMUserManager.loadCurrentUser starts...")
         self.userRequest.executeWithResultBlock({(response: VKResponse!) -> Void in
             println(response.json)
             println(response.parsedModel)
@@ -56,5 +57,9 @@ class VMUserManager: NSObject {
                 NSLog("VMUserManager.loadCurrentUser got error: \(error)")
                 errorBlock(error)
         })
+        
+//        var a:VKUser? = nil;
+//        a ?? self.currentUser
+//        a = self.currentUser != nil ? self.currentUser : nil
     }
 }

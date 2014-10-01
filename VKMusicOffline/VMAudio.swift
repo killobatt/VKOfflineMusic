@@ -16,7 +16,7 @@ class VMAudio: NSObject, NSCoding {
     var title : NSString!
     var URL : NSURL!
     var localURL : NSURL!
-    var lyricsID : NSNumber!
+    var lyrics: VMLyrics!
     var albumID : NSNumber!
     var genreID : NSNumber!
     var duration : Int
@@ -41,7 +41,9 @@ class VMAudio: NSObject, NSCoding {
         if (audio.url != nil) {
             self.URL = NSURL.URLWithString(audio.url)
         }
-        self.lyricsID = audio.lyrics_id
+        if (audio.lyrics_id != nil) {
+            self.lyrics = VMLyrics(id: audio.lyrics_id)
+        }
         self.albumID = audio.album_id
         self.genreID = audio.genre_id
         if (audio.duration != nil) {
@@ -60,7 +62,7 @@ class VMAudio: NSObject, NSCoding {
         aCoder.encodeObject(self.title, forKey: "title")
         aCoder.encodeObject(self.URL, forKey: "URL")
         aCoder.encodeObject(self.localURL, forKey: "localURL")
-        aCoder.encodeObject(self.lyricsID, forKey: "lyricsID")
+        aCoder.encodeObject(self.lyrics, forKey: "lyricsID")
         aCoder.encodeObject(self.albumID, forKey: "ownerID")
         aCoder.encodeInteger(self.duration, forKey: "duration")
     }
@@ -72,7 +74,7 @@ class VMAudio: NSObject, NSCoding {
         self.title = aDecoder.decodeObjectForKey("title") as NSString
         self.URL = aDecoder.decodeObjectForKey("URL") as NSURL
         self.localURL = aDecoder.decodeObjectForKey("localURL") as NSURL
-        self.lyricsID = aDecoder.decodeObjectForKey("lyricsID") as NSNumber
+        self.lyrics = aDecoder.decodeObjectForKey("lyricsID") as VMLyrics
         self.albumID = aDecoder.decodeObjectForKey("albumID") as NSNumber
         self.duration = NSNumber(int: aDecoder.decodeIntForKey("artist"))
     }

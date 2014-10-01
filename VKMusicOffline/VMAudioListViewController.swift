@@ -9,7 +9,8 @@
 import UIKit
 import VK
 
-class VMAudioListViewController: UITableViewController {
+class VMAudioListViewController: UITableViewController, VMAudioCellDelegate
+{
 
     var audioList: VMAudioList! = nil
     
@@ -42,6 +43,7 @@ class VMAudioListViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as VMAudioCell
         cell.audio = self.audioList[indexPath.row]
+        cell.delegate = self
         
         return cell
     }
@@ -91,14 +93,25 @@ class VMAudioListViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "showLyrics") {
+            let controller = segue.destinationViewController as VMLyricsController
+            let audioCell = sender as VMAudioCell
+            controller.lyrics = audioCell.audio.lyrics
+        }
     }
-    */
+    
+    @IBAction func unwindFromSegue(segue: UIStoryboardSegue) {
+        
+    }
 
+    
+    // MARK: - VMAudioCellDelegate
+    
+    func audioCellLyricsButtonPressed(cell: VMAudioCell) {
+        self.performSegueWithIdentifier("showLyrics", sender: cell)
+    }
+    
 }

@@ -49,7 +49,9 @@ class VMOnlineAudioList: VMAudioList {
             return
         }
         
+        NSLog("VMUserManager.loadCurrentUser starts...")
         self.request.executeWithResultBlock({(response: VKResponse!) -> Void in
+            
             let audios = VKAudios(dictionary:response.json as NSDictionary)
             self.totalCount = Int(audios.count)
             for (var i = 0; i < MIN(self.pageSize, Int(audios.items.count)); i++) {
@@ -57,13 +59,16 @@ class VMOnlineAudioList: VMAudioList {
                 self.audios.append(VMAudio(with: audio))
             }
             self.currentPageOffset += self.pageSize
+            
+            NSLog("VMUserManager.loadCurrentUser got audios: \(response.json)")
             if let _completion = completion {
                 _completion(nil)
             }
-            }, errorBlock: {(error: NSError!) -> Void in
-                if let _completion = completion {
-                    _completion(error)
-                }
+        }, errorBlock: {(error: NSError!) -> Void in
+            NSLog("VMUserManager.loadCurrentUser got error: \(error)")
+            if let _completion = completion {
+                _completion(error)
+            }
         })
     }
 }
