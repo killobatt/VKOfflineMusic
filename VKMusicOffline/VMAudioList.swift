@@ -11,9 +11,40 @@ import VK
 
 class VMAudioList: NSObject {
     
-    var audios : Array< VMAudio > = []
+    var audios : Array<VMAudio> = [] {
+        didSet {
+            self._filteredAudios = self.getFilteredAudios(self.audios,
+                searchTerm: self.searchTerm)
+        }
+    }
     
     var title : NSString!
+    
+    var searchTerm: NSString! {
+        didSet {
+            self._filteredAudios = self.getFilteredAudios(self.audios,
+                searchTerm: self.searchTerm)
+        }
+    }
+    
+    var filteredAudios: Array<VMAudio> {
+        get {
+            return self._filteredAudios
+        }
+    }
+    
+    private var _filteredAudios: Array<VMAudio> = []
+    
+    private func getFilteredAudios(audios: Array<VMAudio>, searchTerm: String!) -> Array<VMAudio> {
+        if searchTerm == nil {
+            return audios
+        } else {
+            return audios.filter{ VMAudio -> Bool in
+                return VMAudio.title.containsString(searchTerm) ||
+                    VMAudio.artist.containsString(searchTerm)
+            }
+        }
+    }
     
     subscript(index: Int) -> VMAudio {
         get {

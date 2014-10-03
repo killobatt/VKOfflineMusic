@@ -9,10 +9,17 @@
 import UIKit
 import VK
 
-class VMAudioListViewController: UITableViewController, VMAudioCellDelegate
+class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, VMAudioCellDelegate
 {
-
-    var audioList: VMAudioList! = nil
+    var audioList: VMAudioList! = nil {
+        willSet {
+            if (self.searchResultsController != nil) {
+                self.searchResultsController.audioList = newValue
+            }
+        }
+    }
+    var searchController: UISearchController!
+    var searchResultsController: VMAudioListViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +28,22 @@ class VMAudioListViewController: UITableViewController, VMAudioCellDelegate
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+        // self.navigationItem.rightBarButtonI  tem = self.editButtonItem()
+    
+        if let parentViewController = self.parentViewController {
+            if parentViewController is UINavigationController {
+                self.searchResultsController = self.storyboard?.instantiateViewControllerWithIdentifier("VMAudioListViewController") as VMAudioListViewController
+                self.searchResultsController.audioList = self.audioList
+                self.searchController = UISearchController(searchResultsController: self.searchResultsController)
+                self.searchController.searchResultsUpdater = self.searchResultsController
+                
+                self.definesPresentationContext = true
+                
+                self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0)
+                self.tableView.tableHeaderView = self.searchController.searchBar;
             }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -37,13 +57,24 @@ class VMAudioListViewController: UITableViewController, VMAudioCellDelegate
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.audioList.count
+        if (self.searchResultsController == nil) {
+            return self.audioList.filteredAudios.count
+        } else {
+            return self.audioList.count
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as VMAudioCell
-        cell.audio = self.audioList[indexPath.row]
         cell.delegate = self
+        
+        var audio : VMAudio! = nil
+        if (self.searchResultsController == nil) {
+            audio = self.audioList.filteredAudios[indexPath.row]
+        } else {
+            audio = self.audioList[indexPath.row]
+        }
+        cell.audio = audio
         
         return cell
     }
@@ -57,6 +88,22 @@ class VMAudioListViewController: UITableViewController, VMAudioCellDelegate
             })
         }
     }
+    
+//    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if section == 0 {
+//            return self.searchController.searchBar
+//        } else {
+//            return nil
+//        }
+//    }
+//    
+//    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if section == 0 {
+//            return 44
+//        } else {
+//            return 0
+//        }
+//    }
     
     /*
     // Override to support conditional editing of the table view.
@@ -112,6 +159,12 @@ class VMAudioListViewController: UITableViewController, VMAudioCellDelegate
     
     func audioCellLyricsButtonPressed(cell: VMAudioCell) {
         self.performSegueWithIdentifier("showLyrics", sender: cell)
+    }
+    
+    // MARK: - UISearchResultsUpdating
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        self.audioList.searchTerm = searchController.searchBar.text
     }
     
 }

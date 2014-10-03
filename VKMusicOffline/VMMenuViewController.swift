@@ -20,7 +20,7 @@ class VMMenuViewController: UITableViewController {
                 self.userAudioList = VMUserAudioList(with: newUser)
                 self.userAudioList.title = "Мои аудиозаписи"
                 self.userAudioList.loadNextPage(completion: nil)
-                self.searchAudioList = VMSearchAudioList(with: "")
+                self.searchAudioList = VMSearchAudioList()
                 self.searchAudioList.title = "Поиск"
                 self.tableView.reloadData()
             }

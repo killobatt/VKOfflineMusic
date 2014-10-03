@@ -155,7 +155,7 @@
         <!--Audio List View Controller-->
         <scene sceneID="JpB-Qz-7Pq">
             <objects>
-                <tableViewController id="VBE-dj-CjP" customClass="VMAudioListViewController" customModule="VKMusicOffline" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="VMAudioListViewController" id="VBE-dj-CjP" customClass="VMAudioListViewController" customModule="VKMusicOffline" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="22" sectionFooterHeight="22" id="NsT-1l-TaY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

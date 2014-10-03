@@ -11,8 +11,6 @@ import VK
 
 class VMSearchAudioList: VMOnlineAudioList {
     
-    var searchTerm: NSString!
-    
     override var parameters: NSDictionary {
         get {
             let parameters: NSMutableDictionary = [
@@ -34,7 +32,4 @@ class VMSearchAudioList: VMOnlineAudioList {
         }
     }
     
-    init(with searchTerm: NSString!) {
-        self.searchTerm = searchTerm
-    }
 }
