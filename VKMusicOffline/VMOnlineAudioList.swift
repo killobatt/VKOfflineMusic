@@ -32,24 +32,27 @@ class VMOnlineAudioList: VMAudioList {
         }
     }
 
-    var request: VKRequest! {
-        get {
-            return nil
-        }
-    }
+    func createRequest() -> VKRequest! { return nil }
+
+    private var request: VKRequest! = nil
     
     override func hasNextPage() -> Bool {
         return self.audios.count < self.totalCount
     }
     
     override func loadNextPage(#completion:((NSError!) -> Void)?) -> Void {
-        assert(self.request != nil, "Child class should provide a valid request")
         
-        if (self.request.isExecuting) {
+        if (self.currentPageOffset > self.totalCount) {
             return
         }
         
-        NSLog("VMUserManager.loadCurrentUser starts...")
+        if (self.request != nil && self.request.isExecuting) {
+            return
+        } else {
+            self.request = self.createRequest()
+        }
+        
+        NSLog("VMOnlineAudioList.loadNextPage starts (loading \(self.pageSize) audios with offset \(self.currentPageOffset) ...")
         self.request.executeWithResultBlock({(response: VKResponse!) -> Void in
             
             let audios = VKAudios(dictionary:response.json as NSDictionary)
@@ -60,12 +63,12 @@ class VMOnlineAudioList: VMAudioList {
             }
             self.currentPageOffset += self.pageSize
             
-            NSLog("VMUserManager.loadCurrentUser got audios: \(response.json)")
+            NSLog("VMOnlineAudioList.loadNextPage got audios: \(response.json)")
             if let _completion = completion {
                 _completion(nil)
             }
         }, errorBlock: {(error: NSError!) -> Void in
-            NSLog("VMUserManager.loadCurrentUser got error: \(error)")
+            NSLog("VMOnlineAudioList.loadNextPage got error: \(error)")
             if let _completion = completion {
                 _completion(error)
             }

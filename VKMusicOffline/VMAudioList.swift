@@ -40,8 +40,8 @@ class VMAudioList: NSObject {
             return audios
         } else {
             return audios.filter{ VMAudio -> Bool in
-                return VMAudio.title.containsString(searchTerm) ||
-                    VMAudio.artist.containsString(searchTerm)
+                return VMAudio.title.localizedCaseInsensitiveContainsString(searchTerm) ||
+                    VMAudio.artist.localizedCaseInsensitiveContainsString(searchTerm)
             }
         }
     }

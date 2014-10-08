@@ -23,15 +23,14 @@ class VMUserAudioList: VMOnlineAudioList {
         }
     }
     
-    override var request: VKRequest! {
-        get {
-            return VKApi.requestWithMethod("audio.get",
-                andParameters:self.parameters,
-                andHttpMethod:"GET")
-        }
+    override func createRequest() -> VKRequest {
+        return VKApi.requestWithMethod("audio.get",
+            andParameters:self.parameters,
+            andHttpMethod:"GET")
     }
     
     init(with user: VKUser) {
         self.user = user
+        super.init()
     }
 }

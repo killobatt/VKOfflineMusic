@@ -165,6 +165,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         self.audioList.searchTerm = searchController.searchBar.text
+        self.tableView.reloadData()
     }
     
 }
