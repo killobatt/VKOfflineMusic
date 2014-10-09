@@ -33,7 +33,7 @@ class VMOfflineAudioSearchList: VMAudioList, VMAudioListSearching {
     
     // MARK: - VMAudioListSearching
     
-    override var audios : Array<VMAudio> {
+    override var audios : NSArray {
         get {
             return self.filteredAudios
         }
@@ -56,16 +56,21 @@ class VMOfflineAudioSearchList: VMAudioList, VMAudioListSearching {
         }
     }
     
-    private var filteredAudios: Array<VMAudio> = []
+    private var filteredAudios: NSArray = []
     
-    private func getFilteredAudios(audios: Array<VMAudio>, searchTerm: String!) -> Array<VMAudio> {
+    private func getFilteredAudios(audios: NSArray, searchTerm: String!) -> NSArray {
         if searchTerm == nil {
             return audios
         } else {
-            return audios.filter{ VMAudio -> Bool in
-                return VMAudio.title.localizedCaseInsensitiveContainsString(searchTerm) ||
-                    VMAudio.artist.localizedCaseInsensitiveContainsString(searchTerm)
-            }
+            return audios.filteredArrayUsingPredicate(
+                NSPredicate(block:
+                    { (object: AnyObject!, bindings:[NSObject : AnyObject]!) -> Bool in
+                        let audio = object as VMAudio
+                        return audio.title.localizedCaseInsensitiveContainsString(searchTerm) ||
+                            audio.artist.localizedCaseInsensitiveContainsString(searchTerm)
+                    }
+                )
+            )
         }
     }
 }

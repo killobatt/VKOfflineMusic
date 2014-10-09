@@ -11,7 +11,7 @@ import VK
 
 class VMAudioList: NSObject {
     
-    var audios : Array<VMAudio> = []
+    var audios : NSArray = []
     
     var title : NSString!
    
@@ -23,16 +23,27 @@ class VMAudioList: NSObject {
     
     subscript(index: Int) -> VMAudio {
         get {
-            return audios[index]
+            return self.audios[index] as VMAudio
         }
-        set (newValue) {
-            audios[index] = newValue
-        }
+//        set {
+//            self.audios[index] = newValue as VMAudio
+//        }
     }
     
+    // number of audios in loaded part of list
     var count: Int {
         get {
             return self.audios.count
+        }
+    }
+    
+    // nuber of audios in both loaded and unloaded part of list
+    var totalCount: Int = 0 {
+        willSet {
+            self.willChangeValueForKey("totalCount")
+        }
+        didSet {
+            self.didChangeValueForKey("totalCount")
         }
     }
     

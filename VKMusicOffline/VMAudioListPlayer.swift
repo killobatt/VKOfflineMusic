@@ -30,9 +30,9 @@ class VMAudioListPlayer: NSObject {
             return self.audioList[self.currentTrackIndex]
         }
         set {
-            let index = find(self.audioList.audios, newValue)
-            assert(index != nil, "Set currentTrack failed: \(newValue) is not found in list \(self.audioList)")
-            self.currentTrackIndex = index!
+            let index = self.audioList.audios.indexOfObject(newValue)
+            assert(index != NSNotFound, "Set currentTrack failed: \(newValue) is not found in list \(self.audioList)")
+            self.currentTrackIndex = index
         }
     }
     
