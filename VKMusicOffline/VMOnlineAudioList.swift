@@ -33,7 +33,7 @@ class VMOnlineAudioList: VMAudioList {
     }
 
     func createRequest() -> VKRequest! { return nil }
-
+    
     private var request: VKRequest! = nil
     
     override func hasNextPage() -> Bool {
@@ -73,5 +73,11 @@ class VMOnlineAudioList: VMAudioList {
                 _completion(error)
             }
         })
+    }
+    
+    func resetList() {
+        self.audios.removeAll(keepCapacity: true)
+        self.currentPageOffset = 0
+        self.totalCount = 0
     }
 }

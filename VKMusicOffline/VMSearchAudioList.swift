@@ -9,14 +9,14 @@
 import Foundation
 import VK
 
-class VMSearchAudioList: VMOnlineAudioList {
+class VMSearchAudioList: VMOnlineAudioList, VMAudioListSearching {
     
     override var parameters: NSDictionary {
         get {
             let parameters: NSMutableDictionary = [
-                VK_API_Q: self.searchTerm,
+                VK_API_Q: self._searchTerm,
                 VK_API_SORT: 2,
-                "search_own": 1,
+                "search_own": self.searchOwn ? 1 : 0,
                 "auto_complete": 1,
             ];
             parameters.addEntriesFromDictionary(super.parameters)
@@ -30,4 +30,28 @@ class VMSearchAudioList: VMOnlineAudioList {
             andHttpMethod:"GET")
     }
     
+    private var searchOwn: Bool = false
+    
+    init(searchOwn:Bool) {
+        super.init()
+        self.searchOwn = searchOwn;
+    }
+    
+    // MARK: - VMAudioListSearching
+    
+    var searchTerm: NSString! { get { return self._searchTerm } }
+
+    private var _searchTerm: NSString!
+
+    func setSearchTerm(searchTerm: NSString!, completion:((NSError!) -> Void)?) -> Void {
+        self._searchTerm = searchTerm;
+        self.resetList()
+        self.loadNextPage(completion: completion)
+    }
+    
+    override var searchResultsList: VMAudioList? {
+        get {
+            return self
+        }
+    }
 }

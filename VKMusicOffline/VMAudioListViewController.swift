@@ -15,6 +15,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         willSet {
             if (self.searchResultsController != nil) {
                 self.searchResultsController.audioList = newValue
+                self.title = newValue.title
             }
         }
     }
@@ -33,7 +34,9 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         if let parentViewController = self.parentViewController {
             if parentViewController is UINavigationController {
                 self.searchResultsController = self.storyboard?.instantiateViewControllerWithIdentifier("VMAudioListViewController") as VMAudioListViewController
-                self.searchResultsController.audioList = self.audioList
+                if self.audioList != nil {
+                    self.searchResultsController.audioList = self.audioList.searchResultsList
+                }
                 self.searchController = UISearchController(searchResultsController: self.searchResultsController)
                 self.searchController.searchResultsUpdater = self.searchResultsController
                 
@@ -57,11 +60,11 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (self.searchResultsController == nil) {
-            return self.audioList.filteredAudios.count
-        } else {
+//        if (self.searchResultsController == nil) {
+//            return self.audioList.filteredAudios.count
+//        } else {
             return self.audioList.count
-        }
+//        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -69,11 +72,10 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         cell.delegate = self
         
         var audio : VMAudio! = nil
-        if (self.searchResultsController == nil) {
-            audio = self.audioList.filteredAudios[indexPath.row]
-        } else {
+//        if (self.searchResultsController == nil) {
+//        } else {
             audio = self.audioList[indexPath.row]
-        }
+//        }
         cell.audio = audio
         
         return cell
@@ -164,8 +166,11 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     // MARK: - UISearchResultsUpdating
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        self.audioList.searchTerm = searchController.searchBar.text
-        self.tableView.reloadData()
+        if let audioListSearching = self.audioList as? VMAudioListSearching {
+            audioListSearching.setSearchTerm(searchController.searchBar.text, completion: {(error: NSError!) -> Void in
+                self.tableView.reloadData()
+            })
+        }
     }
     
 }

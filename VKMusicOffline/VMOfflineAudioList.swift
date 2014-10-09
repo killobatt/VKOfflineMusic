@@ -22,5 +22,12 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     required init(coder aDecoder: NSCoder) {
         self.identifier = aDecoder.decodeObjectForKey("identifier") as NSUUID
     }
+
+    // MARK: - VMAudio overrides
     
+    override var searchResultsList: VMAudioList? {
+        get {
+            return VMOfflineAudioSearchList(offlineAudioList: self)
+        }
+    }
 }

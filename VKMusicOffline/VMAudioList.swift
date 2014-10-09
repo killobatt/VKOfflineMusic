@@ -11,38 +11,13 @@ import VK
 
 class VMAudioList: NSObject {
     
-    var audios : Array<VMAudio> = [] {
-        didSet {
-            self._filteredAudios = self.getFilteredAudios(self.audios,
-                searchTerm: self.searchTerm)
-        }
-    }
+    var audios : Array<VMAudio> = []
     
     var title : NSString!
-    
-    var searchTerm: NSString! {
-        didSet {
-            self._filteredAudios = self.getFilteredAudios(self.audios,
-                searchTerm: self.searchTerm)
-        }
-    }
-    
-    var filteredAudios: Array<VMAudio> {
+   
+    var searchResultsList: VMAudioList? {
         get {
-            return self._filteredAudios
-        }
-    }
-    
-    private var _filteredAudios: Array<VMAudio> = []
-    
-    private func getFilteredAudios(audios: Array<VMAudio>, searchTerm: String!) -> Array<VMAudio> {
-        if searchTerm == nil {
-            return audios
-        } else {
-            return audios.filter{ VMAudio -> Bool in
-                return VMAudio.title.localizedCaseInsensitiveContainsString(searchTerm) ||
-                    VMAudio.artist.localizedCaseInsensitiveContainsString(searchTerm)
-            }
+            return nil
         }
     }
     
@@ -64,3 +39,4 @@ class VMAudioList: NSObject {
     func hasNextPage() -> Bool { return false }
     func loadNextPage(#completion:((NSError!) -> Void)?) -> Void { }
 }
+

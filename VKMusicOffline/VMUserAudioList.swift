@@ -33,4 +33,10 @@ class VMUserAudioList: VMOnlineAudioList {
         self.user = user
         super.init()
     }
+    
+    override var searchResultsList: VMAudioList? {
+        get {
+            return VMSearchAudioList(searchOwn: true)
+        }
+    }
 }
