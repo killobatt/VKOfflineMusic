@@ -114,17 +114,10 @@ class VMAudioListPlayer: NSObject {
         get {
             return self.audioList[self.currentTrackIndex]
         }
-        set {
-            let index = self.audioList.audios.indexOfObject(newValue)
-            assert(index != NSNotFound, "Set currentTrack failed: \(newValue) is not found in list \(self.audioList)")
-            self.currentTrackIndex = index
-        }
     }
     
     var currentTrackIndex: Int = 0 {
         didSet {
-            self.currentTrack = self.audioList[self.currentTrackIndex]
-            
             var playerItem: AVPlayerItem! = nil
             if (self.currentTrack.localURL != nil) {
                 playerItem = AVPlayerItem(URL: self.currentTrack.localURL)

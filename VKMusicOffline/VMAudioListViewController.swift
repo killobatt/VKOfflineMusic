@@ -68,15 +68,15 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as VMAudioCell
+        var cell: VMAudioCell
+        if (VMAudioListPlayer.sharedInstance.audioList === self.audioList &&
+            VMAudioListPlayer.sharedInstance.currentTrackIndex == indexPath.row) {
+            cell = tableView.dequeueReusableCellWithIdentifier("VMAudioPlayingCell", forIndexPath: indexPath) as VMAudioPlayingCell
+        } else {
+            cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as VMAudioCell
+        }
         cell.delegate = self
-        
-        var audio : VMAudio! = nil
-//        if (self.searchResultsController == nil) {
-//        } else {
-            audio = self.audioList[indexPath.row]
-//        }
-        cell.audio = audio
+        cell.audio = self.audioList[indexPath.row]
         
         return cell
     }
@@ -89,6 +89,15 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
                 tableView.reloadData()
             })
         }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (VMAudioListPlayer.sharedInstance.audioList !== self.audioList) {
+            VMAudioListPlayer.sharedInstance.audioList = self.audioList
+        }
+        VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
+        VMAudioListPlayer.sharedInstance.play()
+        self.tableView.reloadData()
     }
     
 //    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

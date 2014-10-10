@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol VMAudioCellDelegate {
-    func audioCellLyricsButtonPressed(cell: VMAudioCell)
+@objc protocol VMAudioCellDelegate {
+    optional func audioCellDownloadButtonPressed(cell: VMAudioCell)
+    optional func audioCellLyricsButtonPressed(cell: VMAudioCell)
 }
 
 class VMAudioCell: UITableViewCell {
@@ -65,7 +66,13 @@ class VMAudioCell: UITableViewCell {
     
     @IBAction func lyricsButtonPressed(sender: AnyObject) {
         if let delegate = self.delegate {
-            delegate.audioCellLyricsButtonPressed(self)
+            delegate.audioCellLyricsButtonPressed?(self)
+        }
+    }
+    
+    @IBAction func downloadButtonPressed(sender: AnyObject) {
+        if let delegate = self.delegate {
+            delegate.audioCellLyricsButtonPressed?(self)
         }
     }
 }

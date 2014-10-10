@@ -150,6 +150,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EC12ED419E828AD000C6ADD /* Audio List */ = {
+			isa = PBXGroup;
+			children = (
+				CB9996D419CDD9730076D5E8 /* VMAudioCell.swift */,
+				CB9996D619CDD98B0076D5E8 /* VMAudioPlayingCell.swift */,
+				CB9996CF19CDC5410076D5E8 /* VMAudioListViewController.swift */,
+			);
+			name = "Audio List";
+			sourceTree = "<group>";
+		};
 		CB9996D319CDD3090076D5E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,9 +202,7 @@
 			children = (
 				CB9996D319CDD3090076D5E8 /* Model */,
 				CBB8A21B19D36F3E00FD7251 /* Menu */,
-				CB9996D419CDD9730076D5E8 /* VMAudioCell.swift */,
-				CB9996D619CDD98B0076D5E8 /* VMAudioPlayingCell.swift */,
-				CB9996CF19CDC5410076D5E8 /* VMAudioListViewController.swift */,
+				1EC12ED419E828AD000C6ADD /* Audio List */,
 				CB6B52C619DBE61000127A1B /* VMLyricsController.swift */,
 				CBB7A90319CD844100E95307 /* AppDelegate.swift */,
 				CBB7A90919CD844100E95307 /* Main.storyboard */,
