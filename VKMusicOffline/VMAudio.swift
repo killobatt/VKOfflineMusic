@@ -9,7 +9,7 @@
 import Foundation
 import VK
 
-class VMAudio: NSObject, NSCoding {
+class VMAudio: NSObject, NSCoding, Equatable {
     var id : NSNumber!
     var ownerID : NSNumber!
     var artist : NSString!
@@ -79,4 +79,10 @@ class VMAudio: NSObject, NSCoding {
         self.duration = NSNumber(int: aDecoder.decodeIntForKey("artist"))
     }
     
+    // MARK: - Equatable
+    
+}
+
+func ==(lhs: VMAudio, rhs: VMAudio) -> Bool {
+    return lhs.id == rhs.id
 }

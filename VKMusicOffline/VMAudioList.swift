@@ -25,9 +25,6 @@ class VMAudioList: NSObject {
         get {
             return self.audios[index] as VMAudio
         }
-//        set {
-//            self.audios[index] = newValue as VMAudio
-//        }
     }
     
     // number of audios in loaded part of list
