@@ -36,23 +36,9 @@ class VMAudioListPlayer: NSObject {
         }
     }
     
-    var playbackProgress : CMTime = kCMTimeZero {
-        willSet {
-            self.willChangeValueForKey("playbackProgress")
-            if (self.player.status == AVPlayerStatus.ReadyToPlay) {
-                if (self.isPlaying) {
-                    self.player.pause()
-                }
-                self.player.currentItem.cancelPendingSeeks()
-                self.player.currentItem.seekToTime(newValue, completionHandler: { (finished: Bool) -> Void in
-                    if (self.isPlaying) {
-                        self.player.play()
-                    }
-                })
-            }
-        }
-        didSet {
-            self.didChangeValueForKey("playbackProgress")
+    var playbackProgress : CMTime {
+        get {
+            return self._playbackProgress
         }
     }
     
@@ -100,14 +86,30 @@ class VMAudioListPlayer: NSObject {
     
     // MARK: - Player interface
     
-    func pause() {
+    func play() {
+        NSLog("VMAudioListPlayer play")
         self.player.play()
+        self._isPlaying = true
+    }
+    
+    func pause() {
+        NSLog("VMAudioListPlayer pause")
+        self.player.pause()
         self._isPlaying = false
     }
     
-    func play() {
-        self.player.pause()
-        self._isPlaying = true
+    func seekToTime(time:CMTime) {
+        if (self.player.status == AVPlayerStatus.ReadyToPlay) {
+            if (self.isPlaying) {
+                self.player.pause()
+            }
+            self.player.currentItem.cancelPendingSeeks()
+            self.player.currentItem.seekToTime(time, completionHandler: { (finished: Bool) -> Void in
+                if (self.isPlaying) {
+                    self.player.play()
+                }
+            })
+        }
     }
     
     var currentTrack: VMAudio! {
@@ -157,14 +159,26 @@ class VMAudioListPlayer: NSObject {
         didSet {
             self.didChangeValueForKey("loadedTrackPartTimeRange")
         }
-
+    }
+    
+    private var _playbackProgress: CMTime = kCMTimeZero {
+        willSet {
+            self.willChangeValueForKey("playbackProgress")
+        }
+        didSet {
+            self.didChangeValueForKey("playbackProgress")
+        }
     }
     
     private func timeRangeFrom(timeRanges: NSArray) -> CMTimeRange {
         var loadedTrackPartTimeRange = kCMTimeRangeZero
+        // TODO: Fix logic to more correct
         for value in timeRanges {
             let timeRange = (value as NSValue).CMTimeRangeValue
-            loadedTrackPartTimeRange = CMTimeRangeGetUnion(loadedTrackPartTimeRange, timeRange)
+            if (CMTimeGetSeconds(timeRange.duration) >
+                CMTimeGetSeconds(loadedTrackPartTimeRange.duration)) {
+                loadedTrackPartTimeRange = timeRange
+            }
         }
         return loadedTrackPartTimeRange
     }
@@ -185,10 +199,11 @@ class VMAudioListPlayer: NSObject {
                 case AVPlayerItemStatus.ReadyToPlay:
                     NSLog("VMAudioListPlayer: AVPlayerItem ready to play")
                     
-                    let timeInterval = CMTimeMake(Int64(playerItem.duration.timescale / 100), playerItem.duration.timescale)
+                    let timeInterval = CMTimeMakeWithSeconds(0.1, 600)
                     self.playbackObserver = self.player.addPeriodicTimeObserverForInterval(timeInterval, queue: dispatch_get_main_queue(), usingBlock: { (time: CMTime) -> Void in
-                        self.playbackProgress = self.player.currentItem.currentTime()
+                        self._playbackProgress = self.player.currentItem.currentTime()
                         self._loadedTrackPartTimeRange = self.timeRangeFrom(self.player.currentItem.loadedTimeRanges)
+                        NSLog("loaded part of track: from \(CMTimeGetSeconds(self._loadedTrackPartTimeRange.start)), duration \(CMTimeGetSeconds(self._loadedTrackPartTimeRange.duration)) seconds")
                     })
                 case AVPlayerItemStatus.Failed:
                     NSLog("VMAudioListPlayer: AVPlayerItem: Failed with error \(playerItem.error)")

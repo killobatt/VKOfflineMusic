@@ -72,7 +72,7 @@ class VMAudioPlayingCell: VMAudioCell {
         let timescale = 1 //self.player.currentItem.currentTime().timescale
         let value = Int(sender.value) * timescale
         let time = CMTimeMake(Int64(value), Int32(timescale))
-        VMAudioListPlayer.sharedInstance.playbackProgress = time
+        VMAudioListPlayer.sharedInstance.seekToTime(time)
     }
     
     // MARK: - KVO
@@ -82,7 +82,9 @@ class VMAudioPlayingCell: VMAudioCell {
             if (keyPath == "playbackProgress") {
                 self.progressSlider.value = Float(CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.playbackProgress))
             } else if keyPath == "loadedTrackPartTimeRange" {
-                self.progressSlider.secondaryValue = Float(CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.loadedTrackPartTimeRange.duration))
+                self.progressSlider.secondaryValue = Float(
+                    CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.loadedTrackPartTimeRange.start) +
+                    CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.loadedTrackPartTimeRange.duration))
             } else if keyPath == "isPlaying" {
                 self.pauseButton.titleLabel?.text = VMAudioListPlayer.sharedInstance.isPlaying ? "Pause" : "Play"
             }

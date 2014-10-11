@@ -96,7 +96,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             VMAudioListPlayer.sharedInstance.audioList = self.audioList
         }
         VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
-        VMAudioListPlayer.sharedInstance.play()
+//        VMAudioListPlayer.sharedInstance.play()
         self.tableView.reloadData()
     }
     
