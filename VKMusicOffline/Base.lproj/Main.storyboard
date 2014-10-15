@@ -167,7 +167,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HJb-7c-qOT" id="r3r-jT-Tx0">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bullet for my Valentine" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1y-K9-5MP">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Bullet for my Valentine" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1y-K9-5MP">
                                             <rect key="frame" x="8" y="8" width="171" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -182,7 +182,7 @@
                                                 <action selector="lyricsButtonPressed:" destination="HJb-7c-qOT" eventType="touchUpInside" id="6nq-b1-5SI"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For Words (To choke Up on)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLP-mA-EgW">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="For Words (To choke Up on)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLP-mA-EgW">
                                             <rect key="frame" x="202" y="8" width="214" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -197,13 +197,13 @@
                                                 <action selector="pauseButtonPressed:" destination="HJb-7c-qOT" eventType="touchUpInside" id="4z4-1k-nRK"/>
                                             </connections>
                                         </button>
-                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="40" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="6yu-k3-rbo" customClass="PlayerSlider" customModule="UIViews">
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yu-k3-rbo" customClass="PlayerSlider" customModule="UIViews">
                                             <rect key="frame" x="6" y="33" width="588" height="31"/>
                                             <color key="minimumTrackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="maximumTrackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="secondaryValue">
-                                                    <real key="value" value="60"/>
+                                                    <real key="value" value="0.0"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="secondaryValueTintColor">
                                                     <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -211,6 +211,9 @@
                                             </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="progressSliderMoved:" destination="HJb-7c-qOT" eventType="valueChanged" id="B7A-B7-M7t"/>
+                                                <action selector="progressSliderTouchDragInside:" destination="HJb-7c-qOT" eventType="touchDragInside" id="XXU-JH-NDA"/>
+                                                <action selector="progressSliderTouchUpInside:" destination="HJb-7c-qOT" eventType="touchUpInside" id="6Dd-TD-7aj"/>
+                                                <action selector="progressSliderTouchUpOutside:" destination="HJb-7c-qOT" eventType="touchUpOutside" id="N7M-ZI-mav"/>
                                             </connections>
                                         </slider>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCg-25-8Ic">
@@ -219,7 +222,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQf-vM-cPl">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="8:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQf-vM-cPl">
                                             <rect key="frame" x="558" y="8" width="34" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -233,6 +236,7 @@
                                         <constraint firstItem="FQf-vM-cPl" firstAttribute="trailing" secondItem="6yu-k3-rbo" secondAttribute="trailing" id="EKd-vm-RY9"/>
                                         <constraint firstItem="6yu-k3-rbo" firstAttribute="top" secondItem="x1y-K9-5MP" secondAttribute="bottom" constant="4" id="Gj8-am-2aN"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="FQf-vM-cPl" secondAttribute="trailing" id="KEv-zM-2iQ"/>
+                                        <constraint firstItem="lDA-9t-FfV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eLP-mA-EgW" secondAttribute="trailing" constant="5" id="LXz-8i-xo3"/>
                                         <constraint firstItem="15o-BR-O1O" firstAttribute="baseline" secondItem="FQf-vM-cPl" secondAttribute="baseline" id="Ppt-mJ-nWb"/>
                                         <constraint firstItem="x1y-K9-5MP" firstAttribute="leading" secondItem="r3r-jT-Tx0" secondAttribute="leadingMargin" id="iKb-VQ-LZw"/>
                                         <constraint firstItem="CCg-25-8Ic" firstAttribute="baseline" secondItem="eLP-mA-EgW" secondAttribute="baseline" id="kWh-Bh-T9z"/>

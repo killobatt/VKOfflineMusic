@@ -26,9 +26,9 @@ class VMAudio: NSObject, NSCoding, Equatable {
             let minutes = (self.duration % 3600) / 60
             if (self.duration > 3600) {
                 let hours = self.duration / 3600
-                return "\(hours):\(minutes):\(seconds)"
+                return NSString(format: "%d:%02d:%02d", hours, minutes, seconds)
             } else {
-                return "\(minutes):\(seconds)"
+                return NSString(format: "%d:%02d", minutes, seconds)
             }
         }
     }

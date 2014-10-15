@@ -19,6 +19,10 @@ class VMAudioPlayingCell: VMAudioCell {
             if (newAudio != nil) {
                 self.progressSlider.minimumValue = 0
                 self.progressSlider.maximumValue = Float(newAudio.duration)
+                self.progressSlider.value = Float(CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.playbackProgress))
+                self.progressSlider.secondaryValue = Float(
+                    CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.loadedTrackPartTimeRange.start) +
+                    CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.loadedTrackPartTimeRange.duration))
                 
                 VMAudioListPlayer.sharedInstance.addObserver(self, forKeyPath: "playbackProgress", options: nil, context: nil)
                 VMAudioListPlayer.sharedInstance.addObserver(self, forKeyPath: "loadedTrackPartTimeRange", options: nil, context: nil)
@@ -60,6 +64,8 @@ class VMAudioPlayingCell: VMAudioCell {
 
     // MARK: - Actions
     
+    var progressSliderIsBeingMoved = false
+    
     @IBAction func pauseButtonPressed(sender: AnyObject) {
         if (VMAudioListPlayer.sharedInstance.isPlaying) {
             VMAudioListPlayer.sharedInstance.pause()
@@ -75,18 +81,53 @@ class VMAudioPlayingCell: VMAudioCell {
         VMAudioListPlayer.sharedInstance.seekToTime(time)
     }
     
+    @IBAction func progressSliderTouchDragInside(sender: AnyObject) {
+        self.progressSliderIsBeingMoved = true
+    }
+    
+    @IBAction func progressSliderTouchUpInside(sender: AnyObject) {
+        self.progressSliderIsBeingMoved = false
+    }
+    
+    @IBAction func progressSliderTouchUpOutside(sender: AnyObject) {
+        self.progressSliderIsBeingMoved = false
+    }
+    
+    
     // MARK: - KVO
     
     override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!,
         change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
             if (keyPath == "playbackProgress") {
-                self.progressSlider.value = Float(CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.playbackProgress))
+                if (self.progressSliderIsBeingMoved == false) {
+                    self.progressSlider.value = Float(CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.playbackProgress))
+                }
+                self.trackDurationLabel.text = self.durationString(VMAudioListPlayer.sharedInstance.playbackProgress)
             } else if keyPath == "loadedTrackPartTimeRange" {
                 self.progressSlider.secondaryValue = Float(
                     CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.loadedTrackPartTimeRange.start) +
                     CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.loadedTrackPartTimeRange.duration))
             } else if keyPath == "isPlaying" {
-                self.pauseButton.titleLabel?.text = VMAudioListPlayer.sharedInstance.isPlaying ? "Pause" : "Play"
+                self.pauseButton.setTitle(VMAudioListPlayer.sharedInstance.isPlaying ? "Pause" : "Play", forState:UIControlState.Normal)
             }
+    }
+    
+    // MARK: - Utils
+    
+    func durationString(time: CMTime) -> String {
+        if CMTimeCompare(time, kCMTimeIndefinite) != 0 {
+            let timeInSeconds = Int(CMTimeGetSeconds(time));
+            let seconds = timeInSeconds % 60
+            let minutes = (timeInSeconds / 60) % 60
+            let hours = (timeInSeconds / 3600)
+            if hours > 0 {
+                return NSString(format: "%d:%02d:%02d", hours, minutes, seconds)
+            } else {
+                return NSString(format: "%d:%02d", minutes, seconds)
+            }
+        } else {
+            return ""
+        }
+        
     }
 }
