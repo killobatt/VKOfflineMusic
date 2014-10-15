@@ -17,37 +17,8 @@ class VMMenuViewController: UITableViewController {
     var user : VKUser! {
         willSet (newUser) {
             if (newUser != nil) {
-                self.userAudioList = VMUserAudioList(with: newUser)
-                self.userAudioList.title = "Мои аудиозаписи"
-                self.userAudioList.loadNextPage(completion: nil)
-                self.searchAudioList = VMSearchAudioList(searchOwn: false)
-                self.searchAudioList.title = "Поиск"
                 self.tableView.reloadData()
             }
-        }
-    }
-    
-    // MARK: - VMAudioLists
-    var userAudioList: VMUserAudioList!
-    var searchAudioList: VMSearchAudioList!
-    var resentAudioList: VMAudioList!
-    var allOfflineAudioList: VMAudioList!
-    var audioLists: Array<VMAudioList> {
-        get {
-            var lists: Array<VMAudioList> = []
-            if self.userAudioList != nil {
-                lists.append(self.userAudioList)
-            }
-            if self.searchAudioList != nil {
-                lists.append(self.searchAudioList)
-            }
-            if self.resentAudioList != nil {
-                lists.append(self.resentAudioList)
-            }
-            if self.allOfflineAudioList != nil {
-                lists.append(self.allOfflineAudioList)
-            }
-            return lists
         }
     }
     
@@ -106,7 +77,7 @@ class VMMenuViewController: UITableViewController {
         if section == 0 {
             return 1 // User Info
         } else if section == 1 {
-            return self.audioLists.count
+            return VMAudioListManager.sharedInstance.audioLists.count
         }
         return 0
     }
@@ -118,7 +89,7 @@ class VMMenuViewController: UITableViewController {
             return cell
         } else { // if indexPath.section == 1
             let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuAudioListCell", forIndexPath: indexPath) as VMMenuAudioListCell
-            cell.audioList = self.audioLists[indexPath.row]
+            cell.audioList = VMAudioListManager.sharedInstance.audioLists[indexPath.row]
             return cell // VMMenuAudioListCell
         }
     }

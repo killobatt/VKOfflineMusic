@@ -10,17 +10,19 @@ import Foundation
 
 class VMOfflineAudioList: VMAudioList, NSCoding {
     
-    var name: NSString!
     var identifier: NSUUID
     
     // MARK: - NSCoding interface implementation
     
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.identifier, forKey: "identifier")
+        aCoder.encodeObject(self.identifier, forKey:"identifier")
+        aCoder.encodeObject(self.title, forKey:"title")
     }
     
     required init(coder aDecoder: NSCoder) {
         self.identifier = aDecoder.decodeObjectForKey("identifier") as NSUUID
+        super.init()
+        self.title = aDecoder.decodeObjectForKey("title") as NSString
     }
 
     // MARK: - VMAudio overrides

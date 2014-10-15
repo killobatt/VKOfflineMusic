@@ -153,12 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     
     func vkGetUserInfo() {
         VMUserManager.sharedInstance.loadCurrentUser(completionBlock: { (user: VKUser) -> Void in
-            
-        }) { (error: NSError!) -> Void in
-            
-        }
-        VMUserManager.sharedInstance.loadCurrentUser(completionBlock: { (user: VKUser) -> Void in
-            
+            VMAudioListManager.sharedInstance.user = user
         }) { (error: NSError!) -> Void in
             
         }

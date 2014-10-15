@@ -15,7 +15,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         willSet {
             if (self.searchResultsController != nil) {
                 self.searchResultsController.audioList = newValue
-                self.title = newValue.title
+                self.navigationItem.title = newValue.title
             }
         }
     }
