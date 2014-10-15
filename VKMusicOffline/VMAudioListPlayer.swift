@@ -112,6 +112,22 @@ class VMAudioListPlayer: NSObject {
         }
     }
     
+    func playNextTrack() {
+        var newTrackIndex = self.currentTrackIndex + 1
+        if (newTrackIndex >= self.audioList.count) {
+            newTrackIndex %= self.audioList.count
+        }
+        self.currentTrackIndex = newTrackIndex
+    }
+    
+    func playPreviousItem() {
+        var newTrackIndex = self.currentTrackIndex - 1
+        if (newTrackIndex < 0) {
+            newTrackIndex += self.audioList.count
+        }
+        self.currentTrackIndex = newTrackIndex
+    }
+    
     var currentTrack: VMAudio! {
         get {
             return self.audioList[self.currentTrackIndex]
@@ -119,7 +135,24 @@ class VMAudioListPlayer: NSObject {
     }
     
     var currentTrackIndex: Int = 0 {
+        willSet {
+            self.willChangeValueForKey("currentTrackIndex")
+            self.didChangeValueForKey("currentTrack")
+            if (self.player != nil) {
+                if (self.player.currentItem != nil) {
+                    self.player.currentItem.removeObserver(self, forKeyPath: "status")
+                    NSNotificationCenter.defaultCenter().removeObserver(self,
+                        name: AVPlayerItemDidPlayToEndTimeNotification,
+                        object: self.player.currentItem)
+                }
+                self.player.removeTimeObserver(self.playbackObserver)
+            }
+            self._loadedTrackPartTimeRange = kCMTimeRangeZero
+            self._playbackProgress = kCMTimeZero
+        }
         didSet {
+            self.didChangeValueForKey("currentTrackIndex")
+            self.didChangeValueForKey("currentTrack")
             var playerItem: AVPlayerItem! = nil
             if (self.currentTrack.localURL != nil) {
                 playerItem = AVPlayerItem(URL: self.currentTrack.localURL)
@@ -127,6 +160,9 @@ class VMAudioListPlayer: NSObject {
                 playerItem = AVPlayerItem(URL: self.currentTrack.URL)
             }
             playerItem.addObserver(self, forKeyPath: "status", options: nil, context: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerItemDidPlayToEndTime",
+                name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
+            
             self.player = AVPlayer(playerItem: playerItem)
             self.player.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
         }
@@ -205,6 +241,10 @@ class VMAudioListPlayer: NSObject {
                         self._loadedTrackPartTimeRange = self.timeRangeFrom(self.player.currentItem.loadedTimeRanges)
                         NSLog("loaded part of track: from \(CMTimeGetSeconds(self._loadedTrackPartTimeRange.start)), duration \(CMTimeGetSeconds(self._loadedTrackPartTimeRange.duration)) seconds")
                     })
+                    
+                    if (self.isPlaying) {
+                        self.player.play()
+                    }
                 case AVPlayerItemStatus.Failed:
                     NSLog("VMAudioListPlayer: AVPlayerItem: Failed with error \(playerItem.error)")
                     self._state = State.Failed(error: playerItem.error)
@@ -214,5 +254,9 @@ class VMAudioListPlayer: NSObject {
                 }
             }
         }
+    }
+
+    func playerItemDidPlayToEndTime() {
+        self.playNextTrack()
     }
 }

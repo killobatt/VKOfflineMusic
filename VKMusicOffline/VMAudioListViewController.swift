@@ -22,6 +22,29 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     var searchController: UISearchController!
     var searchResultsController: VMAudioListViewController!
     
+    override init() {
+        super.init()
+        initialize()
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialize()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        initialize()
+    }
+    
+    deinit {
+        VMAudioListPlayer.sharedInstance.removeObserver(self, forKeyPath: "currentTrackIndex")
+    }
+    
+    func initialize() {
+        VMAudioListPlayer.sharedInstance.addObserver(self, forKeyPath: "currentTrackIndex", options: nil, context: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -182,4 +205,14 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         }
     }
     
+    // MARK: - KVO
+    
+    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!,
+        change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+            if (object as NSObject == VMAudioListPlayer.sharedInstance) {
+                if (keyPath == "currentTrackIndex") {
+                    self.tableView.reloadData()
+                }
+            }
+    }
 }
