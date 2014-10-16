@@ -9,7 +9,7 @@
 import Foundation
 import VK
 
-class VMAudioListManager: NSObject {
+class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
    
     class var sharedInstance : VMAudioListManager {
     struct Static {
@@ -25,6 +25,13 @@ class VMAudioListManager: NSObject {
     override init() {
         super.init()
         self.loadOfflineAudioLists()
+        
+        let configuration = NSURLSessionConfiguration.backgroundSessionConfiguration("com.vv.vkmusic-offline")
+        self.URLSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+    }
+    
+    deinit {
+        self.saveOfflineAudioLists()
     }
     
     // MARK: - VMAudioLists
@@ -158,5 +165,76 @@ class VMAudioListManager: NSObject {
     func pathForList(list: VMOfflineAudioList) -> NSString {
         let path = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(list.identifier.UUIDString)
         return path.stringByAppendingPathExtension("list")!
+    }
+    
+    // MARK: - Downloading
+    
+    var URLSession: NSURLSession?
+    
+    var backgroundURLSessionCompletionHandler: (() -> Void)?
+    
+    var downloadTasks: Dictionary<Int, NSNumber> = Dictionary() // download task id, audio id
+    
+    func downloadAudio(audio:VMAudio) {
+        if (audio.localFileName != nil) {
+            return
+        }
+        let downloadTaskOptional = self.URLSession?.downloadTaskWithURL(audio.URL)
+        if let downloadTask = downloadTaskOptional {
+            self.downloadTasks[downloadTask.taskIdentifier] = audio.id
+            downloadTask.resume()
+        }
+    }
+    
+    // MARK: - NSURLSessionDownloadDelegate
+    
+    /* Sent when a download task that has completed a download.  The delegate should
+    * copy or move the file at the given location to a new location as it will be
+    * removed when the delegate message returns. URLSession:task:didCompleteWithError: will
+    * still be called.
+    */
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
+        if let audioID = self.downloadTasks[downloadTask.taskIdentifier] {
+            let audioFileName = audioID.stringValue.stringByAppendingPathExtension("mp3")
+            let audioPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(audioFileName!)
+            let audioURL = NSURL(fileURLWithPath:audioPath)
+            var error: NSError?
+            NSFileManager.defaultManager().moveItemAtURL(location, toURL: audioURL, error: &error)
+            for list in self.offlineAudioLists {
+                for audio in list.audios {
+                    if (audio as VMAudio).id == audioID {
+                        (audio as VMAudio).localFileName = audioFileName
+                    }
+                }
+            }
+            self.saveOfflineAudioLists()
+        }
+    }
+    
+    /* Sent periodically to notify the delegate of download progress. */
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        NSLog("URLSession downloadTask \(downloadTask.taskIdentifier) didWriteData \(bytesWritten) bytes, totalBytesWritten \(totalBytesWritten), totalBytesExpectedToWrite \(totalBytesExpectedToWrite)")
+    }
+    
+    /* Sent when a download has been resumed. If a download failed with an
+    * error, the -userInfo dictionary of the error will contain an
+    * NSURLSessionDownloadTaskResumeData key, whose value is the resume
+    * data.
+    */
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+        
+    }
+    
+    func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
+        self.backgroundURLSessionCompletionHandler!()
+    }
+}
+
+extension VMAudio {
+    var localURL: NSURL! {
+        get {
+            let path = VMAudioListManager.sharedInstance.offlineAudioListDirectoryPath.stringByAppendingPathComponent(self.localFileName)
+            return NSURL(fileURLWithPath: path)
+        }
     }
 }

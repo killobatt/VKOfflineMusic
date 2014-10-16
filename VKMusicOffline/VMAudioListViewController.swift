@@ -118,9 +118,14 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         if (VMAudioListPlayer.sharedInstance.audioList !== self.audioList) {
             VMAudioListPlayer.sharedInstance.audioList = self.audioList
         }
-        VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
-        VMAudioListPlayer.sharedInstance.play()
-        self.tableView.reloadData()
+        if (VMAudioListPlayer.sharedInstance.currentTrackIndex == indexPath.row &&
+            VMAudioListPlayer.sharedInstance.isPlaying) {
+            VMAudioListPlayer.sharedInstance.pause()
+        } else {
+            VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
+            VMAudioListPlayer.sharedInstance.play()
+            self.tableView.reloadData()
+        }
     }
     
 //    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

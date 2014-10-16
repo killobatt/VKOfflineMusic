@@ -15,7 +15,7 @@ class VMAudio: NSObject, NSCoding, Equatable {
     var artist : NSString!
     var title : NSString!
     var URL : NSURL!
-    var localURL : NSURL!
+    var localFileName : NSString!
     var lyrics: VMLyrics!
     var albumID : NSNumber!
     var genreID : NSNumber!
@@ -62,7 +62,7 @@ class VMAudio: NSObject, NSCoding, Equatable {
         aCoder.encodeOptional(self.artist, forKey: "artist")
         aCoder.encodeOptional(self.title, forKey: "title")
         aCoder.encodeOptional(self.URL, forKey: "URL")
-        aCoder.encodeOptional(self.localURL, forKey: "localURL")
+        aCoder.encodeOptional(self.localFileName, forKey: "localFileName")
         aCoder.encodeOptional(self.lyrics, forKey: "lyrics")
         aCoder.encodeOptional(self.albumID, forKey: "albumID")
         aCoder.encodeOptional(self.genreID, forKey: "genreID")
@@ -75,7 +75,7 @@ class VMAudio: NSObject, NSCoding, Equatable {
         self.artist = aDecoder.decodeObjectForKey("artist") as NSString!
         self.title = aDecoder.decodeObjectForKey("title") as NSString!
         self.URL = aDecoder.decodeObjectForKey("URL") as NSURL!
-        self.localURL = aDecoder.decodeObjectForKey("localURL") as NSURL!
+        self.localFileName = aDecoder.decodeObjectForKey("localFileName") as NSString!
         self.albumID = aDecoder.decodeObjectForKey("albumID") as NSNumber!
         super.init()
         self.lyrics = aDecoder.decodeObjectForKey("lyricsID") as VMLyrics!

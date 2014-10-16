@@ -81,6 +81,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     func applicationWillTerminate(application: UIApplication!) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    // MARK: - NSURLSession
+    
+    func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
+        if (identifier == VMAudioListManager.sharedInstance.URLSession?.configuration.identifier) {
+            VMAudioListManager.sharedInstance.backgroundURLSessionCompletionHandler = completionHandler
+        }
+    }
 
     // MARK: - Split view
 
