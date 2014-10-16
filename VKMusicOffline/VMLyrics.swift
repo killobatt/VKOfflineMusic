@@ -12,6 +12,7 @@ import VK
 class VMLyrics: NSObject, NSCoding {
     var id: NSNumber
     var text: String!
+    var audio: VMAudio?
     
     init(id:NSNumber) {
         self.id = id
@@ -48,6 +49,6 @@ class VMLyrics: NSObject, NSCoding {
     
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.id, forKey: "id")
-        aCoder.encodeObject(self.text, forKey: "text")
+        aCoder.encodeOptional(self.text, forKey: "text")
     }
 }

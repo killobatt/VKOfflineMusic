@@ -22,6 +22,33 @@ class VMMenuViewController: UITableViewController {
         }
     }
     
+    // MARK: - Init
+    
+    override init() {
+        super.init()
+        initialize()
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialize()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        initialize()
+    }
+    
+    deinit {
+        VMAudioListManager.sharedInstance.removeObserver(self, forKeyPath: "audioLists")
+    }
+    
+    func initialize() {
+        VMAudioListManager.sharedInstance.addObserver(self, forKeyPath: "audioLists", options: nil, context: nil)
+    }
+    
+    // MARK: - UIViewController
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
@@ -102,6 +129,17 @@ class VMMenuViewController: UITableViewController {
         }
     }
     
+    
+    // MARK: - KVO
+    
+    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!,
+        change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+            if (object as NSObject == VMAudioListManager.sharedInstance) {
+                if (keyPath == "audioLists") {
+                    self.tableView.reloadData()
+                }
+            }
+    }
     
 }
 

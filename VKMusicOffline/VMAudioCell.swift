@@ -72,7 +72,7 @@ class VMAudioCell: UITableViewCell {
     
     @IBAction func downloadButtonPressed(sender: AnyObject) {
         if let delegate = self.delegate {
-            delegate.audioCellLyricsButtonPressed?(self)
+            delegate.audioCellDownloadButtonPressed?(self)
         }
     }
 }

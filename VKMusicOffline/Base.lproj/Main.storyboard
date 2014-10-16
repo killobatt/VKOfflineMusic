@@ -124,6 +124,24 @@
                                     <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="MEY-yI-72g"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddNewListCell" id="fSj-6V-hK4" userLabel="Add new list cell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fSj-6V-hK4" id="2T4-1o-RZ5">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Создать новый список" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKQ-R8-ZTB" userLabel="Add new label">
+                                            <rect key="frame" x="12" y="11" width="184" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="ZKQ-R8-ZTB" secondAttribute="centerY" id="aZy-Rg-yao"/>
+                                        <constraint firstItem="ZKQ-R8-ZTB" firstAttribute="leading" secondItem="2T4-1o-RZ5" secondAttribute="leading" constant="12" id="xcO-bd-QK4"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
@@ -136,6 +154,96 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="801" y="-631"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZtW-hc-1Ki">
+            <objects>
+                <navigationController id="p7T-DI-lSr" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Mv-xw-r5u">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="p0S-lM-hgC" kind="relationship" relationship="rootViewController" id="euv-QC-WBk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kx5-1H-7Jp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1528" y="944"/>
+        </scene>
+        <!--Довить аудио в список-->
+        <scene sceneID="j3J-Se-YpL">
+            <objects>
+                <tableViewController id="p0S-lM-hgC" customClass="VMAudioListsSelectionViewController" customModule="VKMusicOffline" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="x3O-mA-yEZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VMMenuAudioListCell" id="nxc-Tt-1Qy" customClass="VMMenuAudioListCell" customModule="VKMusicOffline" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nxc-Tt-1Qy" id="EBW-gk-ag0">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мои аудиозаписи" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQz-7M-uXN">
+                                            <rect key="frame" x="12" y="11" width="143" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="112" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MwD-UE-H1h">
+                                            <rect key="frame" x="551" y="11" width="29" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MwD-UE-H1h" secondAttribute="trailing" constant="12" id="UJ6-Pd-oJz"/>
+                                        <constraint firstItem="FQz-7M-uXN" firstAttribute="leading" secondItem="EBW-gk-ag0" secondAttribute="leading" constant="12" id="WTg-ob-Ur6"/>
+                                        <constraint firstAttribute="centerY" secondItem="FQz-7M-uXN" secondAttribute="centerY" id="YVE-TB-xIN"/>
+                                        <constraint firstItem="MwD-UE-H1h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FQz-7M-uXN" secondAttribute="trailing" constant="8" id="ZoE-pa-jOQ"/>
+                                        <constraint firstItem="MwD-UE-H1h" firstAttribute="baseline" secondItem="FQz-7M-uXN" secondAttribute="baseline" id="eNq-24-jgm"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="countLabel" destination="MwD-UE-H1h" id="JSw-FT-CAa"/>
+                                    <outlet property="titleLabel" destination="FQz-7M-uXN" id="nCf-wz-pEA"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddNewListCell" id="Tuc-jP-5EG" userLabel="Add new list cell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tuc-jP-5EG" id="IqX-l4-qfk">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Создать новый список" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLA-2t-qjA" userLabel="Add new label">
+                                            <rect key="frame" x="12" y="11" width="184" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="HLA-2t-qjA" secondAttribute="centerY" id="EIR-ch-XP5"/>
+                                        <constraint firstItem="HLA-2t-qjA" firstAttribute="leading" secondItem="IqX-l4-qfk" secondAttribute="leading" constant="12" id="PxJ-QG-5D4"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="p0S-lM-hgC" id="G09-2n-wGC"/>
+                            <outlet property="delegate" destination="p0S-lM-hgC" id="pi1-wu-cLL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Довить аудио в список" id="cil-Gn-jBq"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aZh-gf-hmU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2264" y="944"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="r7l-gg-dq7">
@@ -332,6 +440,7 @@
                     <navigationItem key="navigationItem" id="Fxm-9g-B5a"/>
                     <connections>
                         <segue destination="l6x-eV-Xvn" kind="presentation" identifier="showLyrics" modalPresentationStyle="formSheet" id="9AY-E4-3VY"/>
+                        <segue destination="p7T-DI-lSr" kind="presentation" identifier="showOfflineListSelection" modalPresentationStyle="formSheet" id="5od-8t-a10"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wlv-OP-lkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -357,30 +466,34 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIr-or-mEl">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Idd-5K-1S0">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Close" id="AJK-bt-8t8">
-                                        <connections>
-                                            <action selector="closePressed:" destination="l6x-eV-Xvn" id="G6L-1S-30x"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <navigationItem title="Lyrics" id="0UN-Wy-pJb">
+                                        <barButtonItem key="leftBarButtonItem" title="Close" id="AJK-bt-8t8">
+                                            <connections>
+                                                <action selector="closePressed:" destination="l6x-eV-Xvn" id="G6L-1S-30x"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
-                            </toolbar>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="vIr-or-mEl" firstAttribute="leading" secondItem="jaw-sO-Udh" secondAttribute="leading" id="I7Y-Vb-IWG"/>
+                            <constraint firstAttribute="trailing" secondItem="Idd-5K-1S0" secondAttribute="trailing" id="DN3-oN-Fma"/>
+                            <constraint firstItem="HE9-WL-040" firstAttribute="top" secondItem="Idd-5K-1S0" secondAttribute="bottom" id="Dzf-oc-u7M"/>
+                            <constraint firstItem="Idd-5K-1S0" firstAttribute="top" secondItem="ygq-9Z-H1N" secondAttribute="bottom" id="Kmg-7W-Hta"/>
                             <constraint firstItem="HE9-WL-040" firstAttribute="leading" secondItem="jaw-sO-Udh" secondAttribute="leading" id="NMz-bU-vBT"/>
                             <constraint firstItem="OZM-zY-Qeq" firstAttribute="top" secondItem="HE9-WL-040" secondAttribute="bottom" id="dAk-qA-yLm"/>
                             <constraint firstAttribute="trailing" secondItem="HE9-WL-040" secondAttribute="trailing" id="nRF-pH-v0U"/>
-                            <constraint firstItem="HE9-WL-040" firstAttribute="top" secondItem="vIr-or-mEl" secondAttribute="bottom" id="o8s-Wj-4Qv"/>
-                            <constraint firstAttribute="trailing" secondItem="vIr-or-mEl" secondAttribute="trailing" id="oC9-fb-WkD"/>
-                            <constraint firstItem="vIr-or-mEl" firstAttribute="top" secondItem="ygq-9Z-H1N" secondAttribute="bottom" id="vIg-pC-Ujw"/>
+                            <constraint firstItem="Idd-5K-1S0" firstAttribute="leading" secondItem="jaw-sO-Udh" secondAttribute="leading" id="w45-xk-QAN"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navigationBar" destination="Idd-5K-1S0" id="qFk-Jt-CRR"/>
                         <outlet property="textView" destination="HE9-WL-040" id="w38-p6-QF4"/>
+                        <outlet property="titleBarItem" destination="0UN-Wy-pJb" id="5C3-Tv-QGw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cV2-4i-XJd" userLabel="First Responder" sceneMemberID="firstResponder"/>

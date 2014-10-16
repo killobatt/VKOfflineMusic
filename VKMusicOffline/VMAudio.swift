@@ -58,25 +58,30 @@ class VMAudio: NSObject, NSCoding, Equatable {
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeInteger(self.id.integerValue, forKey: "id")
         aCoder.encodeInteger(self.ownerID.integerValue, forKey: "ownerID")
-        aCoder.encodeObject(self.artist, forKey: "artist")
-        aCoder.encodeObject(self.title, forKey: "title")
-        aCoder.encodeObject(self.URL, forKey: "URL")
-        aCoder.encodeObject(self.localURL, forKey: "localURL")
-        aCoder.encodeObject(self.lyrics, forKey: "lyricsID")
-        aCoder.encodeObject(self.albumID, forKey: "ownerID")
         aCoder.encodeInteger(self.duration, forKey: "duration")
+        aCoder.encodeOptional(self.artist, forKey: "artist")
+        aCoder.encodeOptional(self.title, forKey: "title")
+        aCoder.encodeOptional(self.URL, forKey: "URL")
+        aCoder.encodeOptional(self.localURL, forKey: "localURL")
+        aCoder.encodeOptional(self.lyrics, forKey: "lyrics")
+        aCoder.encodeOptional(self.albumID, forKey: "albumID")
+        aCoder.encodeOptional(self.genreID, forKey: "genreID")
     }
     
     required init(coder aDecoder: NSCoder) {
         self.id = NSNumber(int: aDecoder.decodeIntForKey("id"))
         self.ownerID = NSNumber(int: aDecoder.decodeIntForKey("ownerID"))
-        self.artist = aDecoder.decodeObjectForKey("artist") as NSString
-        self.title = aDecoder.decodeObjectForKey("title") as NSString
-        self.URL = aDecoder.decodeObjectForKey("URL") as NSURL
-        self.localURL = aDecoder.decodeObjectForKey("localURL") as NSURL
-        self.lyrics = aDecoder.decodeObjectForKey("lyricsID") as VMLyrics
-        self.albumID = aDecoder.decodeObjectForKey("albumID") as NSNumber
-        self.duration = NSNumber(int: aDecoder.decodeIntForKey("artist"))
+        self.duration = NSNumber(int: aDecoder.decodeIntForKey("duration"))
+        self.artist = aDecoder.decodeObjectForKey("artist") as NSString!
+        self.title = aDecoder.decodeObjectForKey("title") as NSString!
+        self.URL = aDecoder.decodeObjectForKey("URL") as NSURL!
+        self.localURL = aDecoder.decodeObjectForKey("localURL") as NSURL!
+        self.albumID = aDecoder.decodeObjectForKey("albumID") as NSNumber!
+        super.init()
+        self.lyrics = aDecoder.decodeObjectForKey("lyricsID") as VMLyrics!
+        if (self.lyrics != nil) {
+            self.lyrics.audio = self
+        }
     }
     
     // MARK: - Equatable

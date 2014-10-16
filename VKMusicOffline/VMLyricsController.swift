@@ -19,11 +19,16 @@ class VMLyricsController: UIViewController {
                     }
                 })
             }
+            if let audio = lyrics.audio {
+                self.titleBarItem.title = audio.title
+            }
         }
     }
     
     // MARK: - IBOutlets
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var titleBarItem: UINavigationItem!
     @IBOutlet weak var textView: UITextView!
     
     // MARK: - UIViewController lifecycle

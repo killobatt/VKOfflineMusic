@@ -239,7 +239,6 @@ class VMAudioListPlayer: NSObject {
                     self.playbackObserver = self.player.addPeriodicTimeObserverForInterval(timeInterval, queue: dispatch_get_main_queue(), usingBlock: { (time: CMTime) -> Void in
                         self._playbackProgress = self.player.currentItem.currentTime()
                         self._loadedTrackPartTimeRange = self.timeRangeFrom(self.player.currentItem.loadedTimeRanges)
-                        NSLog("loaded part of track: from \(CMTimeGetSeconds(self._loadedTrackPartTimeRange.start)), duration \(CMTimeGetSeconds(self._loadedTrackPartTimeRange.duration)) seconds")
                     })
                     
                     if (self.isPlaying) {

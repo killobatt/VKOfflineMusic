@@ -181,6 +181,11 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             let controller = segue.destinationViewController as VMLyricsController
             let audioCell = sender as VMAudioCell
             controller.lyrics = audioCell.audio.lyrics
+        } else if (segue.identifier == "showOfflineListSelection") {
+            let navigationController = segue.destinationViewController as UINavigationController
+            let controller = navigationController.topViewController as VMAudioListsSelectionViewController
+            let audioCell = sender as VMAudioCell
+            controller.audioToAdd = audioCell.audio
         }
     }
     
@@ -193,6 +198,10 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
     func audioCellLyricsButtonPressed(cell: VMAudioCell) {
         self.performSegueWithIdentifier("showLyrics", sender: cell)
+    }
+    
+    func audioCellDownloadButtonPressed(cell: VMAudioCell) {
+        self.performSegueWithIdentifier("showOfflineListSelection", sender: cell)
     }
     
     // MARK: - UISearchResultsUpdating
