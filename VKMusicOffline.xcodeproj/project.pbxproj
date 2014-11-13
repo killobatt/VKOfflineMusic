@@ -18,6 +18,7 @@
 		843CAC7C1A155F7400FD37E9 /* UIViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB8A22219D4677500FD7251 /* UIViews.framework */; };
 		843CAC7D1A155F7400FD37E9 /* UIViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBB8A22219D4677500FD7251 /* UIViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		843CAC811A155F7400FD37E9 /* VK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF8FF819CD9216005CB421 /* VK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		843CAC861A156B4300FD37E9 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843CAC851A156B4300FD37E9 /* Launch Screen.xib */; };
 		CB6B52C119DBE40F00127A1B /* VMLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B52C019DBE40F00127A1B /* VMLyrics.swift */; };
 		CB6B52C719DBE61000127A1B /* VMLyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B52C619DBE61000127A1B /* VMLyricsController.swift */; };
 		CB85503B19D2186600B4EF0A /* VMOfflineAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85503A19D2186600B4EF0A /* VMOfflineAudioList.swift */; };
@@ -141,6 +142,7 @@
 		1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListManager.swift; sourceTree = "<group>"; };
 		1E512E1719EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListsSelectionViewController.swift; sourceTree = "<group>"; };
 		1E512E1D19EFC80B00CB22CC /* NSKeyedArchiver+VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSKeyedArchiver+VM.swift"; sourceTree = "<group>"; };
+		843CAC851A156B4300FD37E9 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		CB6B52C019DBE40F00127A1B /* VMLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMLyrics.swift; sourceTree = "<group>"; };
 		CB6B52C619DBE61000127A1B /* VMLyricsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMLyricsController.swift; sourceTree = "<group>"; };
 		CB85503A19D2186600B4EF0A /* VMOfflineAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOfflineAudioList.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				CB6B52C619DBE61000127A1B /* VMLyricsController.swift */,
 				1E512E1719EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift */,
 				CBB7A90319CD844100E95307 /* AppDelegate.swift */,
+				843CAC851A156B4300FD37E9 /* Launch Screen.xib */,
 				CBB7A90919CD844100E95307 /* Main.storyboard */,
 				CBB7A90C19CD844100E95307 /* Images.xcassets */,
 				CBB7A90119CD844100E95307 /* Supporting Files */,
@@ -459,6 +462,7 @@
 			files = (
 				CBB7A90B19CD844100E95307 /* Main.storyboard in Resources */,
 				CBB7A90D19CD844100E95307 /* Images.xcassets in Resources */,
+				843CAC861A156B4300FD37E9 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,7 +638,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = VKMusicOffline/Info.plist;
@@ -648,7 +651,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = VKMusicOffline/Info.plist;

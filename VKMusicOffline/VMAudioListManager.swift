@@ -234,8 +234,12 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
 extension VMAudio {
     var localURL: NSURL! {
         get {
-            let path = VMAudioListManager.sharedInstance.offlineAudioListDirectoryPath.stringByAppendingPathComponent(self.localFileName)
-            return NSURL(fileURLWithPath: path)
+            if let localFileName = self.localFileName {
+                let path = VMAudioListManager.sharedInstance.offlineAudioListDirectoryPath.stringByAppendingPathComponent(localFileName)
+                return NSURL(fileURLWithPath: path)
+            } else {
+                return nil
+            }
         }
     }
 }

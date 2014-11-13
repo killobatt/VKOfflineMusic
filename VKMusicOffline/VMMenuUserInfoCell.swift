@@ -23,7 +23,9 @@ class VMMenuUserInfoCell: UITableViewCell {
             if (newUser != nil) {
                 self.firstNameLabel.text = newUser.first_name
                 self.lastNameLabel.text = newUser.last_name
-                self.userImageView.imageURL = NSURL(string: newUser.photo_100)
+                if let photoURLString = newUser.photo_200 {
+                    self.userImageView.imageURL = NSURL(string:photoURLString)
+                }
             }
         }
     }

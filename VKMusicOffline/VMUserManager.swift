@@ -29,7 +29,7 @@ class VMUserManager: NSObject {
         get {
             let parameters = [
                 VK_API_USER_ID: VKSdk.getAccessToken().userId,
-                VK_API_FIELDS : ["first_name", "last_name", "photo_100", "status"]
+                VK_API_FIELDS : ["first_name", "last_name", "photo_200", "status"]
             ]
             return VKApi.users().get(parameters)
         }
