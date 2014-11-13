@@ -30,17 +30,24 @@ class VMAudioListPlayer: NSObject {
 
     // MARK: - State
     
-    var isPlaying: Bool {
-        get {
-            return self._isPlaying
+    private(set) var isPlaying: Bool = false {
+        willSet {
+            self.willChangeValueForKey("isPlaying")
+        }
+        didSet {
+            self.didChangeValueForKey("isPlaying")
         }
     }
     
-    var playbackProgress : CMTime {
-        get {
-            return self._playbackProgress
+    private(set) var playbackProgress : CMTime = kCMTimeZero {
+        willSet {
+            self.willChangeValueForKey("playbackProgress")
+        }
+        didSet {
+            self.didChangeValueForKey("playbackProgress")
         }
     }
+
     
     var volume: Float = 1.0 {
         willSet {
@@ -66,9 +73,12 @@ class VMAudioListPlayer: NSObject {
         }
     }
     
-    var loadedTrackPartTimeRange: CMTimeRange {
-        get {
-            return self._loadedTrackPartTimeRange
+    private(set) var loadedTrackPartTimeRange: CMTimeRange = kCMTimeRangeZero {
+        willSet {
+            self.willChangeValueForKey("loadedTrackPartTimeRange")
+        }
+        didSet {
+            self.didChangeValueForKey("loadedTrackPartTimeRange")
         }
     }
     
@@ -78,9 +88,12 @@ class VMAudioListPlayer: NSObject {
         case Failed(error: NSError!)
     }
     
-    var state: State {
-        get {
-            return self._state
+    private(set) var state: State = State.Idle {
+        willSet {
+            self.willChangeValueForKey("state")
+        }
+        didSet {
+            self.didChangeValueForKey("state")
         }
     }
     
@@ -89,13 +102,13 @@ class VMAudioListPlayer: NSObject {
     func play() {
         NSLog("VMAudioListPlayer play")
         self.player.play()
-        self._isPlaying = true
+        self.isPlaying = true
     }
     
     func pause() {
         NSLog("VMAudioListPlayer pause")
         self.player.pause()
-        self._isPlaying = false
+        self.isPlaying = false
     }
     
     func seekToTime(time:CMTime) {
@@ -147,8 +160,8 @@ class VMAudioListPlayer: NSObject {
                 }
                 self.player.removeTimeObserver(self.playbackObserver)
             }
-            self._loadedTrackPartTimeRange = kCMTimeRangeZero
-            self._playbackProgress = kCMTimeZero
+            self.loadedTrackPartTimeRange = kCMTimeRangeZero
+            self.playbackProgress = kCMTimeZero
         }
         didSet {
             self.didChangeValueForKey("currentTrackIndex")
@@ -170,41 +183,6 @@ class VMAudioListPlayer: NSObject {
     
     // MARK: - Privates
     
-    private var _isPlaying: Bool = false {
-        willSet {
-            self.willChangeValueForKey("isPlaying")
-        }
-        didSet {
-            self.didChangeValueForKey("isPlaying")
-        }
-    }
-    
-    private var _state: State = State.Idle {
-        willSet {
-            self.willChangeValueForKey("state")
-        }
-        didSet {
-            self.didChangeValueForKey("state")
-        }
-    }
-    
-    private var _loadedTrackPartTimeRange: CMTimeRange = kCMTimeRangeZero {
-        willSet {
-            self.willChangeValueForKey("loadedTrackPartTimeRange")
-        }
-        didSet {
-            self.didChangeValueForKey("loadedTrackPartTimeRange")
-        }
-    }
-    
-    private var _playbackProgress: CMTime = kCMTimeZero {
-        willSet {
-            self.willChangeValueForKey("playbackProgress")
-        }
-        didSet {
-            self.didChangeValueForKey("playbackProgress")
-        }
-    }
     
     private func timeRangeFrom(timeRanges: NSArray) -> CMTimeRange {
         var loadedTrackPartTimeRange = kCMTimeRangeZero
@@ -227,7 +205,7 @@ class VMAudioListPlayer: NSObject {
     
     // MARK: - KVO
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if object is AVPlayerItem {
             let playerItem = object as AVPlayerItem
             if keyPath == "status" {
@@ -237,8 +215,8 @@ class VMAudioListPlayer: NSObject {
                     
                     let timeInterval = CMTimeMakeWithSeconds(0.1, 600)
                     self.playbackObserver = self.player.addPeriodicTimeObserverForInterval(timeInterval, queue: dispatch_get_main_queue(), usingBlock: { (time: CMTime) -> Void in
-                        self._playbackProgress = self.player.currentItem.currentTime()
-                        self._loadedTrackPartTimeRange = self.timeRangeFrom(self.player.currentItem.loadedTimeRanges)
+                        self.playbackProgress = self.player.currentItem.currentTime()
+                        self.loadedTrackPartTimeRange = self.timeRangeFrom(self.player.currentItem.loadedTimeRanges)
                     })
                     
                     if (self.isPlaying) {
@@ -246,10 +224,10 @@ class VMAudioListPlayer: NSObject {
                     }
                 case AVPlayerItemStatus.Failed:
                     NSLog("VMAudioListPlayer: AVPlayerItem: Failed with error \(playerItem.error)")
-                    self._state = State.Failed(error: playerItem.error)
+                    self.state = State.Failed(error: playerItem.error)
                 case AVPlayerItemStatus.Unknown:
                     NSLog("VMAudioListPlayer: AVPlayerItem: Unknown status, eror \(playerItem.error)")
-                    self._state = State.Failed(error: nil)
+                    self.state = State.Failed(error: nil)
                 }
             }
         }
