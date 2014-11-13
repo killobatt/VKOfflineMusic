@@ -13,7 +13,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     var identifier: NSUUID
     
     init(title: NSString) {
-        self.identifier = NSUUID.UUID()
+        self.identifier = NSUUID()
         super.init()
         self.title = title
     }

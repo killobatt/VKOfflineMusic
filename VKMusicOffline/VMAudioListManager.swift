@@ -26,7 +26,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         super.init()
         self.loadOfflineAudioLists()
         
-        let configuration = NSURLSessionConfiguration.backgroundSessionConfiguration("com.vv.vkmusic-offline")
+        let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("com.vv.vkmusic-offline")
         self.URLSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
     }
     
@@ -197,13 +197,14 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         if let audioID = self.downloadTasks[downloadTask.taskIdentifier] {
             let audioFileName = audioID.stringValue.stringByAppendingPathExtension("mp3")
             let audioPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(audioFileName!)
-            let audioURL = NSURL(fileURLWithPath:audioPath)
-            var error: NSError?
-            NSFileManager.defaultManager().moveItemAtURL(location, toURL: audioURL, error: &error)
-            for list in self.offlineAudioLists {
-                for audio in list.audios {
-                    if (audio as VMAudio).id == audioID {
-                        (audio as VMAudio).localFileName = audioFileName
+            if let audioURL = NSURL(fileURLWithPath:audioPath) {            
+                var error: NSError?
+                NSFileManager.defaultManager().moveItemAtURL(location, toURL: audioURL, error: &error)
+                for list in self.offlineAudioLists {
+                    for audio in list.audios {
+                        if (audio as VMAudio).id == audioID {
+                            (audio as VMAudio).localFileName = audioFileName
+                        }
                     }
                 }
             }

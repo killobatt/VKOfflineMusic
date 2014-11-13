@@ -56,7 +56,7 @@ class VMOnlineAudioList: VMAudioList {
             
             let audios = VKAudios(dictionary:response.json as NSDictionary)
             self.totalCount = Int(audios.count)
-            var audioArray = NSMutableArray.arrayWithCapacity(audios.items.count)
+            var audioArray = NSMutableArray(capacity: audios.items.count)
             for (var i = 0; i < MIN(self.pageSize, Int(audios.items.count)); i++) {
                 let audio = audios[UInt(i)] as VKAudio
                 audioArray.addObject(VMAudio(with: audio))

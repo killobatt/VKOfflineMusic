@@ -14,6 +14,10 @@
 		1E512E0719EE64D000CB22CC /* VMAudioListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */; };
 		1E512E1819EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E1719EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift */; };
 		1E512E1E19EFC80B00CB22CC /* NSKeyedArchiver+VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E1D19EFC80B00CB22CC /* NSKeyedArchiver+VM.swift */; };
+		843CAC781A155F6300FD37E9 /* VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF8FF819CD9216005CB421 /* VK.framework */; };
+		843CAC7C1A155F7400FD37E9 /* UIViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB8A22219D4677500FD7251 /* UIViews.framework */; };
+		843CAC7D1A155F7400FD37E9 /* UIViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBB8A22219D4677500FD7251 /* UIViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		843CAC811A155F7400FD37E9 /* VK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF8FF819CD9216005CB421 /* VK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CB6B52C119DBE40F00127A1B /* VMLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B52C019DBE40F00127A1B /* VMLyrics.swift */; };
 		CB6B52C719DBE61000127A1B /* VMLyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B52C619DBE61000127A1B /* VMLyricsController.swift */; };
 		CB85503B19D2186600B4EF0A /* VMOfflineAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85503A19D2186600B4EF0A /* VMOfflineAudioList.swift */; };
@@ -32,11 +36,37 @@
 		CBB7A91919CD844200E95307 /* VKMusicOfflineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB7A91819CD844200E95307 /* VKMusicOfflineTests.swift */; };
 		CBB8A21819D36F0D00FD7251 /* VMMenuAudioListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB8A21719D36F0D00FD7251 /* VMMenuAudioListCell.swift */; };
 		CBB8A21A19D36F3200FD7251 /* VMMenuUserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB8A21919D36F3200FD7251 /* VMMenuUserInfoCell.swift */; };
-		CBB8A22719D467A700FD7251 /* UIViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB8A22219D4677500FD7251 /* UIViews.framework */; };
-		CBBF901119CD9408005CB421 /* VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF8FF819CD9216005CB421 /* VK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		843CAC751A155F5E00FD37E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E98CCE219704652008B424B;
+			remoteInfo = UIViews;
+		};
+		843CAC7A1A155F6300FD37E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CBB7A93519CD90A900E95307;
+			remoteInfo = VK;
+		};
+		843CAC7E1A155F7400FD37E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E98CCE219704652008B424B;
+			remoteInfo = UIViews;
+		};
+		843CAC821A155F7400FD37E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CBB7A93519CD90A900E95307;
+			remoteInfo = VK;
+		};
 		CBB7A91319CD844200E95307 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CBB7A8F619CD844100E95307 /* Project object */;
@@ -72,13 +102,6 @@
 			remoteGlobalIDString = 1E98CCEE19704652008B424B;
 			remoteInfo = UIViewsTests;
 		};
-		CBB8A22519D4679F00FD7251 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 1E98CCE219704652008B424B;
-			remoteInfo = UIViews;
-		};
 		CBBF8FF719CD9216005CB421 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
@@ -93,14 +116,22 @@
 			remoteGlobalIDString = CBB7A94019CD90A900E95307;
 			remoteInfo = VKTests;
 		};
-		CBBF900F19CD9400005CB421 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = CBB7A93519CD90A900E95307;
-			remoteInfo = VK;
-		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		843CAC841A155F7500FD37E9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				843CAC7D1A155F7400FD37E9 /* UIViews.framework in Embed Frameworks */,
+				843CAC811A155F7400FD37E9 /* VK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1E0BD1C619DA9AA500A9C4C2 /* VMUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMUserManager.swift; sourceTree = "<group>"; };
@@ -141,8 +172,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBB8A22719D467A700FD7251 /* UIViews.framework in Frameworks */,
-				CBBF901119CD9408005CB421 /* VK.framework in Frameworks */,
+				843CAC781A155F6300FD37E9 /* VK.framework in Frameworks */,
+				843CAC7C1A155F7400FD37E9 /* UIViews.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,12 +326,15 @@
 				CBB7A8FA19CD844100E95307 /* Sources */,
 				CBB7A8FB19CD844100E95307 /* Frameworks */,
 				CBB7A8FC19CD844100E95307 /* Resources */,
+				843CAC841A155F7500FD37E9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CBB8A22619D4679F00FD7251 /* PBXTargetDependency */,
-				CBBF901019CD9400005CB421 /* PBXTargetDependency */,
+				843CAC761A155F5E00FD37E9 /* PBXTargetDependency */,
+				843CAC7B1A155F6300FD37E9 /* PBXTargetDependency */,
+				843CAC7F1A155F7400FD37E9 /* PBXTargetDependency */,
+				843CAC831A155F7400FD37E9 /* PBXTargetDependency */,
 			);
 			name = VKMusicOffline;
 			productName = VKMusicOffline;
@@ -336,6 +370,7 @@
 				TargetAttributes = {
 					CBB7A8FD19CD844100E95307 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = T69V8N5973;
 					};
 					CBB7A91119CD844200E95307 = {
 						CreatedOnToolsVersion = 6.0;
@@ -477,20 +512,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		843CAC761A155F5E00FD37E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UIViews;
+			targetProxy = 843CAC751A155F5E00FD37E9 /* PBXContainerItemProxy */;
+		};
+		843CAC7B1A155F6300FD37E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = VK;
+			targetProxy = 843CAC7A1A155F6300FD37E9 /* PBXContainerItemProxy */;
+		};
+		843CAC7F1A155F7400FD37E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UIViews;
+			targetProxy = 843CAC7E1A155F7400FD37E9 /* PBXContainerItemProxy */;
+		};
+		843CAC831A155F7400FD37E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = VK;
+			targetProxy = 843CAC821A155F7400FD37E9 /* PBXContainerItemProxy */;
+		};
 		CBB7A91419CD844200E95307 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CBB7A8FD19CD844100E95307 /* VKMusicOffline */;
 			targetProxy = CBB7A91319CD844200E95307 /* PBXContainerItemProxy */;
-		};
-		CBB8A22619D4679F00FD7251 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = UIViews;
-			targetProxy = CBB8A22519D4679F00FD7251 /* PBXContainerItemProxy */;
-		};
-		CBBF901019CD9400005CB421 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = VK;
-			targetProxy = CBBF900F19CD9400005CB421 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -590,6 +635,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = VKMusicOffline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -602,6 +649,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = VKMusicOffline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

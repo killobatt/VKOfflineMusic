@@ -39,7 +39,7 @@ class VMAudio: NSObject, NSCoding, Equatable {
         self.artist = audio.artist
         self.title = audio.title
         if (audio.url != nil) {
-            self.URL = NSURL.URLWithString(audio.url)
+            self.URL = NSURL(string: audio.url)
         }
         if (audio.lyrics_id != nil) {
             self.lyrics = VMLyrics(id: audio.lyrics_id)
@@ -71,7 +71,7 @@ class VMAudio: NSObject, NSCoding, Equatable {
     required init(coder aDecoder: NSCoder) {
         self.id = NSNumber(int: aDecoder.decodeIntForKey("id"))
         self.ownerID = NSNumber(int: aDecoder.decodeIntForKey("ownerID"))
-        self.duration = NSNumber(int: aDecoder.decodeIntForKey("duration"))
+        self.duration = Int(aDecoder.decodeIntForKey("duration"))
         self.artist = aDecoder.decodeObjectForKey("artist") as NSString!
         self.title = aDecoder.decodeObjectForKey("title") as NSString!
         self.URL = aDecoder.decodeObjectForKey("URL") as NSURL!
