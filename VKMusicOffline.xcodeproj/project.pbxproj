@@ -374,6 +374,11 @@
 					CBB7A8FD19CD844100E95307 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = T69V8N5973;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					CBB7A91119CD844200E95307 = {
 						CreatedOnToolsVersion = 6.0;

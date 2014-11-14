@@ -103,12 +103,25 @@ class VMAudioListPlayer: NSObject {
         NSLog("VMAudioListPlayer play")
         self.player.play()
         self.isPlaying = true
+        
+        var error: NSError? = nil
+        var audioSession = AVAudioSession.sharedInstance()
+        if !audioSession.setActive(true, error: &error) {
+            NSLog("Could not activate audio session: \(error)")
+            self.pause()
+        }
     }
     
     func pause() {
         NSLog("VMAudioListPlayer pause")
         self.player.pause()
         self.isPlaying = false
+        
+        var error: NSError? = nil
+        var audioSession = AVAudioSession.sharedInstance()
+        if !audioSession.setActive(false, error: &error) {
+            NSLog("Could not deactivate audio session: \(error)")
+        }
     }
     
     func seekToTime(time:CMTime) {
@@ -200,7 +213,13 @@ class VMAudioListPlayer: NSObject {
     private var playbackObserver: AnyObject!
     
     override init() {
-        
+        super.init()
+        self.setupAudioSession()
+    }
+    
+    deinit {
+        self.interruptionNotificationObserver = nil
+        self.playbackObserver = nil
     }
     
     // MARK: - KVO
@@ -236,4 +255,39 @@ class VMAudioListPlayer: NSObject {
     func playerItemDidPlayToEndTime() {
         self.playNextTrack()
     }
+    
+    // MARK: AudioSession
+    
+    func setupAudioSession() {
+        var error: NSError? = nil
+        var audioSession = AVAudioSession.sharedInstance()
+        if !audioSession.setCategory(AVAudioSessionCategoryPlayback, error: &error) {
+            NSLog("Error setting AVAudioSession category \(AVAudioSessionCategoryPlayback): \(error)")
+        }
+        
+        self.interruptionNotificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVAudioSessionInterruptionNotification, object: self, queue: NSOperationQueue.mainQueue()) {
+            (notification: NSNotification!) -> Void in
+            NSLog("Got interruption: \(notification.userInfo)")
+            
+            let rawValueNumber = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? NSNumber
+            if let rawValue = rawValueNumber?.unsignedIntegerValue {
+                if let interruptionType = AVAudioSessionInterruptionType(rawValue: UInt(rawValue)) {
+                    switch interruptionType {
+                    case AVAudioSessionInterruptionType.Began:
+                        if (self.isPlaying) {
+                            NSLog("Interruption began. Pausing...")
+                            self.player.pause()
+                        }
+                    case AVAudioSessionInterruptionType.Ended:
+                        if (self.isPlaying) {
+                            NSLog("Interruption ended. Resuming...")
+                            self.player.play()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private var interruptionNotificationObserver: AnyObject!
 }
