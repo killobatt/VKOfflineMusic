@@ -30,10 +30,10 @@ class VMAudioListsSelectionViewController: UITableViewController {
     // MARK: - Create new list
     
     func showCreateNewListDialog() {
-        let alertController = UIAlertController(title: "Создать новый список",
-            message: "Введите имя списка", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: NSLocalizedString("audiolist_selection.create_new_list", comment: ""),
+            message: NSLocalizedString("audiolist_selection.enter_new_list_name", comment: ""), preferredStyle: .Alert)
         
-        let okAction = UIAlertAction(title: "Создать", style: .Default) { (action: UIAlertAction!) -> Void in
+        let okAction = UIAlertAction(title: NSLocalizedString("create", comment: ""), style: .Default) { (action: UIAlertAction!) -> Void in
             let textField = alertController.textFields![0] as UITextField
             let audioList = VMAudioListManager.sharedInstance.addOfflineAudioList(textField.text)
             audioList.addAudio(self.audioToAdd!)
@@ -42,15 +42,16 @@ class VMAudioListsSelectionViewController: UITableViewController {
             self.dismissViewControllerAnimated(true, completion: {(_) in })
         }
         
-        let cancelAction = UIAlertAction(title: "Отмена", style: .Cancel) { (_) in }
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .Cancel) { (_) in }
         
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
-            textField.placeholder = "Имя списка"
+            textField.placeholder = NSLocalizedString("audiolist_selection.list_name_placeholder", comment: "")
             
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification,
                 object: textField, queue: NSOperationQueue.mainQueue(), usingBlock: { (_) -> Void in
+                let text = textField.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                 okAction.enabled = textField.text != ""
             })
         }
