@@ -261,6 +261,7 @@ class VMAudioListPlayer: NSObject {
                     if (self.isPlaying) {
                         self.player.play()
                     }
+                    self.updateNowPlayingInfoCenter()
                 case AVPlayerItemStatus.Failed:
                     NSLog("VMAudioListPlayer: AVPlayerItem: Failed with error \(playerItem.error)")
                     self.state = State.Failed(error: playerItem.error)

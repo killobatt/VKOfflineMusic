@@ -53,4 +53,25 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
             assert(false, "Cannot set total count for offline audio list")
         }
     }
+    
+    // MARK: - Editing
+    
+    override func editingEnabled() -> Bool {
+        return true
+    }
+    
+    override func moveTrackFromIndex(index: Int, toIndex: Int) {
+        let audios = self.audios.mutableCopy() as NSMutableArray
+        let audio = audios[index] as VMAudio
+        audios.removeObjectAtIndex(index)
+        audios.insertObject(audio, atIndex:toIndex)
+        self.audios = audios
+    }
+    
+    override func deleteTrackAtIndex(index: Int) {
+        let audios = self.audios.mutableCopy() as NSMutableArray
+        let audio = audios[index] as VMAudio
+        audios.removeObjectAtIndex(index)
+        self.audios = audios
+    }
 }

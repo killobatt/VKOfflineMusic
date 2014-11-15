@@ -48,3 +48,12 @@ class VMAudioList: NSObject {
     func loadNextPage(#completion:((NSError!) -> Void)?) -> Void { }
 }
 
+// Editable list
+extension VMAudioList {
+    
+    func moveTrackFromIndex(index:Int, toIndex:Int) { }
+    func deleteTrackAtIndex(index:Int) { }
+    
+    func editingEnabled() -> Bool { return false }
+    
+}
