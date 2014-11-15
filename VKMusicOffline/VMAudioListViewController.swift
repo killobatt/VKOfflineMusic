@@ -71,6 +71,14 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         }
     }
 
+    override func viewWillAppear(animated: Bool) {
+        UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        UIApplication.sharedApplication().endReceivingRemoteControlEvents()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -228,5 +236,25 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
                     self.tableView.reloadData()
                 }
             }
+    }
+    
+    // MARK: - Events
+    
+    override func remoteControlReceivedWithEvent(event: UIEvent) {
+        let player = VMAudioListPlayer.sharedInstance
+        if (event.type == UIEventType.RemoteControl) {
+            switch event.subtype {
+            case UIEventSubtype.RemoteControlPlay:
+                player.play()
+            case UIEventSubtype.RemoteControlPause:
+                player.pause()
+            case UIEventSubtype.RemoteControlPreviousTrack:
+                player.playPreviousTrack()
+            case UIEventSubtype.RemoteControlNextTrack:
+                player.playNextTrack()
+            default:
+                NSLog("Got event unprocesed event: \(event)")
+            }
+        }
     }
 }

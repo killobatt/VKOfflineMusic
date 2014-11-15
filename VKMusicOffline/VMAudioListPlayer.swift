@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import MediaPlayer
 
 class VMAudioListPlayer: NSObject {
     
@@ -35,6 +36,7 @@ class VMAudioListPlayer: NSObject {
             self.willChangeValueForKey("isPlaying")
         }
         didSet {
+            self.updateNowPlayingInfoCenter()
             self.didChangeValueForKey("isPlaying")
         }
     }
@@ -133,6 +135,7 @@ class VMAudioListPlayer: NSObject {
             self.player.currentItem.seekToTime(time, completionHandler: { (finished: Bool) -> Void in
                 if (self.isPlaying) {
                     self.player.play()
+                    self.updateNowPlayingInfoCenter()
                 }
             })
         }
@@ -146,7 +149,7 @@ class VMAudioListPlayer: NSObject {
         self.currentTrackIndex = newTrackIndex
     }
     
-    func playPreviousItem() {
+    func playPreviousTrack() {
         var newTrackIndex = self.currentTrackIndex - 1
         if (newTrackIndex < 0) {
             newTrackIndex += self.audioList.count
@@ -191,6 +194,7 @@ class VMAudioListPlayer: NSObject {
             
             self.player = AVPlayer(playerItem: playerItem)
             self.player.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
+            self.updateNowPlayingInfoCenter()
         }
     }
     
@@ -211,6 +215,22 @@ class VMAudioListPlayer: NSObject {
     }
     
     private var playbackObserver: AnyObject!
+    
+    private func updateNowPlayingInfoCenter() {
+        var nowPlayingInfo: [NSObject : AnyObject] = [:]
+        if let artist = self.currentTrack.artist {
+            nowPlayingInfo[MPMediaItemPropertyArtist] = artist
+        }
+        if let title = self.currentTrack.title {
+            nowPlayingInfo[MPMediaItemPropertyTitle] = title
+        }
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = NSNumber(integer: self.currentTrack.duration)
+        // set once in the start of the playback, the system will update this automatically
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = NSNumber(double: CMTimeGetSeconds(self.playbackProgress))
+        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = nowPlayingInfo
+    }
+    
+    // MARK: - Initialization
     
     override init() {
         super.init()
