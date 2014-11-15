@@ -96,8 +96,8 @@ class VMAudioPlayingCell: VMAudioCell {
     
     // MARK: - KVO
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!,
-        change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
+        change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
             if (keyPath == "playbackProgress") {
                 if (self.progressSliderIsBeingMoved == false) {
                     self.progressSlider.value = Float(CMTimeGetSeconds(VMAudioListPlayer.sharedInstance.playbackProgress))

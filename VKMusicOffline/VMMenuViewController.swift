@@ -132,8 +132,8 @@ class VMMenuViewController: UITableViewController {
     
     // MARK: - KVO
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!,
-        change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
+        change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
             if (object as NSObject == VMAudioListManager.sharedInstance) {
                 if (keyPath == "audioLists") {
                     self.tableView.reloadData()

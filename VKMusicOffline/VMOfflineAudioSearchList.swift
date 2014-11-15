@@ -24,8 +24,8 @@ class VMOfflineAudioSearchList: VMAudioList, VMAudioListSearching {
     
     // MARK: - NSKeyValueObserving
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!,
-        change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
+        change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if (keyPath == "audios") {
             self.filteredAudios = self.getFilteredAudios(self.originalList.audios, searchTerm: self.searchTerm)
         }

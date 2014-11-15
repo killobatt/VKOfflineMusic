@@ -58,7 +58,7 @@ class VMMenuAudioListCell: UITableViewCell {
     
     // MARK: - NSKeyValueObserving
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!, change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         self.updateUI()
     }
 }

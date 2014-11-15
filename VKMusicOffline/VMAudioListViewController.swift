@@ -221,8 +221,8 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
     // MARK: - KVO
     
-    override func observeValueForKeyPath(keyPath: String!, ofObject object: AnyObject!,
-        change: [NSObject : AnyObject]!, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
+        change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
             if (object as NSObject == VMAudioListPlayer.sharedInstance) {
                 if (keyPath == "currentTrackIndex") {
                     self.tableView.reloadData()
