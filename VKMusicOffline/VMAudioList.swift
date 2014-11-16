@@ -46,7 +46,9 @@ class VMAudioList: NSObject {
     
     func hasNextPage() -> Bool { return false }
     func loadNextPage(#completion:((NSError!) -> Void)?) -> Void { }
+    
 }
+
 
 // Editable list
 extension VMAudioList {

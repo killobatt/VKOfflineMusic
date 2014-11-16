@@ -98,6 +98,23 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         return offlineAudioList
     }
     
+    func removeOfflineAudioList(list:VMOfflineAudioList) {
+        if let index = find(self.offlineAudioLists, list) {
+            self.offlineAudioLists.removeAtIndex(index)
+            self.removeFilesForList(list)
+        }
+    }
+    
+    private func removeFilesForList(list:VMOfflineAudioList) {
+        let listPath = self.pathForList(list)
+        NSLog("Removin list \(list.title) at path: \(listPath)...)")
+        var error: NSError? = nil
+        if !NSFileManager.defaultManager().removeItemAtPath(listPath, error: &error) {
+            NSLog("Could not remove list \(list.title) at path: \(listPath): \(error)")
+        }
+        
+    }
+    
     func createAudioListsDirectoryIfNeeded() {
         let fileManager = NSFileManager.defaultManager()
         var audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryPath)

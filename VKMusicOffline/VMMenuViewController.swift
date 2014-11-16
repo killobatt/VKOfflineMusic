@@ -59,6 +59,12 @@ class VMMenuViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Uncomment the following line to preserve selection between presentations
+        self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -129,6 +135,31 @@ class VMMenuViewController: UITableViewController {
         }
     }
     
+    // MARK: - Table View Delegate
+    
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return NO if you do not want the specified item to be editable.
+        if (indexPath.section == 1) {
+            if let audioList = VMAudioListManager.sharedInstance.audioLists[indexPath.row] as? VMOfflineAudioList {
+                return true
+            }
+        }
+        return false
+    }
+    
+    // Override to support editing the table view.
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // Delete the row from the data source
+            if let list = VMAudioListManager.sharedInstance.audioLists[indexPath.row] as? VMOfflineAudioList {
+                VMAudioListManager.sharedInstance.removeOfflineAudioList(list)
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
     
     // MARK: - KVO
     
@@ -136,7 +167,9 @@ class VMMenuViewController: UITableViewController {
         change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
             if (object as NSObject == VMAudioListManager.sharedInstance) {
                 if (keyPath == "audioLists") {
-                    self.tableView.reloadData()
+                    if self.tableView.editing == false {
+                        self.tableView.reloadData()
+                    }
                 }
             }
     }
