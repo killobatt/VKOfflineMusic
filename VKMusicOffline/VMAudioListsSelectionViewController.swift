@@ -35,27 +35,41 @@ class VMAudioListsSelectionViewController: UITableViewController {
         
         let okAction = UIAlertAction(title: NSLocalizedString("create", comment: ""), style: .Default) { (action: UIAlertAction!) -> Void in
             let textField = alertController.textFields![0] as UITextField
+            if (textField.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) == "") {
+                self.showEmptyTitleAlert()
+                return
+            }
+            
             let audioList = VMAudioListManager.sharedInstance.addOfflineAudioList(textField.text)
             audioList.addAudio(self.audioToAdd!)
             VMAudioListManager.sharedInstance.saveOfflineAudioLists()
             VMAudioListManager.sharedInstance.downloadAudio(self.audioToAdd!)
             self.dismissViewControllerAnimated(true, completion: {(_) in })
         }
+        okAction.enabled = false;
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .Cancel) { (_) in }
         
-        alertController.addAction(okAction)
         alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
         alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
             textField.placeholder = NSLocalizedString("audiolist_selection.list_name_placeholder", comment: "")
             
             NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification,
                 object: textField, queue: NSOperationQueue.mainQueue(), usingBlock: { (_) -> Void in
                 let text = textField.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-                okAction.enabled = textField.text != ""
+                okAction.enabled = text != ""
             })
         }
         
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func showEmptyTitleAlert() {
+        let alertController = UIAlertController(title: NSLocalizedString("audiolist_selection.create_new_list", comment: ""),
+            message: NSLocalizedString("audiolist_selection.enter_new_list_name", comment: ""), preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .Cancel) { (_) in }
+        alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     

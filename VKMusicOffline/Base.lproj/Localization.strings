@@ -9,8 +9,10 @@
 // Global string names
 "create" = "Create";
 "cancel" = "Cancel";
+"ok" = "OK";
 
 // audio list selection controller
 "audiolist_selection.create_new_list" = "Create new list";
 "audiolist_selection.enter_new_list_name" = "Enter list name";
 "audiolist_selection.list_name_placeholder" = "List name";
+"audiolist_selection.list_name_empty_alert" = "List name should not be empty";

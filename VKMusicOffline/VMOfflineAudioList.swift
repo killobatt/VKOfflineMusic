@@ -18,8 +18,19 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         self.title = title
     }
     
+    override var audios : NSArray {
+        didSet {
+//            TODO: Fix crash here
+//            self.totalCount = self.audios.count
+        }
+    }
+    
     func addAudio(audio:VMAudio) {
-        self.audios = self.audios.arrayByAddingObject(audio)
+        if self.audios.containsObject(audio) {
+            return
+        }
+        self.audios = NSArray(object: audio).arrayByAddingObjectsFromArray(self.audios)
+        
     }
     
     // MARK: - NSCoding interface implementation
@@ -44,16 +55,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
             return VMOfflineAudioSearchList(offlineAudioList: self)
         }
     }
-    
-    override var totalCount: Int {
-        get {
-            return self.audios.count
-        }
-        set {
-            assert(false, "Cannot set total count for offline audio list")
-        }
-    }
-    
+        
     // MARK: - Editing
     
     override func editingEnabled() -> Bool {

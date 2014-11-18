@@ -84,6 +84,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
         VMAudioListManager.sharedInstance.saveOfflineAudioLists()
     }
     
+    func application(application: UIApplication!, openURL url: NSURL!, sourceApplication: String!, annotation: AnyObject!) -> Bool {
+        VKSdk.processOpenURL(url, fromApplication:sourceApplication)
+        return true
+    }
+    
     // MARK: - NSURLSession
     
     func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
@@ -93,6 +98,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     }
 
     // MARK: - Split view
+    
+    func splitViewControllerSupportedInterfaceOrientations(splitViewController: UISplitViewController) -> Int {
+        var orientations: UIInterfaceOrientationMask = UIInterfaceOrientationMask.All
+        switch UIDevice.currentDevice().userInterfaceIdiom {
+        case .Phone:
+            orientations = UIInterfaceOrientationMask.Portrait
+        case .Pad, .Unspecified:
+            orientations = UIInterfaceOrientationMask.All
+        }
+        return Int(orientations.rawValue);
+    }
+    
+    func splitViewControllerPreferredInterfaceOrientationForPresentation(splitViewController: UISplitViewController) -> UIInterfaceOrientation {
+        return UIInterfaceOrientation.Portrait
+    }
+    
 
 //    func splitViewController(splitViewController: UISplitViewController!, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
 //        if let secondaryAsNavController = secondaryViewController as? UINavigationController {
@@ -106,10 +127,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
 //        return false
 //    }
     
-    func application(application: UIApplication!, openURL url: NSURL!, sourceApplication: String!, annotation: AnyObject!) -> Bool {
-        VKSdk.processOpenURL(url, fromApplication:sourceApplication)
-        return true
-    }
     
     // MARK: - VKSDK Delegate
     

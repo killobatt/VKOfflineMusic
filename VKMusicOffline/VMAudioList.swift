@@ -35,14 +35,14 @@ class VMAudioList: NSObject {
     }
     
     // nuber of audios in both loaded and unloaded part of list
-    var totalCount: Int = 0 {
-        willSet {
-            self.willChangeValueForKey("totalCount")
-        }
-        didSet {
-            self.didChangeValueForKey("totalCount")
-        }
-    }
+    dynamic var totalCount: Int = 0 // {
+//        willSet {
+//            self.willChangeValueForKey("totalCount")
+//        }
+//        didSet {
+//            self.didChangeValueForKey("totalCount")
+//        }
+//    }
     
     func hasNextPage() -> Bool { return false }
     func loadNextPage(#completion:((NSError!) -> Void)?) -> Void { }

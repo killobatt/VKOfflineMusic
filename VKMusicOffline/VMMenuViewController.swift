@@ -153,6 +153,10 @@ class VMMenuViewController: UITableViewController {
         if editingStyle == .Delete {
             // Delete the row from the data source
             if let list = VMAudioListManager.sharedInstance.audioLists[indexPath.row] as? VMOfflineAudioList {
+                if (VMAudioListPlayer.sharedInstance.audioList === list) {
+                    VMAudioListPlayer.sharedInstance.pause()
+                    VMAudioListPlayer.sharedInstance.audioList = nil
+                }
                 VMAudioListManager.sharedInstance.removeOfflineAudioList(list)
                 tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             }
