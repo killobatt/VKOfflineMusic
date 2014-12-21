@@ -8,8 +8,9 @@
 
 import UIKit
 import VK
+import MGSwipeCells
 
-class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, VMAudioCellDelegate
+class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, MGSwipeTableCellDelegate
 {
     var audioList: VMAudioList! = nil {
         willSet {
@@ -107,11 +108,31 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as VMAudioCell
         }
         cell.delegate = self
-        cell.audio = self.audioList[indexPath.row]
+        
+        let audio = self.audioList[indexPath.row]
+        cell.audio = audio
+        
+        cell.rightButtons = [
+            MGSwipeButton(title: "", icon: UIImage(named: "Delete"), backgroundColor: UIColor.redColor()),
+            MGSwipeButton(title: "", icon: UIImage(named: "Download"), backgroundColor: UIColor.orangeColor()),
+        ]
+        
+        if (audio.lyrics != nil) {
+            cell.rightButtons.append(MGSwipeButton(title: "", icon: UIImage(named: "Lyrics"), backgroundColor: UIColor.greenColor()))
+        }
         
         return cell
     }
 
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if (VMAudioListPlayer.sharedInstance.audioList === self.audioList &&
+            VMAudioListPlayer.sharedInstance.currentTrackIndex == indexPath.row) {
+            return 72;
+        } else {
+            return 52
+        }
+
+    }
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row == self.audioList.count - 1 &&
@@ -135,22 +156,6 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             self.tableView.reloadData()
         }
     }
-    
-//    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if section == 0 {
-//            return self.searchController.searchBar
-//        } else {
-//            return nil
-//        }
-//    }
-//    
-//    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if section == 0 {
-//            return 44
-//        } else {
-//            return 0
-//        }
-//    }
     
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -200,14 +205,22 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
 
     
-    // MARK: - VMAudioCellDelegate
+    // MARK: - MGSwipeTableCellDelegate
     
-    func audioCellLyricsButtonPressed(cell: VMAudioCell) {
-        self.performSegueWithIdentifier("showLyrics", sender: cell)
-    }
-    
-    func audioCellDownloadButtonPressed(cell: VMAudioCell) {
-        self.performSegueWithIdentifier("showOfflineListSelection", sender: cell)
+    func swipeTableCell(cell: VMAudioCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+        if let indexPath = tableView.indexPathForCell(cell) {
+            if (index == 0) { // Delete
+                self.audioList.deleteTrackAtIndex(indexPath.row)
+                tableView.beginUpdates()
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                tableView.endUpdates()
+            } else if (index == 1) { // Download
+                self.performSegueWithIdentifier("showOfflineListSelection", sender: cell)
+            } else if (index == 2) { // lyrics
+                self.performSegueWithIdentifier("showLyrics", sender: cell)
+            }
+        }
+        return true
     }
     
     // MARK: - UISearchResultsUpdating

@@ -73,6 +73,10 @@ class VMAudioListsSelectionViewController: UITableViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func cancelPressed(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: {(_) in })
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

@@ -7,13 +7,9 @@
 //
 
 import UIKit
+import MGSwipeCells
 
-@objc protocol VMAudioCellDelegate {
-    optional func audioCellDownloadButtonPressed(cell: VMAudioCell)
-    optional func audioCellLyricsButtonPressed(cell: VMAudioCell)
-}
-
-class VMAudioCell: UITableViewCell {
+class VMAudioCell: MGSwipeTableCell {
     
     // MARK: - Audio
     var audio: VMAudio! {
@@ -22,23 +18,15 @@ class VMAudioCell: UITableViewCell {
                 self.artistNameLabel.text = newAudio.artist
                 self.trackNameLabel.text = newAudio.title
                 self.trackDurationLabel.text = newAudio.durationString
-                if (newAudio.lyrics != nil) {
-                    self.lyricsButton.enabled = true
-                } else {
-                    self.lyricsButton.enabled = false
-                }
             }
         }
     }
-    
-    var delegate: VMAudioCellDelegate?
     
     // MARK: - IBOutlets
 
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var trackNameLabel: UILabel!
     @IBOutlet weak var trackDurationLabel: UILabel!
-    @IBOutlet weak var lyricsButton: UIButton!
     
     // MARK: - Overrides
     
@@ -60,19 +48,5 @@ class VMAudioCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-
-    // MARK: - Actions
-    
-    @IBAction func lyricsButtonPressed(sender: AnyObject) {
-        if let delegate = self.delegate {
-            delegate.audioCellLyricsButtonPressed?(self)
-        }
-    }
-    
-    @IBAction func downloadButtonPressed(sender: AnyObject) {
-        if let delegate = self.delegate {
-            delegate.audioCellDownloadButtonPressed?(self)
-        }
     }
 }

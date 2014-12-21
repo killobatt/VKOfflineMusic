@@ -3,22 +3,21 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "play-32.png"
+      "filename" : "download-32.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "play-64.png"
+      "filename" : "download-64.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "play-96.png"
+      "filename" : "download-96.png"
     }
   ],
   "info" : {
     "version" : 1,
-    "author" : "xcode",
-    "template-rendering-intent" : "template"
+    "author" : "xcode"
   }
 }

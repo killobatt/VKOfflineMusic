@@ -21,6 +21,7 @@
 		843CAC811A155F7400FD37E9 /* VK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF8FF819CD9216005CB421 /* VK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84708BE91A45F04E0053790A /* VMDownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84708BE81A45F04E0053790A /* VMDownloadCell.swift */; };
 		84EF7F431A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EF7F421A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift */; };
+		84F612671A47251C0075866D /* MGSwipeCells.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84F6125A1A4725000075866D /* MGSwipeCells.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84FE4F2D1A17EBCA00893410 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FE4F2B1A17EBCA00893410 /* Launch Screen.xib */; };
 		84FE4F301A19178100893410 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84FE4F321A19178100893410 /* Localization.strings */; };
 		CB6B52C119DBE40F00127A1B /* VMLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B52C019DBE40F00127A1B /* VMLyrics.swift */; };
@@ -71,6 +72,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = CBB7A93519CD90A900E95307;
 			remoteInfo = VK;
+		};
+		84F612591A4725000075866D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 84F612381A4724FF0075866D;
+			remoteInfo = MGSwipeCells;
+		};
+		84F6125B1A4725000075866D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 84F612431A4724FF0075866D;
+			remoteInfo = MGSwipeCellsTests;
+		};
+		84F612651A4725160075866D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 84F612371A4724FF0075866D;
+			remoteInfo = MGSwipeCells;
 		};
 		CBB7A91319CD844200E95307 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -130,6 +152,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				84F612671A47251C0075866D /* MGSwipeCells.framework in Embed Frameworks */,
 				843CAC7D1A155F7400FD37E9 /* UIViews.framework in Embed Frameworks */,
 				843CAC811A155F7400FD37E9 /* VK.framework in Embed Frameworks */,
 			);
@@ -149,6 +172,7 @@
 		843CA3571A1BEDBA00329FB4 /* VMAudioListEnumerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListEnumerator.swift; sourceTree = "<group>"; };
 		84708BE81A45F04E0053790A /* VMDownloadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMDownloadCell.swift; sourceTree = "<group>"; };
 		84EF7F421A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMDownloadsViewControllerTableViewController.swift; sourceTree = "<group>"; };
+		84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MGSwipeCells.xcodeproj; path = VKMusicOffline/SDKs/MGSwipeCells/MGSwipeCells.xcodeproj; sourceTree = "<group>"; };
 		84FE4F2C1A17EBCA00893410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/Launch Screen.xib"; sourceTree = "<group>"; };
 		84FE4F341A1919D900893410 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		84FE4F351A1920C900893410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localization.strings; sourceTree = "<group>"; };
@@ -215,6 +239,15 @@
 				84EF7F421A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift */,
 			);
 			name = Downloads;
+			sourceTree = "<group>";
+		};
+		84F612551A4724FF0075866D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84F6125A1A4725000075866D /* MGSwipeCells.framework */,
+				84F6125C1A4725000075866D /* MGSwipeCellsTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CB9996D319CDD3090076D5E8 /* Model */ = {
@@ -306,6 +339,7 @@
 			children = (
 				CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */,
 				CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */,
+				84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */,
 			);
 			name = SDKs;
 			sourceTree = "<group>";
@@ -355,6 +389,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				84F612661A4725160075866D /* PBXTargetDependency */,
 				843CAC761A155F5E00FD37E9 /* PBXTargetDependency */,
 				843CAC7B1A155F6300FD37E9 /* PBXTargetDependency */,
 				843CAC7F1A155F7400FD37E9 /* PBXTargetDependency */,
@@ -420,6 +455,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 84F612551A4724FF0075866D /* Products */;
+					ProjectRef = 84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */;
+				},
+				{
 					ProductGroup = CBB7A92519CD8B7B00E95307 /* Products */;
 					ProjectRef = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
 				},
@@ -437,6 +476,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		84F6125A1A4725000075866D /* MGSwipeCells.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MGSwipeCells.framework;
+			remoteRef = 84F612591A4725000075866D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		84F6125C1A4725000075866D /* MGSwipeCellsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MGSwipeCellsTests.xctest;
+			remoteRef = 84F6125B1A4725000075866D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CBB7A92A19CD8B7C00E95307 /* libVKSdk.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -565,6 +618,11 @@
 			isa = PBXTargetDependency;
 			name = VK;
 			targetProxy = 843CAC821A155F7400FD37E9 /* PBXContainerItemProxy */;
+		};
+		84F612661A4725160075866D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MGSwipeCells;
+			targetProxy = 84F612651A4725160075866D /* PBXContainerItemProxy */;
 		};
 		CBB7A91419CD844200E95307 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
