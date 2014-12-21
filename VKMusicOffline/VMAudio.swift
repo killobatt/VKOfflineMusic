@@ -32,6 +32,11 @@ class VMAudio: NSObject, NSCoding, Equatable {
             }
         }
     }
+    var formattedTitle: NSString {
+        get {
+            return "\(self.artist) - \(self.title)"
+        }
+    }
     
     init(with audio: VKAudio) {
         self.id = audio.id

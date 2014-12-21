@@ -103,7 +103,7 @@ class VMMenuViewController: UITableViewController {
     // MARK: - Table View data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,6 +111,8 @@ class VMMenuViewController: UITableViewController {
             return 1 // User Info
         } else if section == 1 {
             return VMAudioListManager.sharedInstance.audioLists.count
+        } else if section == 2 {
+            return 2
         }
         return 0
     }
@@ -120,10 +122,14 @@ class VMMenuViewController: UITableViewController {
             let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuUserInfoCell", forIndexPath: indexPath) as VMMenuUserInfoCell
             cell.user = self.user
             return cell
-        } else { // if indexPath.section == 1
+        } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuAudioListCell", forIndexPath: indexPath) as VMMenuAudioListCell
             cell.audioList = VMAudioListManager.sharedInstance.audioLists[indexPath.row]
             return cell // VMMenuAudioListCell
+        } else { // if indexPath.section == 2 {
+            let cellID = (indexPath.row == 0) ? "AddNewListCell" : "DownloadsCell"
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as UITableViewCell
+            return cell
         }
     }
     

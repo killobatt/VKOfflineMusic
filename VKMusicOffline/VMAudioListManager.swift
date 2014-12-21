@@ -190,7 +190,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     
     var backgroundURLSessionCompletionHandler: (() -> Void)?
     
-    var downloadTasks: Dictionary<Int, NSNumber> = Dictionary() // download task id, audio id
+    private var downloadTasks: Dictionary<Int, NSNumber> = Dictionary() // download task id, audio id
     
     func downloadAudio(audio:VMAudio) {
         if (audio.localFileName != nil) {
@@ -199,8 +199,17 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         let downloadTaskOptional = self.URLSession?.downloadTaskWithURL(audio.URL)
         if let downloadTask = downloadTaskOptional {
             self.downloadTasks[downloadTask.taskIdentifier] = audio.id
+            downloadTask.taskDescription = audio.formattedTitle
             downloadTask.resume()
         }
+    }
+    
+    func getAudioDownloadTaskList(completion: ((downloadTasks:[AnyObject]) -> Void)?) {
+        self.URLSession?.getTasksWithCompletionHandler({ (dataTasks: [AnyObject]!, uploadTasks: [AnyObject]!, downloadTasks: [AnyObject]!) -> Void in
+            if (downloadTasks != nil) {
+                completion?(downloadTasks: downloadTasks)
+            }
+        })
     }
     
     // MARK: - NSURLSessionDownloadDelegate

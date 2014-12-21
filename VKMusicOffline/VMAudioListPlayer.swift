@@ -25,7 +25,12 @@ class VMAudioListPlayer: NSObject {
     }
     
     // MARK: - Instance variables
-    var audioList: VMAudioList!
+    var audioList: VMAudioList! {
+        didSet {
+            self.audioListEnumerator = VMAudioListEnumerator(audioList: audioList,
+                indexOfCurrentObject: self.currentTrackIndex)
+        }
+    }
     
     private var player: AVPlayer!
 
@@ -199,6 +204,8 @@ class VMAudioListPlayer: NSObject {
     }
     
     // MARK: - Privates
+    
+    private var audioListEnumerator: VMAudioListEnumerator!
     
     
     private func timeRangeFrom(timeRanges: NSArray) -> CMTimeRange {
