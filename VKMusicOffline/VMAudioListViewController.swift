@@ -73,6 +73,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
 
     override func viewWillAppear(animated: Bool) {
+        self.tableView.contentOffset = CGPointMake(0, 44)
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
     }
     
