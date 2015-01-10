@@ -20,8 +20,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     
     override var audios : NSArray {
         didSet {
-//            TODO: Fix crash here
-//            self.totalCount = self.audios.count
+            self.totalCount = self.audios.count
         }
     }
     
@@ -30,7 +29,6 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
             return
         }
         self.audios = NSArray(object: audio).arrayByAddingObjectsFromArray(self.audios)
-        
     }
     
     // MARK: - NSCoding interface implementation

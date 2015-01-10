@@ -13,10 +13,10 @@ import MGSwipeCells
 class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, MGSwipeTableCellDelegate
 {
     var audioList: VMAudioList! = nil {
-        willSet {
+        didSet {
+            self.title = self.audioList.title
             if (self.searchResultsController != nil) {
-                self.searchResultsController.audioList = newValue
-                self.navigationItem.title = newValue.title
+                self.searchResultsController.audioList = self.audioList
             }
         }
     }
@@ -230,6 +230,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             audioListSearching.setSearchTerm(searchController.searchBar.text, completion: {(error: NSError!) -> Void in
                 self.tableView.reloadData()
             })
+            self.tableView.reloadData()
         }
     }
     

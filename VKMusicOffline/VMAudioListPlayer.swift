@@ -14,9 +14,9 @@ class VMAudioListPlayer: NSObject {
     
     // MARK: - Singleton
     class var sharedInstance : VMAudioListPlayer {
-    struct Static {
-        static var onceToken : dispatch_once_t = 0
-        static var instance : VMAudioListPlayer? = nil
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+            static var instance : VMAudioListPlayer? = nil
         }
         dispatch_once(&Static.onceToken) {
             Static.instance = VMAudioListPlayer()

@@ -25,29 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
             return self.window!.rootViewController as UISplitViewController
         }
     }
-    var menuViewController: VMMenuViewController {
-        get {
-            let navigationController = self.splitViewController.viewControllers.last as UINavigationController
-            return navigationController.viewControllers.first as VMMenuViewController
-        }
-    }
-    var audioListViewController: VMAudioListViewController {
-        get {
-            let navigationController = self.splitViewController.viewControllers.first as UINavigationController
-            return navigationController.viewControllers.first as VMAudioListViewController
-        }
-    }
-    
 
     // MARK: - UIApplicationDelegate
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
-        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+//        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
+//        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
-        splitViewController.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+        splitViewController.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
         
         VKSdk.initializeWithDelegate(self, andAppId:kVKApplicationID)
         if (VKSdk.wakeUpSession() == false) {
@@ -115,17 +102,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     }
     
 
-//    func splitViewController(splitViewController: UISplitViewController!, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
-//        if let secondaryAsNavController = secondaryViewController as? UINavigationController {
-//            if let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController {
-//                if !topAsDetailController.detailItem {
-//                    // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-//                    return true
-//                }
-//            }
-//        }
-//        return false
-//    }
+    func splitViewController(splitViewController: UISplitViewController!, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
+        if let secondaryAsNavController = secondaryViewController as? UINavigationController {
+            if let topAsDetailController = secondaryAsNavController.topViewController as? VMAudioListViewController {
+                if topAsDetailController.audioList == nil {
+                    // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+                    return true
+                }
+            }
+        }
+        return false
+    }
     
     
     // MARK: - VKSDK Delegate

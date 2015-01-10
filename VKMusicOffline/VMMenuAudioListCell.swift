@@ -35,7 +35,8 @@ class VMMenuAudioListCell: UITableViewCell {
     // MARK: - Overrides
     
     deinit {
-        self.audioList = nil // calls removing observation
+        self.audioList.removeObserver(self, forKeyPath: "title")
+        self.audioList.removeObserver(self, forKeyPath: "totalCount")
     }
     
     override func awakeFromNib() {
