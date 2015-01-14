@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
 //        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
 //        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
-        splitViewController.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
+        splitViewController.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         
         VKSdk.initializeWithDelegate(self, andAppId:kVKApplicationID)
         if (VKSdk.wakeUpSession() == false) {

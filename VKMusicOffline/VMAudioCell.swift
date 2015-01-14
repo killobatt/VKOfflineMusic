@@ -27,6 +27,7 @@ class VMAudioCell: MGSwipeTableCell {
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var trackNameLabel: UILabel!
     @IBOutlet weak var trackDurationLabel: UILabel!
+    @IBOutlet weak var playingIndicator: UIImage!
     
     // MARK: - Overrides
     

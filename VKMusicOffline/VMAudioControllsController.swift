@@ -14,62 +14,6 @@ class VMAudioControllsController: UIViewController {
     
     // MARK: - Public
     
-    // MARK: Singleton
-    class var sharedInstance : VMAudioControllsController {
-        struct Static {
-            static var onceToken : dispatch_once_t = 0
-            static var instance : VMAudioControllsController? = nil
-        }
-        dispatch_once(&Static.onceToken) {
-            Static.instance = VMAudioControllsController()
-        }
-        return Static.instance!
-    }
-    
-    // MARK: Window
-    
-    private class Window: UIWindow {
-        
-        override init() {
-            super.init()
-        }
-        
-        required init(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-        }
-        
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-        }
-        
-        private weak var controller: VMAudioControllsController!
-        
-        private override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-            let hitTestResult = VMAudioControllsController.sharedInstance.view.hitTest(point, withEvent: event)
-            if hitTestResult === VMAudioControllsController.sharedInstance.view {
-                return nil
-            } else {
-                return hitTestResult
-            }
-        }
-    }
-    
-    private var window: Window? = nil
-    
-    func display() {
-        if self.window == nil {
-            self.window = Window()
-            self.window?.rootViewController = self
-            self.window?.windowLevel = UIWindowLevelAlert
-            self.window?.makeKeyAndVisible()
-            if let mainWindow = UIApplication.sharedApplication().delegate?.window {
-                mainWindow?.makeKeyAndVisible()
-            }
-            
-            
-        }
-    }
-
     // MARK: - Outlets
     @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var trackTitleLabel: UILabel!
@@ -78,6 +22,8 @@ class VMAudioControllsController: UIViewController {
     @IBOutlet private weak var trackRemainingDurationLabel: UILabel!
     @IBOutlet private weak var playPauseButton: UIButton!
     @IBOutlet private weak var progressSlider: PlayerSlider!
+    
+    private var lyricsController: VMLyricsController!
     
     // MARK: - Privates
     private var progressSliderIsBeingMoved: Bool = false
@@ -88,12 +34,6 @@ class VMAudioControllsController: UIViewController {
     }
     
     // MARK: - UIViewController
-    
-    override var nibName: String? {
-        get {
-            return "VMAudioControllsController"
-        }
-    }
     
     deinit {
         self.player.removeObserver(self, forKeyPath: "currentTrack")
@@ -110,8 +50,16 @@ class VMAudioControllsController: UIViewController {
         self.player.addObserver(self, forKeyPath: "loadedTrackPartTimeRange", options: nil, context: nil)
         self.player.addObserver(self, forKeyPath: "isPlaying", options: nil, context: nil)
         
-        self.trackTitleLabel.text = self.player.currentTrack.title
-        self.trackArtistLabel.text = self.player.currentTrack.artist
+        if let track = self.player.currentTrack {
+            self.trackTitleLabel.text = track.title
+            self.trackArtistLabel.text = track.artist
+        } else {
+            self.trackTitleLabel.text = ""
+            self.trackArtistLabel.text = ""
+        }
+        self.progressSlider.value = 0
+        self.progressSlider.secondaryValue = 0
+        
         self.playPauseButton.selected = self.player.isPlaying
         // Do any additional setup after loading the view.
     }
@@ -158,16 +106,19 @@ class VMAudioControllsController: UIViewController {
         self.progressSliderIsBeingMoved = false
     }
     
-    
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "embedLyrics" {
+            if let lyricsController = segue.destinationViewController as? VMLyricsController  {
+                self.lyricsController = lyricsController
+                if let lyrics = self.player.currentTrack?.lyrics {
+                    self.lyricsController.lyrics = lyrics
+                }
+            }
+        }
     }
-    */
     
     
     // MARK: - KVO
@@ -176,17 +127,23 @@ class VMAudioControllsController: UIViewController {
         change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
             
             if (keyPath == "currentTrack") {
-                self.trackTitleLabel.text = self.player.currentTrack.title
-                self.trackArtistLabel.text = self.player.currentTrack.artist
+                if let currentTrack = self.player.currentTrack {
+                    self.trackTitleLabel.text = currentTrack.title
+                    self.trackArtistLabel.text = currentTrack.artist
+                    self.lyricsController.lyrics = currentTrack.lyrics
+                }
             } else if (keyPath == "playbackProgress") {
                 if (self.progressSliderIsBeingMoved == false) {
                     self.progressSlider.value = Float(CMTimeGetSeconds(self.player.playbackProgress))
                 }
                 
                 if let playbackProgress = VMAudioControllsController.secondsFrom(time: self.player.playbackProgress) {
-                    let totalDuration = self.player.currentTrack.duration
-                    self.trackDurationLabel.text = VMAudioControllsController.durationString(playbackProgress)
-                    self.trackRemainingDurationLabel.text = VMAudioControllsController.durationString(totalDuration - playbackProgress)
+                    
+                    if let currentTrack = self.player.currentTrack {
+                        let totalDuration = currentTrack.duration
+                        self.trackDurationLabel.text = VMAudioControllsController.durationString(playbackProgress)
+                        self.trackRemainingDurationLabel.text = VMAudioControllsController.durationString(totalDuration - playbackProgress)
+                    }
                 } else {
                     self.trackDurationLabel.text = ""
                     self.trackRemainingDurationLabel.text = ""

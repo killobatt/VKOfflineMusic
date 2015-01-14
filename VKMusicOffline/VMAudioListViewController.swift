@@ -53,7 +53,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     
         if let parentViewController = self.parentViewController {
             if parentViewController is UINavigationController {
@@ -85,6 +85,21 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func playingNowPressed(sender: AnyObject) {
+        if (VMAudioListPlayer.sharedInstance.currentTrack == nil) {
+            return
+        }
+        
+        switch (UIDevice.currentDevice().userInterfaceIdiom) {
+        case .Pad:
+            self.performSegueWithIdentifier("playingNowPopover", sender: sender)
+        case .Phone, .Unspecified:
+            self.performSegueWithIdentifier("playingNowPush", sender: sender)
+        }
+    }
 
     // MARK: - Table view data source
 
@@ -93,26 +108,15 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if (self.searchResultsController == nil) {
-//            return self.audioList.filteredAudios.count
-//        } else {
-            return self.audioList.count
-//        }
+        return self.audioList.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: VMAudioCell
-        if (VMAudioListPlayer.sharedInstance.audioList === self.audioList &&
-            VMAudioListPlayer.sharedInstance.currentTrackIndex == indexPath.row) {
-            cell = tableView.dequeueReusableCellWithIdentifier("VMAudioPlayingCell", forIndexPath: indexPath) as VMAudioPlayingCell
-        } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as VMAudioCell
-        }
-        cell.delegate = self
-        
         let audio = self.audioList[indexPath.row]
-        cell.audio = audio
         
+        var cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as VMAudioCell
+        cell.delegate = self
+        cell.audio = audio
         cell.rightButtons = [
             MGSwipeButton(title: "", icon: UIImage(named: "Delete"), backgroundColor: UIColor.redColor()),
             MGSwipeButton(title: "", icon: UIImage(named: "Download"), backgroundColor: UIColor.orangeColor()),
@@ -123,16 +127,6 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         }
         
         return cell
-    }
-
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if (VMAudioListPlayer.sharedInstance.audioList === self.audioList &&
-            VMAudioListPlayer.sharedInstance.currentTrackIndex == indexPath.row) {
-            return 72;
-        } else {
-            return 52
-        }
-
     }
 
     // MARK: - Table view delegate
@@ -156,7 +150,6 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         } else {
             VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
             VMAudioListPlayer.sharedInstance.play()
-            VMAudioControllsController.sharedInstance.display()
             self.tableView.reloadData()
         }
     }

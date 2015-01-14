@@ -12,14 +12,14 @@ class VMLyricsController: UIViewController {
     
     var lyrics: VMLyrics! {
         didSet {
-            if (lyrics.text == nil) {
+            if (lyrics != nil && lyrics.text == nil) {
                 lyrics.loadText(completion: { (error: NSError!) -> Void in
                     if (self.textView != nil) {
                         self.updateUI()
                     }
                 })
             }
-            if let audio = lyrics.audio {
+            if let audio = lyrics?.audio {
                 self.titleBarItem.title = audio.title
             }
         }
@@ -48,6 +48,8 @@ class VMLyricsController: UIViewController {
     func updateUI() {
         if (self.lyrics != nil) {
             self.textView.text = self.lyrics.text
+        } else {
+            self.textView.text = ""
         }
     }
 

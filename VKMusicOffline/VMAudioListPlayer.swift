@@ -32,7 +32,7 @@ class VMAudioListPlayer: NSObject {
         }
     }
     
-    private var player: AVPlayer!
+    private var player: AVPlayer! 
 
     // MARK: - State
     
@@ -162,16 +162,20 @@ class VMAudioListPlayer: NSObject {
         self.currentTrackIndex = newTrackIndex
     }
     
-    var currentTrack: VMAudio! {
+    var currentTrack: VMAudio? {
         get {
-            return self.audioList[self.currentTrackIndex]
+            if self.audioList != nil {
+                return self.audioList[self.currentTrackIndex]
+            } else {
+                return nil
+            }
         }
     }
     
     var currentTrackIndex: Int = 0 {
         willSet {
             self.willChangeValueForKey("currentTrackIndex")
-            self.didChangeValueForKey("currentTrack")
+            self.willChangeValueForKey("currentTrack")
             if (self.player != nil) {
                 if (self.player.currentItem != nil) {
                     self.player.currentItem.removeObserver(self, forKeyPath: "status")
@@ -188,18 +192,20 @@ class VMAudioListPlayer: NSObject {
             self.didChangeValueForKey("currentTrackIndex")
             self.didChangeValueForKey("currentTrack")
             var playerItem: AVPlayerItem! = nil
-            if (self.currentTrack.localURL != nil) {
-                playerItem = AVPlayerItem(URL: self.currentTrack.localURL)
-            } else {
-                playerItem = AVPlayerItem(URL: self.currentTrack.URL)
+            if let currentTrack = self.currentTrack {
+                if (currentTrack.localURL != nil) {
+                    playerItem = AVPlayerItem(URL: currentTrack.localURL)
+                } else {
+                    playerItem = AVPlayerItem(URL: currentTrack.URL)
+                }
+                playerItem.addObserver(self, forKeyPath: "status", options: nil, context: nil)
+                NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerItemDidPlayToEndTime",
+                    name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
+                
+                self.player = AVPlayer(playerItem: playerItem)
+                self.player.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
+                self.updateNowPlayingInfoCenter()
             }
-            playerItem.addObserver(self, forKeyPath: "status", options: nil, context: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerItemDidPlayToEndTime",
-                name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
-            
-            self.player = AVPlayer(playerItem: playerItem)
-            self.player.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
-            self.updateNowPlayingInfoCenter()
         }
     }
     
@@ -225,13 +231,13 @@ class VMAudioListPlayer: NSObject {
     
     private func updateNowPlayingInfoCenter() {
         var nowPlayingInfo: [NSObject : AnyObject] = [:]
-        if let artist = self.currentTrack.artist {
+        if let artist = self.currentTrack?.artist {
             nowPlayingInfo[MPMediaItemPropertyArtist] = artist
         }
-        if let title = self.currentTrack.title {
+        if let title = self.currentTrack?.title {
             nowPlayingInfo[MPMediaItemPropertyTitle] = title
         }
-        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = NSNumber(integer: self.currentTrack.duration)
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = NSNumber(integer: self.currentTrack!.duration)
         // set once in the start of the playback, the system will update this automatically
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = NSNumber(double: CMTimeGetSeconds(self.playbackProgress))
         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = nowPlayingInfo
