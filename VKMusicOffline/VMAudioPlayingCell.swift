@@ -128,6 +128,5 @@ class VMAudioPlayingCell: VMAudioCell {
         } else {
             return ""
         }
-        
     }
 }

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VMAudioControllsController" customModule="VKMusicOffline" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="i5M-Pr-FkT" id="NS7-gr-Tnj"/>
+                <outlet property="playPauseButton" destination="RCV-in-jx0" id="otb-Yd-Ida"/>
+                <outlet property="progressSlider" destination="VXP-Go-KH3" id="N37-ou-Ycc"/>
+                <outlet property="trackArtistLabel" destination="Rnk-HY-eTD" id="7UC-bA-CPz"/>
+                <outlet property="trackDurationLabel" destination="hWf-F1-lw9" id="9sa-Iv-oH1"/>
+                <outlet property="trackRemainingDurationLabel" destination="WBQ-CM-RdB" id="NFH-VS-KXq"/>
+                <outlet property="trackTitleLabel" destination="fbV-nU-T0A" id="q98-UM-qhT"/>
+                <outlet property="view" destination="GfB-pa-b4g" id="Lc3-hw-aIh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="GfB-pa-b4g">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT">
+                    <rect key="frame" x="0.0" y="481.5" width="600" height="118.5"/>
+                    <subviews>
+                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qmL-CX-esb">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="118.5"/>
+                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Xhw-0a-ewm">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="118.5"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                            <blurEffect style="light"/>
+                        </visualEffectView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Four words to choke upon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbV-nU-T0A" userLabel="Track title label">
+                            <rect key="frame" x="202.5" y="8" width="195.5" height="19.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bullet for my valentine" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnk-HY-eTD" userLabel="Track artist label">
+                            <rect key="frame" x="228.5" y="27" width="143.5" height="17"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PB0-Ui-oqm" userLabel="Play previous track button">
+                            <rect key="frame" x="224" y="44" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="Ne7-X5-Sl2"/>
+                                <constraint firstAttribute="width" secondItem="PB0-Ui-oqm" secondAttribute="height" multiplier="1:1" id="Q5G-yj-Zyk"/>
+                            </constraints>
+                            <state key="normal" image="PlayPrevious">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="Pause"/>
+                            <connections>
+                                <action selector="playPreviousTrack:" destination="-1" eventType="touchUpInside" id="OH5-Lm-FHD"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCV-in-jx0" userLabel="Play/Pause button">
+                            <rect key="frame" x="278" y="44" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="2w5-vG-lct"/>
+                                <constraint firstAttribute="width" secondItem="RCV-in-jx0" secondAttribute="height" multiplier="1:1" id="UXR-PF-r8J"/>
+                            </constraints>
+                            <state key="normal" image="Play">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="Pause"/>
+                            <connections>
+                                <action selector="togglePlayPause:" destination="-1" eventType="touchUpInside" id="p5q-mP-q3r"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-Us-H4m" userLabel="Play next track button">
+                            <rect key="frame" x="332" y="44" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="3Nh-Us-H4m" secondAttribute="height" multiplier="1:1" id="cEy-eS-Lvm"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="pMb-nj-NFP"/>
+                            </constraints>
+                            <state key="normal" image="PlayNext">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected" image="Pause"/>
+                            <connections>
+                                <action selector="playNextTrack:" destination="-1" eventType="touchUpInside" id="Otu-WY-0lc"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWf-F1-lw9" userLabel="Track duration label">
+                            <rect key="frame" x="4" y="96" width="22.5" height="13.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="VXP-Go-KH3" customClass="PlayerSlider" customModule="UIViews">
+                            <rect key="frame" x="33" y="88" width="534" height="31"/>
+                            <color key="maximumTrackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="secondaryValue">
+                                    <real key="value" value="80"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="secondaryValueTintColor">
+                                    <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="progressSliderMoved:" destination="-1" eventType="valueChanged" id="3RY-t7-TOI"/>
+                                <action selector="progressSliderTouchDragInside:" destination="-1" eventType="touchDragOutside" id="5rf-JB-eag"/>
+                                <action selector="progressSliderTouchUpInside:" destination="-1" eventType="touchUpInside" id="Hel-nk-dGV"/>
+                                <action selector="progressSliderTouchUpOutside:" destination="-1" eventType="touchUpOutside" id="4rL-Y2-jpm"/>
+                            </connections>
+                        </slider>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBQ-CM-RdB" userLabel="Track remaining duration label">
+                            <rect key="frame" x="573" y="96" width="23" height="13.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="RCV-in-jx0" firstAttribute="centerY" secondItem="3Nh-Us-H4m" secondAttribute="centerY" id="0YI-Nd-M96"/>
+                        <constraint firstItem="WBQ-CM-RdB" firstAttribute="leading" secondItem="VXP-Go-KH3" secondAttribute="trailing" constant="8" id="0Yq-5N-XqA"/>
+                        <constraint firstItem="PB0-Ui-oqm" firstAttribute="width" secondItem="PB0-Ui-oqm" secondAttribute="height" multiplier="1:1" id="1Wv-j9-UGt"/>
+                        <constraint firstItem="PB0-Ui-oqm" firstAttribute="centerY" secondItem="RCV-in-jx0" secondAttribute="centerY" id="2uX-8l-u0H"/>
+                        <constraint firstAttribute="trailing" secondItem="qmL-CX-esb" secondAttribute="trailing" id="3cP-pX-tOZ"/>
+                        <constraint firstItem="qmL-CX-esb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5Wx-TR-HhU"/>
+                        <constraint firstItem="3Nh-Us-H4m" firstAttribute="leading" secondItem="RCV-in-jx0" secondAttribute="trailing" constant="10" id="A9J-WS-iGZ"/>
+                        <constraint firstItem="RCV-in-jx0" firstAttribute="leading" secondItem="PB0-Ui-oqm" secondAttribute="trailing" constant="10" id="Epz-hX-FgQ"/>
+                        <constraint firstItem="VXP-Go-KH3" firstAttribute="top" secondItem="RCV-in-jx0" secondAttribute="bottom" constant="-4" id="GRt-fj-o72"/>
+                        <constraint firstItem="qmL-CX-esb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Hsc-AR-MBn"/>
+                        <constraint firstItem="VXP-Go-KH3" firstAttribute="leading" secondItem="hWf-F1-lw9" secondAttribute="trailing" constant="8" id="IJC-g3-os9"/>
+                        <constraint firstAttribute="bottom" secondItem="VXP-Go-KH3" secondAttribute="bottom" id="ISq-g1-9Ei"/>
+                        <constraint firstAttribute="centerX" secondItem="RCV-in-jx0" secondAttribute="centerX" id="LT8-hC-Uwc"/>
+                        <constraint firstAttribute="bottom" secondItem="qmL-CX-esb" secondAttribute="bottom" id="Nvd-Xg-GJz"/>
+                        <constraint firstItem="Rnk-HY-eTD" firstAttribute="centerX" secondItem="fbV-nU-T0A" secondAttribute="centerX" id="PZ7-BV-trR"/>
+                        <constraint firstItem="Rnk-HY-eTD" firstAttribute="top" secondItem="fbV-nU-T0A" secondAttribute="bottom" id="RDB-rM-DId"/>
+                        <constraint firstAttribute="centerX" secondItem="VXP-Go-KH3" secondAttribute="centerX" id="VaN-ls-8xm"/>
+                        <constraint firstItem="RCV-in-jx0" firstAttribute="top" secondItem="Rnk-HY-eTD" secondAttribute="bottom" id="WQ8-hf-nav"/>
+                        <constraint firstItem="WBQ-CM-RdB" firstAttribute="centerY" secondItem="VXP-Go-KH3" secondAttribute="centerY" id="fSO-Ku-cxQ"/>
+                        <constraint firstAttribute="centerX" secondItem="fbV-nU-T0A" secondAttribute="centerX" id="fzz-z6-nUx"/>
+                        <constraint firstItem="VXP-Go-KH3" firstAttribute="top" secondItem="RCV-in-jx0" secondAttribute="bottom" id="mil-sH-XyH"/>
+                        <constraint firstItem="hWf-F1-lw9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="4" id="msc-UT-Xvb"/>
+                        <constraint firstAttribute="trailing" secondItem="WBQ-CM-RdB" secondAttribute="trailing" constant="4" id="rAl-4f-Nap"/>
+                        <constraint firstItem="hWf-F1-lw9" firstAttribute="centerY" secondItem="VXP-Go-KH3" secondAttribute="centerY" id="uHs-z1-brC"/>
+                        <constraint firstItem="3Nh-Us-H4m" firstAttribute="width" secondItem="3Nh-Us-H4m" secondAttribute="height" multiplier="1:1" id="wE4-fq-Kt0"/>
+                        <constraint firstItem="fbV-nU-T0A" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="xLx-y1-FIu"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="GRt-fj-o72"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="QSB-xJ-3Zd"/>
+                <constraint firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="W25-Bg-O9l"/>
+                <constraint firstItem="i5M-Pr-FkT" firstAttribute="leading" secondItem="GfB-pa-b4g" secondAttribute="leading" id="pZs-BR-DI5"/>
+            </constraints>
+            <point key="canvasLocation" x="527" y="171"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Pause" width="32" height="32"/>
+        <image name="Play" width="32" height="32"/>
+        <image name="PlayNext" width="24" height="24"/>
+        <image name="PlayPrevious" width="24" height="24"/>
+    </resources>
+</document>

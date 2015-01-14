@@ -135,6 +135,8 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
 
     }
 
+    // MARK: - Table view delegate
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row == self.audioList.count - 1 &&
             self.audioList.hasNextPage()) {
@@ -154,6 +156,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         } else {
             VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
             VMAudioListPlayer.sharedInstance.play()
+            VMAudioControllsController.sharedInstance.display()
             self.tableView.reloadData()
         }
     }
@@ -250,6 +253,13 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
     override func remoteControlReceivedWithEvent(event: UIEvent) {
         let player = VMAudioListPlayer.sharedInstance
+        if player.audioList == nil {
+            player.audioList = VMAudioListManager.sharedInstance.userAudioList
+        }
+        if player.currentTrack == nil {
+            player.currentTrackIndex = 0
+        }
+        
         if (event.type == UIEventType.RemoteControl) {
             switch event.subtype {
             case .RemoteControlPlay:

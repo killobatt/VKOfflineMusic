@@ -20,6 +20,8 @@
 		843CAC7D1A155F7400FD37E9 /* UIViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBB8A22219D4677500FD7251 /* UIViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		843CAC811A155F7400FD37E9 /* VK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF8FF819CD9216005CB421 /* VK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84708BE91A45F04E0053790A /* VMDownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84708BE81A45F04E0053790A /* VMDownloadCell.swift */; };
+		84A2D52B1A61DA7E00AFE6AB /* VMAudioControllsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2D5291A61DA7E00AFE6AB /* VMAudioControllsController.swift */; };
+		84A2D52C1A61DA7E00AFE6AB /* VMAudioControllsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A2D52A1A61DA7E00AFE6AB /* VMAudioControllsController.xib */; };
 		84EF7F431A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EF7F421A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift */; };
 		84F612671A47251C0075866D /* MGSwipeCells.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84F6125A1A4725000075866D /* MGSwipeCells.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84FE4F2D1A17EBCA00893410 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FE4F2B1A17EBCA00893410 /* Launch Screen.xib */; };
@@ -171,6 +173,8 @@
 		1E512E1D19EFC80B00CB22CC /* NSKeyedArchiver+VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSKeyedArchiver+VM.swift"; sourceTree = "<group>"; };
 		843CA3571A1BEDBA00329FB4 /* VMAudioListEnumerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListEnumerator.swift; sourceTree = "<group>"; };
 		84708BE81A45F04E0053790A /* VMDownloadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMDownloadCell.swift; sourceTree = "<group>"; };
+		84A2D5291A61DA7E00AFE6AB /* VMAudioControllsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioControllsController.swift; sourceTree = "<group>"; };
+		84A2D52A1A61DA7E00AFE6AB /* VMAudioControllsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VMAudioControllsController.xib; sourceTree = "<group>"; };
 		84EF7F421A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMDownloadsViewControllerTableViewController.swift; sourceTree = "<group>"; };
 		84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MGSwipeCells.xcodeproj; path = VKMusicOffline/SDKs/MGSwipeCells/MGSwipeCells.xcodeproj; sourceTree = "<group>"; };
 		84FE4F2C1A17EBCA00893410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/Launch Screen.xib"; sourceTree = "<group>"; };
@@ -299,6 +303,8 @@
 				84708BEE1A45F0590053790A /* Downloads */,
 				CB6B52C619DBE61000127A1B /* VMLyricsController.swift */,
 				1E512E1719EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift */,
+				84A2D5291A61DA7E00AFE6AB /* VMAudioControllsController.swift */,
+				84A2D52A1A61DA7E00AFE6AB /* VMAudioControllsController.xib */,
 				CBB7A90319CD844100E95307 /* AppDelegate.swift */,
 				84FE4F321A19178100893410 /* Localization.strings */,
 				84FE4F2B1A17EBCA00893410 /* Launch Screen.xib */,
@@ -541,6 +547,7 @@
 			files = (
 				CBB7A90B19CD844100E95307 /* Main.storyboard in Resources */,
 				84FE4F2D1A17EBCA00893410 /* Launch Screen.xib in Resources */,
+				84A2D52C1A61DA7E00AFE6AB /* VMAudioControllsController.xib in Resources */,
 				84FE4F301A19178100893410 /* Localization.strings in Resources */,
 				CBB7A90D19CD844100E95307 /* Images.xcassets in Resources */,
 			);
@@ -566,6 +573,7 @@
 				CB9996D919CDDC430076D5E8 /* VMAudio.swift in Sources */,
 				1E38FCCE19E66F90002ECA34 /* VMOfflineAudioSearchList.swift in Sources */,
 				CB6B52C119DBE40F00127A1B /* VMLyrics.swift in Sources */,
+				84A2D52B1A61DA7E00AFE6AB /* VMAudioControllsController.swift in Sources */,
 				1E0BD1C719DA9AA500A9C4C2 /* VMUserManager.swift in Sources */,
 				CB9996D019CDC5410076D5E8 /* VMAudioListViewController.swift in Sources */,
 				1E38FCD419E6706C002ECA34 /* VMAudioListSearching.swift in Sources */,
