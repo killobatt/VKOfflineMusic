@@ -247,6 +247,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     override func remoteControlReceivedWithEvent(event: UIEvent) {
         let player = VMAudioListPlayer.sharedInstance
         if player.audioList == nil {
+            // TODO: tracks are not loaded here; we need a allways existing offline track list?
             player.audioList = VMAudioListManager.sharedInstance.userAudioList
         }
         if player.currentTrack == nil {
@@ -259,6 +260,12 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
                 player.play()
             case .RemoteControlPause:
                 player.pause()
+            case .RemoteControlTogglePlayPause:     // received from headphones controlls
+                if (player.isPlaying) {
+                    player.pause()
+                } else {
+                    player.play()
+                }
             case .RemoteControlPreviousTrack:
                 player.playPreviousTrack()
             case .RemoteControlNextTrack:

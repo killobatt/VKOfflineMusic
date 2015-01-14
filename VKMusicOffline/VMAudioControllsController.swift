@@ -50,13 +50,7 @@ class VMAudioControllsController: UIViewController {
         self.player.addObserver(self, forKeyPath: "loadedTrackPartTimeRange", options: nil, context: nil)
         self.player.addObserver(self, forKeyPath: "isPlaying", options: nil, context: nil)
         
-        if let track = self.player.currentTrack {
-            self.trackTitleLabel.text = track.title
-            self.trackArtistLabel.text = track.artist
-        } else {
-            self.trackTitleLabel.text = ""
-            self.trackArtistLabel.text = ""
-        }
+        self.updateForTrack(self.player.currentTrack)
         self.progressSlider.value = 0
         self.progressSlider.secondaryValue = 0
         
@@ -106,6 +100,26 @@ class VMAudioControllsController: UIViewController {
         self.progressSliderIsBeingMoved = false
     }
     
+    private func updateForTrack(currentTrack: VMAudio?) {
+        UIView.animateWithDuration(0.25, animations: {
+            if let track = currentTrack {
+                self.trackTitleLabel.text = track.title
+                self.trackArtistLabel.text = track.artist
+                self.lyricsController.lyrics = track.lyrics
+                self.progressSlider.minimumValue = 0
+                self.progressSlider.maximumValue = Float(track.duration)
+            } else {
+                self.trackTitleLabel.text = ""
+                self.trackArtistLabel.text = ""
+                self.lyricsController.lyrics = nil
+                self.progressSlider.minimumValue = 0
+                self.progressSlider.maximumValue = 1
+            }
+        })
+        self.trackDurationLabel.text = "-:--"
+        self.trackRemainingDurationLabel.text = "-:--"
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -127,11 +141,7 @@ class VMAudioControllsController: UIViewController {
         change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
             
             if (keyPath == "currentTrack") {
-                if let currentTrack = self.player.currentTrack {
-                    self.trackTitleLabel.text = currentTrack.title
-                    self.trackArtistLabel.text = currentTrack.artist
-                    self.lyricsController.lyrics = currentTrack.lyrics
-                }
+                self.updateForTrack(self.player.currentTrack)
             } else if (keyPath == "playbackProgress") {
                 if (self.progressSliderIsBeingMoved == false) {
                     self.progressSlider.value = Float(CMTimeGetSeconds(self.player.playbackProgress))
@@ -145,8 +155,8 @@ class VMAudioControllsController: UIViewController {
                         self.trackRemainingDurationLabel.text = VMAudioControllsController.durationString(totalDuration - playbackProgress)
                     }
                 } else {
-                    self.trackDurationLabel.text = ""
-                    self.trackRemainingDurationLabel.text = ""
+                    self.trackDurationLabel.text = "-:--"
+                    self.trackRemainingDurationLabel.text = "-:--"
                 }
                 
                 
