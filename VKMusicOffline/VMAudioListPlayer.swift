@@ -25,10 +25,12 @@ class VMAudioListPlayer: NSObject {
     }
     
     // MARK: - Instance variables
-    var audioList: VMAudioList! {
-        didSet {
-            self.audioListEnumerator = VMAudioListEnumerator(audioList: audioList,
-                indexOfCurrentObject: self.currentTrackIndex)
+    var audioList: VMAudioList? {
+        willSet {
+            if let list = newValue {
+                self.audioListEnumerator = VMAudioListEnumerator(audioList: list,
+                    indexOfCurrentObject: self.currentTrackIndex)
+            }
         }
     }
     
@@ -147,28 +149,28 @@ class VMAudioListPlayer: NSObject {
     }
     
     func playNextTrack() {
-        var newTrackIndex = self.currentTrackIndex + 1
-        if (newTrackIndex >= self.audioList.count) {
-            newTrackIndex %= self.audioList.count
+        if let audioList = self.audioList {
+            var newTrackIndex = self.currentTrackIndex + 1
+            if (newTrackIndex >= audioList.count) {
+                newTrackIndex %= audioList.count
+            }
+            self.currentTrackIndex = newTrackIndex
         }
-        self.currentTrackIndex = newTrackIndex
     }
     
     func playPreviousTrack() {
-        var newTrackIndex = self.currentTrackIndex - 1
-        if (newTrackIndex < 0) {
-            newTrackIndex += self.audioList.count
+        if let audioList = self.audioList {
+            var newTrackIndex = self.currentTrackIndex - 1
+            if (newTrackIndex < 0) {
+                newTrackIndex += audioList.count
+            }
+            self.currentTrackIndex = newTrackIndex
         }
-        self.currentTrackIndex = newTrackIndex
     }
     
     var currentTrack: VMAudio? {
         get {
-            if self.audioList != nil {
-                return self.audioList[self.currentTrackIndex]
-            } else {
-                return nil
-            }
+            return self.audioList?[self.currentTrackIndex]
         }
     }
     

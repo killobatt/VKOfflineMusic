@@ -22,6 +22,9 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
     var searchController: UISearchController!
     var searchResultsController: VMAudioListViewController!
+    var player: VMAudioListPlayer {
+        return VMAudioListPlayer.sharedInstance
+    }
     
     override init() {
         super.init()
@@ -50,7 +53,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -73,12 +76,16 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.tableView.contentOffset = CGPointMake(0, 44)
-        UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
+        if (self.player.audioList != nil &&
+            self.player.audioList == self.audioList &&
+            self.player.currentTrack != nil) {
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.player.currentTrackIndex, inSection: 0), atScrollPosition: .Middle, animated: false)
+        } else {
+            self.tableView.contentOffset = CGPointMake(0, 44)
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
-        UIApplication.sharedApplication().endReceivingRemoteControlEvents()
     }
     
     override func didReceiveMemoryWarning() {
@@ -242,37 +249,4 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             }
     }
     
-    // MARK: - Events
-    
-    override func remoteControlReceivedWithEvent(event: UIEvent) {
-        let player = VMAudioListPlayer.sharedInstance
-        if player.audioList == nil {
-            // TODO: tracks are not loaded here; we need a allways existing offline track list?
-            player.audioList = VMAudioListManager.sharedInstance.userAudioList
-        }
-        if player.currentTrack == nil {
-            player.currentTrackIndex = 0
-        }
-        
-        if (event.type == UIEventType.RemoteControl) {
-            switch event.subtype {
-            case .RemoteControlPlay:
-                player.play()
-            case .RemoteControlPause:
-                player.pause()
-            case .RemoteControlTogglePlayPause:     // received from headphones controlls
-                if (player.isPlaying) {
-                    player.pause()
-                } else {
-                    player.play()
-                }
-            case .RemoteControlPreviousTrack:
-                player.playPreviousTrack()
-            case .RemoteControlNextTrack:
-                player.playNextTrack()
-            default:
-                NSLog("Got event unprocesed event: \(event)")
-            }
-        }
-    }
 }

@@ -24,7 +24,7 @@
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
-                <splitViewController id="H1p-Uh-vWS" sceneMemberID="viewController">
+                <splitViewController id="H1p-Uh-vWS" customClass="VMSplitViewController" customModule="VKMusicOffline" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
@@ -59,13 +59,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1W3-2s-QiR">
-                                            <rect key="frame" x="171" y="12" width="76" height="19.5"/>
+                                            <rect key="frame" x="171" y="12" width="76" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVA-Wk-BCu">
-                                            <rect key="frame" x="120" y="12" width="43" height="19.5"/>
+                                            <rect key="frame" x="120" y="12" width="43" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -96,13 +96,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My audios" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6k-eo-xgo">
-                                            <rect key="frame" x="12" y="12" width="77" height="19.5"/>
+                                            <rect key="frame" x="12" y="12" width="77" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="112" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qrH-Ht-8wv">
-                                            <rect key="frame" x="559" y="15" width="21" height="14.5"/>
+                                            <rect key="frame" x="559" y="15" width="21" height="15"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -130,7 +130,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new list" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKQ-R8-ZTB" userLabel="Add new label">
-                                            <rect key="frame" x="12" y="12" width="124" height="19.5"/>
+                                            <rect key="frame" x="12" y="12" width="124" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -148,7 +148,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloads" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGn-r4-wiA" userLabel="Add new label">
-                                            <rect key="frame" x="12" y="12" width="83.5" height="19.5"/>
+                                            <rect key="frame" x="12" y="12" width="84" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -191,13 +191,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Bullet for my Valentine" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSz-73-LqX">
-                                            <rect key="frame" x="8" y="12" width="166" height="19.5"/>
+                                            <rect key="frame" x="8" y="12" width="166" height="20"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="For Words (To choke Up on)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZa-l1-e0k">
-                                            <rect key="frame" x="8" y="33.5" width="179.5" height="17"/>
+                                            <rect key="frame" x="8" y="34" width="180" height="17"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -206,13 +206,13 @@
                                             <rect key="frame" x="493" y="18" width="39" height="29"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQ2-AN-ewJ">
-                                                    <rect key="frame" x="13" y="0.0" width="26" height="14.5"/>
+                                                    <rect key="frame" x="13" y="0.0" width="26" height="15"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="8,5 Mb" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhk-J2-htd">
-                                                    <rect key="frame" x="0.0" y="14.5" width="39" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="15" width="39" height="15"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -416,14 +416,14 @@
         <!--Audio List View Controller-->
         <scene sceneID="JpB-Qz-7Pq">
             <objects>
-                <tableViewController storyboardIdentifier="VMAudioListViewController" id="VBE-dj-CjP" customClass="VMAudioListViewController" customModule="VKMusicOffline" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="VMAudioListViewController" clearsSelectionOnViewWillAppear="NO" id="VBE-dj-CjP" customClass="VMAudioListViewController" customModule="VKMusicOffline" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" id="NsT-1l-TaY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VMAudioCell" rowHeight="52" id="hKs-nS-adm" customClass="VMAudioCell" customModule="VKMusicOffline" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="VMAudioCell" rowHeight="52" id="hKs-nS-adm" customClass="VMAudioCell" customModule="VKMusicOffline" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hKs-nS-adm" id="bae-R1-kKe">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -431,8 +431,8 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IsPlaying" translatesAutoresizingMaskIntoConstraints="NO" id="UQy-sB-NtY">
                                             <rect key="frame" x="12" y="18" width="16" height="16"/>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqN-yr-Hdh" userLabel="Title View">
-                                            <rect key="frame" x="38" y="8.5" width="114.5" height="36"/>
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hqN-yr-Hdh" userLabel="Title View">
+                                            <rect key="frame" x="38" y="9" width="115" height="36"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Metallica" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fE7-iH-Bga">
                                                     <rect key="frame" x="0.0" y="19" width="58" height="17"/>
@@ -441,7 +441,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Enter Sandman" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5h7-Td-qOz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="114.5" height="19.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -468,7 +468,7 @@
                                             </variation>
                                         </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDL-31-fk1">
-                                            <rect key="frame" x="563.5" y="19" width="24.5" height="14.5"/>
+                                            <rect key="frame" x="564" y="19" width="25" height="15"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -488,6 +488,7 @@
                                 <inset key="separatorInset" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="artistNameLabel" destination="fE7-iH-Bga" id="b2i-Ja-ZiQ"/>
+                                    <outlet property="playingIndicator" destination="UQy-sB-NtY" id="sqQ-2p-r2B"/>
                                     <outlet property="trackDurationLabel" destination="iDL-31-fk1" id="GTt-gZ-X8S"/>
                                     <outlet property="trackNameLabel" destination="5h7-Td-qOz" id="Bwy-uY-DCh"/>
                                 </connections>
@@ -540,13 +541,13 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Four words to choke upon" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pg2-0q-1cS" userLabel="Track title label">
-                                                    <rect key="frame" x="202" y="8" width="195.5" height="19.5"/>
+                                                    <rect key="frame" x="202" y="8" width="196" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bullet for my valentine" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPf-fX-BUK" userLabel="Track artist label">
-                                                    <rect key="frame" x="228" y="27" width="143.5" height="17"/>
+                                                    <rect key="frame" x="228" y="27" width="144" height="17"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -561,7 +562,7 @@
                                                     <state key="normal" image="PlayPrevious">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" image="CA1F2EA9-750F-47B1-9F2D-2748D31EFD81"/>
+                                                    <state key="selected" image="12AF528B-3A0B-4C21-8DB9-9DAC3997A0FF"/>
                                                     <connections>
                                                         <action selector="playPreviousTrack:" destination="263-cg-i3V" eventType="touchUpInside" id="Tmd-Qg-HIQ"/>
                                                     </connections>
@@ -591,19 +592,19 @@
                                                     <state key="normal" image="PlayNext">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" image="CA1F2EA9-750F-47B1-9F2D-2748D31EFD81"/>
+                                                    <state key="selected" image="12AF528B-3A0B-4C21-8DB9-9DAC3997A0FF"/>
                                                     <connections>
                                                         <action selector="playNextTrack:" destination="263-cg-i3V" eventType="touchUpInside" id="EnE-hr-h0L"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0O-SR-UuG" userLabel="Track duration label">
-                                                    <rect key="frame" x="8" y="95" width="22.5" height="13.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0O-SR-UuG" userLabel="Track duration label">
+                                                    <rect key="frame" x="8" y="95" width="23" height="14"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1D-eM-g1e" userLabel="Track remaining duration label">
-                                                    <rect key="frame" x="569" y="96" width="23" height="13.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1D-eM-g1e" userLabel="Track remaining duration label">
+                                                    <rect key="frame" x="569" y="96" width="23" height="14"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -615,7 +616,7 @@
                                                         <segue destination="l6x-eV-Xvn" kind="embed" identifier="embedLyrics" id="bhC-uZ-9HJ"/>
                                                     </connections>
                                                 </containerView>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ibc-PO-9jX" customClass="PlayerSlider" customModule="UIViews">
+                                                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ibc-PO-9jX" customClass="PlayerSlider" customModule="UIViews">
                                                     <rect key="frame" x="32" y="88" width="535" height="31"/>
                                                     <color key="maximumTrackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <userDefinedRuntimeAttributes>
@@ -704,7 +705,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44Z-Cb-mhH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1515" y="195"/>
+            <point key="canvasLocation" x="1528" y="195"/>
         </scene>
         <!--Lyrics-->
         <scene sceneID="HWh-sD-YVm">
@@ -757,11 +758,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cV2-4i-XJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2226" y="136"/>
+            <point key="canvasLocation" x="2223" y="132"/>
         </scene>
     </scenes>
     <resources>
-        <image name="CA1F2EA9-750F-47B1-9F2D-2748D31EFD81" width="32" height="32">
+        <image name="12AF528B-3A0B-4C21-8DB9-9DAC3997A0FF" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -906,7 +907,7 @@ HpMemx6eHrAesx64AAAAAAAAAgEAAAAAAAAAPwAAAAAAAAAAAAAAAAAAHro
         <image name="PlayPrevious" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MEY-yI-72g"/>
+        <segue reference="Tll-UG-LXB"/>
         <segue reference="XPF-7S-Jct"/>
         <segue reference="DEx-FE-T4v"/>
     </inferredMetricsTieBreakers>

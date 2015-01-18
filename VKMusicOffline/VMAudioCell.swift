@@ -18,36 +18,71 @@ class VMAudioCell: MGSwipeTableCell {
                 self.artistNameLabel.text = newAudio.artist
                 self.trackNameLabel.text = newAudio.title
                 self.trackDurationLabel.text = newAudio.durationString
+                if let track = self.player.currentTrack {
+                    self.playingIndicator.hidden = track != newAudio
+                } else {
+                    self.playingIndicator.hidden = true
+                }
             }
+        }
+    }
+    var player: VMAudioListPlayer {
+        get {
+            return VMAudioListPlayer.sharedInstance
         }
     }
     
     // MARK: - IBOutlets
 
-    @IBOutlet weak var artistNameLabel: UILabel!
-    @IBOutlet weak var trackNameLabel: UILabel!
-    @IBOutlet weak var trackDurationLabel: UILabel!
-    @IBOutlet weak var playingIndicator: UIImage!
+    @IBOutlet private weak var artistNameLabel: UILabel!
+    @IBOutlet private weak var trackNameLabel: UILabel!
+    @IBOutlet private weak var trackDurationLabel: UILabel!
+    @IBOutlet private weak var playingIndicator: UIImageView!
     
     // MARK: - Overrides
     
+    deinit {
+        self.player.removeObserver(self, forKeyPath: "currentTrack")
+        self.player.removeObserver(self, forKeyPath: "isPlaying")
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        // Initialization code
+        
+        self.setupObserving()
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+        self.setupObserving()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
+    
+    // MARK: - KVO
+    
+    private func setupObserving() {
+        self.player.addObserver(self, forKeyPath: "currentTrack", options: nil, context: nil)
+        self.player.addObserver(self, forKeyPath: "isPlaying", options: nil, context: nil)
+    }
+    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        if (keyPath == "currentTrack") {
+            if let track = self.player.currentTrack {
+                self.playingIndicator.hidden = self.audio != track
+            }
+        } else if (keyPath == "isPlaying") {
+            
+        }
+    }
+
 }
