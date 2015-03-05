@@ -27,8 +27,8 @@ class VMLyrics: NSObject, NSCoding {
         lyricsRequest.executeWithResultBlock({ (response: VKResponse!) -> Void in
             NSLog("VMLyrics.loadText got text: \(response.json)")
             if response.json is NSDictionary {
-                let vkObject = response.json as NSDictionary
-                self.text = vkObject["text"] as String
+                let vkObject = response.json as! NSDictionary
+                self.text = vkObject["text"] as! String
             }
             if let _completion = completion {
                 _completion(nil)
@@ -43,8 +43,8 @@ class VMLyrics: NSObject, NSCoding {
     // MARK: - NSCoding
     
     required init(coder aDecoder: NSCoder) {
-        self.id = aDecoder.decodeObjectForKey("id") as NSNumber
-        self.text = aDecoder.decodeObjectForKey("text") as String!
+        self.id = aDecoder.decodeObjectForKey("id") as! NSNumber
+        self.text = aDecoder.decodeObjectForKey("text") as! String!
     }
     
     func encodeWithCoder(aCoder: NSCoder) {

@@ -19,14 +19,14 @@ class VMSearchAudioList: VMOnlineAudioList, VMAudioListSearching {
                 "search_own": self.searchOwn ? 1 : 0,
                 "auto_complete": 1,
             ];
-            parameters.addEntriesFromDictionary(super.parameters)
+            parameters.addEntriesFromDictionary(super.parameters as [NSObject : AnyObject])
             return parameters
         }
     }
     
     override func createRequest() -> VKRequest! {
         return VKApi.requestWithMethod("audio.search",
-            andParameters:self.parameters,
+            andParameters:self.parameters as [NSObject : AnyObject],
             andHttpMethod:"GET")
     }
     
@@ -39,11 +39,11 @@ class VMSearchAudioList: VMOnlineAudioList, VMAudioListSearching {
     
     // MARK: - VMAudioListSearching
     
-    var searchTerm: NSString! { get { return self._searchTerm } }
+    var searchTerm: String! { get { return self._searchTerm } }
 
-    private var _searchTerm: NSString!
+    private var _searchTerm: String!
 
-    func setSearchTerm(searchTerm: NSString!, completion:((NSError!) -> Void)?) -> Void {
+    func setSearchTerm(searchTerm: String!, completion:((NSError!) -> Void)?) -> Void {
         self._searchTerm = searchTerm;
         self.resetList()
         self.loadNextPage(completion: completion)

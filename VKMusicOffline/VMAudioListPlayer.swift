@@ -220,7 +220,7 @@ class VMAudioListPlayer: NSObject {
         var loadedTrackPartTimeRange = kCMTimeRangeZero
         // TODO: Fix logic to more correct
         for value in timeRanges {
-            let timeRange = (value as NSValue).CMTimeRangeValue
+            let timeRange = (value as! NSValue).CMTimeRangeValue
             if (CMTimeGetSeconds(timeRange.duration) >
                 CMTimeGetSeconds(loadedTrackPartTimeRange.duration)) {
                 loadedTrackPartTimeRange = timeRange
@@ -261,7 +261,7 @@ class VMAudioListPlayer: NSObject {
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if object is AVPlayerItem {
-            let playerItem = object as AVPlayerItem
+            let playerItem = object as! AVPlayerItem
             if keyPath == "status" {
                 switch playerItem.status {
                 case AVPlayerItemStatus.ReadyToPlay:

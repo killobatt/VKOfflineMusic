@@ -77,11 +77,11 @@ class VMAudio: NSObject, NSCoding, Equatable {
         self.id = NSNumber(int: aDecoder.decodeIntForKey("id"))
         self.ownerID = NSNumber(int: aDecoder.decodeIntForKey("ownerID"))
         self.duration = Int(aDecoder.decodeIntForKey("duration"))
-        self.artist = aDecoder.decodeObjectForKey("artist") as NSString!
-        self.title = aDecoder.decodeObjectForKey("title") as NSString!
-        self.URL = aDecoder.decodeObjectForKey("URL") as NSURL!
-        self.localFileName = aDecoder.decodeObjectForKey("localFileName") as NSString!
-        self.albumID = aDecoder.decodeObjectForKey("albumID") as NSNumber!
+        self.artist = aDecoder.decodeObjectForKey("artist") as! NSString!
+        self.title = aDecoder.decodeObjectForKey("title") as! NSString!
+        self.URL = aDecoder.decodeObjectForKey("URL") as! NSURL!
+        self.localFileName = aDecoder.decodeObjectForKey("localFileName") as! NSString!
+        self.albumID = aDecoder.decodeObjectForKey("albumID") as! NSNumber!
         super.init()
         if let lyrics = aDecoder.decodeObjectForKey("lyricsID") as? VMLyrics {
             self.lyrics = lyrics

@@ -55,7 +55,7 @@ class VMDownloadsViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("downloadCell", forIndexPath: indexPath) as VMDownloadCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("downloadCell", forIndexPath: indexPath) as! VMDownloadCell
         cell.downloadTask = self.downloadTasks[indexPath.row]
         return cell
     }

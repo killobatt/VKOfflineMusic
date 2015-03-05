@@ -40,7 +40,7 @@ public class URLImageView: UIImageView {
     private func loadImageWithURL(url: NSURL!) {
         if let imgURL = url {
             let defaults = NSUserDefaults.standardUserDefaults()
-            let imageDataOpt = defaults.objectForKey(imgURL.absoluteString!) as NSData!
+            let imageDataOpt = defaults.objectForKey(imgURL.absoluteString!) as! NSData!
             if let imageData = imageDataOpt {
                 self.image = UIImage(data: imageData)
                 self.layoutIfNeeded()

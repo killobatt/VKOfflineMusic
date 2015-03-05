@@ -14,7 +14,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
 {
     var audioList: VMAudioList! = nil {
         didSet {
-            self.title = self.audioList.title
+            self.title = self.audioList.title as String
             if (self.searchResultsController != nil) {
                 self.searchResultsController.audioList = self.audioList
             }
@@ -26,18 +26,8 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         return VMAudioListPlayer.sharedInstance
     }
     
-    override init() {
-        super.init()
-        initialize()
-    }
-
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initialize()
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         initialize()
     }
     
@@ -60,7 +50,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
         if let parentViewController = self.parentViewController {
             if parentViewController is UINavigationController {
-                self.searchResultsController = self.storyboard?.instantiateViewControllerWithIdentifier("VMAudioListViewController") as VMAudioListViewController
+                self.searchResultsController = self.storyboard?.instantiateViewControllerWithIdentifier("VMAudioListViewController") as! VMAudioListViewController
                 if self.audioList != nil {
                     self.searchResultsController.audioList = self.audioList.searchResultsList
                 }
@@ -121,7 +111,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let audio = self.audioList[indexPath.row]
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as VMAudioCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as! VMAudioCell
         cell.delegate = self
         cell.audio = audio
         cell.rightButtons = [
@@ -193,13 +183,13 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "showLyrics") {
-            let controller = segue.destinationViewController as VMLyricsController
-            let audioCell = sender as VMAudioCell
+            let controller = segue.destinationViewController as! VMLyricsController
+            let audioCell = sender as! VMAudioCell
             controller.lyrics = audioCell.audio.lyrics
         } else if (segue.identifier == "showOfflineListSelection") {
-            let navigationController = segue.destinationViewController as UINavigationController
-            let controller = navigationController.topViewController as VMAudioListsSelectionViewController
-            let audioCell = sender as VMAudioCell
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let controller = navigationController.topViewController as! VMAudioListsSelectionViewController
+            let audioCell = sender as! VMAudioCell
             controller.audioToAdd = audioCell.audio
         }
     }
@@ -211,7 +201,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
     // MARK: - MGSwipeTableCellDelegate
     
-    func swipeTableCell(cell: VMAudioCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+    func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
         if let indexPath = tableView.indexPathForCell(cell) {
             if (index == 0) { // Delete
                 self.audioList.deleteTrackAtIndex(indexPath.row)
@@ -242,7 +232,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
         change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-            if (object as NSObject == VMAudioListPlayer.sharedInstance) {
+            if (object as! NSObject == VMAudioListPlayer.sharedInstance) {
                 if (keyPath == "currentTrackIndex") {
                     self.tableView.reloadData()
                 }

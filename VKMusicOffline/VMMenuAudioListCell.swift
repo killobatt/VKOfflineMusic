@@ -52,7 +52,7 @@ class VMMenuAudioListCell: UITableViewCell {
 
     func updateUI() {
         if self.audioList != nil {
-            self.titleLabel.text = self.audioList.title
+            self.titleLabel.text = self.audioList.title as String
             self.countLabel.text = (self.audioList.totalCount > 0) ? "\(self.audioList.totalCount)" : ""
         }
     }

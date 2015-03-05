@@ -9,9 +9,9 @@
 import Foundation
 
 @objc protocol VMAudioListSearching {
-    var searchTerm: NSString! {
+    var searchTerm: String! {
         get
     }
     
-    func setSearchTerm(searchTerm: NSString!, completion:((NSError!) -> Void)?) -> Void
+    func setSearchTerm(searchTerm: String!, completion:((NSError!) -> Void)?) -> Void
 }

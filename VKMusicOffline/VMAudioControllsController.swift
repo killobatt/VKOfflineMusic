@@ -103,8 +103,8 @@ class VMAudioControllsController: UIViewController {
     private func updateForTrack(currentTrack: VMAudio?) {
         UIView.animateWithDuration(0.25, animations: {
             if let track = currentTrack {
-                self.trackTitleLabel.text = track.title
-                self.trackArtistLabel.text = track.artist
+                self.trackTitleLabel.text = track.title as String
+                self.trackArtistLabel.text = track.artist as String
                 self.lyricsController.lyrics = track.lyrics
                 self.progressSlider.minimumValue = 0
                 self.progressSlider.maximumValue = Float(track.duration)
@@ -184,9 +184,9 @@ class VMAudioControllsController: UIViewController {
         let minutes = (timeInSeconds / 60) % 60
         let hours = (timeInSeconds / 3600)
         if hours > 0 {
-            return NSString(format: "%d:%02d:%02d", hours, minutes, seconds)
+            return NSString(format: "%d:%02d:%02d", hours, minutes, seconds) as String
         } else {
-            return NSString(format: "%d:%02d", minutes, seconds)
+            return NSString(format: "%d:%02d", minutes, seconds) as String
         }
     }
 

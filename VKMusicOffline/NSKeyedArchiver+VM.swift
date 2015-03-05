@@ -9,7 +9,7 @@
 import Foundation
 
 extension NSCoder {
-    func encodeOptional(optional:NSObject!, forKey key:NSString) {
+    func encodeOptional(optional:NSObject!, forKey key:String) {
         if optional != nil {
             self.encodeObject(optional, forKey: key)
         }

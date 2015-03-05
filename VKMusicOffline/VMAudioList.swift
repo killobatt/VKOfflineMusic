@@ -23,7 +23,7 @@ class VMAudioList: NSObject {
     
     subscript(index: Int) -> VMAudio {
         get {
-            return self.audios[index] as VMAudio
+            return self.audios[index] as! VMAudio
         }
     }
     

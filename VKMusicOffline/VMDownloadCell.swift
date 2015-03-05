@@ -59,7 +59,7 @@ class VMDownloadCell: UITableViewCell {
     private func updateDownloadSizeTo(countOfBytesExpectedToReceive:Int64) {
         if (countOfBytesExpectedToReceive > 0) {
             let sizeInMegabytes = Float(countOfBytesExpectedToReceive) / (1024 * 1024)
-            self.downloadSizeLabel.text = NSString(format: "%.1f Mb", sizeInMegabytes)
+            self.downloadSizeLabel.text = NSString(format: "%.1f Mb", sizeInMegabytes) as String
         } else {
             self.downloadSizeLabel.text = ""
         }
@@ -68,7 +68,7 @@ class VMDownloadCell: UITableViewCell {
     private func updateProgressTo(countOfBytesReceived:Int64, animated:Bool) {
         let downloadSize = self.downloadTask.countOfBytesExpectedToReceive;
         let progress = (downloadSize == 0) ? 0 : Float(countOfBytesReceived) / Float(self.downloadTask.countOfBytesExpectedToReceive)
-        self.downloadRelativeProgressLabel.text = NSString(format:"%.1f%%", progress * 100)
+        self.downloadRelativeProgressLabel.text = NSString(format:"%.1f%%", progress * 100) as String
         self.progressView.setProgress(progress, animated: animated)
     }
     

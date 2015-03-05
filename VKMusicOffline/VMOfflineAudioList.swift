@@ -28,7 +28,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         if self.audios.containsObject(audio) {
             return
         }
-        self.audios = NSArray(object: audio).arrayByAddingObjectsFromArray(self.audios)
+        self.audios = NSArray(object: audio).arrayByAddingObjectsFromArray(self.audios as [AnyObject])
     }
     
     // MARK: - NSCoding interface implementation
@@ -40,10 +40,10 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self.identifier = aDecoder.decodeObjectForKey("identifier") as NSUUID
+        self.identifier = aDecoder.decodeObjectForKey("identifier") as! NSUUID
         super.init()
-        self.title = aDecoder.decodeObjectForKey("title") as NSString
-        self.audios = aDecoder.decodeObjectForKey("audios") as NSArray
+        self.title = aDecoder.decodeObjectForKey("title") as! NSString
+        self.audios = aDecoder.decodeObjectForKey("audios") as! NSArray
     }
 
     // MARK: - VMAudio overrides
@@ -61,16 +61,16 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     }
     
     override func moveTrackFromIndex(index: Int, toIndex: Int) {
-        let audios = self.audios.mutableCopy() as NSMutableArray
-        let audio = audios[index] as VMAudio
+        let audios = self.audios.mutableCopy() as! NSMutableArray
+        let audio = audios[index] as! VMAudio
         audios.removeObjectAtIndex(index)
         audios.insertObject(audio, atIndex:toIndex)
         self.audios = audios
     }
     
     override func deleteTrackAtIndex(index: Int) {
-        let audios = self.audios.mutableCopy() as NSMutableArray
-        let audio = audios[index] as VMAudio
+        let audios = self.audios.mutableCopy() as! NSMutableArray
+        let audio = audios[index] as! VMAudio
         audios.removeObjectAtIndex(index)
         self.audios = audios
     }

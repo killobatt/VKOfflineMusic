@@ -15,9 +15,9 @@ class VMAudioCell: MGSwipeTableCell {
     var audio: VMAudio! {
         willSet(newAudio) {
             if (newAudio != nil) {
-                self.artistNameLabel.text = newAudio.artist
-                self.trackNameLabel.text = newAudio.title
-                self.trackDurationLabel.text = newAudio.durationString
+                self.artistNameLabel.text = newAudio.artist as String
+                self.trackNameLabel.text = newAudio.title as String
+                self.trackDurationLabel.text = newAudio.durationString as String
                 if let track = self.player.currentTrack {
                     self.playingIndicator.hidden = track != newAudio
                 } else {

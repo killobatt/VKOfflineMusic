@@ -24,18 +24,13 @@ class VMMenuViewController: UITableViewController {
     
     // MARK: - Init
     
-    override init() {
-        super.init()
-        initialize()
-    }
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialize()
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    override init(style: UITableViewStyle) {
+        super.init(style: style)
         initialize()
     }
     
@@ -94,8 +89,8 @@ class VMMenuViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            let controller = (segue.destinationViewController as UINavigationController).topViewController as VMAudioListViewController
-            let cell = sender as VMMenuAudioListCell
+            let controller = (segue.destinationViewController as! UINavigationController).topViewController as!VMAudioListViewController
+            let cell = sender as! VMMenuAudioListCell
             controller.audioList = cell.audioList
         }
     }
@@ -119,16 +114,16 @@ class VMMenuViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuUserInfoCell", forIndexPath: indexPath) as VMMenuUserInfoCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuUserInfoCell", forIndexPath: indexPath) as! VMMenuUserInfoCell
             cell.user = self.user
             return cell
         } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuAudioListCell", forIndexPath: indexPath) as VMMenuAudioListCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuAudioListCell", forIndexPath: indexPath) as! VMMenuAudioListCell
             cell.audioList = VMAudioListManager.sharedInstance.audioLists[indexPath.row]
             return cell // VMMenuAudioListCell
         } else { // if indexPath.section == 2 {
             let cellID = (indexPath.row == 0) ? "AddNewListCell" : "DownloadsCell"
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! UITableViewCell
             return cell
         }
     }
@@ -175,7 +170,7 @@ class VMMenuViewController: UITableViewController {
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
         change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-            if (object as NSObject == VMAudioListManager.sharedInstance) {
+            if (object as! NSObject == VMAudioListManager.sharedInstance) {
                 if (keyPath == "audioLists") {
                     if self.tableView.editing == false {
                         self.tableView.reloadData()

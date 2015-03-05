@@ -18,14 +18,14 @@ class VMUserAudioList: VMOnlineAudioList {
             let parameters: NSMutableDictionary = [
                 VK_API_OWNER_ID: self.user.id,
             ];
-            parameters.addEntriesFromDictionary(super.parameters)
+            parameters.addEntriesFromDictionary(super.parameters as [NSObject : AnyObject])
             return parameters
         }
     }
     
     override func createRequest() -> VKRequest {
         return VKApi.requestWithMethod("audio.get",
-            andParameters:self.parameters,
+            andParameters:self.parameters as [NSObject : AnyObject],
             andHttpMethod:"GET")
     }
     

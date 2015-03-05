@@ -147,7 +147,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
             
             NSLog("Scanning folder '\(self.offlineAudioListDirectoryPath)' for lists...")
             var error: NSError? = nil
-            let paths = fileManager.contentsOfDirectoryAtPath(self.offlineAudioListDirectoryPath, error: &error)
+            let paths = fileManager.contentsOfDirectoryAtPath(self.offlineAudioListDirectoryPath, error: &error) as! [String]?
             if (error != nil) {
                 NSLog("Error loading contents of dir \(self.offlineAudioListDirectoryPath) : \(error)")
                 return
@@ -155,12 +155,12 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
             
             if let listsFileNames = paths {
                 for listFileName in listsFileNames {
-                    let listPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(listFileName as NSString)
+                    let listPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(listFileName)
                     if (listPath.pathExtension != "list") {
                         continue
                     }
                     NSLog("Loading list from file '\(listPath)'...")
-                    var list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as VMOfflineAudioList
+                    var list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as! VMOfflineAudioList
                     self.offlineAudioLists.append(list)
                     NSLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
                 }
@@ -170,16 +170,16 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     
     // MARK: - Paths
     
-    var offlineAudioListDirectoryPath: NSString {
+    var offlineAudioListDirectoryPath: String {
         get {
             let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
                 NSSearchPathDomainMask.UserDomainMask, true)
-            let userDocumentsDirectory = dirs[0] as NSString
+            let userDocumentsDirectory = dirs[0] as! String
             return userDocumentsDirectory.stringByAppendingPathComponent("audio-lists")
         }
     }
     
-    func pathForList(list: VMOfflineAudioList) -> NSString {
+    func pathForList(list: VMOfflineAudioList) -> String {
         let path = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(list.identifier.UUIDString)
         return path.stringByAppendingPathExtension("list")!
     }
@@ -199,7 +199,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         let downloadTaskOptional = self.URLSession?.downloadTaskWithURL(audio.URL)
         if let downloadTask = downloadTaskOptional {
             self.downloadTasks[downloadTask.taskIdentifier] = audio.id
-            downloadTask.taskDescription = audio.formattedTitle
+            downloadTask.taskDescription = audio.formattedTitle as String
             downloadTask.resume()
         }
     }
@@ -228,8 +228,8 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
                 NSFileManager.defaultManager().moveItemAtURL(location, toURL: audioURL, error: &error)
                 for list in self.offlineAudioLists {
                     for audio in list.audios {
-                        if (audio as VMAudio).id == audioID {
-                            (audio as VMAudio).localFileName = audioFileName
+                        if (audio as! VMAudio).id == audioID {
+                            (audio as! VMAudio).localFileName = audioFileName
                         }
                     }
                 }
@@ -261,7 +261,7 @@ extension VMAudio {
     var localURL: NSURL! {
         get {
             if let localFileName = self.localFileName {
-                let path = VMAudioListManager.sharedInstance.offlineAudioListDirectoryPath.stringByAppendingPathComponent(localFileName)
+                let path = VMAudioListManager.sharedInstance.offlineAudioListDirectoryPath.stringByAppendingPathComponent(localFileName as! String)
                 return NSURL(fileURLWithPath: path)
             } else {
                 return nil

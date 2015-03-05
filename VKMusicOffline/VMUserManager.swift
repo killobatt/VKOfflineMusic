@@ -31,7 +31,7 @@ class VMUserManager: NSObject {
                 VK_API_USER_ID: VKSdk.getAccessToken().userId,
                 VK_API_FIELDS : ["first_name", "last_name", "photo_200", "status"]
             ]
-            return VKApi.users().get(parameters)
+            return VKApi.users().get(parameters as [NSObject : AnyObject])
         }
     }
     
@@ -41,10 +41,10 @@ class VMUserManager: NSObject {
             println(response.json)
             println(response.parsedModel)
             if (response.parsedModel is VKUsersArray) {
-                let userList : VKUsersArray = response.parsedModel as VKUsersArray
+                let userList : VKUsersArray = response.parsedModel as! VKUsersArray
                 if (userList.count > 0) {
                     NSLog("VMUserManager.loadCurrentUser got user : \(response.json)")
-                    let user = userList[0] as VKUser
+                    let user = userList[0] as! VKUser
                     self.currentUser = user
                     completionBlock(user)
                     return

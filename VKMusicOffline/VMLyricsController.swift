@@ -20,7 +20,7 @@ class VMLyricsController: UIViewController {
                 })
             }
             if let audio = lyrics?.audio {
-                self.titleBarItem.title = audio.title
+                self.titleBarItem.title = audio.title as String
             }
         }
     }

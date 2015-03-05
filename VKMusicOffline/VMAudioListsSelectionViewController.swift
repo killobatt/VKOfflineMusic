@@ -34,7 +34,7 @@ class VMAudioListsSelectionViewController: UITableViewController {
             message: NSLocalizedString("audiolist_selection.enter_new_list_name", comment: ""), preferredStyle: .Alert)
         
         let okAction = UIAlertAction(title: NSLocalizedString("create", comment: ""), style: .Default) { (action: UIAlertAction!) -> Void in
-            let textField = alertController.textFields![0] as UITextField
+            let textField = alertController.textFields![0] as! UITextField
             if (textField.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) == "") {
                 self.showEmptyTitleAlert()
                 return
@@ -89,11 +89,11 @@ class VMAudioListsSelectionViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (indexPath.row < VMAudioListManager.sharedInstance.offlineAudioLists.count) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuAudioListCell", forIndexPath: indexPath) as VMMenuAudioListCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("VMMenuAudioListCell", forIndexPath: indexPath) as! VMMenuAudioListCell
             cell.audioList = VMAudioListManager.sharedInstance.offlineAudioLists[indexPath.row]
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("AddNewListCell", forIndexPath: indexPath) as UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("AddNewListCell", forIndexPath: indexPath) as! UITableViewCell
             return cell
         }
     }
