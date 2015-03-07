@@ -8,6 +8,9 @@
 
 import UIKit
 import VK
+import Fabric
+import Crashlytics
+
 
 let kVKApplicationID = "4557517"
 let kVKApplicationSecretKey = "284RSWeVjNwxMwk5nX5w"
@@ -24,10 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     // MARK: - UIApplicationDelegate
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+        
+        Fabric.with([Crashlytics()])
+        
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
-//        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
-//        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+
         splitViewController.delegate = self
         splitViewController.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         

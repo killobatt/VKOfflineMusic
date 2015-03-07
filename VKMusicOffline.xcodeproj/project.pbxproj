@@ -26,6 +26,8 @@
 		84F612671A47251C0075866D /* MGSwipeCells.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84F6125A1A4725000075866D /* MGSwipeCells.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84FE4F2D1A17EBCA00893410 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FE4F2B1A17EBCA00893410 /* Launch Screen.xib */; };
 		84FE4F301A19178100893410 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84FE4F321A19178100893410 /* Localization.strings */; };
+		CB445DA41AAB368900DEC338 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB445DA21AAB368800DEC338 /* Crashlytics.framework */; };
+		CB445DA51AAB368900DEC338 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB445DA31AAB368800DEC338 /* Fabric.framework */; };
 		CB6B52C119DBE40F00127A1B /* VMLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B52C019DBE40F00127A1B /* VMLyrics.swift */; };
 		CB6B52C719DBE61000127A1B /* VMLyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B52C619DBE61000127A1B /* VMLyricsController.swift */; };
 		CB85503B19D2186600B4EF0A /* VMOfflineAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85503A19D2186600B4EF0A /* VMOfflineAudioList.swift */; };
@@ -179,6 +181,8 @@
 		84FE4F2C1A17EBCA00893410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/Launch Screen.xib"; sourceTree = "<group>"; };
 		84FE4F341A1919D900893410 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		84FE4F351A1920C900893410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localization.strings; sourceTree = "<group>"; };
+		CB445DA21AAB368800DEC338 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		CB445DA31AAB368800DEC338 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		CB6B52C019DBE40F00127A1B /* VMLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMLyrics.swift; sourceTree = "<group>"; };
 		CB6B52C619DBE61000127A1B /* VMLyricsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMLyricsController.swift; sourceTree = "<group>"; };
 		CB85503A19D2186600B4EF0A /* VMOfflineAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOfflineAudioList.swift; sourceTree = "<group>"; };
@@ -210,7 +214,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				843CAC781A155F6300FD37E9 /* VK.framework in Frameworks */,
+				CB445DA41AAB368900DEC338 /* Crashlytics.framework in Frameworks */,
 				843CAC7C1A155F7400FD37E9 /* UIViews.framework in Frameworks */,
+				CB445DA51AAB368900DEC338 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +346,8 @@
 		CBB7A92219CD8B3500E95307 /* SDKs */ = {
 			isa = PBXGroup;
 			children = (
+				CB445DA21AAB368800DEC338 /* Crashlytics.framework */,
+				CB445DA31AAB368800DEC338 /* Fabric.framework */,
 				CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */,
 				CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */,
 				84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */,
@@ -388,6 +396,7 @@
 				CBB7A8FB19CD844100E95307 /* Frameworks */,
 				CBB7A8FC19CD844100E95307 /* Resources */,
 				843CAC841A155F7500FD37E9 /* Embed Frameworks */,
+				CB445D9C1AAB35DB00DEC338 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -557,6 +566,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CB445D9C1AAB35DB00DEC338 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 1d63f52b9ccb427a98caf904979acaf4460f5e8e e3a48d45f4b3db21d7b98319cf20abe19b42d7a5abf284ebcc96dcad3a7798d5";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CBB7A8FA19CD844100E95307 /* Sources */ = {
@@ -750,6 +775,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = VKMusicOffline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -765,6 +794,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = VKMusicOffline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

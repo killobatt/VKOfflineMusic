@@ -14,7 +14,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
 {
     var audioList: VMAudioList! = nil {
         didSet {
-            self.title = self.audioList.title as String
+            self.title = self.audioList.title as String?
             if (self.searchResultsController != nil) {
                 self.searchResultsController.audioList = self.audioList
             }
