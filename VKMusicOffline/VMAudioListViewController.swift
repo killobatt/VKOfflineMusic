@@ -139,16 +139,18 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (VMAudioListPlayer.sharedInstance.audioList !== self.audioList) {
-            VMAudioListPlayer.sharedInstance.audioList = self.audioList
+            VMAudioListPlayer.sharedInstance.setAudioList(self.audioList, currentTrackIndex: indexPath.row)
         }
-        if (VMAudioListPlayer.sharedInstance.currentTrackIndex == indexPath.row &&
-            VMAudioListPlayer.sharedInstance.isPlaying) {
-            VMAudioListPlayer.sharedInstance.pause()
-        } else {
-            VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
-            VMAudioListPlayer.sharedInstance.play()
-            self.tableView.reloadData()
+        
+        if (VMAudioListPlayer.sharedInstance.currentTrackIndex == indexPath.row) {
+            if (VMAudioListPlayer.sharedInstance.isPlaying) {
+                VMAudioListPlayer.sharedInstance.pause()
+            } else {
+                VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
+                VMAudioListPlayer.sharedInstance.play()
+            }
         }
+        self.tableView.reloadData()
     }
     
     // Override to support conditional editing of the table view.

@@ -49,8 +49,9 @@ class VMSplitViewController: UISplitViewController {
         let player = VMAudioListPlayer.sharedInstance
         if player.audioList == nil {
             // TODO: tracks are not loaded here; we need a allways existing offline track list?
-            player.audioList = VMAudioListManager.sharedInstance.userAudioList
+            player.setAudioList(VMAudioListManager.sharedInstance.userAudioList, currentTrackIndex: 0)
         }
+        
         if player.currentTrack == nil {
             player.currentTrackIndex = 0
         }

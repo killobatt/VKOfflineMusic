@@ -28,13 +28,25 @@ class VMAudioListPlayer: NSObject {
     var audioList: VMAudioList? {
         willSet {
             if let list = newValue {
-                self.audioListEnumerator = VMAudioListEnumerator(audioList: list,
-                    indexOfCurrentObject: self.currentTrackIndex)
+                
             }
         }
     }
     
-    private var player: AVPlayer! 
+    private var player: AVPlayer! {
+        willSet {
+            if let currentItem = self.player?.currentItem {
+                currentItem.removeObserver(self, forKeyPath: "status")
+                NSNotificationCenter.defaultCenter().removeObserver(self,
+                    name: AVPlayerItemDidPlayToEndTimeNotification,
+                    object: currentItem)
+            }
+            if (self.playbackObserver != nil) {
+                self.player.removeTimeObserver(self.playbackObserver)
+                self.playbackObserver = nil
+            }
+        }
+    }
 
     // MARK: - State
     
@@ -108,6 +120,13 @@ class VMAudioListPlayer: NSObject {
     
     // MARK: - Player interface
     
+    func setAudioList(audioList: VMAudioList, currentTrackIndex index: Int) {
+        self.audioList = audioList
+        self.currentTrackIndex = index
+        self.audioListEnumerator = VMAudioListEnumerator(audioList: audioList,
+            indexOfCurrentObject: index)
+    }
+    
     func play() {
         NSLog("VMAudioListPlayer play")
         self.player.play()
@@ -125,12 +144,6 @@ class VMAudioListPlayer: NSObject {
         NSLog("VMAudioListPlayer pause")
         self.player.pause()
         self.isPlaying = false
-        
-        var error: NSError? = nil
-        var audioSession = AVAudioSession.sharedInstance()
-        if !audioSession.setActive(false, error: &error) {
-            NSLog("Could not deactivate audio session: \(error)")
-        }
     }
     
     func seekToTime(time:CMTime) {
@@ -178,15 +191,6 @@ class VMAudioListPlayer: NSObject {
         willSet {
             self.willChangeValueForKey("currentTrackIndex")
             self.willChangeValueForKey("currentTrack")
-            if (self.player != nil) {
-                if (self.player.currentItem != nil) {
-                    self.player.currentItem.removeObserver(self, forKeyPath: "status")
-                    NSNotificationCenter.defaultCenter().removeObserver(self,
-                        name: AVPlayerItemDidPlayToEndTimeNotification,
-                        object: self.player.currentItem)
-                }
-                self.player.removeTimeObserver(self.playbackObserver)
-            }
             self.loadedTrackPartTimeRange = kCMTimeRangeZero
             self.playbackProgress = kCMTimeZero
         }
@@ -195,8 +199,8 @@ class VMAudioListPlayer: NSObject {
             self.didChangeValueForKey("currentTrack")
             var playerItem: AVPlayerItem! = nil
             if let currentTrack = self.currentTrack {
-                if (currentTrack.localURL != nil) {
-                    playerItem = AVPlayerItem(URL: currentTrack.localURL)
+                if let localURL = currentTrack.localURL {
+                    playerItem = AVPlayerItem(URL: localURL)
                 } else {
                     playerItem = AVPlayerItem(URL: currentTrack.URL)
                 }
@@ -300,6 +304,7 @@ class VMAudioListPlayer: NSObject {
         if !audioSession.setCategory(AVAudioSessionCategoryPlayback, error: &error) {
             NSLog("Error setting AVAudioSession category \(AVAudioSessionCategoryPlayback): \(error)")
         }
+        
         
         self.interruptionNotificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVAudioSessionInterruptionNotification, object: self, queue: NSOperationQueue.mainQueue()) {
             (notification: NSNotification!) -> Void in
