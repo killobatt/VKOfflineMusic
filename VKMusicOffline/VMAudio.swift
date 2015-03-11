@@ -83,9 +83,9 @@ class VMAudio: NSObject, NSCoding, Equatable {
         self.localFileName = aDecoder.decodeObjectForKey("localFileName") as! NSString!
         self.albumID = aDecoder.decodeObjectForKey("albumID") as! NSNumber!
         super.init()
-        if let lyrics = aDecoder.decodeObjectForKey("lyricsID") as? VMLyrics {
+        if let lyrics = aDecoder.decodeObjectForKey("lyrics") as? VMLyrics {
             self.lyrics = lyrics
-            lyrics.audio = self
+            self.lyrics!.audio = self
         }
     }
     

@@ -202,6 +202,13 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
             downloadTask.taskDescription = audio.formattedTitle as String
             downloadTask.resume()
         }
+        if let lyrics = audio.lyrics {
+            if lyrics.text == nil {
+                lyrics.loadText { (error: NSError!) -> Void in
+                    self.saveOfflineAudioLists()
+                }
+            }
+        }
     }
     
     func getAudioDownloadTaskList(completion: ((downloadTasks:[AnyObject]) -> Void)?) {
