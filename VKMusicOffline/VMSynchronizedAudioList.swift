@@ -18,18 +18,50 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
     }
 
     /// MARK: - NSCoding
+    
     required init(coder aDecoder: NSCoder) {
-        
         super.init(coder: aDecoder)
     }
     
-    /// MARK: - 
-    
-    func synchronize(completion: (error: NSError) -> Void) {
-        
+    override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
     }
     
+    /// MARK: - Sync
+    
+    func synchronize(completion: (error: NSError?) -> Void) {
+        self.ensureListLoaded(nil, completion: { (error: NSError?) -> Void in
+            
+        })
+    }
+    
+    private func ensureListLoaded(error:NSError?, completion completionClosure: (error: NSError?) -> Void) {
+        assert(self.onlineAudioList != nil)
+        if (error != nil) {
+            completionClosure(error: error)
+            return
+        }
+        
+        if let onlineList = self.onlineAudioList {
+            if (onlineList.hasNextPage()) {
+                var loadNextPageCompletion: ((NSError!) -> Void)? =
+                { (loadPageError: NSError!) -> Void in
+                    self.ensureListLoaded(loadPageError, completion:completionClosure)
+                }
+                onlineList.loadNextPage(completion: loadNextPageCompletion)
+            } else {
+                completionClosure(error: nil)
+            }
+        }
+    }
+    
+//    private func getMissingAudios() -> Array<VMAudio> {
+//        assert(self.onlineAudioList != nil)
+//        assert(self.onlineAudioList?.hasNextPage() == false)
+//        
+//        
+//    }
     
     /// MARK: - Private
-    private var onlineAudioList: VMOnlineAudioList
+    private var onlineAudioList: VMOnlineAudioList?
 }
