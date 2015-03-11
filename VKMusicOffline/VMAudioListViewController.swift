@@ -146,9 +146,11 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             if (VMAudioListPlayer.sharedInstance.isPlaying) {
                 VMAudioListPlayer.sharedInstance.pause()
             } else {
-                VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
                 VMAudioListPlayer.sharedInstance.play()
             }
+        } else {
+            VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
+            VMAudioListPlayer.sharedInstance.play()
         }
         self.tableView.reloadData()
     }
