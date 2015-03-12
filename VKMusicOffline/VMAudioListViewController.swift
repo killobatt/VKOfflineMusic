@@ -70,8 +70,6 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating
             self.player.audioList == self.audioList &&
             self.player.currentTrack != nil) {
                 self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.player.currentTrackIndex, inSection: 0), atScrollPosition: .Middle, animated: false)
-        } else {
-            self.tableView.contentOffset = CGPointMake(0, 44)
         }
     }
     
