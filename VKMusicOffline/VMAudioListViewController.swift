@@ -10,7 +10,7 @@ import UIKit
 import VK
 import MGSwipeCells
 
-class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, MGSwipeTableCellDelegate
+class VMAudioListViewController: UITableViewController, UISearchResultsUpdating
 {
     var audioList: VMAudioList! = nil {
         didSet {
@@ -112,15 +112,38 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         let audio = self.audioList[indexPath.row]
         
         var cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as! VMAudioCell
-        cell.delegate = self
         cell.audio = audio
-        cell.rightButtons = [
-            MGSwipeButton(title: "", icon: UIImage(named: "Delete"), backgroundColor: UIColor.redColor()),
-            MGSwipeButton(title: "", icon: UIImage(named: "Download"), backgroundColor: UIColor.orangeColor()),
-        ]
+        cell.rightButtons = []
+        
+        if self.audioList is VMOfflineAudioList {
+            var button = MGSwipeButton(title: "", icon: UIImage(named: "Delete"),
+                backgroundColor: UIColor.redColor())
+            button.callback = {(sender: MGSwipeTableCell!) -> Bool in
+                self.audioList.deleteTrackAtIndex(indexPath.row)
+                tableView.beginUpdates()
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                tableView.endUpdates()
+                return true
+            }
+            cell.rightButtons.append(button)
+        } else {
+            var button = MGSwipeButton(title: "", icon: UIImage(named: "Download"),
+                backgroundColor: UIColor.orangeColor())
+            button.callback = {(sender: MGSwipeTableCell!) -> Bool in
+                self.performSegueWithIdentifier("showOfflineListSelection", sender: sender)
+                return true
+            }
+            cell.rightButtons.append(button)
+        }
         
         if (audio.lyrics != nil) {
-            cell.rightButtons.append(MGSwipeButton(title: "", icon: UIImage(named: "Lyrics"), backgroundColor: UIColor.greenColor()))
+            var button = MGSwipeButton(title: "", icon: UIImage(named: "Lyrics"),
+                backgroundColor: UIColor.greenColor())
+            button.callback = {(sender: MGSwipeTableCell!) -> Bool in
+                self.performSegueWithIdentifier("showLyrics", sender: cell)
+                return true
+            }
+            cell.rightButtons.append(button)
         }
         
         return cell
@@ -200,25 +223,6 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
     @IBAction func unwindFromSegue(segue: UIStoryboardSegue) {
         
-    }
-
-    
-    // MARK: - MGSwipeTableCellDelegate
-    
-    func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
-        if let indexPath = tableView.indexPathForCell(cell) {
-            if (index == 0) { // Delete
-                self.audioList.deleteTrackAtIndex(indexPath.row)
-                tableView.beginUpdates()
-                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-                tableView.endUpdates()
-            } else if (index == 1) { // Download
-                self.performSegueWithIdentifier("showOfflineListSelection", sender: cell)
-            } else if (index == 2) { // lyrics
-                self.performSegueWithIdentifier("showLyrics", sender: cell)
-            }
-        }
-        return true
     }
     
     // MARK: - UISearchResultsUpdating
