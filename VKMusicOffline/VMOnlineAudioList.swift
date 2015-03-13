@@ -56,12 +56,12 @@ class VMOnlineAudioList: VMAudioList {
             
             let audios = VKAudios(dictionary:(response.json as! [NSObject : AnyObject]))
             self.totalCount = Int(audios.count)
-            var audioArray = NSMutableArray(capacity: audios.items.count)
+            var newAudios = self.audios
             for (var i = 0; i < MIN(self.pageSize, Int(audios.items.count)); i++) {
                 let audio = audios[UInt(i)] as! VKAudio
-                audioArray.addObject(VMAudio(with: audio))
+                newAudios.append(VMAudio(with: audio))
             }
-            self.audios = self.audios.arrayByAddingObjectsFromArray(audioArray as [AnyObject])
+            self.audios = newAudios
             self.currentPageOffset += self.pageSize
             
             NSLog("VMOnlineAudioList.loadNextPage got audios: \(response.json)")

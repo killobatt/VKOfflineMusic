@@ -18,17 +18,23 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         self.title = title
     }
     
-    override var audios : NSArray {
+    override var audios : Array<VMAudio> {
         didSet {
             self.totalCount = self.audios.count
         }
     }
     
     func addAudio(audio:VMAudio) {
-        if self.audios.containsObject(audio) {
+        if find(self.audios, audio) != nil {
             return
         }
-        self.audios = NSArray(object: audio).arrayByAddingObjectsFromArray(self.audios as [AnyObject])
+        
+        var newAudios = Array<VMAudio>()
+        newAudios.append(audio)
+        for oldAudio in self.audios {
+            newAudios.append(oldAudio)
+        }
+        self.audios = newAudios
     }
     
     // MARK: - NSCoding interface implementation
@@ -43,7 +49,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         self.identifier = aDecoder.decodeObjectForKey("identifier") as! NSUUID
         super.init()
         self.title = aDecoder.decodeObjectForKey("title") as! NSString
-        self.audios = aDecoder.decodeObjectForKey("audios") as! NSArray
+        self.audios = aDecoder.decodeObjectForKey("audios") as! Array<VMAudio>
     }
 
     // MARK: - VMAudio overrides
@@ -61,17 +67,17 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     }
     
     override func moveTrackFromIndex(index: Int, toIndex: Int) {
-        let audios = self.audios.mutableCopy() as! NSMutableArray
-        let audio = audios[index] as! VMAudio
-        audios.removeObjectAtIndex(index)
-        audios.insertObject(audio, atIndex:toIndex)
+        var audios = self.audios
+        let audio = audios[index]
+        audios.removeAtIndex(index)
+        audios.insert(audio, atIndex: toIndex)
         self.audios = audios
     }
     
     override func deleteTrackAtIndex(index: Int) {
-        let audios = self.audios.mutableCopy() as! NSMutableArray
-        let audio = audios[index] as! VMAudio
-        audios.removeObjectAtIndex(index)
+        var audios = self.audios
+        let audio = audios[index]
+        audios.removeAtIndex(index)
         self.audios = audios
     }
 }

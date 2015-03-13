@@ -42,7 +42,11 @@ class VMAudioListEnumerator: NSObject {
     private(set) var currentObject: VMAudio!
     var currentObjectIndex: Int {
         get {
-            return self.audioList.audios.indexOfObject(self.currentObject)
+            if let index = find(self.audioList.audios, self.currentObject) {
+                return index
+            } else {
+                assert(false, "Unable to find current object")
+            }
         }
     }
     

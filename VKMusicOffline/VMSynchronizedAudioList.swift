@@ -32,6 +32,10 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
     func synchronize(completion: (error: NSError?) -> Void) {
         self.ensureListLoaded(nil, completion: { (error: NSError?) -> Void in
             
+            // Merge is simple: 
+            // 1. Take all audios from online list
+            // 2. Download missing audios
+            
         })
     }
     
@@ -54,13 +58,6 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
             }
         }
     }
-    
-//    private func getMissingAudios() -> Array<VMAudio> {
-//        assert(self.onlineAudioList != nil)
-//        assert(self.onlineAudioList?.hasNextPage() == false)
-//        
-//        
-//    }
     
     /// MARK: - Private
     private var onlineAudioList: VMOnlineAudioList?

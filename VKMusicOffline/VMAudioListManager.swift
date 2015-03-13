@@ -235,8 +235,8 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
                 NSFileManager.defaultManager().moveItemAtURL(location, toURL: audioURL, error: &error)
                 for list in self.offlineAudioLists {
                     for audio in list.audios {
-                        if (audio as! VMAudio).id == audioID {
-                            (audio as! VMAudio).localFileName = audioFileName
+                        if audio.id == audioID {
+                            audio.localFileName = audioFileName
                         }
                     }
                 }
