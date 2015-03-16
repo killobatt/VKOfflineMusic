@@ -9,6 +9,8 @@
 import Foundation
 import VK
 
+let VMSynchronizedUserAudioListID = "synced-user-audio"
+
 class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
    
     class var sharedInstance : VMAudioListManager {
@@ -37,6 +39,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     // MARK: - VMAudioLists
     var userAudioList: VMUserAudioList!
     var searchAudioList: VMSearchAudioList!
+    var synchronizedUserAudioList: VMSynchronizedAudioList!
     var offlineAudioLists: Array<VMOfflineAudioList> = [] {
         willSet {
             self.willChangeValueForKey("audioLists")
@@ -53,8 +56,8 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     var audioLists: Array<VMAudioList> {
         get {
             var lists: Array<VMAudioList> = []
-            if self.userAudioList != nil {
-                lists.append(self.userAudioList)
+            if self.synchronizedUserAudioList != nil {
+                lists.append(self.synchronizedUserAudioList)
             }
             if self.searchAudioList != nil {
                 lists.append(self.searchAudioList)
@@ -73,7 +76,19 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
             if let newUser = newValue {
                 self.userAudioList = VMUserAudioList(with: newUser)
                 self.userAudioList.title = "Мои аудиозаписи"
-                self.userAudioList.loadNextPage(completion: nil)
+                
+                if self.synchronizedUserAudioList == nil {
+                    self.synchronizedUserAudioList = VMSynchronizedAudioList(identifier: VMSynchronizedUserAudioListID)
+                }
+                self.synchronizedUserAudioList.onlineAudioList = self.userAudioList
+                
+                self.userAudioList.loadNextPage(completion: { (error: NSError!) -> Void in
+                    NSLog("Synchronizing user audio list")
+                    self.synchronizedUserAudioList.synchronize()
+                })
+                
+
+                
                 self.searchAudioList = VMSearchAudioList(searchOwn: false)
                 self.searchAudioList.title = "Поиск"
                 self.willChangeValueForKey("audioLists")
@@ -131,6 +146,12 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     func saveOfflineAudioLists() {
         self.createAudioListsDirectoryIfNeeded()
         
+        if let list = self.synchronizedUserAudioList {
+            let path = self.pathForList(list)
+            NSLog("Saving list '\(list.title)' with \(list.audios.count) audios to file '\(path)'...")
+            NSKeyedArchiver.archiveRootObject(list, toFile: path)
+        }
+        
         for list in self.offlineAudioLists {
             let path = self.pathForList(list)
             NSLog("Saving list '\(list.title)' with \(list.audios.count) audios to file '\(path)'...")
@@ -160,9 +181,14 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
                         continue
                     }
                     NSLog("Loading list from file '\(listPath)'...")
-                    var list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as! VMOfflineAudioList
-                    self.offlineAudioLists.append(list)
-                    NSLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
+                    if listFileName == VMSynchronizedUserAudioListID {
+                        self.synchronizedUserAudioList = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as? VMSynchronizedAudioList
+                        NSLog("Loaded synced list '\(self.synchronizedUserAudioList.title)' with \(self.synchronizedUserAudioList.audios.count) audios")
+                    } else {
+                        var list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as! VMOfflineAudioList
+                        self.offlineAudioLists.append(list)
+                        NSLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
+                    }
                 }
             }
         }
@@ -180,7 +206,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     }
     
     func pathForList(list: VMOfflineAudioList) -> String {
-        let path = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(list.identifier.UUIDString)
+        let path = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(list.identifier)
         return path.stringByAppendingPathExtension("list")!
     }
     

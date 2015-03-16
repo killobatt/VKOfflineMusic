@@ -12,9 +12,9 @@ import UIKit
 // offline audio list which can synchronize with online one.
 class VMSynchronizedAudioList: VMOfflineAudioList {
     
-    init(onlineAudioList: VMOnlineAudioList) {
-        self.onlineAudioList = onlineAudioList
-        super.init(title: onlineAudioList.title)
+    init(identifier:String) {
+        super.init(title: "")
+        self.identifier = identifier
     }
 
     /// MARK: - NSCoding
@@ -29,13 +29,29 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
     
     /// MARK: - Sync
     
-    func synchronize(completion: (error: NSError?) -> Void) {
+    func synchronize() {
         self.ensureListLoaded(nil, completion: { (error: NSError?) -> Void in
+            
+            if error != nil {
+                return
+            }
             
             // Merge is simple: 
             // 1. Take all audios from online list
-            // 2. Download missing audios
+            // 2. Download missing audio files 
             
+            var oldAudios = self.audios
+            if let newAudios = self.onlineAudioList?.audios {
+                self.audios = newAudios
+                for newAudio in newAudios {
+                    if let mappedOldAudioIndex = find(oldAudios.map{ $0.id }, newAudio.id) {
+                        newAudio.localFileName = oldAudios[mappedOldAudioIndex].localFileName
+                    } else {
+                        // TODO: We should not know anything aboud VMAudioListManager
+                        VMAudioListManager.sharedInstance.downloadAudio(newAudio)
+                    }
+                }
+            }
         })
     }
     
@@ -59,6 +75,16 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
         }
     }
     
-    /// MARK: - Private
-    private var onlineAudioList: VMOnlineAudioList?
+    /// MARK: -
+    internal var onlineAudioList: VMOnlineAudioList?
+    
+    override var title: NSString! {
+        get {
+            return self.onlineAudioList?.title
+        }
+        set {
+            self.onlineAudioList?.title = newValue
+        }
+    }
+
 }

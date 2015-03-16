@@ -10,10 +10,10 @@ import Foundation
 
 class VMOfflineAudioList: VMAudioList, NSCoding {
     
-    var identifier: NSUUID
+    var identifier: String
     
     init(title: NSString) {
-        self.identifier = NSUUID()
+        self.identifier = NSUUID().UUIDString
         super.init()
         self.title = title
     }
@@ -46,7 +46,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self.identifier = aDecoder.decodeObjectForKey("identifier") as! NSUUID
+        self.identifier = aDecoder.decodeObjectForKey("identifier") as! String
         super.init()
         self.title = aDecoder.decodeObjectForKey("title") as! NSString
         self.audios = aDecoder.decodeObjectForKey("audios") as! Array<VMAudio>
