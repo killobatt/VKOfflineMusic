@@ -79,11 +79,6 @@ public class CircleProgressView: UIView {
     
     // MARK: - Overrides
     
-    override init() {
-        super.init()
-        self.setupLayers()
-    }
-    
     required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupLayers()

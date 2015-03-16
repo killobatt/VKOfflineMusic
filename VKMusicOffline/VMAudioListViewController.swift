@@ -10,7 +10,7 @@ import UIKit
 import VK
 import MGSwipeCells
 
-class VMAudioListViewController: UITableViewController, UISearchResultsUpdating
+class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate
 {
     var audioList: VMAudioList! = nil {
         didSet {
@@ -56,6 +56,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating
                 }
                 self.searchController = UISearchController(searchResultsController: self.searchResultsController)
                 self.searchController.searchResultsUpdater = self.searchResultsController
+                self.searchController.delegate = self
                 
                 self.definesPresentationContext = true
                 
@@ -66,6 +67,12 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating
     }
 
     override func viewWillAppear(animated: Bool) {
+        if let searchTerm = (self.audioList as? VMAudioListSearching)?.searchTerm {
+            if let searchController = self.searchController {
+                searchController.searchBar.text = searchTerm
+            }
+        }
+        
         if (self.player.audioList != nil &&
             self.player.audioList == self.audioList &&
             self.player.currentTrack != nil) {
@@ -223,10 +230,41 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating
         
     }
     
+    // MARK: - UISearchControllerDelegate
+    
+    func willPresentSearchController(searchController: UISearchController) {
+        
+    }
+    
+    func didPresentSearchController(searchController: UISearchController) {
+        
+    }
+    
+    func willDismissSearchController(searchController: UISearchController) {
+        if let searchTerm = (self.audioList as? VMAudioListSearching)?.searchTerm {
+            if let searchController = self.searchController {
+                searchController.searchBar.text = searchTerm
+            }
+        }
+    }
+    
+    func didDismissSearchController(searchController: UISearchController) {
+    }
+    
     // MARK: - UISearchResultsUpdating
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
+        if (searchController.searchBar.text == "") {
+            self.tableView.reloadData()
+            return
+        }
         if let audioListSearching = self.audioList as? VMAudioListSearching {
+            if let oldSearchTerm = audioListSearching.searchTerm {
+                if searchController.searchBar.text == oldSearchTerm {
+                    self.tableView.reloadData()
+                    return
+                }
+            }
             audioListSearching.setSearchTerm(searchController.searchBar.text, completion: {(error: NSError!) -> Void in
                 self.tableView.reloadData()
             })

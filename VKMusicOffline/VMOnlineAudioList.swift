@@ -80,5 +80,13 @@ class VMOnlineAudioList: VMAudioList {
         self.audios = []
         self.currentPageOffset = 0
         self.totalCount = 0
+        
+        if let request = self.request {
+            if request.isExecuting {
+                NSLog("Cancelling request: \(self.request)")
+                self.request.cancel()
+            }
+            self.request = nil
+        }
     }
 }
