@@ -92,14 +92,14 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     // MARK: - Offline audio lists
     
     func addOfflineAudioList(title:NSString) -> VMOfflineAudioList {
-        var offlineAudioList = VMOfflineAudioList(title: title)
+        let offlineAudioList = VMOfflineAudioList(title: title)
         self.offlineAudioLists.append(offlineAudioList)
         self.saveOfflineAudioLists()
         return offlineAudioList
     }
     
     func removeOfflineAudioList(list:VMOfflineAudioList) {
-        if let index = find(self.offlineAudioLists, list) {
+        if let index = self.offlineAudioLists.indexOf(list) {
             self.offlineAudioLists.removeAtIndex(index)
             self.removeFilesForList(list)
         }
@@ -108,8 +108,9 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     private func removeFilesForList(list:VMOfflineAudioList) {
         let listPath = self.pathForList(list)
         NSLog("Removin list \(list.title) at path: \(listPath)...)")
-        var error: NSError? = nil
-        if !NSFileManager.defaultManager().removeItemAtPath(listPath, error: &error) {
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(listPath)
+        } catch let error as NSError {
             NSLog("Could not remove list \(list.title) at path: \(listPath): \(error)")
         }
         
@@ -117,13 +118,15 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     
     func createAudioListsDirectoryIfNeeded() {
         let fileManager = NSFileManager.defaultManager()
-        var audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryPath)
+        let audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryPath)
         if (!audioListsDirExists) {
             NSLog("Creating audio list directory at path '\(self.offlineAudioListDirectoryPath)'")
-            var errorPointer = NSErrorPointer()
-            if (!fileManager.createDirectoryAtPath(self.offlineAudioListDirectoryPath,
-                withIntermediateDirectories: true, attributes: nil, error: errorPointer)) {
-                NSLog("Error creating audio list directory: \(errorPointer.memory)")
+            do {
+                try
+                    fileManager.createDirectoryAtPath(self.offlineAudioListDirectoryPath,
+                        withIntermediateDirectories: true, attributes: nil)
+            } catch let error as NSError {
+                NSLog("Error creating audio list directory: \(error)")
             }
         }
     }
@@ -142,28 +145,27 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         self.offlineAudioLists = []
         
         let fileManager = NSFileManager.defaultManager()
-        var audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryPath)
+        let audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryPath)
         if (audioListsDirExists) {
             
             NSLog("Scanning folder '\(self.offlineAudioListDirectoryPath)' for lists...")
-            var error: NSError? = nil
-            let paths = fileManager.contentsOfDirectoryAtPath(self.offlineAudioListDirectoryPath, error: &error) as! [String]?
-            if (error != nil) {
-                NSLog("Error loading contents of dir \(self.offlineAudioListDirectoryPath) : \(error)")
-                return
-            }
-            
-            if let listsFileNames = paths {
-                for listFileName in listsFileNames {
-                    let listPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(listFileName)
-                    if (listPath.pathExtension != "list") {
-                        continue
+            do {
+                let paths = try fileManager.contentsOfDirectoryAtPath(self.offlineAudioListDirectoryPath) as [String]?
+                
+                if let listsFileNames = paths {
+                    for listFileName in listsFileNames {
+                        let listPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(listFileName)
+                        if (listPath.pathExtension != "list") {
+                            continue
+                        }
+                        NSLog("Loading list from file '\(listPath)'...")
+                        let list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as! VMOfflineAudioList
+                        self.offlineAudioLists.append(list)
+                        NSLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
                     }
-                    NSLog("Loading list from file '\(listPath)'...")
-                    var list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as! VMOfflineAudioList
-                    self.offlineAudioLists.append(list)
-                    NSLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
                 }
+            } catch let error as NSError {
+                NSLog("Error loading contents of dir \(self.offlineAudioListDirectoryPath) : \(error)")
             }
         }
     }
@@ -174,7 +176,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         get {
             let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
                 NSSearchPathDomainMask.UserDomainMask, true)
-            let userDocumentsDirectory = dirs[0] as! String
+            let userDocumentsDirectory = dirs[0] as String
             return userDocumentsDirectory.stringByAppendingPathComponent("audio-lists")
         }
     }
@@ -212,10 +214,8 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     }
     
     func getAudioDownloadTaskList(completion: ((downloadTasks:[AnyObject]) -> Void)?) {
-        self.URLSession?.getTasksWithCompletionHandler({ (dataTasks: [AnyObject]!, uploadTasks: [AnyObject]!, downloadTasks: [AnyObject]!) -> Void in
-            if (downloadTasks != nil) {
-                completion?(downloadTasks: downloadTasks)
-            }
+        self.URLSession?.getTasksWithCompletionHandler({ (dataTasks: [NSURLSessionDataTask], uploadTasks: [NSURLSessionUploadTask], downloadTasks: [NSURLSessionDownloadTask]) -> Void in
+            completion?(downloadTasks: downloadTasks)
         })
     }
     
@@ -230,14 +230,16 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         if let audioID = self.downloadTasks[downloadTask.taskIdentifier] {
             let audioFileName = audioID.stringValue.stringByAppendingPathExtension("mp3")
             let audioPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(audioFileName!)
-            if let audioURL = NSURL(fileURLWithPath:audioPath) {            
-                var error: NSError?
-                NSFileManager.defaultManager().moveItemAtURL(location, toURL: audioURL, error: &error)
-                for list in self.offlineAudioLists {
-                    for audio in list.audios {
-                        if (audio as! VMAudio).id == audioID {
-                            (audio as! VMAudio).localFileName = audioFileName
-                        }
+            let audioURL = NSURL(fileURLWithPath:audioPath)
+            do {
+                try NSFileManager.defaultManager().moveItemAtURL(location, toURL: audioURL)
+            } catch let error as NSError {
+                NSLog("Error:\(error) moveItem \(location) AtURL: \(audioURL) ")
+            }
+            for list in self.offlineAudioLists {
+                for audio in list.audios {
+                    if (audio as! VMAudio).id == audioID {
+                        (audio as! VMAudio).localFileName = audioFileName
                     }
                 }
             }
@@ -268,7 +270,7 @@ extension VMAudio {
     var localURL: NSURL! {
         get {
             if let localFileName = self.localFileName {
-                let path = VMAudioListManager.sharedInstance.offlineAudioListDirectoryPath.stringByAppendingPathComponent(localFileName as! String)
+                let path = VMAudioListManager.sharedInstance.offlineAudioListDirectoryPath.stringByAppendingPathComponent(localFileName as String)
                 return NSURL(fileURLWithPath: path)
             } else {
                 return nil

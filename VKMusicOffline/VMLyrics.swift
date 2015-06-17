@@ -18,9 +18,9 @@ class VMLyrics: NSObject, NSCoding {
         self.id = id
     }
     
-    func loadText(#completion:((NSError!) -> Void)?) -> Void {
+    func loadText(completion completion:((NSError!) -> Void)?) -> Void {
         NSLog("VMLyrics.loadText starting...")
-        var lyricsRequest = VKApi.requestWithMethod("audio.getLyrics",
+        let lyricsRequest = VKApi.requestWithMethod("audio.getLyrics",
             andParameters: ["lyrics_id" : self.id],
             andHttpMethod: "GET")
         
@@ -42,7 +42,7 @@ class VMLyrics: NSObject, NSCoding {
     
     // MARK: - NSCoding
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         self.id = aDecoder.decodeObjectForKey("id") as! NSNumber
         self.text = aDecoder.decodeObjectForKey("text") as! String!
     }

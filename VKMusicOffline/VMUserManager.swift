@@ -35,11 +35,11 @@ class VMUserManager: NSObject {
         }
     }
     
-    func loadCurrentUser(#completionBlock:((VKUser) -> Void), errorBlock:((NSError!) -> Void)) -> Void {
+    func loadCurrentUser(completionBlock completionBlock:((VKUser) -> Void), errorBlock:((NSError!) -> Void)) -> Void {
         NSLog("VMUserManager.loadCurrentUser starts...")
         self.userRequest.executeWithResultBlock({(response: VKResponse!) -> Void in
-            println(response.json)
-            println(response.parsedModel)
+            print(response.json)
+            print(response.parsedModel)
             if (response.parsedModel is VKUsersArray) {
                 let userList : VKUsersArray = response.parsedModel as! VKUsersArray
                 if (userList.count > 0) {

@@ -66,7 +66,7 @@ class VMDownloadsViewController: UITableViewController {
         return true
     }
     
-    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String! {
+    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
         return NSLocalizedString("cancel", tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
     }
 

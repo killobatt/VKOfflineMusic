@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
         VMAudioListManager.sharedInstance.saveOfflineAudioLists()
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         VKSdk.processOpenURL(url, fromApplication:sourceApplication)
         return true
     }
@@ -86,15 +86,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
 
     // MARK: - Split view
     
-    func splitViewControllerSupportedInterfaceOrientations(splitViewController: UISplitViewController) -> Int {
-        var orientations: UIInterfaceOrientationMask = UIInterfaceOrientationMask.All
+    func splitViewControllerSupportedInterfaceOrientations(splitViewController: UISplitViewController) -> UIInterfaceOrientationMask {
+        var orientations = UIInterfaceOrientationMask.All
         switch UIDevice.currentDevice().userInterfaceIdiom {
         case .Phone:
             orientations = UIInterfaceOrientationMask.Portrait
         case .Pad, .Unspecified:
             orientations = UIInterfaceOrientationMask.All
         }
-        return Int(orientations.rawValue);
+        return orientations
     }
     
     func splitViewControllerPreferredInterfaceOrientationForPresentation(splitViewController: UISplitViewController) -> UIInterfaceOrientation {
@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     }
     
 
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
         if let secondaryAsNavController = secondaryViewController as? UINavigationController {
             if let topAsDetailController = secondaryAsNavController.topViewController as? VMAudioListViewController {
                 if topAsDetailController.audioList == nil {
@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     After user answered current captcha, call answerCaptcha: method with user entered answer.
     */
     func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
-        var vc : VKCaptchaViewController = VKCaptchaViewController.captchaControllerWithError(captchaError)
+        let vc : VKCaptchaViewController = VKCaptchaViewController.captchaControllerWithError(captchaError)
         self.window?.rootViewController?.presentViewController(vc, animated: true, completion:nil)
     }
     

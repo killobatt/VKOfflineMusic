@@ -45,10 +45,10 @@ class VMAudioControllsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.player.addObserver(self, forKeyPath: "currentTrack", options: nil, context: nil)
-        self.player.addObserver(self, forKeyPath: "playbackProgress", options: nil, context: nil)
-        self.player.addObserver(self, forKeyPath: "loadedTrackPartTimeRange", options: nil, context: nil)
-        self.player.addObserver(self, forKeyPath: "isPlaying", options: nil, context: nil)
+        self.player.addObserver(self, forKeyPath: "currentTrack", options: [], context: nil)
+        self.player.addObserver(self, forKeyPath: "playbackProgress", options: [], context: nil)
+        self.player.addObserver(self, forKeyPath: "loadedTrackPartTimeRange", options: [], context: nil)
+        self.player.addObserver(self, forKeyPath: "isPlaying", options: [], context: nil)
         
         self.updateForTrack(self.player.currentTrack)
         self.progressSlider.value = 0
@@ -137,8 +137,8 @@ class VMAudioControllsController: UIViewController {
     
     // MARK: - KVO
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
-        change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?,
+        change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
             
             if (keyPath == "currentTrack") {
                 self.updateForTrack(self.player.currentTrack)
@@ -171,7 +171,7 @@ class VMAudioControllsController: UIViewController {
     
     // MARK: - Utils
     
-    private class func secondsFrom(#time: CMTime) -> Int? {
+    private class func secondsFrom(time time: CMTime) -> Int? {
         if CMTimeCompare(time, kCMTimeIndefinite) != 0 {
             return Int(CMTimeGetSeconds(time));
         } else {

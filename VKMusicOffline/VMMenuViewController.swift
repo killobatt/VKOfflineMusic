@@ -39,7 +39,7 @@ class VMMenuViewController: UITableViewController {
     }
     
     func initialize() {
-        VMAudioListManager.sharedInstance.addObserver(self, forKeyPath: "audioLists", options: nil, context: nil)
+        VMAudioListManager.sharedInstance.addObserver(self, forKeyPath: "audioLists", options: [], context: nil)
     }
     
     // MARK: - UIViewController
@@ -123,7 +123,7 @@ class VMMenuViewController: UITableViewController {
             return cell // VMMenuAudioListCell
         } else { // if indexPath.section == 2 {
             let cellID = (indexPath.row == 0) ? "AddNewListCell" : "DownloadsCell"
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as UITableViewCell
             return cell
         }
     }
@@ -142,7 +142,7 @@ class VMMenuViewController: UITableViewController {
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the specified item to be editable.
         if (indexPath.section == 1) {
-            if let audioList = VMAudioListManager.sharedInstance.audioLists[indexPath.row] as? VMOfflineAudioList {
+            if VMAudioListManager.sharedInstance.audioLists[indexPath.row] is VMOfflineAudioList {
                 return true
             }
         }
@@ -168,8 +168,8 @@ class VMMenuViewController: UITableViewController {
     
     // MARK: - KVO
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
-        change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?,
+        change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
             if (object as! NSObject == VMAudioListManager.sharedInstance) {
                 if (keyPath == "audioLists") {
                     if self.tableView.editing == false {

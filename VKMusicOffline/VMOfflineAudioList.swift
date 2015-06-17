@@ -39,7 +39,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         aCoder.encodeObject(self.audios, forKey:"audios")
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         self.identifier = aDecoder.decodeObjectForKey("identifier") as! NSUUID
         super.init()
         self.title = aDecoder.decodeObjectForKey("title") as! NSString
@@ -70,7 +70,6 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     
     override func deleteTrackAtIndex(index: Int) {
         let audios = self.audios.mutableCopy() as! NSMutableArray
-        let audio = audios[index] as! VMAudio
         audios.removeObjectAtIndex(index)
         self.audios = audios
     }

@@ -50,8 +50,8 @@ class VMDownloadCell: UITableViewCell {
 
                 self.suspendResumeButton.selected = task.state != .Running
                 
-                task.addObserver(self, forKeyPath: "countOfBytesReceived", options: nil, context: nil)
-                task.addObserver(self, forKeyPath: "countOfBytesExpectedToReceive", options: nil, context: nil)
+                task.addObserver(self, forKeyPath: "countOfBytesReceived", options: [], context: nil)
+                task.addObserver(self, forKeyPath: "countOfBytesExpectedToReceive", options: [], context: nil)
             }
         }
     }
@@ -72,7 +72,7 @@ class VMDownloadCell: UITableViewCell {
         self.progressView.setProgress(progress, animated: animated)
     }
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             if (keyPath == "countOfBytesReceived") {
                 self.updateProgressTo(self.downloadTask.countOfBytesReceived, animated:true)

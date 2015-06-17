@@ -60,7 +60,7 @@ public class CircleProgressView: UIView {
             
             self.isAnimated = true
             self.progressEndValue = progress
-            var animation = CABasicAnimation(keyPath: "strokeEnd")
+            let animation = CABasicAnimation(keyPath: "strokeEnd")
             animation.fromValue = self.progress
             animation.toValue = self.progressEndValue
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
@@ -72,7 +72,7 @@ public class CircleProgressView: UIView {
         }
     }
     
-    override public func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+    override public func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         self.progress = self.progressEndValue
         self.isAnimated = false
     }
@@ -95,7 +95,7 @@ public class CircleProgressView: UIView {
     
     override public var bounds : CGRect {
         didSet {
-            var center = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5)
+            let center = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5)
             self.trackLayer.position = center
             self.progressLayer.position = center
         }
@@ -107,8 +107,8 @@ public class CircleProgressView: UIView {
     private var progressLayer: CAShapeLayer!
     
     private func setupLayers() {
-        var center = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5)
-        var path = UIBezierPath(arcCenter: CGPointZero, radius: self.radius, startAngle: CGFloat(-M_PI_2), endAngle: CGFloat(1.5 * M_PI), clockwise: true)
+        let center = CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height * 0.5)
+        let path = UIBezierPath(arcCenter: CGPointZero, radius: self.radius, startAngle: CGFloat(-M_PI_2), endAngle: CGFloat(1.5 * M_PI), clockwise: true)
         self.trackLayer = CAShapeLayer()
         self.trackLayer.path = path.CGPath
         self.trackLayer.fillColor = UIColor.clearColor().CGColor

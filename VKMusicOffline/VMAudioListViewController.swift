@@ -36,7 +36,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
     
     func initialize() {
-        VMAudioListPlayer.sharedInstance.addObserver(self, forKeyPath: "currentTrackIndex", options: nil, context: nil)
+        VMAudioListPlayer.sharedInstance.addObserver(self, forKeyPath: "currentTrackIndex", options: [], context: nil)
     }
     
     override func viewDidLoad() {
@@ -116,12 +116,12 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let audio = self.audioList[indexPath.row]
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as! VMAudioCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("VMAudioCell", forIndexPath: indexPath) as! VMAudioCell
         cell.audio = audio
         cell.rightButtons = []
         
         if self.audioList is VMOfflineAudioList {
-            var button = MGSwipeButton(title: "", icon: UIImage(named: "Delete"),
+            let button = MGSwipeButton(title: "", icon: UIImage(named: "Delete"),
                 backgroundColor: UIColor.redColor())
             button.callback = {(sender: MGSwipeTableCell!) -> Bool in
                 self.audioList.deleteTrackAtIndex(indexPath.row)
@@ -132,7 +132,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             }
             cell.rightButtons.append(button)
         } else {
-            var button = MGSwipeButton(title: "", icon: UIImage(named: "Download"),
+            let button = MGSwipeButton(title: "", icon: UIImage(named: "Download"),
                 backgroundColor: UIColor.orangeColor())
             button.callback = {(sender: MGSwipeTableCell!) -> Bool in
                 self.performSegueWithIdentifier("showOfflineListSelection", sender: sender)
@@ -142,7 +142,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         }
         
         if (audio.lyrics != nil) {
-            var button = MGSwipeButton(title: "", icon: UIImage(named: "Lyrics"),
+            let button = MGSwipeButton(title: "", icon: UIImage(named: "Lyrics"),
                 backgroundColor: UIColor.greenColor())
             button.callback = {(sender: MGSwipeTableCell!) -> Bool in
                 self.performSegueWithIdentifier("showLyrics", sender: cell)
@@ -274,8 +274,8 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     
     // MARK: - KVO
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
-        change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?,
+        change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
             if (object as! NSObject == VMAudioListPlayer.sharedInstance) {
                 if (keyPath == "currentTrackIndex") {
                     self.tableView.reloadData()

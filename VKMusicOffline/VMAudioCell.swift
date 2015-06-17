@@ -71,11 +71,11 @@ class VMAudioCell: MGSwipeTableCell {
     // MARK: - KVO
     
     private func setupObserving() {
-        self.player.addObserver(self, forKeyPath: "currentTrack", options: nil, context: nil)
-        self.player.addObserver(self, forKeyPath: "isPlaying", options: nil, context: nil)
+        self.player.addObserver(self, forKeyPath: "currentTrack", options: [], context: nil)
+        self.player.addObserver(self, forKeyPath: "isPlaying", options: [], context: nil)
     }
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if (keyPath == "currentTrack") {
             if let track = self.player.currentTrack {
                 self.playingIndicator.hidden = self.audio != track

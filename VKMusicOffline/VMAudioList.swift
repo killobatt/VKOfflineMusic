@@ -45,7 +45,7 @@ class VMAudioList: NSObject {
 //    }
     
     func hasNextPage() -> Bool { return false }
-    func loadNextPage(#completion:((NSError!) -> Void)?) -> Void { }
+    func loadNextPage(completion completion:((NSError!) -> Void)?) -> Void { }
     
 }
 
