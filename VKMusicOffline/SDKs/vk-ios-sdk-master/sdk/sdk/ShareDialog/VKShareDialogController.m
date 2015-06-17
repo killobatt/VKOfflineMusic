@@ -367,7 +367,7 @@ static NSInteger kAttachmentsViewHeight = 90.0f;
     }
     self.textView.textAlignment = NSTextAlignmentLeft;
     
-    self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:VKLocalizedString(@"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(close:)];
+    self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:VKLocalizedString(@"Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(close:)];
 }
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -490,7 +490,7 @@ static NSInteger kAttachmentsViewHeight = 90.0f;
         _sendButton = [[UIBarButtonItem alloc] initWithTitle:VKLocalizedString(@"Done") style:UIBarButtonItemStyleDone target:self action:@selector(sendMessage:)];
     }
     return @[_sendButton];
-    return @[_sendButton, [[UIBarButtonItem alloc] initWithImage:VKImageNamed(@"vk_settings") landscapeImagePhone:nil style:UIBarButtonItemStyleBordered target:self action:@selector(openSettings:)]] ;
+    return @[_sendButton, [[UIBarButtonItem alloc] initWithImage:VKImageNamed(@"vk_settings") landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(openSettings:)]] ;
 }
 -(void)denyPostingOnWall:(NSString*)ownerName {
     _sendButton.enabled = NO;
@@ -579,7 +579,7 @@ static NSInteger kAttachmentsViewHeight = 90.0f;
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
--(NSUInteger)supportedInterfaceOrientations
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
 }
