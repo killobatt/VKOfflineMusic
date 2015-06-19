@@ -19,9 +19,7 @@ class VMLyricsController: UIViewController {
                     }
                 })
             }
-            if let audio = lyrics?.audio {
-                self.title = audio.title as String?
-            }
+            self.updateUI()
         }
     }
     
@@ -30,6 +28,7 @@ class VMLyricsController: UIViewController {
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var titleBarItem: UINavigationItem!
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textViewTopConstraint: NSLayoutConstraint!
     
     // MARK: - UIViewController lifecycle
 
@@ -46,10 +45,37 @@ class VMLyricsController: UIViewController {
     }
     
     func updateUI() {
-        if (self.lyrics != nil) {
-            self.textView.text = self.lyrics.text
-        } else {
-            self.textView.text = ""
+        
+        if let textView = self.textView {
+            if (self.lyrics != nil) {
+                textView.text = self.lyrics.text
+            } else {
+                textView.text = ""
+            }
+        }
+        
+        if let audio = lyrics?.audio {
+            self.title = audio.title as String?
+        }
+        
+        NSLog("self.parentViewController: \(self.parentViewController)")
+        
+        if let navigationBar = self.navigationBar {
+            NSLog("self.navigationBar.topItem: \(self.navigationBar.topItem)")
+        
+            self.navigationBar.topItem?.title = self.title
+            
+            if self.parentViewController is VMAudioControllsController || self.parentViewController is UINavigationController {
+                self.navigationBar.hidden = true
+                if let textViewTopConstraint = self.textViewTopConstraint {
+                    textViewTopConstraint.active = false
+                }
+            } else {
+                self.navigationBar.hidden = false
+                if let textViewTopConstraint = self.textViewTopConstraint {
+                    textViewTopConstraint.active = true
+                }
+            }
         }
     }
 

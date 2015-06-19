@@ -46,16 +46,18 @@ class VMAudio: NSObject, NSCoding {
         if (audio.url != nil) {
             self.URL = NSURL(string: audio.url)
         }
-        if (audio.lyrics_id != nil) {
-            self.lyrics = VMLyrics(id: audio.lyrics_id)
-        }
         self.albumID = audio.album_id
         self.genreID = audio.genre_id
         if (audio.duration != nil) {
             self.duration = audio.duration.integerValue
         } else {
             self.duration = 0
-        }        
+        }
+        super.init()
+        if (audio.lyrics_id != nil) {
+            self.lyrics = VMLyrics(audio: self, identifier: audio.lyrics_id)
+        }
+
     }
     
     // MARK: - NSCoding interface implementation

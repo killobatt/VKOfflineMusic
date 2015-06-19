@@ -12,9 +12,10 @@ import VK
 class VMLyrics: NSObject, NSCoding {
     var id: NSNumber
     var text: String!
-    var audio: VMAudio?
+    var audio: VMAudio!
     
-    init(id:NSNumber) {
+    init(audio:VMAudio, identifier id:NSNumber) {
+        self.audio = audio
         self.id = id
     }
     
