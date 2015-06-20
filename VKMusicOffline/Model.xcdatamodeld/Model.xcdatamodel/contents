@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="VMAudio" syncable="YES">
+        <attribute name="albumID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="genreID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="localFileName" optional="YES" syncable="YES"/>
+        <attribute name="ownerID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="remoteURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="lyrics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="VMLyrics" inverseName="audio" inverseEntity="VMLyrics" syncable="YES"/>
+    </entity>
+    <entity name="VMLyrics" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="audio" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VMAudio" inverseName="lyrics" inverseEntity="VMAudio" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="VMAudio" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="VMLyrics" positionX="-54" positionY="63" width="128" height="90"/>
+    </elements>
+</model>
