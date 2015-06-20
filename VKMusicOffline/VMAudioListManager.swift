@@ -37,6 +37,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     // MARK: - VMAudioLists
     var userAudioList: VMUserAudioList!
     var searchAudioList: VMSearchAudioList!
+    var recommendationsAudioList: VMRecomendationsAudioList!
     var offlineAudioLists: Array<VMOfflineAudioList> = [] {
         willSet {
             self.willChangeValueForKey("audioLists")
@@ -59,6 +60,9 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
             if self.searchAudioList != nil {
                 lists.append(self.searchAudioList)
             }
+            if self.recommendationsAudioList != nil {
+                lists.append(self.recommendationsAudioList)
+            }
             for audioList in self.offlineAudioLists {
                 lists.append(audioList)
             }
@@ -76,6 +80,9 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
                 self.userAudioList.loadNextPage(completion: nil)
                 self.searchAudioList = VMSearchAudioList(searchOwn: false)
                 self.searchAudioList.title = "Поиск"
+                self.recommendationsAudioList = VMRecomendationsAudioList(user: newUser)
+                self.recommendationsAudioList.title = "Рекомендации"
+                self.recommendationsAudioList.loadNextPage(completion: nil)
                 self.willChangeValueForKey("audioLists")
                 self.willChangeValueForKey("offlineAudioLists")
             } else {
