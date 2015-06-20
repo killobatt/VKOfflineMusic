@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E0F442219D15EAD003F7252 /* URLImageView.swift in Headers */ = {isa = PBXBuildFile; fileRef = 1E98CCFF19704668008B424B /* URLImageView.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E98CCE919704652008B424B /* UIViews.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E98CCE819704652008B424B /* UIViews.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E98CCEF19704653008B424B /* UIViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E98CCE319704652008B424B /* UIViews.framework */; };
 		1E98CCF619704653008B424B /* UIViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E98CCF519704653008B424B /* UIViewsTests.swift */; };
@@ -120,7 +119,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E98CCE919704652008B424B /* UIViews.h in Headers */,
-				1E0F442219D15EAD003F7252 /* URLImageView.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +285,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -360,7 +359,7 @@
 				INFOPLIST_FILE = UIViews/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

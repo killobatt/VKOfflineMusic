@@ -169,6 +169,7 @@
 		1E0BD1C619DA9AA500A9C4C2 /* VMUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMUserManager.swift; sourceTree = "<group>"; };
 		1E15F32319DAB0FC00A32881 /* VMAudioListPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListPlayer.swift; sourceTree = "<group>"; };
 		1E2267271B35CF3C003980E3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		1E22672E1B35DAB8003980E3 /* VKMusicOffline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VKMusicOffline.entitlements; sourceTree = "<group>"; };
 		1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOfflineAudioSearchList.swift; sourceTree = "<group>"; };
 		1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListSearching.swift; sourceTree = "<group>"; };
 		1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListManager.swift; sourceTree = "<group>"; };
@@ -303,6 +304,7 @@
 		CBB7A90019CD844100E95307 /* VKMusicOffline */ = {
 			isa = PBXGroup;
 			children = (
+				1E22672E1B35DAB8003980E3 /* VKMusicOffline.entitlements */,
 				CB9996D319CDD3090076D5E8 /* Model */,
 				CBB8A21B19D36F3E00FD7251 /* Menu */,
 				1EC12ED419E828AD000C6ADD /* Audio List */,
@@ -447,6 +449,9 @@
 						DevelopmentTeam = 96KHWMMBV3;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
 								enabled = 1;
 							};
 						};
@@ -776,6 +781,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VKMusicOffline/VKMusicOffline.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -795,6 +801,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = VKMusicOffline/VKMusicOffline.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;

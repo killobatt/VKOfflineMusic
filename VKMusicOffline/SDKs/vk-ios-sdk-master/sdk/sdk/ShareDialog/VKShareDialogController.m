@@ -357,7 +357,10 @@ static NSInteger kAttachmentsViewHeight = 90.0f;
         self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [self resizeToInterfaceOrientation:self.interfaceOrientation];
+#pragma clang diagnostic pop
     self.textView.editable = NO;
     UIEdgeInsets insets = UIEdgeInsetsMake(0, 8, 0, 8);
     if (VK_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
@@ -367,7 +370,7 @@ static NSInteger kAttachmentsViewHeight = 90.0f;
     }
     self.textView.textAlignment = NSTextAlignmentLeft;
     
-    self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:VKLocalizedString(@"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(close:)];
+    self.navigationItem.leftBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:VKLocalizedString(@"Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(close:)];
 }
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -490,7 +493,7 @@ static NSInteger kAttachmentsViewHeight = 90.0f;
         _sendButton = [[UIBarButtonItem alloc] initWithTitle:VKLocalizedString(@"Done") style:UIBarButtonItemStyleDone target:self action:@selector(sendMessage:)];
     }
     return @[_sendButton];
-    return @[_sendButton, [[UIBarButtonItem alloc] initWithImage:VKImageNamed(@"vk_settings") landscapeImagePhone:nil style:UIBarButtonItemStyleBordered target:self action:@selector(openSettings:)]] ;
+    return @[_sendButton, [[UIBarButtonItem alloc] initWithImage:VKImageNamed(@"vk_settings") landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(openSettings:)]] ;
 }
 -(void)denyPostingOnWall:(NSString*)ownerName {
     _sendButton.enabled = NO;
@@ -662,7 +665,10 @@ static NSInteger kAttachmentsViewHeight = 90.0f;
     
     if (self.attachmentsArray.count) {
         [UIView animateWithDuration:0.25 animations:^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             [self resizeToInterfaceOrientation:self.interfaceOrientation];
+#pragma clang diagnostic pop
         }];
     }
 }
@@ -744,7 +750,10 @@ static NSInteger kAttachmentsViewHeight = 90.0f;
         } completion:^(BOOL finished) {
             if (!self.attachmentsArray.count) {
                 [UIView animateWithDuration:0.25 animations:^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
                     [self resizeToInterfaceOrientation:self.interfaceOrientation];
+#pragma clang diagnostic pop
                 }];
             }
             [self textViewDidChange:self.textView];
