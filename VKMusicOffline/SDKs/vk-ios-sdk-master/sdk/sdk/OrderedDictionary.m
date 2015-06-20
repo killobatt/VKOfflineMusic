@@ -46,6 +46,16 @@ NSString *DescriptionForObject(NSObject *object, id locale, NSUInteger indent) {
 	return [self initWithCapacity:0];
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCapacity:0];
+    if (self != nil) {
+        dictionary = [[NSMutableDictionary alloc] initWithCoder:aDecoder];
+        array = [[NSMutableArray alloc] initWithCapacity:dictionary.count];
+    }
+    return self;
+}
+
 - (id)initWithCapacity:(NSUInteger)capacity {
 	self = [super init];
 	if (self != nil) {

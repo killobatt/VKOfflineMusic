@@ -27,6 +27,7 @@
 @end
 
 @implementation VKGroup
+@synthesize description;
 @end
 
 @implementation VKGroups

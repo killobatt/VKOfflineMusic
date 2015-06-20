@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E0BD1C719DA9AA500A9C4C2 /* VMUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BD1C619DA9AA500A9C4C2 /* VMUserManager.swift */; };
 		1E15F32419DAB0FC00A32881 /* VMAudioListPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F32319DAB0FC00A32881 /* VMAudioListPlayer.swift */; };
+		1E2267281B35CF3C003980E3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E2267271B35CF3C003980E3 /* Default-568h@2x.png */; };
 		1E38FCCE19E66F90002ECA34 /* VMOfflineAudioSearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */; };
 		1E38FCD419E6706C002ECA34 /* VMAudioListSearching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */; };
 		1E512E0719EE64D000CB22CC /* VMAudioListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */; };
@@ -167,6 +168,7 @@
 /* Begin PBXFileReference section */
 		1E0BD1C619DA9AA500A9C4C2 /* VMUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMUserManager.swift; sourceTree = "<group>"; };
 		1E15F32319DAB0FC00A32881 /* VMAudioListPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListPlayer.swift; sourceTree = "<group>"; };
+		1E2267271B35CF3C003980E3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOfflineAudioSearchList.swift; sourceTree = "<group>"; };
 		1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListSearching.swift; sourceTree = "<group>"; };
 		1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListManager.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 		CBB7A8F519CD844100E95307 = {
 			isa = PBXGroup;
 			children = (
+				1E2267271B35CF3C003980E3 /* Default-568h@2x.png */,
 				CBB7A92219CD8B3500E95307 /* SDKs */,
 				CBB7A90019CD844100E95307 /* VKMusicOffline */,
 				CBB7A91519CD844200E95307 /* VKMusicOfflineTests */,
@@ -554,6 +557,7 @@
 				CBB7A90B19CD844100E95307 /* Main.storyboard in Resources */,
 				84FE4F2D1A17EBCA00893410 /* Launch Screen.xib in Resources */,
 				84FE4F301A19178100893410 /* Localization.strings in Resources */,
+				1E2267281B35CF3C003980E3 /* Default-568h@2x.png in Resources */,
 				CBB7A90D19CD844100E95307 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

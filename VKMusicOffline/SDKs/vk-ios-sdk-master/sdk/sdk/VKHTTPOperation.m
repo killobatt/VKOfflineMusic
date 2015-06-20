@@ -67,6 +67,9 @@ static void VKGetMediaTypeAndSubtypeWithString(NSString *string, NSString **type
 }
 
 @implementation VKHTTPOperation
+
+@synthesize lock;
+
 + (instancetype)operationWithRequest:(VKRequest *)request {
 	NSURLRequest *urlRequest = [request getPreparedRequest];
     
