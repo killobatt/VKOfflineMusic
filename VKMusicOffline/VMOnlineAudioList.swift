@@ -59,7 +59,7 @@ class VMOnlineAudioList: VMAudioList {
             var audioArray = NSMutableArray(capacity: audios.items.count)
             for (var i = 0; i < MIN(self.pageSize, Int(audios.items.count)); i++) {
                 let audio = audios[UInt(i)] as! VKAudio
-                audioArray.addObject(VMAudio(with: audio))
+                audioArray.addObject(VMAudio(audio: audio))
             }
             self.audios = self.audios.arrayByAddingObjectsFromArray(audioArray as [AnyObject])
             self.currentPageOffset += self.pageSize

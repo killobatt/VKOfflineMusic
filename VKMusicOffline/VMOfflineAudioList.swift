@@ -7,15 +7,26 @@
 //
 
 import Foundation
+import CoreData
+import CoreDataStorage
 
 class VMOfflineAudioList: VMAudioList, NSCoding {
     
     var identifier: NSUUID
+    private var storedAudioList: CDAudioList!
     
-    init(title: NSString) {
-        self.identifier = NSUUID()
+    init(storedAudioList: CDAudioList) {
+        self.storedAudioList = storedAudioList
+        self.identifier = NSUUID(UUIDString: storedAudioList.identifier)!
         super.init()
-        self.title = title
+        self.title = storedAudioList.title
+        
+        var audios: [VMAudio] = []
+        for storedAudio in storedAudioList.audios {
+            let audio = VMAudio(storedAudio: storedAudio as! CDAudio)
+            audios.append(audio)
+        }
+        self.audios = audios
     }
     
     override var audios : NSArray {
@@ -29,6 +40,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
             return
         }
         self.audios = NSArray(object: audio).arrayByAddingObjectsFromArray(self.audios as [AnyObject])
+        self.storedAudioList.addAudiosObject(CDAudio.storedAudioForAudio(audio, managedObjectContext: self.storedAudioList.managedObjectContext!))
     }
     
     // MARK: - NSCoding interface implementation
@@ -66,6 +78,11 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         audios.removeObjectAtIndex(index)
         audios.insertObject(audio, atIndex:toIndex)
         self.audios = audios
+        
+        if var orderedAudios = self.storedAudioList.audios.mutableCopy() as? NSMutableOrderedSet {
+            orderedAudios.moveObjectsAtIndexes(NSIndexSet(index: index), toIndex: toIndex)
+            self.storedAudioList.audios = orderedAudios
+        }
     }
     
     override func deleteTrackAtIndex(index: Int) {
@@ -73,5 +90,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         let audio = audios[index] as! VMAudio
         audios.removeObjectAtIndex(index)
         self.audios = audios
+        
+        self.storedAudioList.removeAudiosObject(self.storedAudioList.audios[index] as! CDAudio)
     }
 }

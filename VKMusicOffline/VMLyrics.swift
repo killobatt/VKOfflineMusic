@@ -8,6 +8,7 @@
 
 import UIKit
 import VK
+import CoreDataStorage
 
 class VMLyrics: NSObject, NSCoding {
     var id: NSNumber
@@ -41,6 +42,12 @@ class VMLyrics: NSObject, NSCoding {
         })
     }
     
+    init(audio:VMAudio, storedLyrics: CDLyrics) {
+        self.audio = audio
+        self.id = storedLyrics.id!
+        self.text = storedLyrics.text
+    }
+    
     // MARK: - NSCoding
     
     required init(coder aDecoder: NSCoder) {
@@ -52,4 +59,5 @@ class VMLyrics: NSObject, NSCoding {
         aCoder.encodeObject(self.id, forKey: "id")
         aCoder.encodeOptional(self.text, forKey: "text")
     }
+    
 }

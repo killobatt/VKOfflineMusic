@@ -8,8 +8,9 @@
 
 import Foundation
 import VK
+import CoreDataStorage
 
-class VMAudio: NSObject, NSCoding, Equatable {
+class VMAudio: NSObject, Equatable, NSCoding {
     var id : NSNumber!
     var ownerID : NSNumber!
     var artist : NSString!
@@ -38,7 +39,11 @@ class VMAudio: NSObject, NSCoding, Equatable {
         }
     }
     
-    init(with audio: VKAudio) {
+    override init() {
+        self.duration = 0
+    }
+    
+    init(audio: VKAudio) {
         self.id = audio.id
         self.ownerID = audio.owner_id
         self.artist = audio.artist

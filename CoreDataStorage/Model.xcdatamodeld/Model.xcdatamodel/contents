@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Audio" representedClassName="CDAudio" syncable="YES">
+        <attribute name="albumID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="genreID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="localFileName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ownerID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="remoteURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AudioList" inverseName="audios" inverseEntity="AudioList" syncable="YES"/>
+        <relationship name="lyrics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Lyrics" inverseName="audio" inverseEntity="Lyrics" syncable="YES"/>
+    </entity>
+    <entity name="AudioList" representedClassName="CDAudioList" syncable="YES">
+        <attribute name="identifier" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="audios" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Audio" inverseName="lists" inverseEntity="Audio" syncable="YES"/>
+    </entity>
+    <entity name="Lyrics" representedClassName="CDLyrics" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="audio" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Audio" inverseName="lyrics" inverseEntity="Audio" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Audio" positionX="-63" positionY="-18" width="128" height="210"/>
+        <element name="AudioList" positionX="-18" positionY="90" width="128" height="90"/>
+        <element name="Lyrics" positionX="-54" positionY="63" width="128" height="90"/>
+    </elements>
+</model>

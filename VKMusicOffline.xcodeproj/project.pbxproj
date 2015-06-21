@@ -10,8 +10,27 @@
 		1E0BD1C719DA9AA500A9C4C2 /* VMUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0BD1C619DA9AA500A9C4C2 /* VMUserManager.swift */; };
 		1E15F32419DAB0FC00A32881 /* VMAudioListPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F32319DAB0FC00A32881 /* VMAudioListPlayer.swift */; };
 		1E2267281B35CF3C003980E3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E2267271B35CF3C003980E3 /* Default-568h@2x.png */; };
-		1E2267311B35E4F6003980E3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E22672F1B35E4F6003980E3 /* Model.xcdatamodeld */; };
 		1E2267391B35E7D6003980E3 /* VMRecomendationsAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267381B35E7D6003980E3 /* VMRecomendationsAudioList.swift */; };
+		1E2267871B362463003980E3 /* VMAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267851B362463003980E3 /* VMAudio.swift */; };
+		1E2267881B362463003980E3 /* VMLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267861B362463003980E3 /* VMLyrics.swift */; };
+		1E2267931B3624C5003980E3 /* CoreDataStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E2267921B3624C5003980E3 /* CoreDataStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E2267991B3624C5003980E3 /* CoreDataStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E22678E1B3624C5003980E3 /* CoreDataStorage.framework */; };
+		1E2267A21B3624C5003980E3 /* CoreDataStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267A11B3624C5003980E3 /* CoreDataStorageTests.swift */; };
+		1E2267A51B3624C5003980E3 /* CoreDataStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E22678E1B3624C5003980E3 /* CoreDataStorage.framework */; };
+		1E2267A61B3624C5003980E3 /* CoreDataStorage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E22678E1B3624C5003980E3 /* CoreDataStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E2267B31B362537003980E3 /* CDModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267B21B362537003980E3 /* CDModelTests.swift */; };
+		1E2267C31B3626C8003980E3 /* CDModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267B61B3626C8003980E3 /* CDModel.swift */; };
+		1E2267C41B3626C8003980E3 /* _CDAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267B81B3626C8003980E3 /* _CDAudio.swift */; };
+		1E2267C51B3626C8003980E3 /* _CDAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267B91B3626C8003980E3 /* _CDAudioList.swift */; };
+		1E2267C61B3626C8003980E3 /* _CDLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267BA1B3626C8003980E3 /* _CDLyrics.swift */; };
+		1E2267C71B3626C8003980E3 /* CDAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267BC1B3626C8003980E3 /* CDAudio.swift */; };
+		1E2267C81B3626C8003980E3 /* CDAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267BD1B3626C8003980E3 /* CDAudioList.swift */; };
+		1E2267C91B3626C8003980E3 /* CDLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267BE1B3626C8003980E3 /* CDLyrics.swift */; };
+		1E2267CC1B3626C8003980E3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267C11B3626C8003980E3 /* Model.xcdatamodeld */; };
+		1E2267CD1B3626CD003980E3 /* CDModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267B61B3626C8003980E3 /* CDModel.swift */; };
+		1E2267CF1B3719E0003980E3 /* VMAudio+CDAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267CE1B3719E0003980E3 /* VMAudio+CDAudio.swift */; };
+		1E2267D11B371C79003980E3 /* VMLyrics+CSLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267D01B371C79003980E3 /* VMLyrics+CSLyrics.swift */; };
+		1E2267D31B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267D21B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift */; };
 		1E38FCCE19E66F90002ECA34 /* VMOfflineAudioSearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */; };
 		1E38FCD419E6706C002ECA34 /* VMAudioListSearching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */; };
 		1E512E0719EE64D000CB22CC /* VMAudioListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */; };
@@ -31,13 +50,11 @@
 		84FE4F301A19178100893410 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84FE4F321A19178100893410 /* Localization.strings */; };
 		CB445DA41AAB368900DEC338 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB445DA21AAB368800DEC338 /* Crashlytics.framework */; };
 		CB445DA51AAB368900DEC338 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB445DA31AAB368800DEC338 /* Fabric.framework */; };
-		CB6B52C119DBE40F00127A1B /* VMLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B52C019DBE40F00127A1B /* VMLyrics.swift */; };
 		CB6B52C719DBE61000127A1B /* VMLyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6B52C619DBE61000127A1B /* VMLyricsController.swift */; };
 		CB85503B19D2186600B4EF0A /* VMOfflineAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85503A19D2186600B4EF0A /* VMOfflineAudioList.swift */; };
 		CB9996D019CDC5410076D5E8 /* VMAudioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9996CF19CDC5410076D5E8 /* VMAudioListViewController.swift */; };
 		CB9996D219CDD2FD0076D5E8 /* VMAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9996D119CDD2FD0076D5E8 /* VMAudioList.swift */; };
 		CB9996D519CDD9730076D5E8 /* VMAudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9996D419CDD9730076D5E8 /* VMAudioCell.swift */; };
-		CB9996D919CDDC430076D5E8 /* VMAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9996D819CDDC430076D5E8 /* VMAudio.swift */; };
 		CBAED45419CE21CF00CF634D /* VMOnlineAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAED45319CE21CF00CF634D /* VMOnlineAudioList.swift */; };
 		CBAED45919CE249F00CF634D /* VMUserAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAED45819CE249F00CF634D /* VMUserAudioList.swift */; };
 		CBAED45B19CE285A00CF634D /* VMSearchAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAED45A19CE285A00CF634D /* VMSearchAudioList.swift */; };
@@ -51,6 +68,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1E22679A1B3624C5003980E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB7A8F619CD844100E95307 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E22678D1B3624C5003980E3;
+			remoteInfo = CoreDataStorage;
+		};
+		1E22679C1B3624C5003980E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB7A8F619CD844100E95307 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CBB7A8FD19CD844100E95307;
+			remoteInfo = VKMusicOffline;
+		};
+		1E2267A31B3624C5003980E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CBB7A8F619CD844100E95307 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E22678D1B3624C5003980E3;
+			remoteInfo = CoreDataStorage;
+		};
 		843CAC751A155F5E00FD37E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */;
@@ -159,6 +197,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				84F612671A47251C0075866D /* MGSwipeCells.framework in Embed Frameworks */,
+				1E2267A61B3624C5003980E3 /* CoreDataStorage.framework in Embed Frameworks */,
 				843CAC7D1A155F7400FD37E9 /* UIViews.framework in Embed Frameworks */,
 				843CAC811A155F7400FD37E9 /* VK.framework in Embed Frameworks */,
 			);
@@ -172,8 +211,27 @@
 		1E15F32319DAB0FC00A32881 /* VMAudioListPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListPlayer.swift; sourceTree = "<group>"; };
 		1E2267271B35CF3C003980E3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1E22672E1B35DAB8003980E3 /* VKMusicOffline.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = VKMusicOffline.entitlements; sourceTree = "<group>"; };
-		1E2267301B35E4F6003980E3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		1E2267381B35E7D6003980E3 /* VMRecomendationsAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMRecomendationsAudioList.swift; sourceTree = "<group>"; };
+		1E2267851B362463003980E3 /* VMAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudio.swift; sourceTree = "<group>"; };
+		1E2267861B362463003980E3 /* VMLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMLyrics.swift; sourceTree = "<group>"; };
+		1E22678E1B3624C5003980E3 /* CoreDataStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreDataStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E2267911B3624C5003980E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E2267921B3624C5003980E3 /* CoreDataStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataStorage.h; sourceTree = "<group>"; };
+		1E2267981B3624C5003980E3 /* CoreDataStorageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataStorageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E2267A01B3624C5003980E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E2267A11B3624C5003980E3 /* CoreDataStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageTests.swift; sourceTree = "<group>"; };
+		1E2267B21B362537003980E3 /* CDModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDModelTests.swift; sourceTree = "<group>"; };
+		1E2267B61B3626C8003980E3 /* CDModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDModel.swift; sourceTree = "<group>"; };
+		1E2267B81B3626C8003980E3 /* _CDAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _CDAudio.swift; sourceTree = "<group>"; };
+		1E2267B91B3626C8003980E3 /* _CDAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _CDAudioList.swift; sourceTree = "<group>"; };
+		1E2267BA1B3626C8003980E3 /* _CDLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _CDLyrics.swift; sourceTree = "<group>"; };
+		1E2267BC1B3626C8003980E3 /* CDAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDAudio.swift; sourceTree = "<group>"; };
+		1E2267BD1B3626C8003980E3 /* CDAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDAudioList.swift; sourceTree = "<group>"; };
+		1E2267BE1B3626C8003980E3 /* CDLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDLyrics.swift; sourceTree = "<group>"; };
+		1E2267C21B3626C8003980E3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		1E2267CE1B3719E0003980E3 /* VMAudio+CDAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VMAudio+CDAudio.swift"; sourceTree = "<group>"; };
+		1E2267D01B371C79003980E3 /* VMLyrics+CSLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VMLyrics+CSLyrics.swift"; sourceTree = "<group>"; };
+		1E2267D21B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VMOfflineAudioList+CDAudioList.swift"; sourceTree = "<group>"; };
 		1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOfflineAudioSearchList.swift; sourceTree = "<group>"; };
 		1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListSearching.swift; sourceTree = "<group>"; };
 		1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListManager.swift; sourceTree = "<group>"; };
@@ -190,13 +248,11 @@
 		84FE4F351A1920C900893410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localization.strings; sourceTree = "<group>"; };
 		CB445DA21AAB368800DEC338 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		CB445DA31AAB368800DEC338 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		CB6B52C019DBE40F00127A1B /* VMLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMLyrics.swift; sourceTree = "<group>"; };
 		CB6B52C619DBE61000127A1B /* VMLyricsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMLyricsController.swift; sourceTree = "<group>"; };
 		CB85503A19D2186600B4EF0A /* VMOfflineAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOfflineAudioList.swift; sourceTree = "<group>"; };
 		CB9996CF19CDC5410076D5E8 /* VMAudioListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListViewController.swift; sourceTree = "<group>"; };
 		CB9996D119CDD2FD0076D5E8 /* VMAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioList.swift; sourceTree = "<group>"; };
 		CB9996D419CDD9730076D5E8 /* VMAudioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioCell.swift; sourceTree = "<group>"; };
-		CB9996D819CDDC430076D5E8 /* VMAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudio.swift; sourceTree = "<group>"; };
 		CBAED45319CE21CF00CF634D /* VMOnlineAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOnlineAudioList.swift; sourceTree = "<group>"; };
 		CBAED45819CE249F00CF634D /* VMUserAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMUserAudioList.swift; sourceTree = "<group>"; };
 		CBAED45A19CE285A00CF634D /* VMSearchAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMSearchAudioList.swift; sourceTree = "<group>"; };
@@ -216,11 +272,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1E22678A1B3624C5003980E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E2267951B3624C5003980E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E2267991B3624C5003980E3 /* CoreDataStorage.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBB7A8FB19CD844100E95307 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				843CAC781A155F6300FD37E9 /* VK.framework in Frameworks */,
+				1E2267A51B3624C5003980E3 /* CoreDataStorage.framework in Frameworks */,
 				CB445DA41AAB368900DEC338 /* Crashlytics.framework in Frameworks */,
 				843CAC7C1A155F7400FD37E9 /* UIViews.framework in Frameworks */,
 				CB445DA51AAB368900DEC338 /* Fabric.framework in Frameworks */,
@@ -237,6 +309,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E22678F1B3624C5003980E3 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				1E2267921B3624C5003980E3 /* CoreDataStorage.h */,
+				1E2267B71B3626C8003980E3 /* CoreDataAutoGeneratedFiles */,
+				1E2267BB1B3626C8003980E3 /* CoreDataFiles */,
+				1E2267C11B3626C8003980E3 /* Model.xcdatamodeld */,
+				1E2267B61B3626C8003980E3 /* CDModel.swift */,
+				1E2267901B3624C5003980E3 /* Supporting Files */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		1E2267901B3624C5003980E3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1E2267911B3624C5003980E3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1E22679E1B3624C5003980E3 /* CoreDataStorageTests */ = {
+			isa = PBXGroup;
+			children = (
+				1E2267A11B3624C5003980E3 /* CoreDataStorageTests.swift */,
+				1E2267B21B362537003980E3 /* CDModelTests.swift */,
+				1E22679F1B3624C5003980E3 /* Supporting Files */,
+			);
+			path = CoreDataStorageTests;
+			sourceTree = "<group>";
+		};
+		1E22679F1B3624C5003980E3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1E2267A01B3624C5003980E3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1E2267B71B3626C8003980E3 /* CoreDataAutoGeneratedFiles */ = {
+			isa = PBXGroup;
+			children = (
+				1E2267B81B3626C8003980E3 /* _CDAudio.swift */,
+				1E2267B91B3626C8003980E3 /* _CDAudioList.swift */,
+				1E2267BA1B3626C8003980E3 /* _CDLyrics.swift */,
+			);
+			path = CoreDataAutoGeneratedFiles;
+			sourceTree = "<group>";
+		};
+		1E2267BB1B3626C8003980E3 /* CoreDataFiles */ = {
+			isa = PBXGroup;
+			children = (
+				1E2267BC1B3626C8003980E3 /* CDAudio.swift */,
+				1E2267BD1B3626C8003980E3 /* CDAudioList.swift */,
+				1E2267BE1B3626C8003980E3 /* CDLyrics.swift */,
+			);
+			path = CoreDataFiles;
+			sourceTree = "<group>";
+		};
 		1EC12ED419E828AD000C6ADD /* Audio List */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,15 +398,17 @@
 		CB9996D319CDD3090076D5E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1E22672F1B35E4F6003980E3 /* Model.xcdatamodeld */,
-				CB9996D819CDDC430076D5E8 /* VMAudio.swift */,
-				CB6B52C019DBE40F00127A1B /* VMLyrics.swift */,
+				1E2267851B362463003980E3 /* VMAudio.swift */,
+				1E2267CE1B3719E0003980E3 /* VMAudio+CDAudio.swift */,
+				1E2267861B362463003980E3 /* VMLyrics.swift */,
+				1E2267D01B371C79003980E3 /* VMLyrics+CSLyrics.swift */,
 				CB9996D119CDD2FD0076D5E8 /* VMAudioList.swift */,
 				CBAED45319CE21CF00CF634D /* VMOnlineAudioList.swift */,
 				CBAED45819CE249F00CF634D /* VMUserAudioList.swift */,
 				1E2267381B35E7D6003980E3 /* VMRecomendationsAudioList.swift */,
 				CBAED45A19CE285A00CF634D /* VMSearchAudioList.swift */,
 				CB85503A19D2186600B4EF0A /* VMOfflineAudioList.swift */,
+				1E2267D21B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift */,
 				1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */,
 				1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */,
 				1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */,
@@ -294,6 +427,8 @@
 				CBB7A92219CD8B3500E95307 /* SDKs */,
 				CBB7A90019CD844100E95307 /* VKMusicOffline */,
 				CBB7A91519CD844200E95307 /* VKMusicOfflineTests */,
+				1E22678F1B3624C5003980E3 /* CoreDataStorage */,
+				1E22679E1B3624C5003980E3 /* CoreDataStorageTests */,
 				CBB7A8FF19CD844100E95307 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -303,6 +438,8 @@
 			children = (
 				CBB7A8FE19CD844100E95307 /* VKMusicOffline.app */,
 				CBB7A91219CD844200E95307 /* VKMusicOfflineTests.xctest */,
+				1E22678E1B3624C5003980E3 /* CoreDataStorage.framework */,
+				1E2267981B3624C5003980E3 /* CoreDataStorageTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -398,7 +535,55 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		1E22678B1B3624C5003980E3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E2267931B3624C5003980E3 /* CoreDataStorage.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		1E22678D1B3624C5003980E3 /* CoreDataStorage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E2267A71B3624C5003980E3 /* Build configuration list for PBXNativeTarget "CoreDataStorage" */;
+			buildPhases = (
+				1E2267891B3624C5003980E3 /* Sources */,
+				1E22678A1B3624C5003980E3 /* Frameworks */,
+				1E22678B1B3624C5003980E3 /* Headers */,
+				1E22678C1B3624C5003980E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreDataStorage;
+			productName = CoreDataStorage;
+			productReference = 1E22678E1B3624C5003980E3 /* CoreDataStorage.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1E2267971B3624C5003980E3 /* CoreDataStorageTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E2267AA1B3624C5003980E3 /* Build configuration list for PBXNativeTarget "CoreDataStorageTests" */;
+			buildPhases = (
+				1E2267941B3624C5003980E3 /* Sources */,
+				1E2267951B3624C5003980E3 /* Frameworks */,
+				1E2267961B3624C5003980E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1E22679B1B3624C5003980E3 /* PBXTargetDependency */,
+				1E22679D1B3624C5003980E3 /* PBXTargetDependency */,
+			);
+			name = CoreDataStorageTests;
+			productName = CoreDataStorageTests;
+			productReference = 1E2267981B3624C5003980E3 /* CoreDataStorageTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CBB7A8FD19CD844100E95307 /* VKMusicOffline */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CBB7A91C19CD844200E95307 /* Build configuration list for PBXNativeTarget "VKMusicOffline" */;
@@ -417,15 +602,16 @@
 				843CAC7B1A155F6300FD37E9 /* PBXTargetDependency */,
 				843CAC7F1A155F7400FD37E9 /* PBXTargetDependency */,
 				843CAC831A155F7400FD37E9 /* PBXTargetDependency */,
+				1E2267A41B3624C5003980E3 /* PBXTargetDependency */,
 			);
 			name = VKMusicOffline;
 			productName = VKMusicOffline;
 			productReference = CBB7A8FE19CD844100E95307 /* VKMusicOffline.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CBB7A91119CD844200E95307 /* VKMusicOfflineTests */ = {
+		CBB7A91119CD844200E95307 /* VKMusicOfflineUnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CBB7A91F19CD844200E95307 /* Build configuration list for PBXNativeTarget "VKMusicOfflineTests" */;
+			buildConfigurationList = CBB7A91F19CD844200E95307 /* Build configuration list for PBXNativeTarget "VKMusicOfflineUnitTests" */;
 			buildPhases = (
 				CBB7A90E19CD844200E95307 /* Sources */,
 				CBB7A90F19CD844200E95307 /* Frameworks */,
@@ -436,7 +622,7 @@
 			dependencies = (
 				CBB7A91419CD844200E95307 /* PBXTargetDependency */,
 			);
-			name = VKMusicOfflineTests;
+			name = VKMusicOfflineUnitTests;
 			productName = VKMusicOfflineTests;
 			productReference = CBB7A91219CD844200E95307 /* VKMusicOfflineTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -450,6 +636,14 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Vjacheslav Volodko";
 				TargetAttributes = {
+					1E22678D1B3624C5003980E3 = {
+						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 96KHWMMBV3;
+					};
+					1E2267971B3624C5003980E3 = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = CBB7A8FD19CD844100E95307;
+					};
 					CBB7A8FD19CD844100E95307 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 96KHWMMBV3;
@@ -496,7 +690,9 @@
 			projectRoot = "";
 			targets = (
 				CBB7A8FD19CD844100E95307 /* VKMusicOffline */,
-				CBB7A91119CD844200E95307 /* VKMusicOfflineTests */,
+				CBB7A91119CD844200E95307 /* VKMusicOfflineUnitTests */,
+				1E22678D1B3624C5003980E3 /* CoreDataStorage */,
+				1E2267971B3624C5003980E3 /* CoreDataStorageTests */,
 			);
 		};
 /* End PBXProject section */
@@ -561,6 +757,20 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1E22678C1B3624C5003980E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E2267961B3624C5003980E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBB7A8FC19CD844100E95307 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -599,6 +809,31 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1E2267891B3624C5003980E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E2267C51B3626C8003980E3 /* _CDAudioList.swift in Sources */,
+				1E2267C31B3626C8003980E3 /* CDModel.swift in Sources */,
+				1E2267C71B3626C8003980E3 /* CDAudio.swift in Sources */,
+				1E2267CC1B3626C8003980E3 /* Model.xcdatamodeld in Sources */,
+				1E2267C81B3626C8003980E3 /* CDAudioList.swift in Sources */,
+				1E2267C61B3626C8003980E3 /* _CDLyrics.swift in Sources */,
+				1E2267C91B3626C8003980E3 /* CDLyrics.swift in Sources */,
+				1E2267C41B3626C8003980E3 /* _CDAudio.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E2267941B3624C5003980E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E2267A21B3624C5003980E3 /* CoreDataStorageTests.swift in Sources */,
+				1E2267B31B362537003980E3 /* CDModelTests.swift in Sources */,
+				1E2267CD1B3626CD003980E3 /* CDModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CBB7A8FA19CD844100E95307 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -607,13 +842,14 @@
 				1E2267391B35E7D6003980E3 /* VMRecomendationsAudioList.swift in Sources */,
 				84EF7F431A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift in Sources */,
 				1E15F32419DAB0FC00A32881 /* VMAudioListPlayer.swift in Sources */,
-				CB9996D919CDDC430076D5E8 /* VMAudio.swift in Sources */,
 				1E38FCCE19E66F90002ECA34 /* VMOfflineAudioSearchList.swift in Sources */,
-				1E2267311B35E4F6003980E3 /* Model.xcdatamodeld in Sources */,
-				CB6B52C119DBE40F00127A1B /* VMLyrics.swift in Sources */,
+				1E2267871B362463003980E3 /* VMAudio.swift in Sources */,
 				84A2D52B1A61DA7E00AFE6AB /* VMAudioControllsController.swift in Sources */,
 				1E0BD1C719DA9AA500A9C4C2 /* VMUserManager.swift in Sources */,
+				1E2267D11B371C79003980E3 /* VMLyrics+CSLyrics.swift in Sources */,
 				CB9996D019CDC5410076D5E8 /* VMAudioListViewController.swift in Sources */,
+				1E2267CF1B3719E0003980E3 /* VMAudio+CDAudio.swift in Sources */,
+				1E2267D31B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift in Sources */,
 				1E38FCD419E6706C002ECA34 /* VMAudioListSearching.swift in Sources */,
 				CBB7A90619CD844100E95307 /* VMMenuViewController.swift in Sources */,
 				1E512E1819EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift in Sources */,
@@ -628,6 +864,7 @@
 				CB9996D219CDD2FD0076D5E8 /* VMAudioList.swift in Sources */,
 				84708BE91A45F04E0053790A /* VMDownloadCell.swift in Sources */,
 				CBAED45919CE249F00CF634D /* VMUserAudioList.swift in Sources */,
+				1E2267881B362463003980E3 /* VMLyrics.swift in Sources */,
 				CB9996D519CDD9730076D5E8 /* VMAudioCell.swift in Sources */,
 				8417F0A21A6C5CEF009F5A0A /* VMSplitViewController.swift in Sources */,
 				CBAED45419CE21CF00CF634D /* VMOnlineAudioList.swift in Sources */,
@@ -645,6 +882,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1E22679B1B3624C5003980E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E22678D1B3624C5003980E3 /* CoreDataStorage */;
+			targetProxy = 1E22679A1B3624C5003980E3 /* PBXContainerItemProxy */;
+		};
+		1E22679D1B3624C5003980E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CBB7A8FD19CD844100E95307 /* VKMusicOffline */;
+			targetProxy = 1E22679C1B3624C5003980E3 /* PBXContainerItemProxy */;
+		};
+		1E2267A41B3624C5003980E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E22678D1B3624C5003980E3 /* CoreDataStorage */;
+			targetProxy = 1E2267A31B3624C5003980E3 /* PBXContainerItemProxy */;
+		};
 		843CAC761A155F5E00FD37E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = UIViews;
@@ -706,6 +958,96 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1E2267A81B3624C5003980E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CoreDataStorage/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1E2267A91B3624C5003980E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = CoreDataStorage/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1E2267AB1B3624C5003980E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CoreDataStorageTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VKMusicOffline.app/VKMusicOffline";
+			};
+			name = Debug;
+		};
+		1E2267AC1B3624C5003980E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = CoreDataStorageTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VKMusicOffline.app/VKMusicOffline";
+			};
+			name = Release;
+		};
 		CBB7A91A19CD844200E95307 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -862,6 +1204,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1E2267A71B3624C5003980E3 /* Build configuration list for PBXNativeTarget "CoreDataStorage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E2267A81B3624C5003980E3 /* Debug */,
+				1E2267A91B3624C5003980E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1E2267AA1B3624C5003980E3 /* Build configuration list for PBXNativeTarget "CoreDataStorageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E2267AB1B3624C5003980E3 /* Debug */,
+				1E2267AC1B3624C5003980E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CBB7A8F919CD844100E95307 /* Build configuration list for PBXProject "VKMusicOffline" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -880,7 +1238,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CBB7A91F19CD844200E95307 /* Build configuration list for PBXNativeTarget "VKMusicOfflineTests" */ = {
+		CBB7A91F19CD844200E95307 /* Build configuration list for PBXNativeTarget "VKMusicOfflineUnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CBB7A92019CD844200E95307 /* Debug */,
@@ -892,12 +1250,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		1E22672F1B35E4F6003980E3 /* Model.xcdatamodeld */ = {
+		1E2267C11B3626C8003980E3 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				1E2267301B35E4F6003980E3 /* Model.xcdatamodel */,
+				1E2267C21B3626C8003980E3 /* Model.xcdatamodel */,
 			);
-			currentVersion = 1E2267301B35E4F6003980E3 /* Model.xcdatamodel */;
+			currentVersion = 1E2267C21B3626C8003980E3 /* Model.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -572,7 +572,7 @@
                                                     <state key="normal" image="PlayPrevious">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" image="048391D9-E9A2-4A4A-B748-92B21835129A"/>
+                                                    <state key="selected" image="5947EACB-4EED-47D7-B3F0-7C3E73164985"/>
                                                     <connections>
                                                         <action selector="playPreviousTrack:" destination="263-cg-i3V" eventType="touchUpInside" id="Tmd-Qg-HIQ"/>
                                                     </connections>
@@ -602,7 +602,7 @@
                                                     <state key="normal" image="PlayNext">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" image="048391D9-E9A2-4A4A-B748-92B21835129A"/>
+                                                    <state key="selected" image="5947EACB-4EED-47D7-B3F0-7C3E73164985"/>
                                                     <connections>
                                                         <action selector="playNextTrack:" destination="263-cg-i3V" eventType="touchUpInside" id="EnE-hr-h0L"/>
                                                     </connections>
@@ -790,7 +790,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="048391D9-E9A2-4A4A-B748-92B21835129A" width="32" height="32">
+        <image name="5947EACB-4EED-47D7-B3F0-7C3E73164985" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

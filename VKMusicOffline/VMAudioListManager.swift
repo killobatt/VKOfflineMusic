@@ -8,6 +8,8 @@
 
 import Foundation
 import VK
+import CoreData
+import CoreDataStorage
 
 class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
    
@@ -24,15 +26,21 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     
     override init() {
         super.init()
-        self.loadOfflineAudioLists()
+        self.model = CDModel(storageURL:self.audioListModelURL)
+        
+//        self.loadLegacyOfflineAudioLists()
         
         let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("com.vv.vkmusic-offline")
         self.URLSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
     }
     
     deinit {
-        self.saveOfflineAudioLists()
+        self.saveLegacyOfflineAudioLists()
     }
+    
+    // MARK: - Audio List Storage
+    
+    var model: CDModel
     
     // MARK: - VMAudioLists
     var userAudioList: VMUserAudioList!
@@ -101,7 +109,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     func addOfflineAudioList(title:NSString) -> VMOfflineAudioList {
         var offlineAudioList = VMOfflineAudioList(title: title)
         self.offlineAudioLists.append(offlineAudioList)
-        self.saveOfflineAudioLists()
+        self.saveLegacyOfflineAudioLists()
         return offlineAudioList
     }
     
@@ -135,7 +143,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         }
     }
     
-    func saveOfflineAudioLists() {
+    func saveLegacyOfflineAudioLists() {
         self.createAudioListsDirectoryIfNeeded()
         
         for list in self.offlineAudioLists {
@@ -145,7 +153,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         }
     }
     
-    func loadOfflineAudioLists() {
+    func loadLegacyOfflineAudioLists() {
         self.offlineAudioLists = []
         
         let fileManager = NSFileManager.defaultManager()
@@ -175,7 +183,19 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         }
     }
     
+    func loadOfflineAudioLists() {
+//        self.model.audioLists
+    }
+    
+    func saveOfflineAudioLists() {
+        
+    }
+    
     // MARK: - Paths
+    
+    var audioListModelURL: NSURL {
+        return NSURL(string: self.offlineAudioListDirectoryPath.stringByAppendingPathComponent("audio-list-model.sqlite"))!
+    }
     
     var offlineAudioListDirectoryPath: String {
         get {
@@ -212,7 +232,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         if let lyrics = audio.lyrics {
             if lyrics.text == nil {
                 lyrics.loadText { (error: NSError!) -> Void in
-                    self.saveOfflineAudioLists()
+                    self.saveLegacyOfflineAudioLists()
                 }
             }
         }
@@ -248,7 +268,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
                     }
                 }
             }
-            self.saveOfflineAudioLists()
+            self.saveLegacyOfflineAudioLists()
         }
     }
     
