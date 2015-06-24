@@ -8,6 +8,8 @@
 
 import UIKit
 import XCTest
+import CoreData
+import CoreDataStorage
 
 class CDModelTests: XCTestCase {
     
@@ -16,10 +18,10 @@ class CDModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let storagePath = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first as? NSURL
-        let storageURL = storagePath?.URLByAppendingPathComponent("store.sqlite")
+        let storageFileName = NSUUID().UUIDString.stringByAppendingPathExtension("sqlite")
+        let storageURL = storagePath?.URLByAppendingPathComponent(storageFileName!)
         XCTAssertNotNil(storagePath, "")
         self.model = CDModel(storageURL: storageURL!)
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
@@ -48,4 +50,125 @@ class CDModelTests: XCTestCase {
         XCTAssertNotNil(self.model.mainContext, "mainContext should not be nil")
     }
 
+    func testAudioListAdding() {
+        // given 
+        self.model.addAudioList(title: "Metallica")
+        
+        // when
+        let audioLists = self.model.audioLists
+        let audioList = audioLists.filter({$0.title == "Metallica"}).first! as CDAudioList
+        
+        // then
+        XCTAssertNotNil(audioList, "audio list should be created")
+        XCTAssertNotNil(audioList.title, "audio list title should be created")
+        XCTAssertEqual(audioList.title!, "Metallica", "Title should be correct")
+    }
+    
+    func testAudioListRemoving() {
+        // given 
+        let audioList = self.model.addAudioList(title: "Metallica")
+        
+        // when 
+        self.model.deleteObject(audioList)
+        
+        // then
+        let fetchRequest = NSFetchRequest(entityName: CDAudioList.entityName())
+        var error: NSError? = nil
+        let results = self.model.mainContext.executeFetchRequest(fetchRequest, error: &error) as! [CDAudioList]
+        XCTAssertNil(error, "")
+        let index = find(results.map{$0.title!}, "Metallica")
+        XCTAssertNil(index)
+    }
+    
+    func testAudioAdding() {
+        // given
+        let audio = CDAudio(managedObjectContext: self.model.mainContext)
+        audio.title = "Nothing else matters"
+        
+        // when
+        let allAudios = self.model.allAudios
+        let fetchedAudio = allAudios.filter({$0.title == "Nothing else matters"}).first! as CDAudio
+        
+        // then
+        XCTAssertNotNil(fetchedAudio);
+        XCTAssertNotNil(fetchedAudio.title);
+        XCTAssertEqual(fetchedAudio.title!, "Nothing else matters");
+    }
+    
+    func testAudioRemoving() {
+        // given
+        let audio = CDAudio(managedObjectContext: self.model.mainContext)
+        audio.title = "Nothing else matters"
+        
+        // when
+        self.model.deleteObject(audio)
+        
+        // then
+        let allAudios = self.model.allAudios
+        let fetchedAudio = allAudios.filter({$0.title == "Nothing else matters"}).first as CDAudio?
+        XCTAssertNil(fetchedAudio)
+    }
+    
+    func testUniqueAudiosFromList() {
+        // given
+        let audioList1 = self.model.addAudioList(title: "Metallica")
+        
+        let audio1 = CDAudio(managedObjectContext: self.model.mainContext)
+        audio1.title = "Nothing else matters"
+        audioList1.addAudiosObject(audio1)
+        
+        let audio2 = CDAudio(managedObjectContext: self.model.mainContext)
+        audio2.title = "Phantom of the opera"
+        audioList1.addAudiosObject(audio2)
+        
+        let audioList2 = self.model.addAudioList(title: "Nightwish")
+        
+        let audio3 = CDAudio(managedObjectContext: self.model.mainContext)
+        audio3.title = "Wishmaster"
+        audioList2.addAudiosObject(audio3)
+        
+        audioList2.addAudiosObject(audio2)
+        
+        
+        // when 
+        let audios = self.model.uniqueAudiosFromAudioList(audioList1)
+        
+        // then 
+        XCTAssertEqual(audios.count, 1, "")
+        XCTAssertNotNil(audios.first?.title, "")
+        XCTAssertEqual(audios.first!.title!, "Nothing else matters", "")
+    }
+    
+    func testAudioListRemovingWithAudios() {
+        // given
+        let audioList1 = self.model.addAudioList(title: "Metallica")
+        
+        let audio1 = CDAudio(managedObjectContext: self.model.mainContext)
+        audio1.title = "Nothing else matters"
+        audioList1.addAudiosObject(audio1)
+        
+        let audio2 = CDAudio(managedObjectContext: self.model.mainContext)
+        audio2.title = "Phantom of the opera"
+        audioList1.addAudiosObject(audio2)
+        
+        let audioList2 = self.model.addAudioList(title: "Nightwish")
+        
+        let audio3 = CDAudio(managedObjectContext: self.model.mainContext)
+        audio3.title = "Wishmaster"
+        audioList2.addAudiosObject(audio3)
+        
+        audioList2.addAudiosObject(audio2)
+        
+        // when
+        self.model.deleteObject(audioList1)
+        
+        // then
+        let allAudios = self.model.allAudios
+        var fetchedAudio = allAudios.filter({$0.title == "Nothing else matters"}).first as CDAudio?
+        XCTAssertNil(fetchedAudio)
+        
+        // then
+        fetchedAudio = allAudios.filter({$0.title == "Phantom of the opera"}).first as CDAudio?
+        XCTAssertNotNil(fetchedAudio)
+    }
 }

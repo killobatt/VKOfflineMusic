@@ -11,17 +11,17 @@ import CoreData
 
 public class CDModel: NSObject {
    
-    private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator!
-    private(set) var model: NSManagedObjectModel!
-    private(set) var mainContext: NSManagedObjectContext!
+    public private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator!
+    public private(set) var model: NSManagedObjectModel!
+    public private(set) var mainContext: NSManagedObjectContext!
     
-    var modelFileName: String {
+    public var modelFileName: String {
         get {
             return "Model.momd"
         }
     }
     
-    var modelFileURL: NSURL? {
+    public var modelFileURL: NSURL? {
         if let modelPath = NSBundle(forClass: self.dynamicType).pathForResource(self.modelFileName.stringByDeletingPathExtension,
             ofType: self.modelFileName.pathExtension) {
                 return NSURL(string: modelPath)
@@ -47,23 +47,81 @@ public class CDModel: NSObject {
         }
     }
     
-    public var audioLists: [CDAudioList] {
-        get {
-            var error: NSError? = nil
-            if var audioLists = self.mainContext.executeFetchRequest(self.audioListFetchRequest, error: &error) {
-                return audioLists as! [CDAudioList]
-            } else {
-                NSLog("Error fetching audio lists: \(error)")
-                return []
-            }
+    public func save() {
+        var error: NSError? = nil
+        if !self.mainContext.save(&error) {
+            NSLog("Error saving model: \(error)")
         }
     }
     
-    public var audioListFetchRequest: NSFetchRequest {
-        get {
-            var fetchRequest = NSFetchRequest(entityName: CDAudioList.entityName())
-            return fetchRequest
+    private func executeFetchRequest(fetchRequest: NSFetchRequest) -> [NSManagedObject] {
+        var error: NSError? = nil
+        if var audioLists = self.mainContext.executeFetchRequest(fetchRequest, error: &error) {
+            return audioLists as! [NSManagedObject]
+        } else {
+            NSLog("Fetch request \(fetchRequest) for \(fetchRequest.entityName) failed with error: \(error)")
+            return []
         }
     }
+    
+    public func deleteObject(object: NSManagedObject) {
+        if object is CDAudioList {
+            self.deleteAudioList(object as! CDAudioList)
+        } else if object is CDAudio {
+            self.deleteAudio(object as! CDAudio)
+        } else {
+            self.mainContext.deleteObject(object)
+        }
+    }
+}
 
+/// MARK: - AudioList
+
+public extension CDModel {
+    
+    public func addAudioList(#title: String) -> CDAudioList {
+        var storedAudioList = CDAudioList(managedObjectContext: self.mainContext)
+        storedAudioList.title = title as String
+        storedAudioList.identifier = NSUUID().UUIDString
+        return storedAudioList
+    }
+    
+    private func deleteAudioList(list: CDAudioList) {
+        let audiosToDelete = self.uniqueAudiosFromAudioList(list)
+        for audio in audiosToDelete {
+            self.deleteAudio(audio)
+        }
+        self.mainContext.deleteObject(list)
+    }
+    
+    public var audioLists: [CDAudioList] {
+        return self.executeFetchRequest(self.audioListFetchRequest) as! [CDAudioList]
+    }
+    
+    public var audioListFetchRequest: NSFetchRequest {
+        return NSFetchRequest(entityName: CDAudioList.entityName())
+    }
+}
+
+/// MARK: - Audio
+
+public extension CDModel {
+    
+    public var allAudiosFetchRequest: NSFetchRequest {
+        return NSFetchRequest(entityName: CDAudio.entityName())
+    }
+    
+    public var allAudios: [CDAudio] {
+        return self.executeFetchRequest(self.allAudiosFetchRequest) as! [CDAudio]
+    }
+    
+    /// Audios contained in given list only
+    public func uniqueAudiosFromAudioList(list: CDAudioList) -> [CDAudio] {
+        let audios = list.audios.array as! Array<CDAudio>
+        return audios.filter{ $0.lists.count == 1 }
+    }
+    
+    private func deleteAudio(audio: CDAudio) {
+        self.mainContext.deleteObject(audio)
+    }
 }

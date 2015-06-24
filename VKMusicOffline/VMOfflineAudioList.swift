@@ -13,7 +13,7 @@ import CoreDataStorage
 class VMOfflineAudioList: VMAudioList, NSCoding {
     
     var identifier: NSUUID
-    private var storedAudioList: CDAudioList!
+    private(set) var storedAudioList: CDAudioList!
     
     init(storedAudioList: CDAudioList) {
         self.storedAudioList = storedAudioList

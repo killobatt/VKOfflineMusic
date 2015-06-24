@@ -12,7 +12,7 @@ enum CDAudioListRelationships: String {
     case audios = "audios"
 }
 
-@objc
+@objc(_CDAudioList)
 public class _CDAudioList: NSManagedObject {
 
     // MARK: - Class methods

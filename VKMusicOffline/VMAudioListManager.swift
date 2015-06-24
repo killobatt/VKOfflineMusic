@@ -8,7 +8,6 @@
 
 import Foundation
 import VK
-import CoreData
 import CoreDataStorage
 
 class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
@@ -40,7 +39,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     
     // MARK: - Audio List Storage
     
-    var model: CDModel
+    var model: CDModel!
     
     // MARK: - VMAudioLists
     var userAudioList: VMUserAudioList!
@@ -106,18 +105,33 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     
     // MARK: - Offline audio lists
     
-    func addOfflineAudioList(title:NSString) -> VMOfflineAudioList {
-        var offlineAudioList = VMOfflineAudioList(title: title)
+    func addOfflineAudioList(title:String) -> VMOfflineAudioList {
+        var storedAudioList = self.model.addAudioList(title: title)
+        var offlineAudioList = VMOfflineAudioList(storedAudioList: storedAudioList)
         self.offlineAudioLists.append(offlineAudioList)
-        self.saveLegacyOfflineAudioLists()
+        self.saveOfflineAudioLists()
         return offlineAudioList
     }
     
     func removeOfflineAudioList(list:VMOfflineAudioList) {
         if let index = find(self.offlineAudioLists, list) {
             self.offlineAudioLists.removeAtIndex(index)
-            self.removeFilesForList(list)
+            self.model.deleteObject(list.storedAudioList)
+            let storedAudios = self.model.uniqueAudiosFromAudioList(list.storedAudioList)
+            for storedAudio in storedAudios {
+                self.model.deleteObject(storedAudio)
+            }
+//            TODO: remove only files for deleted list
+//            self.removeFilesForList(list)
         }
+    }
+    
+    private func removeFileForAudio(audio:VMAudio) {
+//        if let fileName = audio.localFileName {
+//            if !NSFileManager.defaultManager().removeItemAtPath(listPath, error: &error) {
+//                NSLog("Could not remove list \(list.title) at path: \(listPath): \(error)")
+//            }
+//        }
     }
     
     private func removeFilesForList(list:VMOfflineAudioList) {
@@ -127,7 +141,6 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         if !NSFileManager.defaultManager().removeItemAtPath(listPath, error: &error) {
             NSLog("Could not remove list \(list.title) at path: \(listPath): \(error)")
         }
-        
     }
     
     func createAudioListsDirectoryIfNeeded() {
@@ -184,17 +197,24 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     }
     
     func loadOfflineAudioLists() {
-//        self.model.audioLists
+        let audioLists = self.model.audioLists
+        
+        self.offlineAudioLists = []
+        for storedAudioList in audioLists {
+            let list = VMOfflineAudioList(storedAudioList: storedAudioList)
+            self.offlineAudioLists.append(list)
+            NSLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
+        }
     }
     
     func saveOfflineAudioLists() {
-        
+        self.model.save()
     }
     
     // MARK: - Paths
     
     var audioListModelURL: NSURL {
-        return NSURL(string: self.offlineAudioListDirectoryPath.stringByAppendingPathComponent("audio-list-model.sqlite"))!
+        return NSURL(fileURLWithPath: self.offlineAudioListDirectoryPath.stringByAppendingPathComponent("audio-list-model.sqlite"))!
     }
     
     var offlineAudioListDirectoryPath: String {
