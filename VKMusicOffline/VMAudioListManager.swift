@@ -27,6 +27,8 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         super.init()
         self.model = CDModel(storageURL:self.audioListModelURL)
         
+        self.migrateToCoreDataStorage()
+        
         self.loadOfflineAudioLists()
         
 //        self.loadLegacyOfflineAudioLists()
@@ -137,7 +139,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     }
     
     private func removeFilesForList(list:VMOfflineAudioList) {
-        let listPath = self.pathForList(list)
+        let listPath = self.pathForLegacyList(list)
         NSLog("Removin list \(list.title) at path: \(listPath)...)")
         var error: NSError? = nil
         if !NSFileManager.defaultManager().removeItemAtPath(listPath, error: &error) {
@@ -162,25 +164,25 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         self.createAudioListsDirectoryIfNeeded()
         
         for list in self.offlineAudioLists {
-            let path = self.pathForList(list)
+            let path = self.pathForLegacyList(list)
             NSLog("Saving list '\(list.title)' with \(list.audios.count) audios to file '\(path)'...")
             NSKeyedArchiver.archiveRootObject(list, toFile: path)
         }
     }
     
-    func loadLegacyOfflineAudioLists() {
-        self.offlineAudioLists = []
+    func loadLegacyOfflineAudioLists() -> [VMOfflineAudioList] {
+        var offlineAudioLists: [VMOfflineAudioList] = []
         
         let fileManager = NSFileManager.defaultManager()
         var audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryPath)
         if (audioListsDirExists) {
             
-            NSLog("Scanning folder '\(self.offlineAudioListDirectoryPath)' for lists...")
+            NSLog("Scanning folder '\(self.offlineAudioListDirectoryPath)' for legacy lists...")
             var error: NSError? = nil
             let paths = fileManager.contentsOfDirectoryAtPath(self.offlineAudioListDirectoryPath, error: &error) as! [String]?
             if (error != nil) {
                 NSLog("Error loading contents of dir \(self.offlineAudioListDirectoryPath) : \(error)")
-                return
+                return []
             }
             
             if let listsFileNames = paths {
@@ -189,19 +191,19 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
                     if (listPath.pathExtension != "list") {
                         continue
                     }
-                    NSLog("Loading list from file '\(listPath)'...")
+                    NSLog("Loading legacy list from file '\(listPath)'...")
                     var list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as! VMOfflineAudioList
-                    self.offlineAudioLists.append(list)
-                    NSLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
+                    offlineAudioLists.append(list)
+                    NSLog("Loaded legacy list '\(list.title)' with \(list.audios.count) audios")
                 }
             }
         }
+        return offlineAudioLists
     }
     
     func loadOfflineAudioLists() {
         let audioLists = self.model.audioLists
         
-        self.offlineAudioLists = []
         for storedAudioList in audioLists {
             let list = VMOfflineAudioList(storedAudioList: storedAudioList)
             self.offlineAudioLists.append(list)
@@ -231,7 +233,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         }
     }
     
-    func pathForList(list: VMOfflineAudioList) -> String {
+    func pathForLegacyList(list: VMOfflineAudioList) -> String {
         let path = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(list.identifier.UUIDString)
         return path.stringByAppendingPathExtension("list")!
     }
@@ -328,3 +330,25 @@ extension VMAudio {
         }
     }
 }
+
+/// MARK: - Migration
+
+extension VMAudioListManager {
+    func migrateToCoreDataStorage() {
+        let legacyAudioLists = self.loadLegacyOfflineAudioLists()
+        for legacyList in legacyAudioLists {
+            let storedAudioList = CDAudioList.storedAudioListForAudioList(legacyList,
+                managedObjectContext: self.model.mainContext)
+            
+            let path = self.pathForLegacyList(legacyList)
+            var error:NSError? = nil
+            if NSFileManager.defaultManager().removeItemAtPath(path, error: &error) {
+                NSLog("Removed legacy list \(legacyList.title) file \(path)")
+            } else {
+                NSLog("Error removing list \(legacyList.title) file: \(path)")
+            }
+        }
+        self.model.save()
+    }
+}
+

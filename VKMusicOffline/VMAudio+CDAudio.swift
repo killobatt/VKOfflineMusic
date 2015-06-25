@@ -45,7 +45,7 @@ extension CDAudio {
         var error: NSError? = nil
         var storedAudio = context.executeFetchRequest(request, error: &error)?.first as! CDAudio!
         if storedAudio == nil {
-            var storedAudio = CDAudio(managedObjectContext: context)
+            storedAudio = CDAudio(managedObjectContext: context)
         }
         
         storedAudio.id = audio.id

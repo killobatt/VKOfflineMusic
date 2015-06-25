@@ -23,7 +23,7 @@ extension CDLyrics {
         var error: NSError? = nil
         var storedLyrics = context.executeFetchRequest(request, error: &error)?.first as! CDLyrics!
         if storedLyrics == nil {
-            var storedLyrics = CDLyrics(managedObjectContext: context)
+            storedLyrics = CDLyrics(managedObjectContext: context)
         }
         
         storedLyrics.id = lyrics.id
