@@ -31,6 +31,8 @@
 		1E2267D11B371C79003980E3 /* VMLyrics+CSLyrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267D01B371C79003980E3 /* VMLyrics+CSLyrics.swift */; };
 		1E2267D31B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267D21B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift */; };
 		1E2600381B3B05A40043AED4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267C11B3626C8003980E3 /* Model.xcdatamodeld */; };
+		1E26003A1B3BDD640043AED4 /* VMSynchronizedAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2600391B3BDD640043AED4 /* VMSynchronizedAudioList.swift */; };
+		1E26003C1B3BDE1B0043AED4 /* VMAudioDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E26003B1B3BDE1B0043AED4 /* VMAudioDownloadManager.swift */; };
 		1E38FCCE19E66F90002ECA34 /* VMOfflineAudioSearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */; };
 		1E38FCD419E6706C002ECA34 /* VMAudioListSearching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */; };
 		1E512E0719EE64D000CB22CC /* VMAudioListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */; };
@@ -232,6 +234,8 @@
 		1E2267CE1B3719E0003980E3 /* VMAudio+CDAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VMAudio+CDAudio.swift"; sourceTree = "<group>"; };
 		1E2267D01B371C79003980E3 /* VMLyrics+CSLyrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VMLyrics+CSLyrics.swift"; sourceTree = "<group>"; };
 		1E2267D21B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VMOfflineAudioList+CDAudioList.swift"; sourceTree = "<group>"; };
+		1E2600391B3BDD640043AED4 /* VMSynchronizedAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMSynchronizedAudioList.swift; sourceTree = "<group>"; };
+		1E26003B1B3BDE1B0043AED4 /* VMAudioDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioDownloadManager.swift; sourceTree = "<group>"; };
 		1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOfflineAudioSearchList.swift; sourceTree = "<group>"; };
 		1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListSearching.swift; sourceTree = "<group>"; };
 		1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListManager.swift; sourceTree = "<group>"; };
@@ -409,9 +413,11 @@
 				CBAED45A19CE285A00CF634D /* VMSearchAudioList.swift */,
 				CB85503A19D2186600B4EF0A /* VMOfflineAudioList.swift */,
 				1E2267D21B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift */,
+				1E2600391B3BDD640043AED4 /* VMSynchronizedAudioList.swift */,
 				1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */,
 				1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */,
 				1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */,
+				1E26003B1B3BDE1B0043AED4 /* VMAudioDownloadManager.swift */,
 				1E0BD1C619DA9AA500A9C4C2 /* VMUserManager.swift */,
 				1E15F32319DAB0FC00A32881 /* VMAudioListPlayer.swift */,
 				843CA3571A1BEDBA00329FB4 /* VMAudioListEnumerator.swift */,
@@ -854,6 +860,7 @@
 				CBB7A90619CD844100E95307 /* VMMenuViewController.swift in Sources */,
 				1E512E1819EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift in Sources */,
 				CBAED45B19CE285A00CF634D /* VMSearchAudioList.swift in Sources */,
+				1E26003A1B3BDD640043AED4 /* VMSynchronizedAudioList.swift in Sources */,
 				CBB7A90419CD844100E95307 /* AppDelegate.swift in Sources */,
 				843CA3581A1BEDBA00329FB4 /* VMAudioListEnumerator.swift in Sources */,
 				1E512E0719EE64D000CB22CC /* VMAudioListManager.swift in Sources */,
@@ -868,6 +875,7 @@
 				CB9996D519CDD9730076D5E8 /* VMAudioCell.swift in Sources */,
 				8417F0A21A6C5CEF009F5A0A /* VMSplitViewController.swift in Sources */,
 				CBAED45419CE21CF00CF634D /* VMOnlineAudioList.swift in Sources */,
+				1E26003C1B3BDE1B0043AED4 /* VMAudioDownloadManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,7 @@ import Foundation
 import VK
 import CoreDataStorage
 
-class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
+class VMAudioListManager: NSObject {
    
     class var sharedInstance : VMAudioListManager {
     struct Static {
@@ -27,14 +27,13 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         super.init()
         self.model = CDModel(storageURL:self.audioListModelURL)
         
+        self.downloadManager = VMAudioDownloadManager(delegate: self);
+        
         self.migrateToCoreDataStorage()
         
         self.loadOfflineAudioLists()
         
 //        self.loadLegacyOfflineAudioLists()
-        
-        let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("com.vv.vkmusic-offline")
-        self.URLSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
     }
     
     deinit {
@@ -44,6 +43,8 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     // MARK: - Audio List Storage
     
     var model: CDModel!
+    
+    var downloadManager: VMAudioDownloadManager!
     
     // MARK: - VMAudioLists
     var userAudioList: VMUserAudioList!
@@ -238,85 +239,34 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         return path.stringByAppendingPathExtension("list")!
     }
     
-    // MARK: - Downloading
+}
+
+/// MARK: - Downloading
+
+extension VMAudioListManager: VMAudioDownloadManagerDelegate {
     
-    var URLSession: NSURLSession?
-    
-    var backgroundURLSessionCompletionHandler: (() -> Void)?
-    
-    private var downloadTasks: Dictionary<Int, NSNumber> = Dictionary() // download task id, audio id
-    
-    func downloadAudio(audio:VMAudio) {
-        if (audio.localFileName != nil) {
-            return
-        }
-        let downloadTaskOptional = self.URLSession?.downloadTaskWithURL(audio.URL)
-        if let downloadTask = downloadTaskOptional {
-            self.downloadTasks[downloadTask.taskIdentifier] = audio.id
-            downloadTask.taskDescription = audio.formattedTitle as String
-            downloadTask.resume()
-        }
-        if let lyrics = audio.lyrics {
-            if lyrics.text == nil {
-                lyrics.loadText { (error: NSError!) -> Void in
-                    self.saveOfflineAudioLists()
-                }
-            }
-        }
-    }
-    
-    func getAudioDownloadTaskList(completion: ((downloadTasks:[AnyObject]) -> Void)?) {
-        self.URLSession?.getTasksWithCompletionHandler({ (dataTasks: [AnyObject]!, uploadTasks: [AnyObject]!, downloadTasks: [AnyObject]!) -> Void in
-            if (downloadTasks != nil) {
-                completion?(downloadTasks: downloadTasks)
-            }
-        })
-    }
-    
-    // MARK: - NSURLSessionDownloadDelegate
-    
-    /* Sent when a download task that has completed a download.  The delegate should
-    * copy or move the file at the given location to a new location as it will be
-    * removed when the delegate message returns. URLSession:task:didCompleteWithError: will
-    * still be called.
-    */
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
-        if let audioID = self.downloadTasks[downloadTask.taskIdentifier] {
-            let audioFileName = audioID.stringValue.stringByAppendingPathExtension("mp3")
-            let audioPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(audioFileName!)
-            if let audioURL = NSURL(fileURLWithPath:audioPath) {            
-                var error: NSError?
-                NSFileManager.defaultManager().moveItemAtURL(location, toURL: audioURL, error: &error)
-                for list in self.offlineAudioLists {
-                    for audio in list.audios {
-                        if (audio as! VMAudio).id == audioID {
-                            (audio as! VMAudio).localFileName = audioFileName
-                        }
+    func downloadManager(downloadManager: VMAudioDownloadManager, didLoadFile url: NSURL, forAudioWithID audioID: NSNumber) {
+        let audioFileName = audioID.stringValue.stringByAppendingPathExtension("mp3")
+        let audioPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(audioFileName!)
+        if let audioURL = NSURL(fileURLWithPath:audioPath) {
+            var error: NSError?
+            NSFileManager.defaultManager().moveItemAtURL(url, toURL: audioURL, error: &error)
+            for list in self.offlineAudioLists {
+                for audio in list.audios {
+                    if (audio as! VMAudio).id == audioID {
+                        (audio as! VMAudio).localFileName = audioFileName
                     }
                 }
             }
-            self.saveOfflineAudioLists()
         }
+        self.saveOfflineAudioLists()
     }
     
-    /* Sent periodically to notify the delegate of download progress. */
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        NSLog("URLSession downloadTask \(downloadTask.taskIdentifier) didWriteData \(bytesWritten) bytes, totalBytesWritten \(totalBytesWritten), totalBytesExpectedToWrite \(totalBytesExpectedToWrite)")
-    }
-    
-    /* Sent when a download has been resumed. If a download failed with an
-    * error, the -userInfo dictionary of the error will contain an
-    * NSURLSessionDownloadTaskResumeData key, whose value is the resume
-    * data.
-    */
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
-        
-    }
-    
-    func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
-        self.backgroundURLSessionCompletionHandler!()
+    func downloadManager(downloadManager: VMAudioDownloadManager, didLoadLyrics lyrics: VMLyrics, forAudio audio: VMAudio) {
+        self.saveOfflineAudioLists()
     }
 }
+
 
 extension VMAudio {
     var localURL: NSURL! {

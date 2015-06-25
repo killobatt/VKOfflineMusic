@@ -43,7 +43,7 @@ class VMAudioListsSelectionViewController: UITableViewController {
             let audioList = VMAudioListManager.sharedInstance.addOfflineAudioList(textField.text)
             audioList.addAudio(self.audioToAdd!)
             VMAudioListManager.sharedInstance.saveOfflineAudioLists()
-            VMAudioListManager.sharedInstance.downloadAudio(self.audioToAdd!)
+            VMAudioListManager.sharedInstance.downloadManager.downloadAudio(self.audioToAdd!)
             self.dismissViewControllerAnimated(true, completion: {(_) in })
         }
         okAction.enabled = false;
@@ -103,7 +103,7 @@ class VMAudioListsSelectionViewController: UITableViewController {
             let audioList = VMAudioListManager.sharedInstance.offlineAudioLists[indexPath.row]
             audioList.addAudio(self.audioToAdd!)
             VMAudioListManager.sharedInstance.saveOfflineAudioLists()
-            VMAudioListManager.sharedInstance.downloadAudio(self.audioToAdd!)
+            VMAudioListManager.sharedInstance.downloadManager.downloadAudio(self.audioToAdd!)
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
             self.showCreateNewListDialog()

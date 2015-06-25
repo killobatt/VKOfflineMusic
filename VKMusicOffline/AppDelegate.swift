@@ -79,8 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     // MARK: - NSURLSession
     
     func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
-        if (identifier == VMAudioListManager.sharedInstance.URLSession?.configuration.identifier) {
-            VMAudioListManager.sharedInstance.backgroundURLSessionCompletionHandler = completionHandler
+        let downloadManager = VMAudioListManager.sharedInstance.downloadManager
+        if (identifier == downloadManager.URLSession?.configuration.identifier) {
+            downloadManager.backgroundURLSessionCompletionHandler = completionHandler
         }
     }
 

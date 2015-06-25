@@ -23,7 +23,7 @@ class VMDownloadsViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        VMAudioListManager.sharedInstance.getAudioDownloadTaskList({ (downloadTasks:[AnyObject]) -> Void in
+        VMAudioListManager.sharedInstance.downloadManager.getAudioDownloadTaskList({ (downloadTasks:[AnyObject]) -> Void in
             var tasks = Array<NSURLSessionDownloadTask>()
             for task in downloadTasks {
                 if let downloadTask = task as? NSURLSessionDownloadTask {
