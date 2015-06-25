@@ -21,6 +21,7 @@ extension VMAudio {
         if let remoteURLString = storedAudio.remoteURLString {
             self.URL = NSURL(string: remoteURLString)
         }
+        self.localFileName = storedAudio.localFileName
         self.albumID = storedAudio.albumID
         self.genreID = storedAudio.genreID
         if let duration = storedAudio.duration?.integerValue {
@@ -42,28 +43,29 @@ extension CDAudio {
         request.predicate = NSPredicate(format: "id = %@", audio.id)
         
         var error: NSError? = nil
-        if let storedAudio = context.executeFetchRequest(request, error: &error)?.first as? CDAudio {
-            return storedAudio
-        } else {
+        var storedAudio = context.executeFetchRequest(request, error: &error)?.first as! CDAudio!
+        if storedAudio == nil {
             var storedAudio = CDAudio(managedObjectContext: context)
-            storedAudio.id = audio.id
-            storedAudio.ownerID = audio.ownerID
-            if let artist = audio.artist {
-                storedAudio.artist = artist as String
-            }
-            if let title = audio.title {
-                storedAudio.title = title as String
-            }
-            storedAudio.remoteURLString = audio.URL.absoluteString
-            storedAudio.albumID = audio.albumID
-            storedAudio.genreID = audio.genreID
-            storedAudio.duration = NSNumber(integer: audio.duration)
-            if let lyrics = audio.lyrics {
-                storedAudio.lyrics = CDLyrics.storedLyricsForLyrics(lyrics, storedAudio: storedAudio,
-                    managedObjectContext: context)
-            }
-            return storedAudio
         }
+        
+        storedAudio.id = audio.id
+        storedAudio.ownerID = audio.ownerID
+        if let artist = audio.artist {
+            storedAudio.artist = artist as String
+        }
+        if let title = audio.title {
+            storedAudio.title = title as String
+        }
+        storedAudio.remoteURLString = audio.URL.absoluteString
+        storedAudio.localFileName = audio.localFileName as String?
+        storedAudio.albumID = audio.albumID
+        storedAudio.genreID = audio.genreID
+        storedAudio.duration = NSNumber(integer: audio.duration)
+        if let lyrics = audio.lyrics {
+            storedAudio.lyrics = CDLyrics.storedLyricsForLyrics(lyrics, storedAudio: storedAudio,
+                managedObjectContext: context)
+        }
+        return storedAudio
     }
     
 }

@@ -32,10 +32,12 @@ public class CDModel: NSObject {
     
     public init(storageURL:NSURL) {
         super.init()
+        NSLog("Using model \(self.modelFileURL)")
         self.model = NSManagedObjectModel(contentsOfURL: self.modelFileURL!)
         
-        self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.model)
         var error: NSError? = nil
+        self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.model)
+        NSLog("Using persistentStore: \(storageURL)")
         let store = self.persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType,
             configuration: nil, URL: storageURL, options: nil, error: &error)
         
@@ -113,6 +115,12 @@ public extension CDModel {
     
     public var allAudios: [CDAudio] {
         return self.executeFetchRequest(self.allAudiosFetchRequest) as! [CDAudio]
+    }
+    
+    public func audioWithID(id: NSNumber) -> CDAudio? {
+        var fetchRequest = NSFetchRequest(entityName: CDAudio.entityName())
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        return (self.executeFetchRequest(fetchRequest) as! [CDAudio]).first
     }
     
     /// Audios contained in given list only

@@ -17,21 +17,20 @@ extension CDAudioList {
         request.predicate = NSPredicate(format: "identifier = %@", audioList.identifier.UUIDString)
         
         var error: NSError? = nil
-        if let storedAudioList = context.executeFetchRequest(request, error: &error)?.first as? CDAudioList {
-            return storedAudioList
-        } else {
-            var storedAudioList = CDAudioList(managedObjectContext: context)
-            storedAudioList.identifier = audioList.identifier.UUIDString
-            storedAudioList.title = audioList.title! as String
-            
-            var storedAudios: NSMutableOrderedSet = NSMutableOrderedSet(array: [])
-            for audio in audioList.audios {
-                let storedAudio = CDAudio.storedAudioForAudio(audio as! VMAudio, managedObjectContext: context)
-                storedAudios.addObject(storedAudio)
-            }
-            storedAudioList.audios = storedAudios
-            return storedAudioList
+        var storedAudioList: CDAudioList! = context.executeFetchRequest(request, error: &error)?.first as! CDAudioList!
+        if storedAudioList == nil {
+            storedAudioList = CDAudioList(managedObjectContext: context)
         }
+        storedAudioList.identifier = audioList.identifier.UUIDString
+        storedAudioList.title = audioList.title! as String
+        
+        var storedAudios: NSMutableOrderedSet = NSMutableOrderedSet(array: [])
+        for audio in audioList.audios {
+            let storedAudio = CDAudio.storedAudioForAudio(audio as! VMAudio, managedObjectContext: context)
+            storedAudios.addObject(storedAudio)
+        }
+        storedAudioList.audios = storedAudios
+        return storedAudioList
     }
     
 }

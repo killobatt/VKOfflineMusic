@@ -171,4 +171,21 @@ class CDModelTests: XCTestCase {
         fetchedAudio = allAudios.filter({$0.title == "Phantom of the opera"}).first as CDAudio?
         XCTAssertNotNil(fetchedAudio)
     }
+    
+    func testGetAudioByID() {
+        // given
+        let audio = CDAudio(managedObjectContext: self.model.mainContext)
+        audio.title = "Nothing else matters"
+        audio.id = 100500
+        
+        // when
+        let fetchedAudio = self.model.audioWithID(100500)
+        
+        // then
+        XCTAssertNotNil(fetchedAudio)
+        XCTAssertNotNil(fetchedAudio?.id)
+        XCTAssertNotNil(fetchedAudio?.title)
+        XCTAssertEqual(fetchedAudio!.id!, 100500)
+        XCTAssertEqual(fetchedAudio!.title!, "Nothing else matters")
+    }
 }

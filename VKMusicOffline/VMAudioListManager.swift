@@ -27,6 +27,8 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         super.init()
         self.model = CDModel(storageURL:self.audioListModelURL)
         
+        self.loadOfflineAudioLists()
+        
 //        self.loadLegacyOfflineAudioLists()
         
         let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("com.vv.vkmusic-offline")
@@ -34,7 +36,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     }
     
     deinit {
-        self.saveLegacyOfflineAudioLists()
+        self.saveOfflineAudioLists()
     }
     
     // MARK: - Audio List Storage
@@ -208,6 +210,9 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     }
     
     func saveOfflineAudioLists() {
+        for list in self.offlineAudioLists {
+            CDAudioList.storedAudioListForAudioList(list, managedObjectContext: self.model.mainContext)
+        }
         self.model.save()
     }
     
@@ -252,7 +257,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
         if let lyrics = audio.lyrics {
             if lyrics.text == nil {
                 lyrics.loadText { (error: NSError!) -> Void in
-                    self.saveLegacyOfflineAudioLists()
+                    self.saveOfflineAudioLists()
                 }
             }
         }
@@ -288,7 +293,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
                     }
                 }
             }
-            self.saveLegacyOfflineAudioLists()
+            self.saveOfflineAudioLists()
         }
     }
     

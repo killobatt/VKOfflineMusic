@@ -21,15 +21,15 @@ extension CDLyrics {
         request.predicate = NSPredicate(format: "id = %@", lyrics.id)
         
         var error: NSError? = nil
-        if let storedLyrics = context.executeFetchRequest(request, error: &error)?.first as? CDLyrics {
-            return storedLyrics
-        } else {
+        var storedLyrics = context.executeFetchRequest(request, error: &error)?.first as! CDLyrics!
+        if storedLyrics == nil {
             var storedLyrics = CDLyrics(managedObjectContext: context)
-            storedLyrics.id = lyrics.id
-            storedLyrics.audio = storedAudio
-            storedLyrics.text = lyrics.text
-            return storedLyrics
         }
+        
+        storedLyrics.id = lyrics.id
+        storedLyrics.audio = storedAudio
+        storedLyrics.text = lyrics.text
+        return storedLyrics
     }
     
 }

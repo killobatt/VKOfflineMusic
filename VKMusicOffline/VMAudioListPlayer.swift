@@ -284,9 +284,11 @@ class VMAudioListPlayer: NSObject {
                 case AVPlayerItemStatus.Failed:
                     NSLog("VMAudioListPlayer: AVPlayerItem: Failed with error \(playerItem.error)")
                     self.state = State.Failed(error: playerItem.error)
+                    self.player = nil
                 case AVPlayerItemStatus.Unknown:
                     NSLog("VMAudioListPlayer: AVPlayerItem: Unknown status, eror \(playerItem.error)")
                     self.state = State.Failed(error: nil)
+                    self.player = nil                    
                 }
             }
         }
