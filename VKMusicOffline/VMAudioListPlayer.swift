@@ -142,7 +142,9 @@ class VMAudioListPlayer: NSObject {
     
     func pause() {
         NSLog("VMAudioListPlayer pause")
-        self.player.pause()
+        if self.player != nil {
+            self.player.pause()
+        }
         self.isPlaying = false
     }
     

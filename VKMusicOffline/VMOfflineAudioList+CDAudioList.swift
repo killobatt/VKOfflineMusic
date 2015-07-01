@@ -26,7 +26,7 @@ extension CDAudioList {
         
         var storedAudios: NSMutableOrderedSet = NSMutableOrderedSet(array: [])
         for audio in audioList.audios {
-            let storedAudio = CDAudio.storedAudioForAudio(audio as! VMAudio, managedObjectContext: context)
+            let storedAudio = CDAudio.storedAudioForAudio(audio, managedObjectContext: context)
             storedAudios.addObject(storedAudio)
         }
         storedAudioList.audios = storedAudios

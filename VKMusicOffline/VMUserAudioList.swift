@@ -13,6 +13,10 @@ class VMUserAudioList: VMOnlineAudioList {
     
     var user: VKUser
     
+    override var method: String! {
+        return "audio.get"
+    }
+    
     override var parameters: NSDictionary {
         get {
             let parameters: NSMutableDictionary = [
@@ -21,12 +25,6 @@ class VMUserAudioList: VMOnlineAudioList {
             parameters.addEntriesFromDictionary(super.parameters as [NSObject : AnyObject])
             return parameters
         }
-    }
-    
-    override func createRequest() -> VKRequest {
-        return VKApi.requestWithMethod("audio.get",
-            andParameters:self.parameters as [NSObject : AnyObject],
-            andHttpMethod:"GET")
     }
     
     init(with user: VKUser) {

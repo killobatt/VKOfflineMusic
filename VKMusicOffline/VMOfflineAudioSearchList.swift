@@ -33,9 +33,9 @@ class VMOfflineAudioSearchList: VMAudioList, VMAudioListSearching {
     
     // MARK: - VMAudioListSearching
     
-    override var audios : NSArray {
+    override var audios : [VMAudio] {
         get {
-            return self.filteredAudios
+            return self.filteredAudios as! [VMAudio]
         }
         set {
             assert(false, "Cannot set audios for search list");

@@ -11,7 +11,7 @@ import VK
 
 class VMAudioList: NSObject {
     
-    var audios : NSArray = []
+    var audios : [VMAudio] = []
     
     var title : NSString!
    
@@ -23,7 +23,7 @@ class VMAudioList: NSObject {
     
     subscript(index: Int) -> VMAudio {
         get {
-            return self.audios[index] as! VMAudio
+            return self.audios[index]
         }
     }
     
@@ -36,13 +36,6 @@ class VMAudioList: NSObject {
     
     // nuber of audios in both loaded and unloaded part of list
     dynamic var totalCount: Int = 0 // {
-//        willSet {
-//            self.willChangeValueForKey("totalCount")
-//        }
-//        didSet {
-//            self.didChangeValueForKey("totalCount")
-//        }
-//    }
     
     func hasNextPage() -> Bool { return false }
     func loadNextPage(#completion:((NSError!) -> Void)?) -> Void { }
@@ -55,6 +48,7 @@ extension VMAudioList {
     
     func moveTrackFromIndex(index:Int, toIndex:Int) { }
     func deleteTrackAtIndex(index:Int) { }
+    func deleteAudio(audio: VMAudio) { }
     
     func editingEnabled() -> Bool { return false }
     

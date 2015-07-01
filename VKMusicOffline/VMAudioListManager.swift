@@ -222,16 +222,17 @@ class VMAudioListManager: NSObject {
     // MARK: - Paths
     
     var audioListModelURL: NSURL {
-        return NSURL(fileURLWithPath: self.offlineAudioListDirectoryPath.stringByAppendingPathComponent("audio-list-model.sqlite"))!
+        return NSURL(fileURLWithPath: self.userDocumentsDirectoryPath.stringByAppendingPathComponent("audio-list-model.sqlite"))!
+    }
+    
+    var userDocumentsDirectoryPath: String {
+        let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
+            NSSearchPathDomainMask.UserDomainMask, true)
+        return dirs[0] as! String
     }
     
     var offlineAudioListDirectoryPath: String {
-        get {
-            let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
-                NSSearchPathDomainMask.UserDomainMask, true)
-            let userDocumentsDirectory = dirs[0] as! String
-            return userDocumentsDirectory.stringByAppendingPathComponent("audio-lists")
-        }
+        return self.userDocumentsDirectoryPath.stringByAppendingPathComponent("audio-lists")
     }
     
     func pathForLegacyList(list: VMOfflineAudioList) -> String {
@@ -253,8 +254,8 @@ extension VMAudioListManager: VMAudioDownloadManagerDelegate {
             NSFileManager.defaultManager().moveItemAtURL(url, toURL: audioURL, error: &error)
             for list in self.offlineAudioLists {
                 for audio in list.audios {
-                    if (audio as! VMAudio).id == audioID {
-                        (audio as! VMAudio).localFileName = audioFileName
+                    if audio.id == audioID {
+                        audio.localFileName = audioFileName
                     }
                 }
             }

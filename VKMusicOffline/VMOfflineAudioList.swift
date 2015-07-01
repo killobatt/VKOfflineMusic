@@ -29,18 +29,37 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         self.audios = audios
     }
     
-    override var audios : NSArray {
+    override var audios : [VMAudio] {
         didSet {
             self.totalCount = self.audios.count
         }
     }
     
     func addAudio(audio:VMAudio) {
-        if self.audios.containsObject(audio) {
+        self.insertAudio(audio, atIndex: self.audios.count)
+//        if let _ = find(self.audios, audio) {
+//            return
+//        }
+//        var newAudios = self.audios
+//        newAudios.append(audio)
+//        self.audios = newAudios
+//        self.storedAudioList.addAudiosObject(CDAudio.storedAudioForAudio(audio, managedObjectContext: self.storedAudioList.managedObjectContext!))
+    }
+    
+    func insertAudio(audio: VMAudio, atIndex index:Int) {
+        if let oldIndex = find(self.audios, audio) {
+            self.moveTrackFromIndex(oldIndex, toIndex: index)
             return
         }
-        self.audios = NSArray(object: audio).arrayByAddingObjectsFromArray(self.audios as [AnyObject])
-        self.storedAudioList.addAudiosObject(CDAudio.storedAudioForAudio(audio, managedObjectContext: self.storedAudioList.managedObjectContext!))
+        
+        var newAudios = self.audios
+        newAudios.insert(audio, atIndex: index)
+        self.audios = newAudios
+        
+        let storedAudio = CDAudio.storedAudioForAudio(audio, managedObjectContext: self.storedAudioList.managedObjectContext!)
+        var storedAudios = self.storedAudioList.audios.mutableCopy() as! NSMutableOrderedSet
+        storedAudios.insertObject(storedAudio, atIndex: index)
+        self.storedAudioList.audios = storedAudios
     }
     
     // MARK: - NSCoding interface implementation
@@ -55,7 +74,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         self.identifier = aDecoder.decodeObjectForKey("identifier") as! NSUUID
         super.init()
         self.title = aDecoder.decodeObjectForKey("title") as! NSString
-        self.audios = aDecoder.decodeObjectForKey("audios") as! NSArray
+        self.audios = aDecoder.decodeObjectForKey("audios") as! [VMAudio]
     }
 
     // MARK: - VMAudio overrides
@@ -73,10 +92,10 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     }
     
     override func moveTrackFromIndex(index: Int, toIndex: Int) {
-        let audios = self.audios.mutableCopy() as! NSMutableArray
-        let audio = audios[index] as! VMAudio
-        audios.removeObjectAtIndex(index)
-        audios.insertObject(audio, atIndex:toIndex)
+        var audios = self.audios
+        let audio = audios[index]
+        audios.removeAtIndex(index)
+        audios.insert(audio, atIndex: toIndex)
         self.audios = audios
         
         if var orderedAudios = self.storedAudioList.audios.mutableCopy() as? NSMutableOrderedSet {
@@ -86,11 +105,17 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     }
     
     override func deleteTrackAtIndex(index: Int) {
-        let audios = self.audios.mutableCopy() as! NSMutableArray
-        let audio = audios[index] as! VMAudio
-        audios.removeObjectAtIndex(index)
+        var audios = self.audios
+        let audio = audios[index]
+        audios.removeAtIndex(index)
         self.audios = audios
         
-        self.storedAudioList.removeAudiosObject(self.storedAudioList.audios[index] as! CDAudio)
+        self.storedAudioList.deleteAudio(self.storedAudioList.audios[index] as! CDAudio)
+    }
+    
+    override func deleteAudio(audio: VMAudio) {
+        if let index = find(self.audios, audio) {
+            self.deleteTrackAtIndex(index)
+        }
     }
 }

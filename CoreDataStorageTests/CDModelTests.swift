@@ -188,4 +188,46 @@ class CDModelTests: XCTestCase {
         XCTAssertEqual(fetchedAudio!.id!, 100500)
         XCTAssertEqual(fetchedAudio!.title!, "Nothing else matters")
     }
+    
+    func testDeleteAudioFromOnlyContainingList() {
+        // given
+        let audio = CDAudio(managedObjectContext: self.model.mainContext)
+        audio.title = "Nothing else matters"
+        audio.id = 100500
+        
+        let audioList = CDAudioList(managedObjectContext: self.model.mainContext)
+        audioList.title = "Metallica"
+        audioList.addAudiosObject(audio)
+        
+        // when
+        audioList.deleteAudio(audio)
+        
+        // then
+        let fetchedAudio = self.model.audioWithID(100500)
+        XCTAssertNil(fetchedAudio)
+    }
+    
+    func testDeleteAudioFromNotOnlyContainingList() {
+        // given
+        let audio = CDAudio(managedObjectContext: self.model.mainContext)
+        audio.title = "Nothing else matters"
+        audio.id = 100500
+        
+        let audioList1 = CDAudioList(managedObjectContext: self.model.mainContext)
+        audioList1.title = "Metallica"
+        audioList1.addAudiosObject(audio)
+        
+        let audioList2 = CDAudioList(managedObjectContext: self.model.mainContext)
+        audioList2.title = "Alcoholica"
+        audioList2.addAudiosObject(audio)
+        
+        // when
+        audioList1.deleteAudio(audio)
+        
+        // then
+        let fetchedAudio = self.model.audioWithID(100500)
+        XCTAssertNotNil(fetchedAudio)
+        XCTAssertEqual(fetchedAudio!.lists.count, 1)
+        XCTAssertEqual(fetchedAudio!.lists.anyObject()! as! CDAudioList, audioList2)
+    }
 }

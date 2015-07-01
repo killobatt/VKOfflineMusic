@@ -11,6 +11,10 @@ import VK
 
 class VMSearchAudioList: VMOnlineAudioList, VMAudioListSearching {
     
+    override var method: String! {
+        return "audio.search"
+    }
+    
     override var parameters: NSDictionary {
         get {
             let parameters: NSMutableDictionary = [
@@ -22,12 +26,6 @@ class VMSearchAudioList: VMOnlineAudioList, VMAudioListSearching {
             parameters.addEntriesFromDictionary(super.parameters as [NSObject : AnyObject])
             return parameters
         }
-    }
-    
-    override func createRequest() -> VKRequest! {
-        return VKApi.requestWithMethod("audio.search",
-            andParameters:self.parameters as [NSObject : AnyObject],
-            andHttpMethod:"GET")
     }
     
     private var searchOwn: Bool = false
