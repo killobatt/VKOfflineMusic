@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VMDownloadsViewController: UITableViewController {
+class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerProgressDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,7 @@ class VMDownloadsViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        VMAudioListManager.sharedInstance.downloadManager.progressDelegate = self
         VMAudioListManager.sharedInstance.downloadManager.getAudioDownloadTaskList({ (downloadTasks:[AnyObject]) -> Void in
             var tasks = Array<NSURLSessionDownloadTask>()
             for task in downloadTasks {
@@ -104,5 +105,11 @@ class VMDownloadsViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //  Mark: - VMAudioDownloadManagerProgressDelegate
+    
+    func downloadManager(downloadManager: VMAudioDownloadManager, loadedBytes bytesLoaded: Int64, fromTotalBytes totalBytes: Int64, forAudioWithID: NSNumber) {
+        
+    }
 
 }

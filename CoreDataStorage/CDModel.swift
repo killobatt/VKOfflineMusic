@@ -81,11 +81,19 @@ public class CDModel: NSObject {
 
 public extension CDModel {
     
-    public func addAudioList(#title: String) -> CDAudioList {
+    public func addAudioList(#title: String, identifier:NSUUID) -> CDAudioList {
+        if let storedAudioList = self.audioListWithIdentifier(identifier) {
+            return storedAudioList
+        }
+        
         var storedAudioList = CDAudioList(managedObjectContext: self.mainContext)
         storedAudioList.title = title as String
-        storedAudioList.identifier = NSUUID().UUIDString
+        storedAudioList.identifier = identifier.UUIDString
         return storedAudioList
+    }
+    
+    public func addAudioList(#title: String) -> CDAudioList {
+        return self.addAudioList(title: title, identifier: NSUUID())
     }
     
     private func deleteAudioList(list: CDAudioList) {
@@ -98,6 +106,12 @@ public extension CDModel {
     
     public var audioLists: [CDAudioList] {
         return self.executeFetchRequest(self.audioListFetchRequest) as! [CDAudioList]
+    }
+    
+    public func audioListWithIdentifier(identifier: NSUUID) -> CDAudioList? {
+        var fetchRequest = NSFetchRequest(entityName: CDAudioList.entityName())
+        fetchRequest.predicate = NSPredicate(format: "identifier == %@", identifier.UUIDString)
+        return (self.executeFetchRequest(fetchRequest) as! [CDAudioList]).first
     }
     
     public var audioListFetchRequest: NSFetchRequest {

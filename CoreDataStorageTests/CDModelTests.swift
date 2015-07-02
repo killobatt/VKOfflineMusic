@@ -64,6 +64,19 @@ class CDModelTests: XCTestCase {
         XCTAssertEqual(audioList.title!, "Metallica", "Title should be correct")
     }
     
+    func testAudioListFetching() {
+        // given
+        let identifier = self.model.addAudioList(title: "Metallica").identifier
+        XCTAssertNotNil(NSUUID(UUIDString: identifier))
+        
+        // when
+        let fetchedAudioList = self.model.audioListWithIdentifier(NSUUID(UUIDString: identifier)!)
+        
+        // then
+        XCTAssertNotNil(fetchedAudioList, "audio list should be fetched by id")
+        XCTAssertEqual(fetchedAudioList!.identifier, identifier)
+    }
+    
     func testAudioListRemoving() {
         // given 
         let audioList = self.model.addAudioList(title: "Metallica")

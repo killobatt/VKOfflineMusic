@@ -14,20 +14,37 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
     
     var model: CDModel!
     var downloadManager: VMAudioDownloadManager!
+    var user: VKUser?
     
-    init(model: CDModel, storedAudioList: CDAudioList) {
-        self.model = model
+    override var identifier: NSUUID {
+        get {
+            return NSUUID.vm_syncAudioListUUID
+        }
+        set {
+            
+        }
+    }
+    
+    override init(storedAudioList: CDAudioList) {
         super.init(storedAudioList: storedAudioList)
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    private var request: VKRequest! = nil
+    private var request: VKRequest? {
+        if let user = self.user {
+            return VKApi.requestWithMethod("audio.get",
+                andParameters:[VK_API_OWNER_ID: user.id],
+                andHttpMethod:"GET")
+        } else {
+            return nil
+        }
+    }
     
     func synchronize() {
-        self.request.executeWithResultBlock({ (response: VKResponse!) -> Void in
+        self.request?.executeWithResultBlock({ (response: VKResponse!) -> Void in
             if response != nil {
                 if let vkAudios = VKAudios(dictionary:(response.json as! [NSObject : AnyObject])) {
                     
@@ -42,12 +59,18 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
                     for (var i: Int = 0; i < loadedAudios.count; i++) {
                         let loadedAudio = loadedAudios[i]
                         if let storedAudio = self.model.audioWithID(loadedAudio.id) {
-                            updatedAudios.append(VMAudio(storedAudio: storedAudio))
+                            let loadedAudio = VMAudio(storedAudio: storedAudio)
+                            updatedAudios.append(loadedAudio)
+                            
+                            // in case audio was not already loaded for some reason (e.g. app crash)
+                            if loadedAudio.localFileName == nil {
+                                self.downloadManager.downloadAudio(loadedAudio)
+                            }
                         } else {
-                            // TODO: download audio
                             let addedAudio = VMAudio(audio: loadedAudio)
                             updatedAudios.append(addedAudio)
                             audiosToInsert[i] = addedAudio
+                            self.downloadManager.downloadAudio(addedAudio)
                         }
                     }
                     

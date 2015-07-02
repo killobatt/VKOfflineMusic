@@ -14,15 +14,24 @@ protocol VMAudioDownloadManagerDelegate {
     optional func downloadManager(downloadManager:VMAudioDownloadManager, didLoadLyrics lyrics:VMLyrics, forAudio audio:VMAudio)
 }
 
+@objc
+protocol VMAudioDownloadManagerProgressDelegate {
+    optional func downloadManager(downloadManager:VMAudioDownloadManager, loadedBytes bytesLoaded:Int64, fromTotalBytes totalBytes:Int64, forAudioWithID:NSNumber)
+}
+
 class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     
     weak var delegate: VMAudioDownloadManagerDelegate? = nil
+    weak var progressDelegate: VMAudioDownloadManagerProgressDelegate? = nil
    
     var URLSession: NSURLSession?
     
     var backgroundURLSessionCompletionHandler: (() -> Void)?
     
     private var downloadTasks: Dictionary<Int, NSNumber> = Dictionary() // download task id, audio id
+    var downloadedAudioIDs: [NSNumber] {
+        return downloadTasks.values.array
+    }
     
     init(delegate: VMAudioDownloadManagerDelegate?) {
         super.init()
@@ -76,6 +85,9 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     /* Sent periodically to notify the delegate of download progress. */
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         NSLog("URLSession downloadTask \(downloadTask.taskIdentifier) didWriteData \(bytesWritten) bytes, totalBytesWritten \(totalBytesWritten), totalBytesExpectedToWrite \(totalBytesExpectedToWrite)")
+        if let audioID = self.downloadTasks[downloadTask.taskIdentifier] {
+            self.progressDelegate?.downloadManager?(self, loadedBytes: totalBytesWritten, fromTotalBytes: totalBytesExpectedToWrite, forAudioWithID: audioID)
+        }
     }
     
     /* Sent when a download has been resumed. If a download failed with an

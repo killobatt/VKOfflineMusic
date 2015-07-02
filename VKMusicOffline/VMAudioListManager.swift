@@ -25,9 +25,13 @@ class VMAudioListManager: NSObject {
     
     override init() {
         super.init()
+        self.createAudioListsDirectoryIfNeeded()
+        
         self.model = CDModel(storageURL:self.audioListModelURL)
         
         self.downloadManager = VMAudioDownloadManager(delegate: self);
+        
+        self.addSyncAudioList()
         
         self.migrateToCoreDataStorage()
         
@@ -48,6 +52,12 @@ class VMAudioListManager: NSObject {
     
     // MARK: - VMAudioLists
     var userAudioList: VMUserAudioList!
+    var syncAudioList: VMSynchronizedAudioList! {
+        didSet {
+            self.syncAudioList.model = self.model
+            self.syncAudioList.downloadManager = self.downloadManager
+        }
+    }
     var searchAudioList: VMSearchAudioList!
     var recommendationsAudioList: VMRecomendationsAudioList!
     var offlineAudioLists: Array<VMOfflineAudioList> = [] {
@@ -95,6 +105,8 @@ class VMAudioListManager: NSObject {
                 self.recommendationsAudioList = VMRecomendationsAudioList(user: newUser)
                 self.recommendationsAudioList.title = "Рекомендации"
                 self.recommendationsAudioList.loadNextPage(completion: nil)
+                self.syncAudioList.user = newUser
+                self.syncAudioList.synchronize()
                 self.willChangeValueForKey("audioLists")
                 self.willChangeValueForKey("offlineAudioLists")
             } else {
@@ -109,6 +121,11 @@ class VMAudioListManager: NSObject {
     }
     
     // MARK: - Offline audio lists
+    
+    private func addSyncAudioList() {
+        var title = "Мои аудиозаписи (оффлайн)"
+        self.model.addAudioList(title: title, identifier: NSUUID.vm_syncAudioListUUID)
+    }
     
     func addOfflineAudioList(title:String) -> VMOfflineAudioList {
         var storedAudioList = self.model.addAudioList(title: title)
@@ -206,7 +223,13 @@ class VMAudioListManager: NSObject {
         let audioLists = self.model.audioLists
         
         for storedAudioList in audioLists {
-            let list = VMOfflineAudioList(storedAudioList: storedAudioList)
+            var list: VMOfflineAudioList! = nil
+            if storedAudioList.identifier == NSUUID.vm_syncAudioListUUID.UUIDString {
+                self.syncAudioList = VMSynchronizedAudioList(storedAudioList: storedAudioList)
+                list = self.syncAudioList
+            } else {
+                list = VMOfflineAudioList(storedAudioList: storedAudioList)
+            }
             self.offlineAudioLists.append(list)
             NSLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
         }
