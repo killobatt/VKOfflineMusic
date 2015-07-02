@@ -23,8 +23,8 @@ class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerPr
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        VMAudioListManager.sharedInstance.downloadManager.progressDelegate = self
-        VMAudioListManager.sharedInstance.downloadManager.getAudioDownloadTaskList({ (downloadTasks:[AnyObject]) -> Void in
+        self.downloadManager.progressDelegate = self
+        self.downloadManager.getAudioDownloadTaskList { (downloadTasks:[AnyObject]) -> Void in
             var tasks = Array<NSURLSessionDownloadTask>()
             for task in downloadTasks {
                 if let downloadTask = task as? NSURLSessionDownloadTask {
@@ -33,7 +33,7 @@ class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerPr
             }
             self.downloadTasks = tasks
             self.tableView.reloadData()
-        })
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +44,16 @@ class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerPr
     // MARK: - model
     
     var downloadTasks: Array<NSURLSessionDownloadTask> = []
+    
+    // MARK: - Dependancies
+    
+    var audioListManager: VMAudioListManager {
+        return VMAudioListManager.sharedInstance
+    }
+    
+    var downloadManager: VMAudioDownloadManager {
+        return self.audioListManager.downloadManager
+    }
 
     // MARK: - Table view data source
 
@@ -57,7 +67,15 @@ class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerPr
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("downloadCell", forIndexPath: indexPath) as! VMDownloadCell
-        cell.downloadTask = self.downloadTasks[indexPath.row]
+        
+        let downloadTask = self.downloadTasks[indexPath.row]
+        if let
+            audioID = self.downloadManager.audioIDForTask(downloadTask),
+            audio = self.audioListManager.model.audioWithID(audioID) {
+                cell.audio = audio
+                cell.downloadTask = downloadTask
+        }
+        
         return cell
     }
 
@@ -108,8 +126,13 @@ class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerPr
     
     //  Mark: - VMAudioDownloadManagerProgressDelegate
     
-    func downloadManager(downloadManager: VMAudioDownloadManager, loadedBytes bytesLoaded: Int64, fromTotalBytes totalBytes: Int64, forAudioWithID: NSNumber) {
-        
+    func downloadManager(downloadManager: VMAudioDownloadManager, loadedBytes bytesLoaded: Int64, fromTotalBytes totalBytes: Int64, forAudioWithID audioID: NSNumber, andTask task:NSURLSessionDownloadTask) {
+        if let index = find(self.downloadTasks, task) {
+            if let cell = self.tableView(self.tableView, cellForRowAtIndexPath: NSIndexPath(forRow: index, inSection: 0)) as? VMDownloadCell {
+                cell.updateDownloadSizeTo(totalBytes)
+                cell.updateProgressTo(bytesLoaded, animated: true)
+            }
+        }
     }
 
 }

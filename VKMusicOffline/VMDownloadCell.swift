@@ -8,6 +8,7 @@
 
 import UIKit
 import UIViews
+import CoreDataStorage
 
 class VMDownloadCell: UITableViewCell {
     
@@ -31,56 +32,54 @@ class VMDownloadCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
-    deinit {
-        self.downloadTask.removeObserver(self, forKeyPath: "countOfBytesReceived")
-        self.downloadTask.removeObserver(self, forKeyPath: "countOfBytesExpectedToReceive")
-    }
     
     // MARK: - 
     
-    var downloadTask: NSURLSessionTask! {
+    
+    var audio: CDAudio! {
         didSet {
-            if let task = self.downloadTask {
-                self.audioArtistLabel.text = task.taskDescription
-                self.audioTitleLabel.text = ""
-                
-                self.updateDownloadSizeTo(task.countOfBytesExpectedToReceive)
-                self.updateProgressTo(task.countOfBytesReceived, animated:false)
-
-                self.suspendResumeButton.selected = task.state != .Running
-                
-                task.addObserver(self, forKeyPath: "countOfBytesReceived", options: nil, context: nil)
-                task.addObserver(self, forKeyPath: "countOfBytesExpectedToReceive", options: nil, context: nil)
+            if let audio = self.audio {
+                self.audioArtistLabel.text = audio.artist
+                self.audioTitleLabel.text = audio.title
             }
         }
     }
     
-    private func updateDownloadSizeTo(countOfBytesExpectedToReceive:Int64) {
+    var downloadTask: NSURLSessionDownloadTask! {
+        didSet {
+            if let task = self.downloadTask {
+                self.updateDownloadSizeTo(task.countOfBytesExpectedToReceive)
+                self.updateProgressTo(task.countOfBytesReceived, animated:false)
+
+                self.suspendResumeButton.selected = task.state != .Running
+            }
+        }
+    }
+    
+    func updateDownloadSizeTo(countOfBytesExpectedToReceive:Int64) {
         if (countOfBytesExpectedToReceive > 0) {
-            let sizeInMegabytes = Float(countOfBytesExpectedToReceive) / (1024 * 1024)
+            let sizeInMegabytes = Float(countOfBytesExpectedToReceive) / Float(1024 * 1024)
             self.downloadSizeLabel.text = NSString(format: "%.1f Mb", sizeInMegabytes) as String
         } else {
             self.downloadSizeLabel.text = ""
         }
     }
     
-    private func updateProgressTo(countOfBytesReceived:Int64, animated:Bool) {
-        let downloadSize = self.downloadTask.countOfBytesExpectedToReceive;
-        let progress = (downloadSize == 0) ? 0 : Float(countOfBytesReceived) / Float(self.downloadTask.countOfBytesExpectedToReceive)
+    func updateProgressTo(countOfBytesReceived:Int64, animated:Bool) {
+        let progress = (self.downloadTask.countOfBytesExpectedToReceive == 0) ? 0 : Float(countOfBytesReceived) / Float(self.downloadTask.countOfBytesExpectedToReceive)
         self.downloadRelativeProgressLabel.text = NSString(format:"%.1f%%", progress * 100) as String
         self.progressView.setProgress(progress, animated: animated)
     }
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            if (keyPath == "countOfBytesReceived") {
-                self.updateProgressTo(self.downloadTask.countOfBytesReceived, animated:true)
-            } else if (keyPath == "countOfBytesExpectedToReceive") {
-                self.updateDownloadSizeTo(self.downloadTask.countOfBytesExpectedToReceive)
-            }
-        })
-    }
+//    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+//        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//            if (keyPath == "countOfBytesReceived") {
+//                self.updateProgressTo(self.downloadTask.countOfBytesReceived, animated:true)
+//            } else if (keyPath == "countOfBytesExpectedToReceive") {
+//                self.updateDownloadSizeTo(self.downloadTask.countOfBytesExpectedToReceive)
+//            }
+//        })
+//    }
     
     @IBAction func toggleSuspendPressed(sender: AnyObject) {
         if (self.downloadTask.state == NSURLSessionTaskState.Running) {

@@ -63,7 +63,9 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
                             updatedAudios.append(loadedAudio)
                             
                             // in case audio was not already loaded for some reason (e.g. app crash)
-                            if loadedAudio.localFileName == nil {
+                            
+                            if loadedAudio.localURL == nil ||
+                                !NSFileManager.defaultManager().fileExistsAtPath(loadedAudio.localURL.absoluteString!){
                                 self.downloadManager.downloadAudio(loadedAudio)
                             }
                         } else {
