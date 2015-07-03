@@ -17,6 +17,7 @@ protocol VMAudioDownloadManagerDelegate {
 @objc
 protocol VMAudioDownloadManagerProgressDelegate {
     optional func downloadManager(downloadManager:VMAudioDownloadManager, loadedBytes bytesLoaded:Int64, fromTotalBytes totalBytes:Int64, forAudioWithID audioID:NSNumber, andTask task:NSURLSessionDownloadTask)
+    optional func downloadManager(downloadManager:VMAudioDownloadManager, didLoadAudioWithID audioID:NSNumber, andTask task:NSURLSessionDownloadTask)
 }
 
 class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
@@ -83,6 +84,7 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         if let audioID = self.audioIDForTask(downloadTask) {
             self.delegate?.downloadManager?(self, didLoadFile: location, forAudioWithID: audioID)
+            self.progressDelegate?.downloadManager?(self, didLoadAudioWithID: audioID, andTask: downloadTask)
         }
     }
     

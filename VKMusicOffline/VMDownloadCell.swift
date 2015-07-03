@@ -51,7 +51,20 @@ class VMDownloadCell: UITableViewCell {
                 self.updateDownloadSizeTo(task.countOfBytesExpectedToReceive)
                 self.updateProgressTo(task.countOfBytesReceived, animated:false)
 
-                self.suspendResumeButton.selected = task.state != .Running
+                switch (task.state) {
+                case .Suspended:
+                    self.suspendResumeButton.selected = true
+                    self.suspendResumeButton.enabled = true
+                case .Completed:
+                    self.suspendResumeButton.selected = false
+                    self.suspendResumeButton.enabled = false
+                case .Running:
+                    self.suspendResumeButton.selected = false
+                    self.suspendResumeButton.enabled = true
+                case .Canceling:
+                    self.suspendResumeButton.selected = true
+                    self.suspendResumeButton.enabled = false
+                }
             }
         }
     }
@@ -70,16 +83,6 @@ class VMDownloadCell: UITableViewCell {
         self.downloadRelativeProgressLabel.text = NSString(format:"%.1f%%", progress * 100) as String
         self.progressView.setProgress(progress, animated: animated)
     }
-    
-//    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
-//        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//            if (keyPath == "countOfBytesReceived") {
-//                self.updateProgressTo(self.downloadTask.countOfBytesReceived, animated:true)
-//            } else if (keyPath == "countOfBytesExpectedToReceive") {
-//                self.updateDownloadSizeTo(self.downloadTask.countOfBytesExpectedToReceive)
-//            }
-//        })
-//    }
     
     @IBAction func toggleSuspendPressed(sender: AnyObject) {
         if (self.downloadTask.state == NSURLSessionTaskState.Running) {

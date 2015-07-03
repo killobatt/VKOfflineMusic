@@ -23,6 +23,8 @@ class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerPr
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.title = "Downloads"
+        
         self.downloadManager.progressDelegate = self
         self.downloadManager.getAudioDownloadTaskList { (downloadTasks:[AnyObject]) -> Void in
             var tasks = Array<NSURLSessionDownloadTask>()
@@ -128,10 +130,13 @@ class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerPr
     
     func downloadManager(downloadManager: VMAudioDownloadManager, loadedBytes bytesLoaded: Int64, fromTotalBytes totalBytes: Int64, forAudioWithID audioID: NSNumber, andTask task:NSURLSessionDownloadTask) {
         if let index = find(self.downloadTasks, task) {
-            if let cell = self.tableView(self.tableView, cellForRowAtIndexPath: NSIndexPath(forRow: index, inSection: 0)) as? VMDownloadCell {
-                cell.updateDownloadSizeTo(totalBytes)
-                cell.updateProgressTo(bytesLoaded, animated: true)
-            }
+            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation:.None)
+        }
+    }
+    
+    func downloadManager(downloadManager: VMAudioDownloadManager, didLoadAudioWithID audioID: NSNumber, andTask task: NSURLSessionDownloadTask) {
+        if let index = find(self.downloadTasks, task) {
+            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation:.None)
         }
     }
 

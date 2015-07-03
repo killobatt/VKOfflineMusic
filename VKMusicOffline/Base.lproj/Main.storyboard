@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -238,10 +238,11 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tle-t1-uHQ" customClass="CircleProgressView" customModule="UIViews">
                                             <rect key="frame" x="542" y="7" width="50" height="50"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjs-5J-rGo">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjs-5J-rGo">
                                                     <rect key="frame" x="9" y="9" width="32" height="32"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <state key="normal" image="Pause"/>
+                                                    <state key="disabled" image="Check"/>
                                                     <state key="selected" image="Play"/>
                                                     <connections>
                                                         <action selector="toggleSuspendPressed:" destination="64g-qh-0nd" eventType="touchUpInside" id="l5Z-ag-fYL"/>
@@ -572,7 +573,7 @@
                                                     <state key="normal" image="PlayPrevious">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" image="3035E831-26F6-45A2-9EE5-0ACC78DEE267"/>
+                                                    <state key="selected" image="07E680BB-4835-4754-B569-E81757A50D0C"/>
                                                     <connections>
                                                         <action selector="playPreviousTrack:" destination="263-cg-i3V" eventType="touchUpInside" id="Tmd-Qg-HIQ"/>
                                                     </connections>
@@ -602,7 +603,7 @@
                                                     <state key="normal" image="PlayNext">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" image="3035E831-26F6-45A2-9EE5-0ACC78DEE267"/>
+                                                    <state key="selected" image="07E680BB-4835-4754-B569-E81757A50D0C"/>
                                                     <connections>
                                                         <action selector="playNextTrack:" destination="263-cg-i3V" eventType="touchUpInside" id="EnE-hr-h0L"/>
                                                     </connections>
@@ -790,7 +791,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="3035E831-26F6-45A2-9EE5-0ACC78DEE267" width="32" height="32">
+        <image name="07E680BB-4835-4754-B569-E81757A50D0C" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -928,6 +929,7 @@ AKYAqACtAMQAxgDIHdod3x3qHfMeBh4KHh0eKB4xHjYePh5BHkYeVR5ZHmAeaB51HnoefB5+HoMeix6O
 HpMemx6eHrAesx64AAAAAAAAAgEAAAAAAAAAPwAAAAAAAAAAAAAAAAAAHro
 </mutableData>
         </image>
+        <image name="Check" width="32" height="32"/>
         <image name="IsPlaying" width="16" height="16"/>
         <image name="Pause" width="32" height="32"/>
         <image name="Play" width="32" height="32"/>
