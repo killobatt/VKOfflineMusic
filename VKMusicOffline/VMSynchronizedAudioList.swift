@@ -102,5 +102,68 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
         })
     }
     
+    override func editingEnabled() -> Bool {
+        return true
+    }
     
+    override func addAudio(audio: VMAudio) {
+        let parameters = ["audio_id": audio.id, "owner_id": audio.ownerID]
+        let request = VKApi.requestWithMethod("audio.add", andParameters: parameters, andHttpMethod: "GET")
+        request.executeWithResultBlock({ (vkResponse: VKResponse!) -> Void in
+            if let response = vkResponse {
+                // Should be new audio ID
+                NSLog("Received response: \(response.json)")
+                self.synchronize()
+            }
+        }, errorBlock: { (error:NSError!) -> Void in
+            NSLog("Received error: \(error)")
+        })
+    }
+    
+    override func deleteTrackAtIndex(index: Int) {
+        let audio = self.audios[index]
+        
+        let parameters = ["audio_id": audio.id, "owner_id": audio.ownerID]
+        let request = VKApi.requestWithMethod("audio.delete", andParameters: parameters, andHttpMethod: "GET")
+        request.executeWithResultBlock({ (vkResponse: VKResponse!) -> Void in
+            if let response = vkResponse {
+                NSLog("Received response: \(response.json)")
+                // Should be 1
+            }
+            }, errorBlock: { (error:NSError!) -> Void in
+                NSLog("Received error: \(error)")
+        })
+        
+        super.deleteTrackAtIndex(index)
+    }
+    
+    override func moveTrackFromIndex(index: Int, toIndex: Int) {
+        
+        let audio = self.audios[index]
+        var parameters = ["audio_id": audio.id, "owner_id": audio.ownerID]
+        
+        super.moveTrackFromIndex(index, toIndex: toIndex)
+        
+        if toIndex > 0 {
+            let beforeAudio = self.audios[toIndex - 1]
+            parameters["before"] = beforeAudio.id
+        }
+        
+        if toIndex + 1 < self.audios.count {
+            let afterAudio = self.audios[toIndex + 1]
+            parameters["after"] = afterAudio.id
+        }
+        
+        let request = VKApi.requestWithMethod("audio.reorder", andParameters: parameters, andHttpMethod: "GET")
+        request.executeWithResultBlock({ (vkResponse: VKResponse!) -> Void in
+            if let response = vkResponse {
+                NSLog("Received response: \(response.json)")
+                // Should be 1
+            }
+            }, errorBlock: { (error:NSError!) -> Void in
+                NSLog("Received error: \(error)")
+        })
+        
+        
+    }
 }
