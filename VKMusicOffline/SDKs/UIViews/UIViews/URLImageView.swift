@@ -14,6 +14,7 @@ public class URLImageView: UIImageView {
     @IBInspectable
     public var imageURL : NSURL! {
         willSet (newImageURL) {
+            self.image = nil
             self.loadImageWithURL(newImageURL)
         }
     }

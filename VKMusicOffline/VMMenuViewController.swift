@@ -107,7 +107,7 @@ class VMMenuViewController: UITableViewController {
         } else if section == 1 {
             return VMAudioListManager.sharedInstance.audioLists.count
         } else if section == 2 {
-            return 2
+            return 3
         }
         return 0
     }
@@ -122,7 +122,17 @@ class VMMenuViewController: UITableViewController {
             cell.audioList = VMAudioListManager.sharedInstance.audioLists[indexPath.row]
             return cell // VMMenuAudioListCell
         } else { // if indexPath.section == 2 {
-            let cellID = (indexPath.row == 0) ? "AddNewListCell" : "DownloadsCell"
+            var cellID: String! = nil
+            switch (indexPath.row) {
+            case 0:
+                cellID = "AddNewListCell"
+            case 1:
+                cellID = "DownloadsCell"
+            case 2:
+                cellID = "FriendsCell"
+            default:
+                cellID = ""
+            }
             let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! UITableViewCell
             return cell
         }
