@@ -47,8 +47,16 @@ class VMFriendListController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let
+            audioListController = segue.destinationViewController as? VMAudioListViewController,
+            senderCell = sender as? VMFriendCell,
+            user = senderCell.user
+            where segue.identifier == "showFriendAudioList" {
+                audioListController.audioList = VMAudioListManager.sharedInstance.audioListForFriend(user)
+                audioListController.audioList.loadNextPage(completion: { (error: NSError!) -> Void in
+                    audioListController.tableView.reloadData()
+                })
+        }
     }
     
     // MARK: - Table view data source

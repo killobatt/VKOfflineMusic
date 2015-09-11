@@ -70,10 +70,11 @@ class VMAudioListManager: NSObject {
             self.didChangeValueForKey("offlineAudioLists")
         }
     }
+    var friendsAudioLists: [VMUserAudioList] = []
 //    var resentAudioList: VMAudioList!
 //    var allOfflineAudioList: VMAudioList!
     
-    var audioLists: Array<VMAudioList> {
+    var audioLists: [VMAudioList] {
         get {
             var lists: Array<VMAudioList> = []
             if self.userAudioList != nil {
@@ -117,6 +118,17 @@ class VMAudioListManager: NSObject {
         didSet {
             self.didChangeValueForKey("audioLists")
             self.didChangeValueForKey("offlineAudioLists")
+        }
+    }
+    
+    func audioListForFriend(user: VKUser) -> VMUserAudioList {
+        
+        if let list = (self.friendsAudioLists.filter { $0.user.id == user.id }.first) {
+            return list
+        } else {
+            let list = VMUserAudioList(with: user)
+            self.friendsAudioLists.append(list)
+            return list
         }
     }
     
