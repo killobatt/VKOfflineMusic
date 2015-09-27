@@ -19,8 +19,8 @@ class VMMenuAudioListCell: UITableViewCell {
     var audioList: VMAudioList! {
         willSet {
             if (newValue != nil) {
-                newValue.addObserver(self, forKeyPath: "title", options: nil, context: nil)
-                newValue.addObserver(self, forKeyPath: "totalCount", options: nil, context: nil)
+                newValue.addObserver(self, forKeyPath: "title", options: [.New, .Initial], context: nil)
+                newValue.addObserver(self, forKeyPath: "totalCount", options: [.New, .Initial], context: nil)
             }
         }
         didSet {
@@ -59,7 +59,7 @@ class VMMenuAudioListCell: UITableViewCell {
     
     // MARK: - NSKeyValueObserving
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         self.updateUI()
     }
 }

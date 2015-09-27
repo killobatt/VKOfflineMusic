@@ -56,14 +56,14 @@ public class PlayerSlider: UISlider {
         )
         
         // draw secondary value progress
-        var context = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()
         let colorComponents = CGColorGetComponents(self.secondaryValueTintColor.CGColor)
         CGContextSetFillColor(context, colorComponents)
         CGContextSetStrokeColor(context, colorComponents)
         CGContextFillRect(context, secondaryValueTrackRect)
     }
     
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

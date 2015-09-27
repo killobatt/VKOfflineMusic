@@ -40,7 +40,7 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     
     func downloadAudio(audio:VMAudio) {
         if (audio.localFileName != nil &&
-            NSFileManager.defaultManager().fileExistsAtPath(audio.localURL.absoluteString!)) {
+            NSFileManager.defaultManager().fileExistsAtPath(audio.localURL.absoluteString)) {
             return
         }
         
@@ -59,16 +59,15 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     }
     
     func getAudioDownloadTaskList(completion: ((downloadTasks:[AnyObject]) -> Void)?) {
-        self.URLSession?.getTasksWithCompletionHandler({ (dataTasks: [AnyObject]!, uploadTasks: [AnyObject]!, downloadTasks: [AnyObject]!) -> Void in
-            if (downloadTasks != nil) {
-                completion?(downloadTasks: downloadTasks)
-            }
+        self.URLSession?.getTasksWithCompletionHandler({ (dataTasks: [NSURLSessionDataTask], uploadTasks: [NSURLSessionUploadTask], downloadTasks: [NSURLSessionDownloadTask]) -> Void in
+            completion?(downloadTasks: downloadTasks)
         })
     }
     
     func audioIDForTask(task: NSURLSessionTask) -> NSNumber? {
-        if let audioIDint = task.taskDescription.toInt() {
-            return NSNumber(long: audioIDint)
+        if let taskDescription = task.taskDescription,
+            audioIDint = Int(taskDescription) {
+                return NSNumber(long: audioIDint)
         } else {
             return nil
         }

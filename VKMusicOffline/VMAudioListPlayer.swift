@@ -27,7 +27,7 @@ class VMAudioListPlayer: NSObject {
     // MARK: - Instance variables
     var audioList: VMAudioList? {
         willSet {
-            if let list = newValue {
+            if let _ = newValue {
                 
             }
         }
@@ -133,8 +133,11 @@ class VMAudioListPlayer: NSObject {
         self.isPlaying = true
         
         var error: NSError? = nil
-        var audioSession = AVAudioSession.sharedInstance()
-        if !audioSession.setActive(true, error: &error) {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setActive(true)
+        } catch let error1 as NSError {
+            error = error1
             NSLog("Could not activate audio session: \(error)")
             self.pause()
         }
@@ -153,8 +156,8 @@ class VMAudioListPlayer: NSObject {
             if (self.isPlaying) {
                 self.player.pause()
             }
-            self.player.currentItem.cancelPendingSeeks()
-            self.player.currentItem.seekToTime(time, completionHandler: { (finished: Bool) -> Void in
+            self.player.currentItem?.cancelPendingSeeks()
+            self.player.currentItem?.seekToTime(time, completionHandler: { (finished: Bool) -> Void in
                 if (self.isPlaying) {
                     self.player.play()
                     self.updateNowPlayingInfoCenter()
@@ -206,7 +209,7 @@ class VMAudioListPlayer: NSObject {
                 } else {
                     playerItem = AVPlayerItem(URL: currentTrack.URL)
                 }
-                playerItem.addObserver(self, forKeyPath: "status", options: nil, context: nil)
+                playerItem.addObserver(self, forKeyPath: "status", options: [.New, .Initial], context: nil)
                 NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerItemDidPlayToEndTime",
                     name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
                 
@@ -238,7 +241,7 @@ class VMAudioListPlayer: NSObject {
     private var playbackObserver: AnyObject!
     
     private func updateNowPlayingInfoCenter() {
-        var nowPlayingInfo: [NSObject : AnyObject] = [:]
+        var nowPlayingInfo: [String : AnyObject] = [:]
         if let artist = self.currentTrack?.artist {
             nowPlayingInfo[MPMediaItemPropertyArtist] = artist
         }
@@ -265,7 +268,7 @@ class VMAudioListPlayer: NSObject {
     
     // MARK: - KVO
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if object is AVPlayerItem {
             let playerItem = object as! AVPlayerItem
             if keyPath == "status" {
@@ -275,8 +278,8 @@ class VMAudioListPlayer: NSObject {
                     
                     let timeInterval = CMTimeMakeWithSeconds(0.1, 600)
                     self.playbackObserver = self.player.addPeriodicTimeObserverForInterval(timeInterval, queue: dispatch_get_main_queue(), usingBlock: { (time: CMTime) -> Void in
-                        self.playbackProgress = self.player.currentItem.currentTime()
-                        self.loadedTrackPartTimeRange = self.timeRangeFrom(self.player.currentItem.loadedTimeRanges)
+                        self.playbackProgress = self.player.currentItem!.currentTime()
+                        self.loadedTrackPartTimeRange = self.timeRangeFrom(self.player.currentItem!.loadedTimeRanges)
                     })
                     
                     if (self.isPlaying) {
@@ -304,14 +307,17 @@ class VMAudioListPlayer: NSObject {
     
     func setupAudioSession() {
         var error: NSError? = nil
-        var audioSession = AVAudioSession.sharedInstance()
-        if !audioSession.setCategory(AVAudioSessionCategoryPlayback, error: &error) {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+        } catch let error1 as NSError {
+            error = error1
             NSLog("Error setting AVAudioSession category \(AVAudioSessionCategoryPlayback): \(error)")
         }
         
         
         self.interruptionNotificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVAudioSessionInterruptionNotification, object: self, queue: NSOperationQueue.mainQueue()) {
-            (notification: NSNotification!) -> Void in
+            (notification: NSNotification) -> Void in
             NSLog("Got interruption: \(notification.userInfo)")
             
             let rawValueNumber = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? NSNumber

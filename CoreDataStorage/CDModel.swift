@@ -16,14 +16,20 @@ public class CDModel: NSObject {
     public private(set) var mainContext: NSManagedObjectContext!
     
     public var modelFileName: String {
-        get {
-            return "Model.momd"
-        }
+        return "\(self.modelFileNameWithoutExtension)\(self.modelFileExtension)"
+    }
+    
+    public var modelFileNameWithoutExtension: String {
+        return "Model"
+    }
+    
+    public var modelFileExtension: String {
+        return "momd"
     }
     
     public var modelFileURL: NSURL? {
-        if let modelPath = NSBundle(forClass: self.dynamicType).pathForResource(self.modelFileName.stringByDeletingPathExtension,
-            ofType: self.modelFileName.pathExtension) {
+        if let modelPath = NSBundle(forClass: self.dynamicType).pathForResource(self.modelFileNameWithoutExtension,
+            ofType: self.modelFileExtension) {
                 return NSURL(string: modelPath)
         } else {
             return nil
@@ -35,32 +41,28 @@ public class CDModel: NSObject {
         NSLog("Using model \(self.modelFileURL)")
         self.model = NSManagedObjectModel(contentsOfURL: self.modelFileURL!)
         
-        var error: NSError? = nil
         self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.model)
         NSLog("Using persistentStore: \(storageURL)")
-        let store = self.persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType,
-            configuration: nil, URL: storageURL, options: nil, error: &error)
-        
-        if (store != nil) {
+        if let _ = try? self.persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType,
+            configuration: nil, URL: storageURL, options: nil) {
             self.mainContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
             self.mainContext.persistentStoreCoordinator = self.persistentStoreCoordinator
-        } else {
-            NSLog("Error adding persistent store: \(error)")
         }
     }
     
     public func save() {
-        var error: NSError? = nil
-        if !self.mainContext.save(&error) {
+        do {
+            try self.mainContext.save()
+        } catch let error as NSError {
             NSLog("Error saving model: \(error)")
         }
     }
     
     private func executeFetchRequest(fetchRequest: NSFetchRequest) -> [NSManagedObject] {
-        var error: NSError? = nil
-        if var audioLists = self.mainContext.executeFetchRequest(fetchRequest, error: &error) {
+        do {
+            let audioLists = try self.mainContext.executeFetchRequest(fetchRequest)
             return audioLists as! [NSManagedObject]
-        } else {
+        } catch let error as NSError {
             NSLog("Fetch request \(fetchRequest) for \(fetchRequest.entityName) failed with error: \(error)")
             return []
         }
@@ -81,18 +83,18 @@ public class CDModel: NSObject {
 
 public extension CDModel {
     
-    public func addAudioList(#title: String, identifier:NSUUID) -> CDAudioList {
+    public func addAudioList(title title: String, identifier:NSUUID) -> CDAudioList {
         if let storedAudioList = self.audioListWithIdentifier(identifier) {
             return storedAudioList
         }
         
-        var storedAudioList = CDAudioList(managedObjectContext: self.mainContext)
+        let storedAudioList = CDAudioList(managedObjectContext: self.mainContext)
         storedAudioList.title = title as String
         storedAudioList.identifier = identifier.UUIDString
         return storedAudioList
     }
     
-    public func addAudioList(#title: String) -> CDAudioList {
+    public func addAudioList(title title: String) -> CDAudioList {
         return self.addAudioList(title: title, identifier: NSUUID())
     }
     
@@ -109,7 +111,7 @@ public extension CDModel {
     }
     
     public func audioListWithIdentifier(identifier: NSUUID) -> CDAudioList? {
-        var fetchRequest = NSFetchRequest(entityName: CDAudioList.entityName())
+        let fetchRequest = NSFetchRequest(entityName: CDAudioList.entityName())
         fetchRequest.predicate = NSPredicate(format: "identifier == %@", identifier.UUIDString)
         return (self.executeFetchRequest(fetchRequest) as! [CDAudioList]).first
     }
@@ -132,7 +134,7 @@ public extension CDModel {
     }
     
     public func audioWithID(id: NSNumber) -> CDAudio? {
-        var fetchRequest = NSFetchRequest(entityName: CDAudio.entityName())
+        let fetchRequest = NSFetchRequest(entityName: CDAudio.entityName())
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         return (self.executeFetchRequest(fetchRequest) as! [CDAudio]).first
     }

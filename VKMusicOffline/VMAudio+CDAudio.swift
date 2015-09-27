@@ -42,8 +42,13 @@ extension CDAudio {
         let request = NSFetchRequest(entityName: self.entityName())
         request.predicate = NSPredicate(format: "id = %@", audio.id)
         
-        var error: NSError? = nil
-        var storedAudio = context.executeFetchRequest(request, error: &error)?.first as! CDAudio!
+        var storedAudio : CDAudio! = nil
+        do {
+            storedAudio = try context.executeFetchRequest(request).first as? CDAudio
+        } catch let error as NSError {
+            NSLog("Error fetching stored audio: \(error)")
+        }
+        
         if storedAudio == nil {
             storedAudio = CDAudio(managedObjectContext: context)
         }

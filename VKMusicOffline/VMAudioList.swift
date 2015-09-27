@@ -38,7 +38,7 @@ class VMAudioList: NSObject {
     dynamic var totalCount: Int = 0 // {
     
     func hasNextPage() -> Bool { return false }
-    func loadNextPage(#completion:((NSError!) -> Void)?) -> Void { }
+    func loadNextPage(completion completion:((NSError!) -> Void)?) -> Void { }
     
 }
 

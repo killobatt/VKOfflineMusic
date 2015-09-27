@@ -65,7 +65,7 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
                             // in case audio was not already loaded for some reason (e.g. app crash)
                             
                             if loadedAudio.localURL == nil ||
-                                !NSFileManager.defaultManager().fileExistsAtPath(loadedAudio.localURL.absoluteString!){
+                                !NSFileManager.defaultManager().fileExistsAtPath(loadedAudio.localURL.absoluteString){
                                 self.downloadManager.downloadAudio(loadedAudio)
                             }
                         } else {
@@ -76,20 +76,20 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
                         }
                     }
                     
-                    var commonAudios = self.audios.filter {
-                        return find(loadedAudios.map{ $0.id }, $0.id) != nil
+                    let commonAudios = self.audios.filter {
+                        return loadedAudios.map{ $0.id }.contains($0.id)
                     }
                     
                     var audiosToMove: [(audio: VMAudio, from: Int, to: Int)] = []
                     for audio in commonAudios {
-                        if let oldIndex = find(self.audios, audio), newIndex = find(updatedAudios, audio)
+                        if let oldIndex = self.audios.indexOf(audio), newIndex = updatedAudios.indexOf(audio)
                             where oldIndex != newIndex {
                                 audiosToMove.append((audio: audio, from: oldIndex, to: newIndex))
                         }
                     }
                     
-                    var audiosToRemove = self.audios.filter {
-                        return find(loadedAudios.map{ $0.id }, $0.id) == nil
+                    let audiosToRemove = self.audios.filter {
+                        return loadedAudios.map{ $0.id }.contains($0.id)
                     }
                     
                     // TODO: use insertedAudios, audiosToMove and audiosToRemove to make updates

@@ -42,7 +42,7 @@ class VMAudioListEnumerator: NSObject {
     private(set) var currentObject: VMAudio!
     var currentObjectIndex: Int! {
         get {
-            return find(self.audioList.audios, self.currentObject)
+            return self.audioList.audios.indexOf(self.currentObject)
         }
     }
     

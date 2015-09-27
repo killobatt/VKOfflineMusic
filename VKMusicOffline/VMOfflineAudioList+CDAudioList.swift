@@ -16,15 +16,21 @@ extension CDAudioList {
         let request = NSFetchRequest(entityName: self.entityName())
         request.predicate = NSPredicate(format: "identifier = %@", audioList.identifier.UUIDString)
         
-        var error: NSError? = nil
-        var storedAudioList: CDAudioList! = context.executeFetchRequest(request, error: &error)?.first as! CDAudioList!
+        
+        var storedAudioList: CDAudioList! = nil
+        do {
+            storedAudioList = try context.executeFetchRequest(request).first as? CDAudioList
+        } catch let error as NSError {
+            NSLog("Failed to fetch stored audio list: \(error)")
+        }
+        
         if storedAudioList == nil {
             storedAudioList = CDAudioList(managedObjectContext: context)
         }
         storedAudioList.identifier = audioList.identifier.UUIDString
         storedAudioList.title = audioList.title! as String
         
-        var storedAudios: NSMutableOrderedSet = NSMutableOrderedSet(array: [])
+        let storedAudios: NSMutableOrderedSet = NSMutableOrderedSet(array: [])
         for audio in audioList.audios {
             let storedAudio = CDAudio.storedAudioForAudio(audio, managedObjectContext: context)
             storedAudios.addObject(storedAudio)

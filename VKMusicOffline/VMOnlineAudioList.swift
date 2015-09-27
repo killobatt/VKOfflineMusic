@@ -47,7 +47,7 @@ class VMOnlineAudioList: VMAudioList {
         return self.audios.count < self.totalCount
     }
     
-    override func loadNextPage(#completion:((NSError!) -> Void)?) -> Void {
+    override func loadNextPage(completion completion:((NSError!) -> Void)?) -> Void {
         
         if (self.currentPageOffset > self.totalCount) {
             return
@@ -65,7 +65,7 @@ class VMOnlineAudioList: VMAudioList {
             let audios = VKAudios(dictionary:(response.json as! [NSObject : AnyObject]))
             self.totalCount = Int(audios.count)
             var audioArray : [VMAudio] = self.audios
-            for (var i = 0; i < MIN(self.pageSize, Int(audios.items.count)); i++) {
+            for (var i = 0; i < MIN(self.pageSize, b: Int(audios.items.count)); i++) {
                 let audio = audios[UInt(i)] as! VKAudio
                 audioArray.append(VMAudio(audio: audio))
             }

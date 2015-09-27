@@ -87,7 +87,7 @@ class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerPr
         return true
     }
     
-    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String! {
+    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
         return NSLocalizedString("cancel", tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
     }
 
@@ -129,13 +129,13 @@ class VMDownloadsViewController: UITableViewController, VMAudioDownloadManagerPr
     //  Mark: - VMAudioDownloadManagerProgressDelegate
     
     func downloadManager(downloadManager: VMAudioDownloadManager, loadedBytes bytesLoaded: Int64, fromTotalBytes totalBytes: Int64, forAudioWithID audioID: NSNumber, andTask task:NSURLSessionDownloadTask) {
-        if let index = find(self.downloadTasks, task) {
+        if let index = self.downloadTasks.indexOf(task) {
             self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation:.None)
         }
     }
     
     func downloadManager(downloadManager: VMAudioDownloadManager, didLoadAudioWithID audioID: NSNumber, andTask task: NSURLSessionDownloadTask) {
-        if let index = find(self.downloadTasks, task) {
+        if let index = self.downloadTasks.indexOf(task) {
             self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)], withRowAnimation:.None)
         }
     }

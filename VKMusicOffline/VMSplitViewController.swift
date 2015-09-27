@@ -45,35 +45,37 @@ class VMSplitViewController: UISplitViewController {
     
     // MARK: - Events
     
-    override func remoteControlReceivedWithEvent(event: UIEvent) {
-        let player = VMAudioListPlayer.sharedInstance
-        if player.audioList == nil {
-            // TODO: tracks are not loaded here; we need a allways existing offline track list?
-            player.setAudioList(VMAudioListManager.sharedInstance.userAudioList, currentTrackIndex: 0)
-        }
-        
-        if player.currentTrack == nil {
-            player.currentTrackIndex = 0
-        }
-        
-        if (event.type == UIEventType.RemoteControl) {
-            switch event.subtype {
-            case .RemoteControlPlay:
-                player.play()
-            case .RemoteControlPause:
-                player.pause()
-            case .RemoteControlTogglePlayPause:     // received from headphones controlls
-                if (player.isPlaying) {
-                    player.pause()
-                } else {
+    override func remoteControlReceivedWithEvent(remoteControlEvent: UIEvent?) {
+        if let event = remoteControlEvent {
+            let player = VMAudioListPlayer.sharedInstance
+            if player.audioList == nil {
+                // TODO: tracks are not loaded here; we need an allways existing offline track list?
+                player.setAudioList(VMAudioListManager.sharedInstance.userAudioList, currentTrackIndex: 0)
+            }
+            
+            if player.currentTrack == nil {
+                player.currentTrackIndex = 0
+            }
+            
+            if (event.type == UIEventType.RemoteControl) {
+                switch event.subtype {
+                case .RemoteControlPlay:
                     player.play()
+                case .RemoteControlPause:
+                    player.pause()
+                case .RemoteControlTogglePlayPause:     // received from headphones controlls
+                    if (player.isPlaying) {
+                        player.pause()
+                    } else {
+                        player.play()
+                    }
+                case .RemoteControlPreviousTrack:
+                    player.playPreviousTrack()
+                case .RemoteControlNextTrack:
+                    player.playNextTrack()
+                default:
+                    NSLog("Got event unprocesed event: \(event)")
                 }
-            case .RemoteControlPreviousTrack:
-                player.playPreviousTrack()
-            case .RemoteControlNextTrack:
-                player.playNextTrack()
-            default:
-                NSLog("Got event unprocesed event: \(event)")
             }
         }
     }

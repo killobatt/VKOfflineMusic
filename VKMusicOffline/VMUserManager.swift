@@ -35,11 +35,11 @@ class VMUserManager: NSObject {
         }
     }
     
-    func loadCurrentUser(#completionBlock:((VKUser) -> Void), errorBlock:((NSError!) -> Void)) -> Void {
+    func loadCurrentUser(completionBlock completionBlock:((VKUser) -> Void), errorBlock:((NSError!) -> Void)) -> Void {
         NSLog("VMUserManager.loadCurrentUser starts...")
         self.userRequest.executeWithResultBlock({(response: VKResponse!) -> Void in
-            println(response.json)
-            println(response.parsedModel)
+            print(response.json)
+            print(response.parsedModel)
             if (response.parsedModel is VKUsersArray) {
                 let userList : VKUsersArray = response.parsedModel as! VKUsersArray
                 if (userList.count > 0) {
@@ -70,7 +70,7 @@ class VMUserManager: NSObject {
         return VKApi.friends().get(parameters as [NSObject : AnyObject])
     }
     
-    func loadFriends(#completion:((VKUsersArray) -> Void), errorBlock:((NSError!) -> Void)) {
+    func loadFriends(completion completion:((VKUsersArray) -> Void), errorBlock:((NSError!) -> Void)) {
         self.friendsRequest.executeWithResultBlock({ (response: VKResponse!) -> Void in
             NSLog("VMUserManager.loadFriends got response: \(response)")
             if let friends = response.parsedModel as? VKUsersArray {

@@ -24,7 +24,7 @@ class VMMenuViewController: UITableViewController {
     
     // MARK: - Init
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialize()
     }
@@ -39,7 +39,7 @@ class VMMenuViewController: UITableViewController {
     }
     
     func initialize() {
-        VMAudioListManager.sharedInstance.addObserver(self, forKeyPath: "audioLists", options: nil, context: nil)
+        VMAudioListManager.sharedInstance.addObserver(self, forKeyPath: "audioLists", options: [.New, .Initial], context: nil)
     }
     
     // MARK: - UIViewController
@@ -133,7 +133,7 @@ class VMMenuViewController: UITableViewController {
             default:
                 cellID = ""
             }
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) 
             return cell
         }
     }
@@ -152,7 +152,7 @@ class VMMenuViewController: UITableViewController {
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return NO if you do not want the specified item to be editable.
         if (indexPath.section == 1) {
-            if let audioList = VMAudioListManager.sharedInstance.audioLists[indexPath.row] as? VMOfflineAudioList {
+            if let _ = VMAudioListManager.sharedInstance.audioLists[indexPath.row] as? VMOfflineAudioList {
                 return true
             }
         }
@@ -178,8 +178,8 @@ class VMMenuViewController: UITableViewController {
     
     // MARK: - KVO
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
-        change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?,
+        change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
             if (object as! NSObject == VMAudioListManager.sharedInstance) {
                 if (keyPath == "audioLists") {
                     if self.tableView.editing == false {

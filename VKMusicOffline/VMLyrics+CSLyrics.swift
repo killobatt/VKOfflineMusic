@@ -20,8 +20,13 @@ extension CDLyrics {
         let request = NSFetchRequest(entityName: self.entityName())
         request.predicate = NSPredicate(format: "id = %@", lyrics.id)
         
-        var error: NSError? = nil
-        var storedLyrics = context.executeFetchRequest(request, error: &error)?.first as! CDLyrics!
+        var storedLyrics: CDLyrics! = nil
+        do {
+            storedLyrics = try context.executeFetchRequest(request).first as? CDLyrics
+        } catch let error as NSError {
+            NSLog("Error fetching stored lyrics: \(error)")
+        }
+        
         if storedLyrics == nil {
             storedLyrics = CDLyrics(managedObjectContext: context)
         }

@@ -19,7 +19,7 @@ public class URLImageView: UIImageView {
         }
     }
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -41,16 +41,18 @@ public class URLImageView: UIImageView {
     private func loadImageWithURL(url: NSURL!) {
         if let imgURL = url {
             let defaults = NSUserDefaults.standardUserDefaults()
-            let imageDataOpt = defaults.objectForKey(imgURL.absoluteString!) as! NSData!
+            let imageDataOpt = defaults.objectForKey(imgURL.absoluteString) as! NSData!
             if let imageData = imageDataOpt {
                 self.image = UIImage(data: imageData)
                 self.layoutIfNeeded()
             } else {
-                var request = NSURLRequest(URL: imgURL)
+                let request = NSURLRequest(URL: imgURL)
                 NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(),
-                completionHandler:{(response:NSURLResponse!, responseData:NSData!, error:NSError!) in
-                    defaults.setObject(responseData, forKey:imgURL.absoluteString!)
-                    self.image = UIImage(data: responseData)
+                completionHandler:{(response:NSURLResponse?, responseData:NSData?, error:NSError?) in
+                    if let data = responseData {
+                        defaults.setObject(data, forKey:imgURL.absoluteString)
+                        self.image = UIImage(data: data)
+                    }
                 })
             }
         }

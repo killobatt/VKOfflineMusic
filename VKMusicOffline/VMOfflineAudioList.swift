@@ -47,7 +47,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     }
     
     func insertAudio(audio: VMAudio, atIndex index:Int) {
-        if let oldIndex = find(self.audios, audio) {
+        if let oldIndex = self.audios.indexOf(audio) {
             self.moveTrackFromIndex(oldIndex, toIndex: index)
             return
         }
@@ -57,7 +57,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         self.audios = newAudios
         
         let storedAudio = CDAudio.storedAudioForAudio(audio, managedObjectContext: self.storedAudioList.managedObjectContext!)
-        var storedAudios = self.storedAudioList.audios.mutableCopy() as! NSMutableOrderedSet
+        let storedAudios = self.storedAudioList.audios.mutableCopy() as! NSMutableOrderedSet
         storedAudios.insertObject(storedAudio, atIndex: index)
         self.storedAudioList.audios = storedAudios
     }
@@ -98,7 +98,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
         audios.insert(audio, atIndex: toIndex)
         self.audios = audios
         
-        if var orderedAudios = self.storedAudioList.audios.mutableCopy() as? NSMutableOrderedSet {
+        if let orderedAudios = self.storedAudioList.audios.mutableCopy() as? NSMutableOrderedSet {
             orderedAudios.moveObjectsAtIndexes(NSIndexSet(index: index), toIndex: toIndex)
             self.storedAudioList.audios = orderedAudios
         }
@@ -106,7 +106,6 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     
     override func deleteTrackAtIndex(index: Int) {
         var audios = self.audios
-        let audio = audios[index]
         audios.removeAtIndex(index)
         self.audios = audios
         
@@ -114,7 +113,7 @@ class VMOfflineAudioList: VMAudioList, NSCoding {
     }
     
     override func deleteAudio(audio: VMAudio) {
-        if let index = find(self.audios, audio) {
+        if let index = self.audios.indexOf(audio) {
             self.deleteTrackAtIndex(index)
         }
     }

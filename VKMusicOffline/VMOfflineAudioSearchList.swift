@@ -15,7 +15,7 @@ class VMOfflineAudioSearchList: VMAudioList, VMAudioListSearching {
     init(offlineAudioList: VMOfflineAudioList) {
         self.originalList = offlineAudioList
         super.init()
-        self.originalList.addObserver(self, forKeyPath: "audios", options:nil, context: nil)
+        self.originalList.addObserver(self, forKeyPath: "audios", options:[.New, .Initial], context: nil)
     }
     
     deinit {
@@ -24,8 +24,8 @@ class VMOfflineAudioSearchList: VMAudioList, VMAudioListSearching {
     
     // MARK: - NSKeyValueObserving
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject,
-        change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?,
+        change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if (keyPath == "audios") {
             self.filteredAudios = self.getFilteredAudios(self.originalList.audios, searchTerm: self.searchTerm as String)
         }
@@ -64,7 +64,7 @@ class VMOfflineAudioSearchList: VMAudioList, VMAudioListSearching {
         } else {
             return audios.filteredArrayUsingPredicate(
                 NSPredicate(block:
-                    { (object: AnyObject!, bindings:[NSObject : AnyObject]!) -> Bool in
+                    { (object: AnyObject, bindings:[String : AnyObject]?) -> Bool in
                         let audio = object as! VMAudio
                         return audio.title.localizedCaseInsensitiveContainsString(searchTerm) ||
                             audio.artist.localizedCaseInsensitiveContainsString(searchTerm)

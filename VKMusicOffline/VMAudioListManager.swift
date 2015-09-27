@@ -135,20 +135,20 @@ class VMAudioListManager: NSObject {
     // MARK: - Offline audio lists
     
     private func addSyncAudioList() {
-        var title = "Мои аудиозаписи (оффлайн)"
+        let title = "Мои аудиозаписи (оффлайн)"
         self.model.addAudioList(title: title, identifier: NSUUID.vm_syncAudioListUUID)
     }
     
     func addOfflineAudioList(title:String) -> VMOfflineAudioList {
-        var storedAudioList = self.model.addAudioList(title: title)
-        var offlineAudioList = VMOfflineAudioList(storedAudioList: storedAudioList)
+        let storedAudioList = self.model.addAudioList(title: title)
+        let offlineAudioList = VMOfflineAudioList(storedAudioList: storedAudioList)
         self.offlineAudioLists.append(offlineAudioList)
         self.saveOfflineAudioLists()
         return offlineAudioList
     }
     
     func removeOfflineAudioList(list:VMOfflineAudioList) {
-        if let index = find(self.offlineAudioLists, list) {
+        if let index = self.offlineAudioLists.indexOf(list) {
             self.offlineAudioLists.removeAtIndex(index)
             self.model.deleteObject(list.storedAudioList)
             let storedAudios = self.model.uniqueAudiosFromAudioList(list.storedAudioList)
@@ -169,23 +169,24 @@ class VMAudioListManager: NSObject {
     }
     
     private func removeFilesForList(list:VMOfflineAudioList) {
-        let listPath = self.pathForLegacyList(list)
-        NSLog("Removin list \(list.title) at path: \(listPath)...)")
-        var error: NSError? = nil
-        if !NSFileManager.defaultManager().removeItemAtPath(listPath, error: &error) {
-            NSLog("Could not remove list \(list.title) at path: \(listPath): \(error)")
+        let listURL = self.URLForLegacyList(list)
+        NSLog("Removin list \(list.title) at path: \(listURL)...)")
+        do {
+            try NSFileManager.defaultManager().removeItemAtURL(listURL)
+        } catch let error {
+            NSLog("Could not remove list \(list.title) at path: \(listURL): \(error)")
         }
     }
     
     func createAudioListsDirectoryIfNeeded() {
         let fileManager = NSFileManager.defaultManager()
-        var audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryPath)
+        let audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryURL.absoluteString)
         if (!audioListsDirExists) {
-            NSLog("Creating audio list directory at path '\(self.offlineAudioListDirectoryPath)'")
-            var errorPointer = NSErrorPointer()
-            if (!fileManager.createDirectoryAtPath(self.offlineAudioListDirectoryPath,
-                withIntermediateDirectories: true, attributes: nil, error: errorPointer)) {
-                NSLog("Error creating audio list directory: \(errorPointer.memory)")
+            NSLog("Creating audio list directory at path '\(self.offlineAudioListDirectoryURL)'")
+            do {
+                try fileManager.createDirectoryAtURL(self.offlineAudioListDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+            } catch let error as NSError {
+                NSLog("Error creating audio list directory: \(error)")
             }
         }
     }
@@ -194,9 +195,9 @@ class VMAudioListManager: NSObject {
         self.createAudioListsDirectoryIfNeeded()
         
         for list in self.offlineAudioLists {
-            let path = self.pathForLegacyList(list)
-            NSLog("Saving list '\(list.title)' with \(list.audios.count) audios to file '\(path)'...")
-            NSKeyedArchiver.archiveRootObject(list, toFile: path)
+            let url = self.URLForLegacyList(list)
+            NSLog("Saving list '\(list.title)' with \(list.audios.count) audios to file '\(url)'...")
+            NSKeyedArchiver.archiveRootObject(list, toFile: url.absoluteString)
         }
     }
     
@@ -204,28 +205,24 @@ class VMAudioListManager: NSObject {
         var offlineAudioLists: [VMOfflineAudioList] = []
         
         let fileManager = NSFileManager.defaultManager()
-        var audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryPath)
+        var audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryURL.absoluteString)
         if (audioListsDirExists) {
             
-            NSLog("Scanning folder '\(self.offlineAudioListDirectoryPath)' for legacy lists...")
-            var error: NSError? = nil
-            let paths = fileManager.contentsOfDirectoryAtPath(self.offlineAudioListDirectoryPath, error: &error) as! [String]?
-            if (error != nil) {
-                NSLog("Error loading contents of dir \(self.offlineAudioListDirectoryPath) : \(error)")
-                return []
-            }
-            
-            if let listsFileNames = paths {
-                for listFileName in listsFileNames {
-                    let listPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(listFileName)
+            NSLog("Scanning folder '\(self.offlineAudioListDirectoryURL)' for legacy lists...")
+            do {
+                let listPaths = try fileManager.contentsOfDirectoryAtURL(self.offlineAudioListDirectoryURL, includingPropertiesForKeys: [], options: [])
+                for listPath in listPaths {
                     if (listPath.pathExtension != "list") {
                         continue
                     }
                     NSLog("Loading legacy list from file '\(listPath)'...")
-                    var list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as! VMOfflineAudioList
+                    let list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath.absoluteString) as! VMOfflineAudioList
                     offlineAudioLists.append(list)
                     NSLog("Loaded legacy list '\(list.title)' with \(list.audios.count) audios")
                 }
+            } catch let error as NSError {
+                NSLog("Error loading contents of dir \(self.offlineAudioListDirectoryURL) : \(error)")
+                return []
             }
         }
         return offlineAudioLists
@@ -257,22 +254,22 @@ class VMAudioListManager: NSObject {
     // MARK: - Paths
     
     var audioListModelURL: NSURL {
-        return NSURL(fileURLWithPath: self.userDocumentsDirectoryPath.stringByAppendingPathComponent("audio-list-model.sqlite"))!
+        return self.userDocumentsDirectoryURL.URLByAppendingPathComponent("audio-list-model.sqlite")
     }
     
-    var userDocumentsDirectoryPath: String {
+    var userDocumentsDirectoryURL: NSURL {
         let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
             NSSearchPathDomainMask.UserDomainMask, true)
-        return dirs[0] as! String
+        return NSURL(fileURLWithPath: dirs[0])
     }
     
-    var offlineAudioListDirectoryPath: String {
-        return self.userDocumentsDirectoryPath.stringByAppendingPathComponent("audio-lists")
+    var offlineAudioListDirectoryURL: NSURL {
+        return self.userDocumentsDirectoryURL.URLByAppendingPathComponent("audio-lists")
     }
     
-    func pathForLegacyList(list: VMOfflineAudioList) -> String {
-        let path = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(list.identifier.UUIDString)
-        return path.stringByAppendingPathExtension("list")!
+    func URLForLegacyList(list: VMOfflineAudioList) -> NSURL {
+        let url = self.offlineAudioListDirectoryURL.URLByAppendingPathComponent(list.identifier.UUIDString)
+        return url.URLByAppendingPathExtension("list")
     }
     
 }
@@ -282,20 +279,24 @@ class VMAudioListManager: NSObject {
 extension VMAudioListManager: VMAudioDownloadManagerDelegate {
     
     func downloadManager(downloadManager: VMAudioDownloadManager, didLoadFile url: NSURL, forAudioWithID audioID: NSNumber) {
-        let audioFileName = audioID.stringValue.stringByAppendingPathExtension("mp3")
-        let audioPath = self.offlineAudioListDirectoryPath.stringByAppendingPathComponent(audioFileName!)
-        if let audioURL = NSURL(fileURLWithPath:audioPath) {
-            var error: NSError?
-            NSFileManager.defaultManager().moveItemAtURL(url, toURL: audioURL, error: &error)
-            for list in self.offlineAudioLists {
-                for audio in list.audios {
-                    if audio.id == audioID {
-                        audio.localFileName = audioFileName
-                    }
-                }
+        let audioFileName = audioID.stringValue
+        let audioURL = self.offlineAudioListDirectoryURL.URLByAppendingPathComponent(audioFileName).URLByAppendingPathExtension("mp3")
+        
+        do {
+            try NSFileManager.defaultManager().moveItemAtURL(url, toURL: audioURL)
+            
+            let allAudios = self.offlineAudioLists.reduce([]) { result, list in result + list.audios }
+            let audiosToUpdate = allAudios.filter { audio in audio.id == audioID }
+            for audio in audiosToUpdate {
+                audio.localFileName = audioFileName
             }
+            self.saveOfflineAudioLists()
+        } catch let error as NSError {
+            NSLog("Error moving item: \(error)")
+        } catch _ {
+            NSLog("Unknown shit happened")
         }
-        self.saveOfflineAudioLists()
+        
     }
     
     func downloadManager(downloadManager: VMAudioDownloadManager, didLoadLyrics lyrics: VMLyrics, forAudio audio: VMAudio) {
@@ -308,8 +309,7 @@ extension VMAudio {
     var localURL: NSURL! {
         get {
             if let localFileName = self.localFileName {
-                let path = VMAudioListManager.sharedInstance.offlineAudioListDirectoryPath.stringByAppendingPathComponent(localFileName as! String)
-                return NSURL(fileURLWithPath: path)
+                return VMAudioListManager.sharedInstance.offlineAudioListDirectoryURL.URLByAppendingPathComponent(localFileName as String)
             } else {
                 return nil
             }
@@ -326,7 +326,7 @@ extension VMAudioListManager {
             let storedAudioList = CDAudioList.storedAudioListForAudioList(legacyList,
                 managedObjectContext: self.model.mainContext)
             
-            let path = self.pathForLegacyList(legacyList)
+            let path = self.URLForLegacyList(legacyList)
             var error:NSError? = nil
             if NSFileManager.defaultManager().removeItemAtPath(path, error: &error) {
                 NSLog("Removed legacy list \(legacyList.title) file \(path)")

@@ -60,7 +60,7 @@ class VMLyricsController: UIViewController {
         
         NSLog("self.parentViewController: \(self.parentViewController)")
         
-        if let navigationBar = self.navigationBar {
+        if let _ = self.navigationBar {
             NSLog("self.navigationBar.topItem: \(self.navigationBar.topItem)")
         
             self.navigationBar.topItem?.title = self.title

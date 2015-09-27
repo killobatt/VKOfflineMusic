@@ -10,7 +10,7 @@ import Foundation
 import VK
 import CoreDataStorage
 
-class VMAudio: NSObject, Equatable, NSCoding {
+class VMAudio: NSObject, NSCoding {
     var id : NSNumber!
     var ownerID : NSNumber!
     var artist : NSString!
@@ -80,7 +80,7 @@ class VMAudio: NSObject, Equatable, NSCoding {
         aCoder.encodeOptional(self.genreID, forKey: "genreID")
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         self.id = NSNumber(int: aDecoder.decodeIntForKey("id"))
         self.ownerID = NSNumber(int: aDecoder.decodeIntForKey("ownerID"))
         self.duration = Int(aDecoder.decodeIntForKey("duration"))
