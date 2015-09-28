@@ -17,11 +17,11 @@ class CDModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        let storagePath = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first as? NSURL
-        let storageFileName = NSUUID().UUIDString.stringByAppendingPathExtension("sqlite")
-        let storageURL = storagePath?.URLByAppendingPathComponent(storageFileName!)
+        let storagePath = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+        let storageFileName = NSUUID().UUIDString
+        let storageURL = storagePath.URLByAppendingPathComponent(storageFileName).URLByAppendingPathExtension("sqlite")
         XCTAssertNotNil(storagePath, "")
-        self.model = CDModel(storageURL: storageURL!)
+        self.model = CDModel(storageURL: storageURL)
     }
     
     override func tearDown() {
@@ -86,11 +86,13 @@ class CDModelTests: XCTestCase {
         
         // then
         let fetchRequest = NSFetchRequest(entityName: CDAudioList.entityName())
-        var error: NSError? = nil
-        let results = self.model.mainContext.executeFetchRequest(fetchRequest, error: &error) as! [CDAudioList]
-        XCTAssertNil(error, "")
-        let index = find(results.map{$0.title!}, "Metallica")
-        XCTAssertNil(index)
+        do {
+            let results = try self.model.mainContext.executeFetchRequest(fetchRequest) as! [CDAudioList]
+            let index = results.map{$0.title!}.indexOf("Metallica")
+            XCTAssertNil(index)
+        } catch let error as NSError? {
+            XCTAssertNil(error, "")
+        }
     }
     
     func testAudioAdding() {
@@ -241,6 +243,6 @@ class CDModelTests: XCTestCase {
         let fetchedAudio = self.model.audioWithID(100500)
         XCTAssertNotNil(fetchedAudio)
         XCTAssertEqual(fetchedAudio!.lists.count, 1)
-        XCTAssertEqual(fetchedAudio!.lists.anyObject()! as! CDAudioList, audioList2)
+        XCTAssertEqual(fetchedAudio!.lists.anyObject() as? CDAudioList, audioList2)
     }
 }
