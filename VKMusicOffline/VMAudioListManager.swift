@@ -38,6 +38,8 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
     var userAudioList: VMUserAudioList!
     var searchAudioList: VMSearchAudioList!
     var recommendationsAudioList: VMRecomendationsAudioList!
+    var popularAudioList: VMPopularAudioList!
+    var popularEnglishAudioList: VMPopularAudioList!
     var offlineAudioLists: Array<VMOfflineAudioList> = [] {
         willSet {
             self.willChangeValueForKey("audioLists")
@@ -63,6 +65,12 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
             if self.recommendationsAudioList != nil {
                 lists.append(self.recommendationsAudioList)
             }
+            if self.popularAudioList != nil {
+                lists.append(self.popularAudioList)
+            }
+            if self.popularEnglishAudioList != nil {
+                lists.append(self.popularEnglishAudioList)
+            }
             for audioList in self.offlineAudioLists {
                 lists.append(audioList)
             }
@@ -78,11 +86,28 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
                 self.userAudioList = VMUserAudioList(with: newUser)
                 self.userAudioList.title = "Мои аудиозаписи"
                 self.userAudioList.loadNextPage(completion: nil)
+                
                 self.searchAudioList = VMSearchAudioList(searchOwn: false)
                 self.searchAudioList.title = "Поиск"
+                
                 self.recommendationsAudioList = VMRecomendationsAudioList(user: newUser)
                 self.recommendationsAudioList.title = "Рекомендации"
                 self.recommendationsAudioList.loadNextPage(completion: nil)
+                
+                self.popularAudioList = VMPopularAudioList()
+                self.popularAudioList.title = "Популярное"
+                self.popularAudioList.pageSize = 110
+                self.popularAudioList.loadNextPage(completion: nil)
+                
+                self.popularEnglishAudioList = VMPopularAudioList()
+                self.popularEnglishAudioList.title = "Popular"
+                self.popularEnglishAudioList.onlyEnglish = true
+                self.popularEnglishAudioList.pageSize = 180
+                self.popularEnglishAudioList.loadNextPage(completion: nil)
+                
+                self.syncAudioList.user = newUser
+                self.syncAudioList.synchronize()
+                
                 self.willChangeValueForKey("audioLists")
                 self.willChangeValueForKey("offlineAudioLists")
             } else {
