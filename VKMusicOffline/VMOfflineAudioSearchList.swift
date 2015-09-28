@@ -15,7 +15,7 @@ class VMOfflineAudioSearchList: VMAudioList, VMAudioListSearching {
     init(offlineAudioList: VMOfflineAudioList) {
         self.originalList = offlineAudioList
         super.init()
-        self.originalList.addObserver(self, forKeyPath: "audios", options:[.New, .Initial], context: nil)
+        self.originalList.addObserver(self, forKeyPath: "audios", options:[.New], context: nil)
     }
     
     deinit {

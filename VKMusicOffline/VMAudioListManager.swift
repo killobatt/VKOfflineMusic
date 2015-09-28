@@ -205,7 +205,7 @@ class VMAudioListManager: NSObject {
         var offlineAudioLists: [VMOfflineAudioList] = []
         
         let fileManager = NSFileManager.defaultManager()
-        var audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryURL.absoluteString)
+        let audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryURL.absoluteString)
         if (audioListsDirExists) {
             
             NSLog("Scanning folder '\(self.offlineAudioListDirectoryURL)' for legacy lists...")
@@ -323,15 +323,14 @@ extension VMAudioListManager {
     func migrateToCoreDataStorage() {
         let legacyAudioLists = self.loadLegacyOfflineAudioLists()
         for legacyList in legacyAudioLists {
-            let storedAudioList = CDAudioList.storedAudioListForAudioList(legacyList,
-                managedObjectContext: self.model.mainContext)
+            CDAudioList.storedAudioListForAudioList(legacyList, managedObjectContext: self.model.mainContext)
             
             let path = self.URLForLegacyList(legacyList)
-            var error:NSError? = nil
-            if NSFileManager.defaultManager().removeItemAtPath(path, error: &error) {
+            do {
+                try NSFileManager.defaultManager().removeItemAtURL(path)
                 NSLog("Removed legacy list \(legacyList.title) file \(path)")
-            } else {
-                NSLog("Error removing list \(legacyList.title) file: \(path)")
+            } catch let error {
+                NSLog("Error removing list \(legacyList.title) file: \(path), error: \(error)")
             }
         }
         self.model.save()

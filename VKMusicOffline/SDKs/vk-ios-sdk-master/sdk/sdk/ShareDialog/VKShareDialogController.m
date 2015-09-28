@@ -582,7 +582,7 @@ static NSInteger kAttachmentsViewHeight = 90.0f;
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
--(NSUInteger)supportedInterfaceOrientations
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
 }

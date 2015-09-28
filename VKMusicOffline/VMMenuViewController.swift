@@ -39,7 +39,7 @@ class VMMenuViewController: UITableViewController {
     }
     
     func initialize() {
-        VMAudioListManager.sharedInstance.addObserver(self, forKeyPath: "audioLists", options: [.New, .Initial], context: nil)
+        VMAudioListManager.sharedInstance.addObserver(self, forKeyPath: "audioLists", options: [.New], context: nil)
     }
     
     // MARK: - UIViewController

@@ -36,7 +36,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
     
     func initialize() {
-        VMAudioListPlayer.sharedInstance.addObserver(self, forKeyPath: "currentTrackIndex", options: [.New, .Initial], context: nil)
+        VMAudioListPlayer.sharedInstance.addObserver(self, forKeyPath: "currentTrackIndex", options: [.New], context: nil)
     }
     
     override func viewDidLoad() {
