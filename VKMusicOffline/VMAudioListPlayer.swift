@@ -188,7 +188,12 @@ class VMAudioListPlayer: NSObject {
     
     var currentTrack: VMAudio? {
         get {
-            return self.audioList?[self.currentTrackIndex]
+            if let audioList = self.audioList
+                where 0 <= self.currentTrackIndex && self.currentTrackIndex <= audioList.count {
+                    return audioList[self.currentTrackIndex]
+            } else {
+                return nil
+            }
         }
     }
     
