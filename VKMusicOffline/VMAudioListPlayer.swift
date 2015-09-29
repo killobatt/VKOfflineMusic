@@ -33,17 +33,30 @@ class VMAudioListPlayer: NSObject {
         }
     }
     
-    private var player: AVPlayer! {
+    private var player: AVPlayer? {
         willSet {
-            if let currentItem = self.player?.currentItem {
-                currentItem.removeObserver(self, forKeyPath: "status")
+            if let playbackObserver: AnyObject = self.playbackObserver,
+                player = self.player {
+                    player.removeTimeObserver(playbackObserver)
+                    self.playbackObserver = nil
+            }
+        }
+    }
+    
+    private var playerItem: AVPlayerItem? {
+        willSet {
+            if let item = self.playerItem {
+                item.removeObserver(self, forKeyPath: "status")
                 NSNotificationCenter.defaultCenter().removeObserver(self,
                     name: AVPlayerItemDidPlayToEndTimeNotification,
-                    object: currentItem)
+                    object: item)
             }
-            if (self.playbackObserver != nil) {
-                self.player.removeTimeObserver(self.playbackObserver)
-                self.playbackObserver = nil
+        }
+        didSet {
+            if let item = self.playerItem {
+                item.addObserver(self, forKeyPath: "status", options: [.New, .Initial], context: nil)
+                NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerItemDidPlayToEndTime",
+                    name: AVPlayerItemDidPlayToEndTimeNotification, object: item)
             }
         }
     }
@@ -73,7 +86,7 @@ class VMAudioListPlayer: NSObject {
     var volume: Float = 1.0 {
         willSet {
             self.willChangeValueForKey("volume")
-            self.player.volume = newValue
+            self.player?.volume = newValue
         }
         didSet {
             self.didChangeValueForKey("volume")
@@ -129,7 +142,7 @@ class VMAudioListPlayer: NSObject {
     
     func play() {
         NSLog("VMAudioListPlayer play")
-        self.player.play()
+        self.player?.play()
         self.isPlaying = true
         
         var error: NSError? = nil
@@ -145,21 +158,19 @@ class VMAudioListPlayer: NSObject {
     
     func pause() {
         NSLog("VMAudioListPlayer pause")
-        if self.player != nil {
-            self.player.pause()
-        }
+        self.player?.pause()
         self.isPlaying = false
     }
     
     func seekToTime(time:CMTime) {
-        if (self.player.status == AVPlayerStatus.ReadyToPlay) {
+        if let player = self.player where player.status == AVPlayerStatus.ReadyToPlay {
             if (self.isPlaying) {
-                self.player.pause()
+                player.pause()
             }
-            self.player.currentItem?.cancelPendingSeeks()
-            self.player.currentItem?.seekToTime(time, completionHandler: { (finished: Bool) -> Void in
+            player.currentItem.cancelPendingSeeks()
+            player.currentItem.seekToTime(time, completionHandler: { (finished: Bool) -> Void in
                 if (self.isPlaying) {
-                    self.player.play()
+                    player.play()
                     self.updateNowPlayingInfoCenter()
                 }
             })
@@ -207,19 +218,15 @@ class VMAudioListPlayer: NSObject {
         didSet {
             self.didChangeValueForKey("currentTrackIndex")
             self.didChangeValueForKey("currentTrack")
-            var playerItem: AVPlayerItem! = nil
             if let currentTrack = self.currentTrack {
                 if let localURL = currentTrack.localURL {
-                    playerItem = AVPlayerItem(URL: localURL)
+                    self.playerItem = AVPlayerItem(URL: localURL)
                 } else {
-                    playerItem = AVPlayerItem(URL: currentTrack.URL)
+                    self.playerItem = AVPlayerItem(URL: currentTrack.URL)
                 }
-                playerItem.addObserver(self, forKeyPath: "status", options: [.New, .Initial], context: nil)
-                NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerItemDidPlayToEndTime",
-                    name: AVPlayerItemDidPlayToEndTimeNotification, object: playerItem)
                 
-                self.player = AVPlayer(playerItem: playerItem)
-                self.player.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
+                self.player = AVPlayer(playerItem: self.playerItem)
+                self.player?.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
                 self.updateNowPlayingInfoCenter()
             }
         }
@@ -282,13 +289,15 @@ class VMAudioListPlayer: NSObject {
                     NSLog("VMAudioListPlayer: AVPlayerItem ready to play")
                     
                     let timeInterval = CMTimeMakeWithSeconds(0.1, 600)
-                    self.playbackObserver = self.player.addPeriodicTimeObserverForInterval(timeInterval, queue: dispatch_get_main_queue(), usingBlock: { (time: CMTime) -> Void in
-                        self.playbackProgress = self.player.currentItem!.currentTime()
-                        self.loadedTrackPartTimeRange = self.timeRangeFrom(self.player.currentItem!.loadedTimeRanges)
-                    })
+                    self.playbackObserver = self.player?.addPeriodicTimeObserverForInterval(timeInterval, queue: dispatch_get_main_queue()) { (time: CMTime) -> Void in
+                        if let player = self.player {
+                            self.playbackProgress = player.currentItem.currentTime()
+                            self.loadedTrackPartTimeRange = self.timeRangeFrom(player.currentItem.loadedTimeRanges)
+                        }
+                    }
                     
                     if (self.isPlaying) {
-                        self.player.play()
+                        self.player?.play()
                     }
                     self.updateNowPlayingInfoCenter()
                 case AVPlayerItemStatus.Failed:
@@ -332,12 +341,12 @@ class VMAudioListPlayer: NSObject {
                     case AVAudioSessionInterruptionType.Began:
                         if (self.isPlaying) {
                             NSLog("Interruption began. Pausing...")
-                            self.player.pause()
+                            self.player?.pause()
                         }
                     case AVAudioSessionInterruptionType.Ended:
                         if (self.isPlaying) {
                             NSLog("Interruption ended. Resuming...")
-                            self.player.play()
+                            self.player?.play()
                         }
                     }
                 }
