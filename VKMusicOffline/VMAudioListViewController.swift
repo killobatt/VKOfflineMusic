@@ -12,6 +12,9 @@ import MGSwipeCells
 
 class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate
 {
+    
+    @IBOutlet weak var playingNowButtonItem: UIBarButtonItem!
+    
     var audioList: VMAudioList! = nil {
         didSet {
             self.title = self.audioList.title as String?
@@ -62,6 +65,8 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
                 
                 self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0)
                 self.tableView.tableHeaderView = self.searchController.searchBar;
+                
+                self.playingNowButtonItem.enabled = self.player.currentTrack != nil
             }
         }
     }
@@ -279,6 +284,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             if (object as! NSObject == VMAudioListPlayer.sharedInstance) {
                 if (keyPath == "currentTrackIndex") {
                     self.tableView.reloadData()
+                    self.playingNowButtonItem.enabled = self.player.currentTrack != nil
                 }
             }
     }
