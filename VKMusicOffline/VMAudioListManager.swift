@@ -104,10 +104,7 @@ class VMAudioListManager: NSObject, NSURLSessionDownloadDelegate {
                 self.popularEnglishAudioList.onlyEnglish = true
                 self.popularEnglishAudioList.pageSize = 180
                 self.popularEnglishAudioList.loadNextPage(completion: nil)
-                
-                self.syncAudioList.user = newUser
-                self.syncAudioList.synchronize()
-                
+                                
                 self.willChangeValueForKey("audioLists")
                 self.willChangeValueForKey("offlineAudioLists")
             } else {

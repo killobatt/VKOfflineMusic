@@ -14,10 +14,6 @@ class VMPopularAudioList: VMOnlineAudioList {
     var onlyEnglish: Bool = false
     var genreID: Int? = nil
     
-    override var method: String! {
-        return "audio.getPopular"
-    }
-    
     override var parameters: NSDictionary {
         get {
             let parameters: NSMutableDictionary = [
@@ -31,6 +27,12 @@ class VMPopularAudioList: VMOnlineAudioList {
         }
     }
     
+    override func createRequest() -> VKRequest {
+        return VKApi.requestWithMethod("audio.getPopular",
+            andParameters:self.parameters as [NSObject : AnyObject],
+            andHttpMethod:"GET")
+    }
+
     override var searchResultsList: VMAudioList? {
         get {
             return VMSearchAudioList(searchOwn: true)

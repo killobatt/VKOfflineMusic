@@ -441,17 +441,17 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IsPlaying" translatesAutoresizingMaskIntoConstraints="NO" id="UQy-sB-NtY">
                                             <rect key="frame" x="12" y="18" width="16" height="16"/>
                                         </imageView>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hqN-yr-Hdh" userLabel="Title View">
-                                            <rect key="frame" x="38" y="9" width="115" height="36"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqN-yr-Hdh" userLabel="Title View">
+                                            <rect key="frame" x="38" y="7.5" width="114.5" height="36.5"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Metallica" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fE7-iH-Bga">
-                                                    <rect key="frame" x="0.0" y="19" width="58" height="17"/>
+                                                    <rect key="frame" x="0.0" y="19.5" width="58" height="17"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Enter Sandman" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5h7-Td-qOz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="114.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -478,7 +478,7 @@
                                             </variation>
                                         </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDL-31-fk1">
-                                            <rect key="frame" x="564" y="19" width="25" height="15"/>
+                                            <rect key="frame" x="563.5" y="18.5" width="24.5" height="14.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -552,19 +552,19 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Four words to choke upon" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pg2-0q-1cS" userLabel="Track title label">
-                                                    <rect key="frame" x="202" y="8" width="196" height="20"/>
+                                                    <rect key="frame" x="202.5" y="8" width="195.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bullet for my valentine" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPf-fX-BUK" userLabel="Track artist label">
-                                                    <rect key="frame" x="228" y="27" width="144" height="17"/>
+                                                    <rect key="frame" x="228.5" y="27.5" width="143.5" height="17"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpg-Le-C3W" userLabel="Play previous track button">
-                                                    <rect key="frame" x="226" y="44" width="44" height="44"/>
+                                                    <rect key="frame" x="226" y="44.5" width="44" height="44"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Zpg-Le-C3W" secondAttribute="height" multiplier="1:1" id="NL9-6Z-Ygl"/>
@@ -573,13 +573,13 @@
                                                     <state key="normal" image="PlayPrevious">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" image="5FB20078-0789-4088-B9C8-0A8D788DA60C"/>
+                                                    <state key="selected" image="523AF2D1-7844-4DC4-8E1C-88339101F15F"/>
                                                     <connections>
                                                         <action selector="playPreviousTrack:" destination="263-cg-i3V" eventType="touchUpInside" id="Tmd-Qg-HIQ"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1P5-lL-ufk" userLabel="Play/Pause button">
-                                                    <rect key="frame" x="278" y="44" width="44" height="44"/>
+                                                    <rect key="frame" x="278" y="44.5" width="44" height="44"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="1P5-lL-ufk" secondAttribute="height" multiplier="1:1" id="bgW-5j-700"/>
@@ -594,7 +594,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a88-e3-7SR" userLabel="Play next track button">
-                                                    <rect key="frame" x="330" y="44" width="44" height="44"/>
+                                                    <rect key="frame" x="330" y="44.5" width="44" height="44"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="a88-e3-7SR" secondAttribute="height" multiplier="1:1" id="CNb-iV-Fvy"/>
@@ -603,32 +603,32 @@
                                                     <state key="normal" image="PlayNext">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" image="5FB20078-0789-4088-B9C8-0A8D788DA60C"/>
+                                                    <state key="selected" image="523AF2D1-7844-4DC4-8E1C-88339101F15F"/>
                                                     <connections>
                                                         <action selector="playNextTrack:" destination="263-cg-i3V" eventType="touchUpInside" id="EnE-hr-h0L"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0O-SR-UuG" userLabel="Track duration label">
-                                                    <rect key="frame" x="8" y="95" width="23" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0O-SR-UuG" userLabel="Track duration label">
+                                                    <rect key="frame" x="8" y="96" width="22.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1D-eM-g1e" userLabel="Track remaining duration label">
-                                                    <rect key="frame" x="569" y="96" width="23" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1D-eM-g1e" userLabel="Track remaining duration label">
+                                                    <rect key="frame" x="568.5" y="97" width="23.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eto-50-sVw">
-                                                    <rect key="frame" x="0.0" y="126" width="600" height="474"/>
+                                                    <rect key="frame" x="0.0" y="126.5" width="600" height="473.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <connections>
                                                         <segue destination="l6x-eV-Xvn" kind="embed" identifier="embedLyrics" id="bhC-uZ-9HJ"/>
                                                     </connections>
                                                 </containerView>
-                                                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ibc-PO-9jX" customClass="PlayerSlider" customModule="UIViews">
-                                                    <rect key="frame" x="32" y="88" width="535" height="31"/>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Ibc-PO-9jX" customClass="PlayerSlider" customModule="UIViews">
+                                                    <rect key="frame" x="32.5" y="88.5" width="534" height="31"/>
                                                     <color key="maximumTrackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="secondaryValue">
@@ -791,7 +791,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="5FB20078-0789-4088-B9C8-0A8D788DA60C" width="32" height="32">
+        <image name="523AF2D1-7844-4DC4-8E1C-88339101F15F" width="32" height="32">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
