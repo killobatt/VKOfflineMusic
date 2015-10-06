@@ -222,7 +222,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         if (segue.identifier == "showLyrics") {
             let controller = segue.destinationViewController as! VMLyricsController
             let audioCell = sender as! VMAudioCell
-            controller.lyrics = audioCell.audio.lyrics
+            controller.lyrics = audioCell.audio?.lyrics
         } else if (segue.identifier == "showOfflineListSelection") {
             let navigationController = segue.destinationViewController as! UINavigationController
             let controller = navigationController.topViewController as! VMAudioListsSelectionViewController

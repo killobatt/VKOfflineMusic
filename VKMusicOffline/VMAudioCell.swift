@@ -12,14 +12,14 @@ import MGSwipeCells
 class VMAudioCell: MGSwipeTableCell {
     
     // MARK: - Audio
-    var audio: VMAudio! {
+    var audio: VMAudio? {
         willSet(newAudio) {
-            if (newAudio != nil) {
-                self.artistNameLabel.text = newAudio.artist as String
-                self.trackNameLabel.text = newAudio.title as String
-                self.trackDurationLabel.text = newAudio.durationString as String
+            if let audio = newAudio {
+                self.artistNameLabel.text = audio.artist as String
+                self.trackNameLabel.text = audio.title as String
+                self.trackDurationLabel.text = audio.durationString as String
                 if let track = self.player.currentTrack {
-                    self.playingIndicator.hidden = track != newAudio
+                    self.playingIndicator.hidden = track != audio
                 } else {
                     self.playingIndicator.hidden = true
                 }
@@ -71,14 +71,17 @@ class VMAudioCell: MGSwipeTableCell {
     // MARK: - KVO
     
     private func setupObserving() {
-        self.player.addObserver(self, forKeyPath: "currentTrack", options: [.New, .Initial], context: nil)
-        self.player.addObserver(self, forKeyPath: "isPlaying", options: [.New, .Initial], context: nil)
+        self.player.addObserver(self, forKeyPath: "currentTrack", options: [.New], context: nil)
+        self.player.addObserver(self, forKeyPath: "isPlaying", options: [.New], context: nil)
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if (keyPath == "currentTrack") {
-            if let track = self.player.currentTrack {
-                self.playingIndicator.hidden = self.audio != track
+            if let playerTrack = self.player.currentTrack,
+                ourTrack = self.audio {
+                    self.playingIndicator.hidden = ourTrack != playerTrack
+            } else {
+                self.playingIndicator.hidden = true
             }
         } else if (keyPath == "isPlaying") {
             
