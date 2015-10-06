@@ -170,7 +170,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
         VMUserManager.sharedInstance.loadCurrentUser(completionBlock: { (user: VKUser) -> Void in
             VMAudioListManager.sharedInstance.user = user
         }) { (error: NSError!) -> Void in
-            
+            if error.domain == VKSdkErrorDomain &&
+                error.code == Int(VK_API_ERROR) {
+                    self.vkAuthorize()
+            }
         }
     }
 }
