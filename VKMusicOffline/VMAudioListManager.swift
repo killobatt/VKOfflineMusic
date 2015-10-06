@@ -72,7 +72,6 @@ class VMAudioListManager: NSObject {
             self.didChangeValueForKey("offlineAudioLists")
         }
     }
-    var friendsAudioLists: [VMUserAudioList] = []
 //    var resentAudioList: VMAudioList!
 //    var allOfflineAudioList: VMAudioList!
     
@@ -143,18 +142,7 @@ class VMAudioListManager: NSObject {
             self.didChangeValueForKey("offlineAudioLists")
         }
     }
-    
-    func audioListForFriend(user: VKUser) -> VMUserAudioList {
         
-        if let list = (self.friendsAudioLists.filter { $0.user.id == user.id }.first) {
-            return list
-        } else {
-            let list = VMUserAudioList(with: user)
-            self.friendsAudioLists.append(list)
-            return list
-        }
-    }
-    
     // MARK: - Offline audio lists
     
     private func addSyncAudioList() {

@@ -58,28 +58,4 @@ class VMUserManager: NSObject {
                 errorBlock(error)
         })
     }
-    
-    var friends: VKUsersArray?
-    
-    private var friendsRequest: VKRequest {
-        let parameters = [
-            VK_API_USER_ID: VKSdk.getAccessToken().userId,
-            VK_API_FIELDS : ["first_name", "last_name", "photo_100", "online"],
-            "order" : "hints"
-        ]
-        return VKApi.friends().get(parameters as [NSObject : AnyObject])
-    }
-    
-    func loadFriends(completion completion:((VKUsersArray) -> Void), errorBlock:((NSError!) -> Void)) {
-        self.friendsRequest.executeWithResultBlock({ (response: VKResponse!) -> Void in
-            NSLog("VMUserManager.loadFriends got response: \(response)")
-            if let friends = response.parsedModel as? VKUsersArray {
-                completion(friends)
-                self.friends = friends
-            }
-            }, errorBlock: { (error: NSError!) -> Void in
-            NSLog("VMUserManager.loadFriends got error: \(error)")
-                errorBlock(error)
-        })
-    }
 }

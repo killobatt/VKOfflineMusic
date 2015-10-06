@@ -107,7 +107,7 @@ class VMMenuViewController: UITableViewController {
         } else if section == 1 {
             return VMAudioListManager.sharedInstance.audioLists.count
         } else if section == 2 {
-            return 3
+            return 2
         }
         return 0
     }
@@ -128,8 +128,6 @@ class VMMenuViewController: UITableViewController {
                 cellID = "AddNewListCell"
             case 1:
                 cellID = "DownloadsCell"
-            case 2:
-                cellID = "FriendsCell"
             default:
                 cellID = ""
             }

@@ -167,8 +167,8 @@ class VMAudioListPlayer: NSObject {
             if (self.isPlaying) {
                 player.pause()
             }
-            player.currentItem.cancelPendingSeeks()
-            player.currentItem.seekToTime(time, completionHandler: { (finished: Bool) -> Void in
+            player.currentItem?.cancelPendingSeeks()
+            player.currentItem?.seekToTime(time, completionHandler: { (finished: Bool) -> Void in
                 if (self.isPlaying) {
                     player.play()
                     self.updateNowPlayingInfoCenter()
@@ -225,7 +225,7 @@ class VMAudioListPlayer: NSObject {
                     self.playerItem = AVPlayerItem(URL: currentTrack.URL)
                 }
                 
-                self.player = AVPlayer(playerItem: self.playerItem)
+                self.player = AVPlayer(playerItem: self.playerItem!)
                 self.player?.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
                 self.updateNowPlayingInfoCenter()
             }
@@ -290,9 +290,9 @@ class VMAudioListPlayer: NSObject {
                     
                     let timeInterval = CMTimeMakeWithSeconds(0.1, 600)
                     self.playbackObserver = self.player?.addPeriodicTimeObserverForInterval(timeInterval, queue: dispatch_get_main_queue()) { (time: CMTime) -> Void in
-                        if let player = self.player {
-                            self.playbackProgress = player.currentItem.currentTime()
-                            self.loadedTrackPartTimeRange = self.timeRangeFrom(player.currentItem.loadedTimeRanges)
+                        if let playerItem = self.playerItem {
+                            self.playbackProgress = playerItem.currentTime()
+                            self.loadedTrackPartTimeRange = self.timeRangeFrom(playerItem.loadedTimeRanges)
                         }
                     }
                     
