@@ -90,7 +90,7 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     
     /* Sent periodically to notify the delegate of download progress. */
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        NSLog("URLSession downloadTask: \(downloadTask.taskIdentifier) didWriteData: \(bytesWritten) bytes, totalBytesWritten: \(totalBytesWritten), totalBytesExpectedToWrite: \(totalBytesExpectedToWrite)")
+//        NSLog("URLSession downloadTask: \(downloadTask.taskIdentifier) didWriteData: \(bytesWritten) bytes, totalBytesWritten: \(totalBytesWritten), totalBytesExpectedToWrite: \(totalBytesExpectedToWrite)")
         if let audioID = self.audioIDForTask(downloadTask) {
             self.progressDelegate?.downloadManager?(self, loadedBytes: totalBytesWritten, fromTotalBytes: totalBytesExpectedToWrite, forAudioWithID: audioID, andTask:downloadTask)
         }
