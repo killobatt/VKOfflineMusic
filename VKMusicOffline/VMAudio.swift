@@ -62,7 +62,6 @@ class VMAudio: NSObject, NSCoding {
         if (audio.lyrics_id != nil) {
             self.lyrics = VMLyrics(audio: self, identifier: audio.lyrics_id)
         }
-
     }
     
     // MARK: - NSCoding interface implementation
@@ -103,3 +102,42 @@ class VMAudio: NSObject, NSCoding {
 func ==(lhs: VMAudio, rhs: VMAudio) -> Bool {
     return lhs.id == rhs.id
 }
+
+
+extension VMAudio {
+    
+    private var requestParameters: [NSObject : AnyObject] {
+        return ["audios":"\(self.ownerID)_\(self.id)"]
+    }
+    
+    private var request: VKRequest {
+        return VKRequest(method: "audio.getById",
+            andParameters: self.requestParameters,
+            andHttpMethod: "GET")
+    }
+    
+    func refreshURL(completion:(audio:VMAudio?, error:NSError?) -> ()) {
+        self.request.executeWithResultBlock({ (response: VKResponse!) -> Void in
+            
+            var audios : VKAudios! = nil
+            if let audioJSONDictionary = response.json as? [NSObject : AnyObject] {
+                audios = VKAudios(dictionary: audioJSONDictionary)
+            } else if let audioJSONArray = response.json as? [AnyObject] {
+                audios = VKAudios(array: audioJSONArray)
+            }
+            
+            if let audio = audios.objectAtIndex(0) as? VKAudio,
+                url = audio.url {
+                    self.URL = NSURL(string: url)
+                    completion(audio: self, error: nil)
+            } else {
+                completion(audio: nil, error: NSError(domain:NSCocoaErrorDomain, code:-1, userInfo: [NSLocalizedDescriptionKey: "could not parse object VKAudio from response: \(response.json)"]))
+            }
+            }) { (error: NSError!) -> Void in
+                completion(audio: nil, error: error)
+        }
+    }
+    
+}
+
+

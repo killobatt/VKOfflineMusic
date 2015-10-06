@@ -25,6 +25,9 @@ class VMAudioListManager: NSObject {
     
     override init() {
         super.init()
+        
+        NSFileManager.defaultManager().delegate = self
+        
         self.createAudioListsDirectoryIfNeeded()
         
         self.model = CDModel(storageURL:self.audioListModelURL)
@@ -290,11 +293,14 @@ class VMAudioListManager: NSObject {
 extension VMAudioListManager: VMAudioDownloadManagerDelegate {
     
     func downloadManager(downloadManager: VMAudioDownloadManager, didLoadFile url: NSURL, forAudioWithID audioID: NSNumber) {
+        
+        NSLog("downloadManager audio: \(audioID) was loaded to temp file: \(url)")
         let audioFileName = audioID.stringValue
         let audioURL = self.offlineAudioListDirectoryURL.URLByAppendingPathComponent(audioFileName).URLByAppendingPathExtension("mp3")
         
         do {
             try NSFileManager.defaultManager().moveItemAtURL(url, toURL: audioURL)
+            NSLog("downloadManager audio: \(audioID) was moved to file: \(audioURL)")
             
             let allAudios = self.offlineAudioLists.reduce([]) { result, list in result + list.audios }
             let audiosToUpdate = allAudios.filter { audio in audio.id == audioID }
@@ -315,6 +321,15 @@ extension VMAudioListManager: VMAudioDownloadManagerDelegate {
     }
 }
 
+extension VMAudioListManager: NSFileManagerDelegate {
+    func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, movingItemAtURL srcURL: NSURL, toURL dstURL: NSURL) -> Bool {
+        if error.code == NSFileWriteFileExistsError {
+            NSLog("will overwrite file at path: \(dstURL)")
+            return true
+        }
+        return false
+    }
+}
 
 extension VMAudio {
     var localURL: NSURL! {

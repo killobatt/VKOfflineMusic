@@ -81,6 +81,7 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     * still be called.
     */
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
+        NSLog("URLSession downloadTask: \(downloadTask.taskIdentifier) didFinishDownloadingToURL: \(location)")
         if let audioID = self.audioIDForTask(downloadTask) {
             self.delegate?.downloadManager?(self, didLoadFile: location, forAudioWithID: audioID)
             self.progressDelegate?.downloadManager?(self, didLoadAudioWithID: audioID, andTask: downloadTask)
@@ -89,7 +90,7 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     
     /* Sent periodically to notify the delegate of download progress. */
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        NSLog("URLSession downloadTask \(downloadTask.taskIdentifier) didWriteData \(bytesWritten) bytes, totalBytesWritten \(totalBytesWritten), totalBytesExpectedToWrite \(totalBytesExpectedToWrite)")
+        NSLog("URLSession downloadTask: \(downloadTask.taskIdentifier) didWriteData: \(bytesWritten) bytes, totalBytesWritten: \(totalBytesWritten), totalBytesExpectedToWrite: \(totalBytesExpectedToWrite)")
         if let audioID = self.audioIDForTask(downloadTask) {
             self.progressDelegate?.downloadManager?(self, loadedBytes: totalBytesWritten, fromTotalBytes: totalBytesExpectedToWrite, forAudioWithID: audioID, andTask:downloadTask)
         }
@@ -101,11 +102,12 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     * data.
     */
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
-        
+        NSLog("URLSession downloadTask: \(downloadTask.taskIdentifier) didResumeAtOffset: \(fileOffset) bytes, expectedTotalBytes: \(expectedTotalBytes) bytes")
     }
     
     func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
-        self.backgroundURLSessionCompletionHandler!()
+        NSLog("URLSessionDidFinishEventsForBackgroundURLSession: \(session.sessionDescription)")
+        self.backgroundURLSessionCompletionHandler?()
     }
 
 }

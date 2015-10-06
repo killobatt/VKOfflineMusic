@@ -120,6 +120,7 @@ class VMAudioListPlayer: NSObject {
         case Idle
         case ReadyToPlay
         case Failed(error: NSError!)
+        case RecoveringFromError(error: NSError!)
     }
     
     private(set) var state: State = State.Idle {
@@ -218,17 +219,21 @@ class VMAudioListPlayer: NSObject {
         didSet {
             self.didChangeValueForKey("currentTrackIndex")
             self.didChangeValueForKey("currentTrack")
-            if let currentTrack = self.currentTrack {
-                if let localURL = currentTrack.localURL {
-                    self.playerItem = AVPlayerItem(URL: localURL)
-                } else {
-                    self.playerItem = AVPlayerItem(URL: currentTrack.URL)
-                }
-                
-                self.player = AVPlayer(playerItem: self.playerItem!)
-                self.player?.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
-                self.updateNowPlayingInfoCenter()
+            self.updateCurrentPlayerItem()
+        }
+    }
+    
+    private func updateCurrentPlayerItem() {
+        if let currentTrack = self.currentTrack {
+            if let localURL = currentTrack.localURL {
+                self.playerItem = AVPlayerItem(URL: localURL)
+            } else {
+                self.playerItem = AVPlayerItem(URL: currentTrack.URL)
             }
+            
+            self.player = AVPlayer(playerItem: self.playerItem!)
+            self.player?.actionAtItemEnd = AVPlayerActionAtItemEnd.Pause
+            self.updateNowPlayingInfoCenter()
         }
     }
     
@@ -287,6 +292,7 @@ class VMAudioListPlayer: NSObject {
                 switch playerItem.status {
                 case AVPlayerItemStatus.ReadyToPlay:
                     NSLog("VMAudioListPlayer: AVPlayerItem ready to play")
+                    self.state = State.ReadyToPlay
                     
                     let timeInterval = CMTimeMakeWithSeconds(0.1, 600)
                     self.playbackObserver = self.player?.addPeriodicTimeObserverForInterval(timeInterval, queue: dispatch_get_main_queue()) { (time: CMTime) -> Void in
@@ -302,12 +308,30 @@ class VMAudioListPlayer: NSObject {
                     self.updateNowPlayingInfoCenter()
                 case AVPlayerItemStatus.Failed:
                     NSLog("VMAudioListPlayer: AVPlayerItem: Failed with error \(playerItem.error)")
-                    self.state = State.Failed(error: playerItem.error)
+                    switch self.state {
+                        case .RecoveringFromError(_):
+                            self.state = State.Failed(error: playerItem.error)
+                            self.playNextTrack()
+                        case .Idle, .ReadyToPlay, .Failed(_):
+                            self.state = State.RecoveringFromError(error: playerItem.error)
+                            self.currentTrack?.refreshURL() {
+                                (refreshedAudio: VMAudio?, error: NSError?) -> () in
+                                if let audio = refreshedAudio {
+                                    // if offline track is broken, redownload it
+                                    if let currentTrack = self.currentTrack where currentTrack.localURL != nil {
+                                        currentTrack.localFileName = nil
+                                        VMAudioListManager.sharedInstance.downloadManager.downloadAudio(audio)
+                                    }
+                                }
+                                self.updateCurrentPlayerItem()
+                                self.play()
+                            }
+                    }
                     self.player = nil
                 case AVPlayerItemStatus.Unknown:
                     NSLog("VMAudioListPlayer: AVPlayerItem: Unknown status, eror \(playerItem.error)")
-                    self.state = State.Failed(error: nil)
-                    self.player = nil                    
+                    self.state = .Idle
+                    self.player = nil
                 }
             }
         }
