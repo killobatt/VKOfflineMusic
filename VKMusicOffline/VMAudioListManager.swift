@@ -9,6 +9,7 @@
 import Foundation
 import VK
 import CoreDataStorage
+import CoreData
 
 class VMAudioListManager: NSObject {
    
@@ -259,10 +260,23 @@ class VMAudioListManager: NSObject {
     }
     
     func saveOfflineAudioLists() {
-        for list in self.offlineAudioLists {
-            CDAudioList.storedAudioListForAudioList(list, managedObjectContext: self.model.mainContext)
+        let context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        context.parentContext = self.model.mainContext
+        context.performBlock() {
+            for list in self.offlineAudioLists {
+                CDAudioList.storedAudioListForAudioList(list, managedObjectContext: context)
+            }
+            
+            do {
+                try context.save()
+            } catch let error as NSError {
+                NSLog("Error saving child context: \(error)")
+            }
+            
+            self.model.mainContext.performBlockAndWait() {
+                self.model.save()
+            }
         }
-        self.model.save()
     }
     
     // MARK: - Paths
