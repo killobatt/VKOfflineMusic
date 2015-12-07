@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
         switch UIDevice.currentDevice().userInterfaceIdiom {
         case .Phone:
             orientations = UIInterfaceOrientationMask.Portrait
-        case .Pad, .Unspecified:
+        default:
             orientations = UIInterfaceOrientationMask.All
         }
         return orientations;

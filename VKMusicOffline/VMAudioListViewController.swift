@@ -103,7 +103,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         switch (UIDevice.currentDevice().userInterfaceIdiom) {
         case .Pad:
             self.performSegueWithIdentifier("playingNowPopover", sender: sender)
-        case .Phone, .Unspecified:
+        default:
             self.performSegueWithIdentifier("playingNowPush", sender: sender)
         }
     }
