@@ -295,6 +295,10 @@ class VMAudioListManager: NSObject {
         return self.userDocumentsDirectoryURL.URLByAppendingPathComponent("audio-lists")
     }
     
+    func URLForAudioID(audioID: String) -> NSURL {
+        return self.offlineAudioListDirectoryURL.URLByAppendingPathComponent(audioID).URLByAppendingPathExtension("mp3")
+    }
+    
     func URLForLegacyList(list: VMOfflineAudioList) -> NSURL {
         let url = self.offlineAudioListDirectoryURL.URLByAppendingPathComponent(list.identifier.UUIDString)
         return url.URLByAppendingPathExtension("list")
@@ -309,8 +313,7 @@ extension VMAudioListManager: VMAudioDownloadManagerDelegate {
     func downloadManager(downloadManager: VMAudioDownloadManager, didLoadFile url: NSURL, forAudioWithID audioID: NSNumber) {
         
         NSLog("downloadManager audio: \(audioID) was loaded to temp file: \(url)")
-        let audioFileName = audioID.stringValue
-        let audioURL = self.offlineAudioListDirectoryURL.URLByAppendingPathComponent(audioFileName).URLByAppendingPathExtension("mp3")
+        let audioURL = self.URLForAudioID(audioID.stringValue)
         
         do {
             try NSFileManager.defaultManager().moveItemAtURL(url, toURL: audioURL)
@@ -319,7 +322,7 @@ extension VMAudioListManager: VMAudioDownloadManagerDelegate {
             let allAudios = self.offlineAudioLists.reduce([]) { result, list in result + list.audios }
             let audiosToUpdate = allAudios.filter { audio in audio.id == audioID }
             for audio in audiosToUpdate {
-                audio.localFileName = audioFileName
+                audio.localFileName = audioID.stringValue
             }
             self.saveOfflineAudioLists()
         } catch let error as NSError {
@@ -349,7 +352,7 @@ extension VMAudio {
     var localURL: NSURL! {
         get {
             if let localFileName = self.localFileName {
-                return VMAudioListManager.sharedInstance.offlineAudioListDirectoryURL.URLByAppendingPathComponent(localFileName as String)
+                return VMAudioListManager.sharedInstance.URLForAudioID(localFileName as String)
             } else {
                 return nil
             }

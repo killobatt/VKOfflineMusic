@@ -126,6 +126,11 @@ extension VMAudio {
                 audios = VKAudios(array: audioJSONArray)
             }
             
+            if (audios.count == 0) {
+                completion(audio: nil, error: NSError(domain:NSCocoaErrorDomain, code:-1, userInfo: [NSLocalizedDescriptionKey: "No VKAudios found in response: \(response.json)"]))
+                return
+            }
+            
             if let audio = audios.objectAtIndex(0) as? VKAudio,
                 url = audio.url {
                     self.URL = NSURL(string: url)

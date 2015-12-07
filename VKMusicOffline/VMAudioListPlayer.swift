@@ -318,10 +318,8 @@ class VMAudioListPlayer: NSObject {
                                 (refreshedAudio: VMAudio?, error: NSError?) -> () in
                                 if let audio = refreshedAudio {
                                     // if offline track is broken, redownload it
-                                    if let currentTrack = self.currentTrack where currentTrack.localURL != nil {
-                                        currentTrack.localFileName = nil
-                                        VMAudioListManager.sharedInstance.downloadManager.downloadAudio(audio)
-                                    }
+                                    audio.localFileName = nil
+                                    VMAudioListManager.sharedInstance.downloadManager.downloadAudio(audio)
                                 }
                                 self.updateCurrentPlayerItem()
                                 self.play()
