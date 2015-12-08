@@ -78,6 +78,7 @@ class VMMenuViewController: UITableViewController {
                 })
             }
         }
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {

@@ -14,6 +14,7 @@ class VMMenuAudioListCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var isPlayingImage: UIImageView!
     
     // MARK: - VMAudioList
     var audioList: VMAudioList! {
@@ -51,9 +52,14 @@ class VMMenuAudioListCell: UITableViewCell {
     }
 
     func updateUI() {
-        if self.audioList != nil {
+        if let audioList = self.audioList {
             self.titleLabel.text = self.audioList.title as String
             self.countLabel.text = (self.audioList.totalCount > 0) ? "\(self.audioList.totalCount)" : ""
+            if let currentAudioList = VMAudioListPlayer.sharedInstance.audioList {
+                self.isPlayingImage.hidden = (audioList !== currentAudioList)
+            }
+        } else {
+            self.isPlayingImage.hidden = true
         }
     }
     
