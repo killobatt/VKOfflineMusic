@@ -352,7 +352,7 @@ class VMAudioListPlayer: NSObject {
         }
         
         
-        self.interruptionNotificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVAudioSessionInterruptionNotification, object: self, queue: NSOperationQueue.mainQueue()) {
+        self.interruptionNotificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVAudioSessionInterruptionNotification, object: nil, queue: NSOperationQueue.mainQueue()) {
             (notification: NSNotification) -> Void in
             NSLog("Got interruption: \(notification.userInfo)")
             
