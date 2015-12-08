@@ -171,19 +171,23 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (VMAudioListPlayer.sharedInstance.audioList !== self.audioList) {
-            VMAudioListPlayer.sharedInstance.setAudioList(self.audioList, currentTrackIndex: indexPath.row)
+        let player = VMAudioListPlayer.sharedInstance
+        if (player.audioList !== self.audioList) {
+            player.setAudioList(self.audioList, currentTrackIndex: indexPath.row)
+            player.play()
+            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+            return
         }
         
-        if (VMAudioListPlayer.sharedInstance.currentTrackIndex == indexPath.row) {
-            if (VMAudioListPlayer.sharedInstance.isPlaying) {
-                VMAudioListPlayer.sharedInstance.pause()
+        if (player.currentTrackIndex == indexPath.row) {
+            if (player.isPlaying) {
+                player.pause()
             } else {
-                VMAudioListPlayer.sharedInstance.play()
+                player.play()
             }
         } else {
-            VMAudioListPlayer.sharedInstance.currentTrackIndex = indexPath.row
-            VMAudioListPlayer.sharedInstance.play()
+            player.currentTrackIndex = indexPath.row
+            player.play()
         }
         self.tableView.reloadData()
     }
