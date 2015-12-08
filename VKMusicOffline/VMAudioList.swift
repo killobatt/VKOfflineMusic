@@ -21,6 +21,8 @@ class VMAudioList: NSObject {
         }
     }
     
+    var delegate: VMAudioListDelegate?
+    
     subscript(index: Int) -> VMAudio {
         get {
             return self.audios[index]
@@ -39,9 +41,29 @@ class VMAudioList: NSObject {
     
     func hasNextPage() -> Bool { return false }
     func loadNextPage(completion completion:((NSError!) -> Void)?) -> Void { }
-    
+    func reload() {}
 }
 
+class VMAudioListChangeInfo {
+    var insertedAudios: [Int: VMAudio] = [:]
+    var removedAudios:  [Int: VMAudio] = [:]
+    var movedAudios: [(audio: VMAudio, from: Int, to: Int)] = []
+    
+    static func removedAudiosForAudios(audios: [VMAudio], fromAudioList audioList:VMAudioList) -> [Int: VMAudio] {
+        return audios.reduce([Int: VMAudio]()) { (var dictionary: [Int: VMAudio], audio: VMAudio) -> [Int: VMAudio] in
+            if let index = audioList.audios.indexOf(audio) {
+                dictionary[index] = audio
+            }
+            return dictionary
+        }
+    }
+}
+
+protocol VMAudioListDelegate {
+    func audioListWasReloaded(audioList: VMAudioList)
+    func audioListWillChange(audioList: VMAudioList)
+    func autioList(audioList: VMAudioList, didChangeWithInfo changeInfo: VMAudioListChangeInfo)
+}
 
 // Editable list
 extension VMAudioList {

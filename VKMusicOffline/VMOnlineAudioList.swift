@@ -105,4 +105,18 @@ class VMOnlineAudioList: VMAudioList {
             self.request = nil
         }
     }
+    
+    override func reload() {
+        self.delegate?.audioListWillChange(self)
+        
+        let change = VMAudioListChangeInfo()
+        change.removedAudios = VMAudioListChangeInfo.removedAudiosForAudios(self.audios, fromAudioList: self)
+        
+        self.resetList()
+        self.delegate?.autioList(self, didChangeWithInfo: change)
+        
+        self.loadNextPage { (error: NSError!) -> Void in
+            self.delegate?.audioListWasReloaded(self)
+        }
+    }
 }

@@ -43,18 +43,21 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
         }
     }
     
+    override func reload() {
+        self.synchronize()
+    }
+    
     func synchronize() {
         self.request?.executeWithResultBlock({ (response: VKResponse!) -> Void in
             if response != nil {
                 if let vkAudios = VKAudios(dictionary:(response.json as! [NSObject : AnyObject])) {
                     
-                    var audiosToDelete: [VMAudio] = []
+                    self.delegate?.audioListWillChange(self)
                     
                     let loadedAudios = vkAudios.items.copy() as! [VKAudio]
-                    let storedAudios = self.storedAudioList.audios
                     
                     var updatedAudios: [VMAudio] = []
-                    var audiosToInsert: [Int: VMAudio] = [:]
+                    var insertedAudios: [Int: VMAudio] = [:]
                         
                     for (var i: Int = 0; i < loadedAudios.count; i++) {
                         let loadedAudio = loadedAudios[i]
@@ -70,7 +73,7 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
                         } else {
                             let addedAudio = VMAudio(audio: loadedAudio)
                             updatedAudios.append(addedAudio)
-                            audiosToInsert[i] = addedAudio
+                            insertedAudios[i] = addedAudio
                             self.downloadManager.downloadAudio(addedAudio)
                         }
                     }
@@ -79,21 +82,31 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
                         return loadedAudios.map{ $0.id }.contains($0.id)
                     }
                     
-                    var audiosToMove: [(audio: VMAudio, from: Int, to: Int)] = []
+                    var movedAudios: [(audio: VMAudio, from: Int, to: Int)] = []
                     for audio in commonAudios {
-                        if let oldIndex = self.audios.indexOf(audio), newIndex = updatedAudios.indexOf(audio)
+                        let oldIndexOpt = self.audios.map{ $0.id }.indexOf(audio.id)
+                        let newIndexOpt = updatedAudios.map{ $0.id }.indexOf(audio.id)
+                        if let oldIndex = oldIndexOpt,
+                            let newIndex = newIndexOpt
                             where oldIndex != newIndex {
-                                audiosToMove.append((audio: audio, from: oldIndex, to: newIndex))
+                                movedAudios.append((audio: audio, from: oldIndex, to: newIndex))
                         }
                     }
                     
                     let audiosToRemove = self.audios.filter {
-                        return loadedAudios.map{ $0.id }.contains($0.id)
+                        return !loadedAudios.map{ $0.id }.contains($0.id)
                     }
                     
-                    // TODO: use insertedAudios, audiosToMove and audiosToRemove to make updates
+                    let removedAudios = VMAudioListChangeInfo.removedAudiosForAudios(audiosToRemove, fromAudioList:self)
+                    
+                    let changeInfo = VMAudioListChangeInfo()
+                    changeInfo.movedAudios = movedAudios
+                    changeInfo.insertedAudios = insertedAudios
+                    changeInfo.removedAudios = removedAudios
                     
                     self.audios = updatedAudios
+                    
+                    self.delegate?.autioList(self, didChangeWithInfo: changeInfo)
                 }
             }
         }, errorBlock: { (error: NSError!) -> Void in

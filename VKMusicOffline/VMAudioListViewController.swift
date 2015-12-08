@@ -10,13 +10,14 @@ import UIKit
 import VK
 import MGSwipeCells
 
-class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate
+class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, VMAudioListDelegate
 {
     
     @IBOutlet weak var playingNowButtonItem: UIBarButtonItem!
     
     var audioList: VMAudioList! = nil {
         didSet {
+            audioList.delegate = self
             self.title = self.audioList.title as String?
             if (self.searchResultsController != nil) {
                 self.searchResultsController.audioList = self.audioList
@@ -69,6 +70,9 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
                 self.playingNowButtonItem.enabled = self.player.currentTrack != nil
             }
         }
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: "pullToRefresh:", forControlEvents: .ValueChanged)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -106,6 +110,10 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         default:
             self.performSegueWithIdentifier("playingNowPush", sender: sender)
         }
+    }
+    
+    @IBAction func pullToRefresh(sender: AnyObject) {
+        self.audioList.reload()
     }
 
     // MARK: - Table view data source
@@ -293,4 +301,30 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
             }
     }
     
+    // MARK: - VMAudioListDelegate
+    
+    func audioListWasReloaded(audioList: VMAudioList) {
+        self.refreshControl?.endRefreshing()
+        self.tableView.reloadData()
+    }
+    
+    func audioListWillChange(audioList: VMAudioList) {
+        self.refreshControl?.endRefreshing()
+        self.tableView.beginUpdates()
+    }
+    
+    func autioList(audioList: VMAudioList, didChangeWithInfo changeInfo: VMAudioListChangeInfo) {
+        let insertedIndexPaths: [NSIndexPath] = changeInfo.insertedAudios.keys.map { NSIndexPath(forRow: $0, inSection: 0) }
+        self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: UITableViewRowAnimation.Top)
+        
+        let removedIndexPaths: [NSIndexPath] = changeInfo.removedAudios.keys.map { NSIndexPath(forRow: $0, inSection: 0) }
+        self.tableView.deleteRowsAtIndexPaths(removedIndexPaths, withRowAnimation: UITableViewRowAnimation.Bottom)
+        
+        for move in changeInfo.movedAudios {
+            self.tableView.moveRowAtIndexPath(NSIndexPath(forRow: move.from, inSection: 0),
+                toIndexPath: NSIndexPath(forRow: move.to, inSection: 0))
+        }
+        
+        self.tableView.endUpdates()
+    }
 }
