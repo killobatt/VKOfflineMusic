@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
         } else {
             self.vkAuthorize()
         }
+
         return true
     }
 
@@ -169,6 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     func vkGetUserInfo() {
         VMUserManager.sharedInstance.loadCurrentUser(completionBlock: { (user: VKUser) -> Void in
             VMAudioListManager.sharedInstance.user = user
+            
         }) { (error: NSError!) -> Void in
             if error.domain == VKSdkErrorDomain &&
                 error.code == Int(VK_API_ERROR) {
@@ -176,5 +178,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
             }
         }
     }
+    
+    // MARK: - Crashlytics
+    
+    func logUserToCrashlytics(user: VKUser) {
+        // You can call any combination of these three methods
+//        Crashlytics.sharedInstance().setUserEmail(user.id)
+        Crashlytics.sharedInstance().setUserIdentifier("\(user.id)")
+        Crashlytics.sharedInstance().setUserName("\(user.first_name) \(user.last_name)")
+    }
+
+
 }
 
