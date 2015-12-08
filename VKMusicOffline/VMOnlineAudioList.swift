@@ -63,9 +63,9 @@ class VMOnlineAudioList: VMAudioList {
         self.request.executeWithResultBlock({(response: VKResponse!) -> Void in
             
             var audios : VKAudios! = nil
-            if let audioJSONDictionary = response.json as? [NSObject : AnyObject] {
+            if let audioJSONDictionary = response?.json as? [NSObject : AnyObject] {
                 audios = VKAudios(dictionary: audioJSONDictionary)
-            } else if let audioJSONArray = response.json as? [AnyObject] {
+            } else if let audioJSONArray = response?.json as? [AnyObject] {
                 audios = VKAudios(array: audioJSONArray)
             }
             
