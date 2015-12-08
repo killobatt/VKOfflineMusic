@@ -222,15 +222,17 @@ class VMAudioListManager: NSObject {
         if (self.offlineAudioListDirectoryExists) {
             NSLog("Scanning folder '\(self.offlineAudioListDirectoryURL)' for legacy lists...")
             do {
-                let listPaths = try fileManager.contentsOfDirectoryAtURL(self.offlineAudioListDirectoryURL, includingPropertiesForKeys: [], options: [])
-                for listPath in listPaths {
-                    if (listPath.pathExtension != "list") {
+                let listURLs = try fileManager.contentsOfDirectoryAtURL(self.offlineAudioListDirectoryURL, includingPropertiesForKeys: [], options: [])
+                for listURL in listURLs {
+                    if (listURL.pathExtension != "list") {
                         continue
                     }
-                    NSLog("Loading legacy list from file '\(listPath)'...")
-                    let list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath.absoluteString) as! VMOfflineAudioList
-                    offlineAudioLists.append(list)
-                    NSLog("Loaded legacy list '\(list.title)' with \(list.audios.count) audios")
+                    NSLog("Loading legacy list from file '\(listURL)'...")
+                    if let listPath = listURL.path {
+                        let list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as! VMOfflineAudioList
+                        offlineAudioLists.append(list)
+                        NSLog("Loaded legacy list '\(list.title)' with \(list.audios.count) audios")
+                    }
                 }
             } catch let error as NSError {
                 NSLog("Error loading contents of dir \(self.offlineAudioListDirectoryURL) : \(error)")
