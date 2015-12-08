@@ -320,6 +320,9 @@ class VMAudioListPlayer: NSObject {
                                     // if offline track is broken, redownload it
                                     audio.localFileName = nil
                                     VMAudioListManager.sharedInstance.downloadManager.downloadAudio(audio)
+                                } else {
+                                    self.state = State.Failed(error: playerItem.error)
+                                    self.playNextTrack()
                                 }
                                 self.updateCurrentPlayerItem()
                                 self.play()
