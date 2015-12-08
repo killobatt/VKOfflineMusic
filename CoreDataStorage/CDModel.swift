@@ -53,6 +53,7 @@ public class CDModel: NSObject {
     public func save() {
         do {
             try self.mainContext.save()
+            NSLog("Model saved.")
         } catch let error as NSError {
             NSLog("Error saving model: \(error)")
         }

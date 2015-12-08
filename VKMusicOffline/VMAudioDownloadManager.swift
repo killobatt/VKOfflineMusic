@@ -34,18 +34,17 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
         
         self.delegate = delegate
         let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("com.vv.vkmusic-offline")
+        configuration.HTTPMaximumConnectionsPerHost = 1
         self.URLSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
 
     }
     
     func downloadAudio(audio:VMAudio) {
-        if (audio.localFileName != nil &&
-            NSFileManager.defaultManager().fileExistsAtPath(audio.localURL.absoluteString)) {
+        if audio.localFileExists {
             return
         }
         
-        let downloadTaskOptional = self.URLSession?.downloadTaskWithURL(audio.URL)
-        if let downloadTask = downloadTaskOptional {
+        if let downloadTask = self.URLSession?.downloadTaskWithURL(audio.URL) {
             downloadTask.taskDescription = audio.id.stringValue
             downloadTask.resume()
         }
@@ -59,9 +58,9 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     }
     
     func getAudioDownloadTaskList(completion: ((downloadTasks:[AnyObject]) -> Void)?) {
-        self.URLSession?.getTasksWithCompletionHandler({ (dataTasks: [NSURLSessionDataTask], uploadTasks: [NSURLSessionUploadTask], downloadTasks: [NSURLSessionDownloadTask]) -> Void in
+        self.URLSession?.getTasksWithCompletionHandler() { (dataTasks: [NSURLSessionDataTask], uploadTasks: [NSURLSessionUploadTask], downloadTasks: [NSURLSessionDownloadTask]) -> Void in
             completion?(downloadTasks: downloadTasks)
-        })
+        }
     }
     
     func audioIDForTask(task: NSURLSessionTask) -> NSNumber? {

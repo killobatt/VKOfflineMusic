@@ -195,8 +195,7 @@ class VMAudioListManager: NSObject {
     
     func createAudioListsDirectoryIfNeeded() {
         let fileManager = NSFileManager.defaultManager()
-        let audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryURL.absoluteString)
-        if (!audioListsDirExists) {
+        if !self.offlineAudioListDirectoryExists {
             NSLog("Creating audio list directory at path '\(self.offlineAudioListDirectoryURL)'")
             do {
                 try fileManager.createDirectoryAtURL(self.offlineAudioListDirectoryURL, withIntermediateDirectories: true, attributes: nil)
@@ -220,9 +219,7 @@ class VMAudioListManager: NSObject {
         var offlineAudioLists: [VMOfflineAudioList] = []
         
         let fileManager = NSFileManager.defaultManager()
-        let audioListsDirExists = fileManager.fileExistsAtPath(self.offlineAudioListDirectoryURL.absoluteString)
-        if (audioListsDirExists) {
-            
+        if (self.offlineAudioListDirectoryExists) {
             NSLog("Scanning folder '\(self.offlineAudioListDirectoryURL)' for legacy lists...")
             do {
                 let listPaths = try fileManager.contentsOfDirectoryAtURL(self.offlineAudioListDirectoryURL, includingPropertiesForKeys: [], options: [])
@@ -295,6 +292,15 @@ class VMAudioListManager: NSObject {
         return self.userDocumentsDirectoryURL.URLByAppendingPathComponent("audio-lists")
     }
     
+    var offlineAudioListDirectoryExists: Bool {
+        var isDirectory: ObjCBool = false
+        if let path = self.offlineAudioListDirectoryURL.path where NSFileManager.defaultManager().fileExistsAtPath(path, isDirectory: &isDirectory) {
+            return isDirectory.boolValue
+        } else {
+            return false
+        }
+    }
+    
     func URLForAudioID(audioID: String) -> NSURL {
         return self.offlineAudioListDirectoryURL.URLByAppendingPathComponent(audioID).URLByAppendingPathExtension("mp3")
     }
@@ -349,13 +355,22 @@ extension VMAudioListManager: NSFileManagerDelegate {
 }
 
 extension VMAudio {
-    var localURL: NSURL! {
+    var localURL: NSURL? {
         get {
             if let localFileName = self.localFileName {
                 return VMAudioListManager.sharedInstance.URLForAudioID(localFileName as String)
             } else {
                 return nil
             }
+        }
+    }
+    
+    var localFileExists: Bool {
+        if let path = self.localURL?.path where
+            NSFileManager.defaultManager().fileExistsAtPath(path) {
+                return true
+        } else {
+            return false
         }
     }
 }

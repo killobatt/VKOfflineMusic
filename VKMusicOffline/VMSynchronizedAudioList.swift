@@ -59,14 +59,13 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
                     for (var i: Int = 0; i < loadedAudios.count; i++) {
                         let loadedAudio = loadedAudios[i]
                         if let storedAudio = self.model.audioWithID(loadedAudio.id) {
-                            let loadedAudio = VMAudio(storedAudio: storedAudio)
-                            updatedAudios.append(loadedAudio)
+                            let mappedLocalAudio = VMAudio(storedAudio: storedAudio)
+                            updatedAudios.append(mappedLocalAudio)
                             
                             // in case audio was not already loaded for some reason (e.g. app crash)
                             
-                            if loadedAudio.localURL == nil ||
-                                !NSFileManager.defaultManager().fileExistsAtPath(loadedAudio.localURL.absoluteString){
-                                self.downloadManager.downloadAudio(loadedAudio)
+                            if !mappedLocalAudio.localFileExists {
+                                self.downloadManager.downloadAudio(mappedLocalAudio)
                             }
                         } else {
                             let addedAudio = VMAudio(audio: loadedAudio)
