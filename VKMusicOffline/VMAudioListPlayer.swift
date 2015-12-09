@@ -137,8 +137,9 @@ class VMAudioListPlayer: NSObject {
     func setAudioList(audioList: VMAudioList, currentTrackIndex index: Int) {
         self.audioList = audioList
         self.currentTrackIndex = index
-        self.audioListEnumerator = VMAudioListEnumerator(audioList: audioList,
-            indexOfCurrentObject: index)
+        if let audioList = self.audioList {
+            self.audioListEnumerator = VMCycledDirectAudioListEnumerator(audioList: audioList, currentIndex:index)
+        }
     }
     
     func play() {
@@ -179,22 +180,18 @@ class VMAudioListPlayer: NSObject {
     }
     
     func playNextTrack() {
-        if let audioList = self.audioList {
-            var newTrackIndex = self.currentTrackIndex + 1
-            if (newTrackIndex >= audioList.count) {
-                newTrackIndex %= audioList.count
-            }
+        if let newTrackIndex = self.audioListEnumerator?.nextIndex {
             self.currentTrackIndex = newTrackIndex
+        } else {
+            NSLog("Error: VMAudioListPlayer has no audioListEnumerator")
         }
     }
     
     func playPreviousTrack() {
-        if let audioList = self.audioList {
-            var newTrackIndex = self.currentTrackIndex - 1
-            if (newTrackIndex < 0) {
-                newTrackIndex += audioList.count
-            }
+        if let newTrackIndex = self.audioListEnumerator?.previousIndex {
             self.currentTrackIndex = newTrackIndex
+        } else {
+            NSLog("Error: VMAudioListPlayer has no audioListEnumerator")
         }
     }
     
@@ -209,14 +206,24 @@ class VMAudioListPlayer: NSObject {
         }
     }
     
-    var currentTrackIndex: Int = 0 {
-        willSet {
+    var currentTrackIndex: Int {
+        get {
+            if let audioListEnumerator = self.audioListEnumerator {
+                return audioListEnumerator.currentIndex
+            } else {
+                return 0
+            }
+        }
+        set(newValue) {
             self.willChangeValueForKey("currentTrackIndex")
             self.willChangeValueForKey("currentTrack")
             self.loadedTrackPartTimeRange = kCMTimeRangeZero
             self.playbackProgress = kCMTimeZero
-        }
-        didSet {
+            
+            if var audioListEnumerator = self.audioListEnumerator {
+                audioListEnumerator.currentIndex = newValue
+            }
+            
             self.didChangeValueForKey("currentTrackIndex")
             self.didChangeValueForKey("currentTrack")
             self.updateCurrentPlayerItem()
@@ -239,7 +246,7 @@ class VMAudioListPlayer: NSObject {
     
     // MARK: - Privates
     
-    private var audioListEnumerator: VMAudioListEnumerator!
+    private var audioListEnumerator: VMAudioListEnumerator? = nil
     
     
     private func timeRangeFrom(timeRanges: NSArray) -> CMTimeRange {
