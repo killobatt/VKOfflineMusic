@@ -45,7 +45,7 @@ public class CDModel: NSObject {
         NSLog("Using persistentStore: \(storageURL)")
         if let _ = try? self.persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType,
             configuration: nil, URL: storageURL, options: nil) {
-            self.mainContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+            self.mainContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
             self.mainContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         }
     }
