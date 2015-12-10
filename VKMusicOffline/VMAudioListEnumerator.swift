@@ -26,12 +26,13 @@ enum VMAudioListEnumeratorType {
 
 class VMAudioListEnumeratorFactory {
     
-    private static let typeTable = [
-        VMAudioListEnumeratorType.CycledDirect : VMCycledDirectAudioListEnumerator.self
+    private static let typeTable: [VMAudioListEnumeratorType: VMAudioListEnumerator.Type] = [
+        .CycledDirect : VMCycledDirectAudioListEnumerator.self,
+        .CycledRandom : VMCycledRandomAudioListEnumerator.self,
     ]
     
-    func rangeEnumeratorClassWithType(type: VMAudioListEnumeratorType) -> AnyClass {
-        return self.dynamicType.typeTable[type]!
+    static func rangeEnumeratorClassWithType(type: VMAudioListEnumeratorType) -> VMAudioListEnumerator.Type {
+        return self.typeTable[type]!
     }
 }
 

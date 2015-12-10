@@ -93,20 +93,38 @@ class VMAudioListPlayer: NSObject {
         }
     }
     
-    enum ShufflingMode {
-        case NoShuffling
-        case RandomShufling
+    enum ShuffleMode {
+        case NoShuffle
+        case RandomShuffle
     }
     
-    var shufflingMode: ShufflingMode = ShufflingMode.NoShuffling{
+    var shuffleMode: ShuffleMode = ShuffleMode.NoShuffle {
         willSet {
             self.willChangeValueForKey("shufflingMode")
         }
         didSet {
             self.didChangeValueForKey("shufflingMode")
+            
+            self.audioListEnumerator = self.audioListEnumeratorForShuffleMode(self.shuffleMode)
         }
     }
     
+    private func audioListEnumeratorForShuffleMode(shuffleMode: ShuffleMode) -> VMAudioListEnumerator? {
+        let typeTable = [
+            ShuffleMode.NoShuffle : VMAudioListEnumeratorType.CycledDirect,
+            ShuffleMode.RandomShuffle : VMAudioListEnumeratorType.CycledRandom,
+        ]
+        
+        if let enumeratorType = typeTable[self.shuffleMode],
+            let audioList = self.audioList {
+                let enumeratorClass = VMAudioListEnumeratorFactory.rangeEnumeratorClassWithType(enumeratorType)
+                return enumeratorClass.init(audioList: audioList, currentIndex: self.currentTrackIndex)
+        } else {
+            return nil
+        }
+    }
+    
+
     private(set) var loadedTrackPartTimeRange: CMTimeRange = kCMTimeRangeZero {
         willSet {
             self.willChangeValueForKey("loadedTrackPartTimeRange")
@@ -137,10 +155,7 @@ class VMAudioListPlayer: NSObject {
     func setAudioList(audioList: VMAudioList, currentTrackIndex index: Int) {
         self.audioList = audioList
         self.currentTrackIndex = index
-        if let audioList = self.audioList {
-//            self.audioListEnumerator = VMCycledDirectAudioListEnumerator(audioList: audioList, currentIndex:index)
-            self.audioListEnumerator = VMCycledRandomAudioListEnumerator(audioList: audioList, currentIndex: index)
-        }
+        self.audioListEnumerator = self.audioListEnumeratorForShuffleMode(self.shuffleMode)
     }
     
     func play() {

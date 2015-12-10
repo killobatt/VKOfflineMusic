@@ -22,6 +22,7 @@ class VMAudioControllsController: UIViewController {
     @IBOutlet private weak var trackRemainingDurationLabel: UILabel!
     @IBOutlet private weak var playPauseButton: UIButton!
     @IBOutlet private weak var progressSlider: PlayerSlider!
+    @IBOutlet weak var shuffleButton: UIButton!
     
     private var lyricsController: VMLyricsController!
     
@@ -100,6 +101,16 @@ class VMAudioControllsController: UIViewController {
         self.progressSliderIsBeingMoved = false
     }
     
+    @IBAction func shuffleButtonTouchUpInside(sender: AnyObject) {
+        let player = VMAudioListPlayer.sharedInstance
+        if player.shuffleMode == .NoShuffle {
+            player.shuffleMode = .RandomShuffle
+        } else {
+            player.shuffleMode = .NoShuffle
+        }
+        self.updateShuffleButton()
+    }
+    
     private func updateForTrack(currentTrack: VMAudio?) {
         UIView.animateWithDuration(0.25, animations: {
             if let track = currentTrack {
@@ -118,6 +129,12 @@ class VMAudioControllsController: UIViewController {
         })
         self.trackDurationLabel.text = "-:--"
         self.trackRemainingDurationLabel.text = "-:--"
+    }
+    
+    private func updateShuffleButton() {
+        self.shuffleButton.selected = (VMAudioListPlayer.sharedInstance.shuffleMode == .RandomShuffle)
+        self.shuffleButton.backgroundColor = (VMAudioListPlayer.sharedInstance.shuffleMode == .NoShuffle) ? UIColor.clearColor() : UIColor.lightGrayColor()
+        self.shuffleButton.layer.cornerRadius = 5
     }
     
     // MARK: - Navigation
