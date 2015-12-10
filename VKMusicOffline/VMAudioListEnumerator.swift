@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Darwin
 
 
 protocol VMAudioListEnumerator {
@@ -67,71 +68,72 @@ class VMCycledDirectAudioListEnumerator: VMAudioListEnumerator {
     }
 }
 
-//class VMCycledRandomRangeEnumerator: VMRangeEnumerator {
-//    
-//    required init(fromIndex: Int, toIndex: Int) {
-//        
-//    }
-//    
-//    var nextIndex: Int {
-//        return (self.currentObjectIndex + 1) % self.audioList.count
-//    }
-//    var previousIndex: Int {
-//        return 0
-//    }
-//    
-//}
-
-// Player enumerates audio list.
-// Enumeration logic can be complex besause 
-//  - audio list can change while playing
-//  - in future we want have shuffle playing (random enumerator)
-// So we encupsulte it here
-//class VMAudioListEnumerator: NSObject {
-//    
-//    var nextObject: VMAudio! {
-//        get {
-//            return self.audioList[self.nextObjectIndex]
-//        }
-//    }
-//    
-//    var previousObject: VMAudio! {
-//        get {
-//            return self.audioList[self.previousObjectIndex]
-//        }
-//    }
-//    
-//    var nextObjectIndex: Int {
-//        get {
-//            return (self.currentObjectIndex + 1) % self.audioList.count
-//        }
-//    }
-//    
-//    var previousObjectIndex: Int {
-//        get {
-//            return (self.currentObjectIndex - 1) % self.audioList.count
-//        }
-//    }
-//    
-//    private(set) var currentObject: VMAudio!
-//    var currentObjectIndex: Int! {
-//        get {
-//            return self.audioList.audios.indexOf(self.currentObject)
-//        }
-//    }
-//    
-//    
-//    // MARK: - Init
-//    
-//    init(audioList: VMAudioList, indexOfCurrentObject:Int) {
-//        self.audioList = audioList
-//        self.currentObject = self.audioList[indexOfCurrentObject]
-//        super.init()
-//    }
-//    
-//    // MARK: - Private
-//    
-//    private var audioList: VMAudioList
-//    
-//    
-//}
+class VMCycledRandomAudioListEnumerator: NSObject, VMAudioListEnumerator {
+    
+    private weak var audioList: VMAudioList?
+    var currentIndex: Int
+    var randomRearrangedIndexes: [Int] = []
+    
+    func rearrangeWithCurrentIndex(currentIndex: Int) {
+        if let audioList = self.audioList {
+            var indexes = audioList.audios.enumerate().map { (index, audio) in return index }
+            var rearrangedIndexes: [Int] = []
+            
+            indexes.removeAtIndex(currentIndex)
+            
+            while indexes.count > 0 {
+                let randomIndex = Int(arc4random_uniform(UInt32(indexes.count)))
+                rearrangedIndexes.append(indexes[randomIndex])
+                indexes.removeAtIndex(randomIndex)
+            }
+            self.randomRearrangedIndexes = rearrangedIndexes
+        }
+    }
+    
+    convenience required init(audioList: VMAudioList) {
+        self.init(audioList: audioList, currentIndex: 0)
+    }
+    
+    required init(audioList: VMAudioList, currentIndex: Int) {
+        self.audioList = audioList
+        self.currentIndex = currentIndex
+        
+        super.init()
+        self.audioList?.addObserver(self, forKeyPath: "audios", options: [.New, .Initial], context: nil)
+    }
+    
+    deinit {
+        self.audioList?.removeObserver(self, forKeyPath: "audios")
+    }
+    
+    var nextIndex: Int {
+        if (self.randomRearrangedIndexes.count == 0) {
+            self.rearrangeWithCurrentIndex(self.currentIndex)
+        }
+        if let first = self.randomRearrangedIndexes.first {
+            self.randomRearrangedIndexes.removeFirst()
+            self.randomRearrangedIndexes.append(self.currentIndex)
+            self.currentIndex = first
+        }
+        return self.currentIndex
+    }
+    
+    var previousIndex: Int {
+        if (self.randomRearrangedIndexes.count == 0) {
+            self.rearrangeWithCurrentIndex(self.currentIndex)
+        }
+        if let last = self.randomRearrangedIndexes.last {
+            self.randomRearrangedIndexes.removeLast()
+            self.randomRearrangedIndexes.insert(self.currentIndex, atIndex: 0)
+            self.currentIndex = last
+        }
+        return self.currentIndex
+    }
+    
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if object === self.audioList && keyPath == "audios" {
+            self.rearrangeWithCurrentIndex(self.currentIndex)
+        }
+    }
+}

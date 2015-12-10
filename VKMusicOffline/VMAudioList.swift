@@ -11,7 +11,7 @@ import VK
 
 class VMAudioList: NSObject {
     
-    var audios : [VMAudio] = []
+    dynamic var audios : [VMAudio] = []
     
     var title : NSString!
    

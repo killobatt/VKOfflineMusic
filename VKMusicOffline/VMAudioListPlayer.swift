@@ -138,7 +138,8 @@ class VMAudioListPlayer: NSObject {
         self.audioList = audioList
         self.currentTrackIndex = index
         if let audioList = self.audioList {
-            self.audioListEnumerator = VMCycledDirectAudioListEnumerator(audioList: audioList, currentIndex:index)
+//            self.audioListEnumerator = VMCycledDirectAudioListEnumerator(audioList: audioList, currentIndex:index)
+            self.audioListEnumerator = VMCycledRandomAudioListEnumerator(audioList: audioList, currentIndex: index)
         }
     }
     
