@@ -154,8 +154,8 @@ class VMAudioListPlayer: NSObject {
     
     func setAudioList(audioList: VMAudioList, currentTrackIndex index: Int) {
         self.audioList = audioList
-        self.currentTrackIndex = index
         self.audioListEnumerator = self.audioListEnumeratorForShuffleMode(self.shuffleMode)
+        self.currentTrackIndex = index
     }
     
     func play() {

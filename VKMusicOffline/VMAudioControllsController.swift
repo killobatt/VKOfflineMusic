@@ -129,6 +129,7 @@ class VMAudioControllsController: UIViewController {
         })
         self.trackDurationLabel.text = "-:--"
         self.trackRemainingDurationLabel.text = "-:--"
+        self.updateShuffleButton()
     }
     
     private func updateShuffleButton() {

@@ -80,7 +80,9 @@ class VMCycledRandomAudioListEnumerator: NSObject, VMAudioListEnumerator {
             var indexes = audioList.audios.enumerate().map { (index, audio) in return index }
             var rearrangedIndexes: [Int] = []
             
-            indexes.removeAtIndex(currentIndex)
+            if (indexes.count > currentIndex) {
+                indexes.removeAtIndex(currentIndex)
+            }
             
             while indexes.count > 0 {
                 let randomIndex = Int(arc4random_uniform(UInt32(indexes.count)))
@@ -134,7 +136,15 @@ class VMCycledRandomAudioListEnumerator: NSObject, VMAudioListEnumerator {
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if object === self.audioList && keyPath == "audios" {
-            self.rearrangeWithCurrentIndex(self.currentIndex)
+            if let newCount = self.audioList?.audios.count {
+                if self.currentIndex >= newCount {
+                    self.currentIndex = 0
+                }
+                
+                if newCount > 0 {
+                    self.rearrangeWithCurrentIndex(self.currentIndex)
+                }
+            }
         }
     }
 }
