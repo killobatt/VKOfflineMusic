@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MGSwipeCells
+import MGSwipeTableCell
 
 class VMAudioCell: MGSwipeTableCell {
     

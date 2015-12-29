@@ -1,0 +1,1392 @@
+BCSymbolMap Version: 1.0
++[MGSwipeButton buttonWithTitle:backgroundColor:]
++[MGSwipeButton buttonWithTitle:backgroundColor:padding:]
++[MGSwipeButton buttonWithTitle:backgroundColor:insets:]
++[MGSwipeButton buttonWithTitle:backgroundColor:callback:]
++[MGSwipeButton buttonWithTitle:backgroundColor:padding:callback:]
++[MGSwipeButton buttonWithTitle:backgroundColor:insets:callback:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:padding:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:insets:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:callback:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:padding:callback:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:insets:callback:]
+-[MGSwipeButton callMGSwipeConvenienceCallback:]
+-[MGSwipeButton centerIconOverText]
+-[MGSwipeButton centerIconOverTextWithSpacing:]
+-[MGSwipeButton setPadding:]
+-[MGSwipeButton setButtonWidth:]
+-[MGSwipeButton setEdgeInsets:]
+-[MGSwipeButton callback]
+-[MGSwipeButton setCallback:]
+-[MGSwipeButton buttonWidth]
+-[MGSwipeButton .cxx_destruct]
+OBJC_METH_VAR_NAME_
+OBJC_SELECTOR_REFERENCES_
+OBJC_METH_VAR_NAME_1
+OBJC_SELECTOR_REFERENCES_2
+OBJC_METH_VAR_NAME_3
+OBJC_SELECTOR_REFERENCES_4
+OBJC_METH_VAR_NAME_5
+OBJC_SELECTOR_REFERENCES_6
+OBJC_METH_VAR_NAME_7
+OBJC_SELECTOR_REFERENCES_8
+OBJC_METH_VAR_NAME_9
+OBJC_SELECTOR_REFERENCES_10
+OBJC_METH_VAR_NAME_11
+OBJC_SELECTOR_REFERENCES_12
+OBJC_METH_VAR_NAME_13
+OBJC_SELECTOR_REFERENCES_14
+OBJC_METH_VAR_NAME_15
+OBJC_SELECTOR_REFERENCES_16
+OBJC_METH_VAR_NAME_17
+OBJC_SELECTOR_REFERENCES_18
+OBJC_METH_VAR_NAME_19
+OBJC_SELECTOR_REFERENCES_20
+OBJC_CLASSLIST_REFERENCES_$_
+OBJC_METH_VAR_NAME_21
+OBJC_SELECTOR_REFERENCES_22
+OBJC_METH_VAR_NAME_23
+OBJC_SELECTOR_REFERENCES_24
+OBJC_METH_VAR_NAME_25
+OBJC_SELECTOR_REFERENCES_26
+OBJC_METH_VAR_NAME_27
+OBJC_SELECTOR_REFERENCES_28
+OBJC_METH_VAR_NAME_29
+OBJC_SELECTOR_REFERENCES_30
+OBJC_IVAR_$_MGSwipeButton._callback
+OBJC_METH_VAR_NAME_31
+OBJC_SELECTOR_REFERENCES_32
+OBJC_METH_VAR_NAME_33
+OBJC_SELECTOR_REFERENCES_34
+OBJC_METH_VAR_NAME_35
+OBJC_SELECTOR_REFERENCES_36
+OBJC_METH_VAR_NAME_37
+OBJC_SELECTOR_REFERENCES_38
+OBJC_METH_VAR_NAME_39
+OBJC_SELECTOR_REFERENCES_40
+OBJC_METH_VAR_NAME_41
+OBJC_SELECTOR_REFERENCES_42
+OBJC_METH_VAR_NAME_43
+OBJC_SELECTOR_REFERENCES_44
+OBJC_CLASSLIST_REFERENCES_$_45
+OBJC_METH_VAR_NAME_46
+OBJC_SELECTOR_REFERENCES_47
+OBJC_METH_VAR_NAME_48
+OBJC_SELECTOR_REFERENCES_49
+OBJC_METH_VAR_NAME_50
+OBJC_SELECTOR_REFERENCES_51
+OBJC_METH_VAR_NAME_52
+OBJC_SELECTOR_REFERENCES_53
+OBJC_METH_VAR_NAME_54
+OBJC_SELECTOR_REFERENCES_55
+OBJC_IVAR_$_MGSwipeButton._buttonWidth
+OBJC_METH_VAR_NAME_56
+OBJC_SELECTOR_REFERENCES_57
+OBJC_METH_VAR_NAME_58
+OBJC_SELECTOR_REFERENCES_59
+OBJC_CLASS_NAME_
+OBJC_METH_VAR_NAME_60
+OBJC_METH_VAR_TYPE_
+OBJC_METH_VAR_NAME_61
+OBJC_METH_VAR_TYPE_62
+OBJC_METH_VAR_NAME_63
+OBJC_METH_VAR_TYPE_64
+OBJC_METH_VAR_NAME_65
+OBJC_METH_VAR_TYPE_66
+OBJC_METH_VAR_NAME_67
+OBJC_METH_VAR_TYPE_68
+OBJC_METH_VAR_NAME_69
+OBJC_METH_VAR_TYPE_70
+OBJC_METH_VAR_TYPE_71
+OBJC_METH_VAR_NAME_72
+OBJC_METH_VAR_TYPE_73
+OBJC_METH_VAR_TYPE_74
+OBJC_METH_VAR_TYPE_75
+OBJC_METH_VAR_TYPE_76
+OBJC_METH_VAR_TYPE_77
+l_OBJC_$_CLASS_METHODS_MGSwipeButton
+l_OBJC_METACLASS_RO_$_MGSwipeButton
+OBJC_CLASS_NAME_78
+OBJC_METH_VAR_NAME_79
+OBJC_METH_VAR_TYPE_80
+OBJC_METH_VAR_NAME_81
+OBJC_METH_VAR_TYPE_82
+OBJC_METH_VAR_TYPE_83
+OBJC_METH_VAR_NAME_84
+OBJC_METH_VAR_NAME_85
+OBJC_METH_VAR_TYPE_86
+OBJC_METH_VAR_NAME_87
+OBJC_METH_VAR_NAME_88
+OBJC_METH_VAR_TYPE_89
+OBJC_METH_VAR_TYPE_90
+OBJC_METH_VAR_NAME_91
+OBJC_METH_VAR_TYPE_92
+l_OBJC_$_INSTANCE_METHODS_MGSwipeButton
+OBJC_METH_VAR_NAME_93
+OBJC_METH_VAR_TYPE_94
+OBJC_METH_VAR_NAME_95
+OBJC_METH_VAR_TYPE_96
+l_OBJC_$_INSTANCE_VARIABLES_MGSwipeButton
+OBJC_PROP_NAME_ATTR_
+OBJC_PROP_NAME_ATTR_97
+OBJC_PROP_NAME_ATTR_98
+OBJC_PROP_NAME_ATTR_99
+l_OBJC_$_PROP_LIST_MGSwipeButton
+l_OBJC_CLASS_RO_$_MGSwipeButton
+OBJC_LABEL_CLASS_$
+Apple LLVM version 7.0.2 (clang-700.1.81)
+/Users/vvolodko/Library/Developer/Xcode/DerivedData/ModuleCache/64599VMJPC1M/CoreGraphics-1YQ59ILDR3NYI.pcm
+CoreGraphics
+/Users/vvolodko/Library/Developer/Xcode/DerivedData/ModuleCache/64599VMJPC1M/Foundation-A3SOD99KJ0S9.pcm
+Foundation
+/Users/vvolodko/Library/Developer/Xcode/DerivedData/ModuleCache/64599VMJPC1M/UIKit-2LM3EQU7VVY4O.pcm
+UIKit
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/UIKit.framework
+UIEdgeInsetsMake
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIGeometry.h
+/Users/vvolodko/Projects/killobatt/VKOfflineMusic/Carthage/Checkouts/MGSwipeTableCell
+-[MGSwipeButton .cxx_destruct]
+/Users/vvolodko/Projects/killobatt/VKOfflineMusic/Carthage/Checkouts/MGSwipeTableCell/MGSwipeTableCell/MGSwipeButton.m
+-[MGSwipeButton buttonWidth]
+/Users/vvolodko/Projects/killobatt/VKOfflineMusic/Carthage/Checkouts/MGSwipeTableCell/MGSwipeTableCell/MGSwipeButton.h
+-[MGSwipeButton setCallback:]
+-[MGSwipeButton callback]
+-[MGSwipeButton setEdgeInsets:]
+-[MGSwipeButton setButtonWidth:]
+-[MGSwipeButton setPadding:]
+-[MGSwipeButton centerIconOverTextWithSpacing:]
+-[MGSwipeButton centerIconOverText]
+-[MGSwipeButton callMGSwipeConvenienceCallback:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:insets:callback:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:padding:callback:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:callback:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:insets:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:padding:]
++[MGSwipeButton buttonWithTitle:icon:backgroundColor:]
++[MGSwipeButton buttonWithTitle:backgroundColor:insets:callback:]
++[MGSwipeButton buttonWithTitle:backgroundColor:padding:callback:]
++[MGSwipeButton buttonWithTitle:backgroundColor:callback:]
++[MGSwipeButton buttonWithTitle:backgroundColor:insets:]
++[MGSwipeButton buttonWithTitle:backgroundColor:padding:]
++[MGSwipeButton buttonWithTitle:backgroundColor:]
+-[MGSwipeTableInputOverlay initWithFrame:]
+-[MGSwipeTableInputOverlay hitTest:withEvent:]
+-[MGSwipeTableInputOverlay currentCell]
+-[MGSwipeTableInputOverlay setCurrentCell:]
+-[MGSwipeTableInputOverlay .cxx_destruct]
+-[MGSwipeButtonsView initWithButtons:direction:differentWidth:]
+-[MGSwipeButtonsView dealloc]
+-[MGSwipeButtonsView resetButtons]
+-[MGSwipeButtonsView layoutExpansion:]
+-[MGSwipeButtonsView layoutSubviews]
+-[MGSwipeButtonsView expansionBackgroundRect:]
+-[MGSwipeButtonsView expandToOffset:settings:]
+__46-[MGSwipeButtonsView expandToOffset:settings:]_block_invoke
+__copy_helper_block_
+__destroy_helper_block_
+__46-[MGSwipeButtonsView expandToOffset:settings:]_block_invoke110
+-[MGSwipeButtonsView endExpansionAnimated:]
+__43-[MGSwipeButtonsView endExpansionAnimated:]_block_invoke
+__copy_helper_block_117
+__destroy_helper_block_118
+__43-[MGSwipeButtonsView endExpansionAnimated:]_block_invoke120
+__copy_helper_block_121
+__destroy_helper_block_122
+-[MGSwipeButtonsView getExpandedButton]
+-[MGSwipeButtonsView handleClick:fromExpansion:]
+-[MGSwipeButtonsView buttonClicked:]
+-[MGSwipeButtonsView transitionStatic:]
+-[MGSwipeButtonsView transitionDrag:]
+-[MGSwipeButtonsView transitionClip:]
+-[MGSwipeButtonsView transtitionFloatBorder:]
+-[MGSwipeButtonsView transition3D:]
+-[MGSwipeButtonsView transition:percent:]
+-[MGSwipeButtonsView cell]
+-[MGSwipeButtonsView setCell:]
+-[MGSwipeButtonsView backgroundColorCopy]
+-[MGSwipeButtonsView setBackgroundColorCopy:]
+-[MGSwipeButtonsView .cxx_destruct]
+-[MGSwipeSettings init]
+-[MGSwipeSettings setAnimationDuration:]
+-[MGSwipeSettings animationDuration]
+-[MGSwipeSettings transition]
+-[MGSwipeSettings setTransition:]
+-[MGSwipeSettings threshold]
+-[MGSwipeSettings setThreshold:]
+-[MGSwipeSettings offset]
+-[MGSwipeSettings setOffset:]
+-[MGSwipeSettings showAnimation]
+-[MGSwipeSettings setShowAnimation:]
+-[MGSwipeSettings hideAnimation]
+-[MGSwipeSettings setHideAnimation:]
+-[MGSwipeSettings stretchAnimation]
+-[MGSwipeSettings setStretchAnimation:]
+-[MGSwipeSettings keepButtonsSwiped]
+-[MGSwipeSettings setKeepButtonsSwiped:]
+-[MGSwipeSettings onlySwipeButtons]
+-[MGSwipeSettings setOnlySwipeButtons:]
+-[MGSwipeSettings .cxx_destruct]
+-[MGSwipeExpansionSettings init]
+-[MGSwipeExpansionSettings buttonIndex]
+-[MGSwipeExpansionSettings setButtonIndex:]
+-[MGSwipeExpansionSettings fillOnTrigger]
+-[MGSwipeExpansionSettings setFillOnTrigger:]
+-[MGSwipeExpansionSettings threshold]
+-[MGSwipeExpansionSettings setThreshold:]
+-[MGSwipeExpansionSettings expansionColor]
+-[MGSwipeExpansionSettings setExpansionColor:]
+-[MGSwipeExpansionSettings expansionLayout]
+-[MGSwipeExpansionSettings setExpansionLayout:]
+-[MGSwipeExpansionSettings triggerAnimation]
+-[MGSwipeExpansionSettings setTriggerAnimation:]
+-[MGSwipeExpansionSettings animationDuration]
+-[MGSwipeExpansionSettings setAnimationDuration:]
+-[MGSwipeExpansionSettings .cxx_destruct]
+-[MGSwipeAnimationData from]
+-[MGSwipeAnimationData setFrom:]
+-[MGSwipeAnimationData to]
+-[MGSwipeAnimationData setTo:]
+-[MGSwipeAnimationData duration]
+-[MGSwipeAnimationData setDuration:]
+-[MGSwipeAnimationData start]
+-[MGSwipeAnimationData setStart:]
+-[MGSwipeAnimationData animation]
+-[MGSwipeAnimationData setAnimation:]
+-[MGSwipeAnimationData .cxx_destruct]
+-[MGSwipeAnimation init]
+-[MGSwipeAnimation value:duration:from:to:]
+mgEaseLinear
+mgEaseInQuad
+mgEaseOutQuad
+mgEaseInOutQuad
+mgEaseInCubic
+mgEaseOutCubic
+mgEaseInOutCubic
+mgEaseInBounce
+mgEaseOutBounce
+mgEaseInOutBounce
+-[MGSwipeAnimation duration]
+-[MGSwipeAnimation setDuration:]
+-[MGSwipeAnimation easingFunction]
+-[MGSwipeAnimation setEasingFunction:]
+-[MGSwipeTableCell initWithStyle:reuseIdentifier:]
+-[MGSwipeTableCell initWithCoder:]
+-[MGSwipeTableCell awakeFromNib]
+-[MGSwipeTableCell dealloc]
+-[MGSwipeTableCell initViews:]
+-[MGSwipeTableCell cleanViews]
+-[MGSwipeTableCell swipeContentView]
+-[MGSwipeTableCell layoutSubviews]
+-[MGSwipeTableCell fetchButtonsIfNeeded]
+-[MGSwipeTableCell createSwipeViewIfNeeded]
+-[MGSwipeTableCell showSwipeOverlayIfNeeded]
+-[MGSwipeTableCell hideSwipeOverlayIfNeeded]
+-[MGSwipeTableCell refreshContentView]
+-[MGSwipeTableCell refreshButtons:]
+-[MGSwipeTableCell willMoveToSuperview:]
+-[MGSwipeTableCell prepareForReuse]
+-[MGSwipeTableCell setEditing:animated:]
+-[MGSwipeTableCell setEditing:]
+-[MGSwipeTableCell hitTest:withEvent:]
+-[MGSwipeTableCell imageFromView:]
+-[MGSwipeTableCell setAccesoryViewsHidden:]
+-[MGSwipeTableCell backgroundColorForSwipe]
+-[MGSwipeTableCell parentTable]
+-[MGSwipeTableCell updateState:]
+-[MGSwipeTableCell setSwipeOffset:]
+-[MGSwipeTableCell hideSwipeAnimated:completion:]
+-[MGSwipeTableCell hideSwipeAnimated:]
+-[MGSwipeTableCell showSwipe:animated:]
+-[MGSwipeTableCell showSwipe:animated:completion:]
+-[MGSwipeTableCell expandSwipe:animated:]
+__41-[MGSwipeTableCell expandSwipe:animated:]_block_invoke
+__copy_helper_block_470
+__destroy_helper_block_471
+-[MGSwipeTableCell animationTick:]
+-[MGSwipeTableCell setSwipeOffset:animated:completion:]
+-[MGSwipeTableCell setSwipeOffset:animation:completion:]
+-[MGSwipeTableCell cancelPanGesture]
+-[MGSwipeTableCell tapHandler:]
+-[MGSwipeTableCell filterSwipe:]
+-[MGSwipeTableCell panHandler:]
+__31-[MGSwipeTableCell panHandler:]_block_invoke
+__copy_helper_block_516
+__destroy_helper_block_517
+-[MGSwipeTableCell gestureRecognizerShouldBegin:]
+-[MGSwipeTableCell isSwipeGestureActive]
+-[MGSwipeTableCell setSwipeBackgroundColor:]
+-[MGSwipeTableCell delegate]
+-[MGSwipeTableCell setDelegate:]
+-[MGSwipeTableCell leftButtons]
+-[MGSwipeTableCell setLeftButtons:]
+-[MGSwipeTableCell rightButtons]
+-[MGSwipeTableCell setRightButtons:]
+-[MGSwipeTableCell leftSwipeSettings]
+-[MGSwipeTableCell setLeftSwipeSettings:]
+-[MGSwipeTableCell rightSwipeSettings]
+-[MGSwipeTableCell setRightSwipeSettings:]
+-[MGSwipeTableCell leftExpansion]
+-[MGSwipeTableCell setLeftExpansion:]
+-[MGSwipeTableCell rightExpansion]
+-[MGSwipeTableCell setRightExpansion:]
+-[MGSwipeTableCell swipeState]
+-[MGSwipeTableCell allowsMultipleSwipe]
+-[MGSwipeTableCell setAllowsMultipleSwipe:]
+-[MGSwipeTableCell allowsButtonsWithDifferentWidth]
+-[MGSwipeTableCell setAllowsButtonsWithDifferentWidth:]
+-[MGSwipeTableCell allowsSwipeWhenTappingButtons]
+-[MGSwipeTableCell setAllowsSwipeWhenTappingButtons:]
+-[MGSwipeTableCell preservesSelectionStatus]
+-[MGSwipeTableCell setPreservesSelectionStatus:]
+-[MGSwipeTableCell swipeBackgroundColor]
+-[MGSwipeTableCell swipeOffset]
+-[MGSwipeTableCell .cxx_destruct]
+OBJC_CLASSLIST_SUP_REFS_$_
+OBJC_IVAR_$_MGSwipeTableInputOverlay._currentCell
+l_OBJC_METACLASS_RO_$_MGSwipeTableInputOverlay
+OBJC_METH_VAR_TYPE_20
+OBJC_METH_VAR_TYPE_22
+OBJC_METH_VAR_TYPE_24
+OBJC_METH_VAR_TYPE_26
+l_OBJC_$_INSTANCE_METHODS_MGSwipeTableInputOverlay
+OBJC_METH_VAR_TYPE_28
+l_OBJC_$_INSTANCE_VARIABLES_MGSwipeTableInputOverlay
+OBJC_CLASS_NAME_29
+OBJC_PROP_NAME_ATTR_30
+l_OBJC_$_PROP_LIST_MGSwipeTableInputOverlay
+l_OBJC_CLASS_RO_$_MGSwipeTableInputOverlay
+OBJC_CLASSLIST_SUP_REFS_$_35
+OBJC_IVAR_$_MGSwipeButtonsView._fromLeft
+OBJC_CLASSLIST_REFERENCES_$_36
+OBJC_IVAR_$_MGSwipeButtonsView._container
+OBJC_METH_VAR_NAME_45
+OBJC_SELECTOR_REFERENCES_46
+OBJC_IVAR_$_MGSwipeButtonsView._buttons
+OBJC_CLASSLIST_REFERENCES_$_47
+OBJC_SELECTOR_REFERENCES_61
+OBJC_METH_VAR_NAME_62
+OBJC_SELECTOR_REFERENCES_63
+OBJC_METH_VAR_NAME_64
+OBJC_SELECTOR_REFERENCES_65
+OBJC_METH_VAR_NAME_66
+OBJC_SELECTOR_REFERENCES_67
+OBJC_IVAR_$_MGSwipeButtonsView._expansionOffset
+OBJC_IVAR_$_MGSwipeButtonsView._expansionBackgroundAnimated
+OBJC_IVAR_$_MGSwipeButtonsView._expandedButtonAnimated
+OBJC_METH_VAR_NAME_68
+OBJC_SELECTOR_REFERENCES_69
+OBJC_METH_VAR_NAME_70
+OBJC_SELECTOR_REFERENCES_71
+OBJC_IVAR_$_MGSwipeButtonsView._expandedButton
+OBJC_SELECTOR_REFERENCES_73
+OBJC_METH_VAR_NAME_74
+OBJC_SELECTOR_REFERENCES_75
+OBJC_METH_VAR_NAME_76
+OBJC_SELECTOR_REFERENCES_77
+OBJC_METH_VAR_NAME_78
+OBJC_SELECTOR_REFERENCES_79
+OBJC_IVAR_$_MGSwipeButtonsView._expansionBackground
+OBJC_METH_VAR_NAME_80
+OBJC_SELECTOR_REFERENCES_81
+OBJC_METH_VAR_NAME_82
+OBJC_SELECTOR_REFERENCES_83
+OBJC_IVAR_$_MGSwipeButtonsView._backgroundColorCopy
+OBJC_SELECTOR_REFERENCES_85
+OBJC_METH_VAR_NAME_86
+OBJC_SELECTOR_REFERENCES_87
+OBJC_SELECTOR_REFERENCES_89
+OBJC_METH_VAR_NAME_90
+OBJC_SELECTOR_REFERENCES_91
+OBJC_IVAR_$_MGSwipeButtonsView._expansionLayout
+OBJC_IVAR_$_MGSwipeButtonsView._cell
+OBJC_METH_VAR_NAME_92
+OBJC_SELECTOR_REFERENCES_93
+OBJC_METH_VAR_NAME_94
+OBJC_SELECTOR_REFERENCES_95
+OBJC_METH_VAR_NAME_96
+OBJC_SELECTOR_REFERENCES_97
+OBJC_METH_VAR_NAME_98
+OBJC_SELECTOR_REFERENCES_99
+OBJC_IVAR_$_MGSwipeButtonsView._expandedButtonBoundsCopy
+OBJC_METH_VAR_NAME_100
+OBJC_SELECTOR_REFERENCES_101
+OBJC_METH_VAR_NAME_102
+OBJC_SELECTOR_REFERENCES_103
+OBJC_METH_VAR_NAME_104
+OBJC_SELECTOR_REFERENCES_105
+OBJC_METH_VAR_NAME_106
+OBJC_SELECTOR_REFERENCES_107
+OBJC_METH_VAR_NAME_108
+OBJC_SELECTOR_REFERENCES_109
+.str
+__block_descriptor_tmp
+.str111
+__block_descriptor_tmp112
+__block_literal_global
+OBJC_METH_VAR_NAME_113
+OBJC_SELECTOR_REFERENCES_114
+OBJC_METH_VAR_NAME_115
+OBJC_SELECTOR_REFERENCES_116
+__block_descriptor_tmp119
+__block_descriptor_tmp123
+OBJC_METH_VAR_NAME_124
+OBJC_SELECTOR_REFERENCES_125
+OBJC_METH_VAR_NAME_126
+OBJC_SELECTOR_REFERENCES_127
+OBJC_METH_VAR_NAME_128
+OBJC_SELECTOR_REFERENCES_129
+OBJC_METH_VAR_NAME_130
+OBJC_SELECTOR_REFERENCES_131
+OBJC_METH_VAR_NAME_132
+OBJC_SELECTOR_REFERENCES_133
+OBJC_METH_VAR_NAME_134
+OBJC_SELECTOR_REFERENCES_135
+OBJC_CLASSLIST_REFERENCES_$_136
+OBJC_METH_VAR_NAME_137
+OBJC_SELECTOR_REFERENCES_138
+OBJC_METH_VAR_NAME_139
+OBJC_SELECTOR_REFERENCES_140
+OBJC_METH_VAR_NAME_141
+OBJC_SELECTOR_REFERENCES_142
+OBJC_METH_VAR_NAME_143
+OBJC_SELECTOR_REFERENCES_144
+OBJC_METH_VAR_NAME_145
+OBJC_SELECTOR_REFERENCES_146
+OBJC_METH_VAR_NAME_147
+OBJC_SELECTOR_REFERENCES_148
+OBJC_METH_VAR_NAME_149
+OBJC_SELECTOR_REFERENCES_150
+OBJC_CLASS_NAME_151
+l_OBJC_METACLASS_RO_$_MGSwipeButtonsView
+OBJC_CLASS_NAME_152
+OBJC_METH_VAR_NAME_153
+OBJC_METH_VAR_TYPE_154
+OBJC_METH_VAR_TYPE_155
+OBJC_METH_VAR_TYPE_156
+OBJC_METH_VAR_NAME_157
+OBJC_METH_VAR_TYPE_158
+OBJC_METH_VAR_NAME_159
+OBJC_METH_VAR_TYPE_160
+OBJC_METH_VAR_NAME_161
+OBJC_METH_VAR_TYPE_162
+OBJC_METH_VAR_NAME_163
+OBJC_METH_VAR_TYPE_164
+OBJC_METH_VAR_NAME_165
+OBJC_METH_VAR_NAME_166
+OBJC_METH_VAR_NAME_167
+OBJC_METH_VAR_NAME_168
+l_OBJC_$_INSTANCE_METHODS_MGSwipeButtonsView
+OBJC_METH_VAR_NAME_169
+OBJC_METH_VAR_TYPE_170
+OBJC_METH_VAR_NAME_171
+OBJC_METH_VAR_TYPE_172
+OBJC_METH_VAR_NAME_173
+OBJC_METH_VAR_TYPE_174
+OBJC_METH_VAR_NAME_175
+OBJC_METH_VAR_NAME_176
+OBJC_METH_VAR_NAME_177
+OBJC_METH_VAR_NAME_178
+OBJC_METH_VAR_NAME_179
+OBJC_METH_VAR_TYPE_180
+OBJC_METH_VAR_NAME_181
+OBJC_METH_VAR_TYPE_182
+OBJC_METH_VAR_NAME_183
+OBJC_METH_VAR_TYPE_184
+OBJC_IVAR_$_MGSwipeButtonsView._autoHideExpansion
+OBJC_METH_VAR_NAME_185
+OBJC_METH_VAR_NAME_186
+OBJC_METH_VAR_NAME_187
+OBJC_METH_VAR_TYPE_188
+l_OBJC_$_INSTANCE_VARIABLES_MGSwipeButtonsView
+OBJC_CLASS_NAME_189
+OBJC_PROP_NAME_ATTR_190
+OBJC_PROP_NAME_ATTR_191
+OBJC_PROP_NAME_ATTR_192
+OBJC_PROP_NAME_ATTR_193
+l_OBJC_$_PROP_LIST_MGSwipeButtonsView
+l_OBJC_CLASS_RO_$_MGSwipeButtonsView
+OBJC_CLASSLIST_SUP_REFS_$_194
+OBJC_METH_VAR_NAME_195
+OBJC_SELECTOR_REFERENCES_196
+OBJC_METH_VAR_NAME_197
+OBJC_SELECTOR_REFERENCES_198
+OBJC_METH_VAR_NAME_199
+OBJC_SELECTOR_REFERENCES_200
+OBJC_METH_VAR_NAME_201
+OBJC_SELECTOR_REFERENCES_202
+OBJC_METH_VAR_NAME_203
+OBJC_SELECTOR_REFERENCES_204
+OBJC_CLASSLIST_REFERENCES_$_205
+OBJC_METH_VAR_NAME_206
+OBJC_SELECTOR_REFERENCES_207
+OBJC_METH_VAR_NAME_208
+OBJC_SELECTOR_REFERENCES_209
+OBJC_METH_VAR_NAME_210
+OBJC_SELECTOR_REFERENCES_211
+OBJC_IVAR_$_MGSwipeSettings._showAnimation
+OBJC_METH_VAR_NAME_212
+OBJC_SELECTOR_REFERENCES_213
+OBJC_IVAR_$_MGSwipeSettings._hideAnimation
+OBJC_IVAR_$_MGSwipeSettings._stretchAnimation
+OBJC_METH_VAR_NAME_214
+OBJC_SELECTOR_REFERENCES_215
+OBJC_IVAR_$_MGSwipeSettings._transition
+OBJC_IVAR_$_MGSwipeSettings._threshold
+OBJC_IVAR_$_MGSwipeSettings._offset
+OBJC_IVAR_$_MGSwipeSettings._keepButtonsSwiped
+OBJC_IVAR_$_MGSwipeSettings._onlySwipeButtons
+OBJC_CLASS_NAME_216
+l_OBJC_METACLASS_RO_$_MGSwipeSettings
+OBJC_CLASS_NAME_217
+OBJC_METH_VAR_NAME_218
+OBJC_METH_VAR_TYPE_219
+OBJC_METH_VAR_NAME_220
+OBJC_METH_VAR_TYPE_221
+OBJC_METH_VAR_TYPE_222
+OBJC_METH_VAR_NAME_223
+OBJC_METH_VAR_NAME_224
+OBJC_METH_VAR_NAME_225
+OBJC_METH_VAR_NAME_226
+OBJC_METH_VAR_NAME_227
+OBJC_METH_VAR_NAME_228
+OBJC_METH_VAR_TYPE_229
+OBJC_METH_VAR_NAME_230
+OBJC_METH_VAR_NAME_231
+l_OBJC_$_INSTANCE_METHODS_MGSwipeSettings
+OBJC_METH_VAR_NAME_232
+OBJC_METH_VAR_NAME_233
+OBJC_METH_VAR_NAME_234
+OBJC_METH_VAR_NAME_235
+OBJC_METH_VAR_NAME_236
+OBJC_METH_VAR_NAME_237
+OBJC_METH_VAR_TYPE_238
+OBJC_METH_VAR_NAME_239
+OBJC_METH_VAR_NAME_240
+l_OBJC_$_INSTANCE_VARIABLES_MGSwipeSettings
+OBJC_PROP_NAME_ATTR_241
+OBJC_PROP_NAME_ATTR_242
+OBJC_PROP_NAME_ATTR_243
+OBJC_PROP_NAME_ATTR_244
+OBJC_PROP_NAME_ATTR_245
+OBJC_PROP_NAME_ATTR_246
+OBJC_PROP_NAME_ATTR_247
+OBJC_PROP_NAME_ATTR_248
+OBJC_PROP_NAME_ATTR_249
+OBJC_PROP_NAME_ATTR_250
+OBJC_PROP_NAME_ATTR_251
+OBJC_PROP_NAME_ATTR_252
+OBJC_PROP_NAME_ATTR_253
+OBJC_PROP_NAME_ATTR_254
+OBJC_PROP_NAME_ATTR_255
+OBJC_PROP_NAME_ATTR_256
+OBJC_PROP_NAME_ATTR_257
+OBJC_PROP_NAME_ATTR_258
+l_OBJC_$_PROP_LIST_MGSwipeSettings
+l_OBJC_CLASS_RO_$_MGSwipeSettings
+OBJC_CLASSLIST_SUP_REFS_$_259
+OBJC_METH_VAR_NAME_260
+OBJC_SELECTOR_REFERENCES_261
+OBJC_SELECTOR_REFERENCES_262
+OBJC_METH_VAR_NAME_263
+OBJC_SELECTOR_REFERENCES_264
+OBJC_IVAR_$_MGSwipeExpansionSettings._buttonIndex
+OBJC_IVAR_$_MGSwipeExpansionSettings._fillOnTrigger
+OBJC_IVAR_$_MGSwipeExpansionSettings._threshold
+OBJC_IVAR_$_MGSwipeExpansionSettings._expansionColor
+OBJC_IVAR_$_MGSwipeExpansionSettings._expansionLayout
+OBJC_IVAR_$_MGSwipeExpansionSettings._triggerAnimation
+OBJC_IVAR_$_MGSwipeExpansionSettings._animationDuration
+OBJC_CLASS_NAME_265
+l_OBJC_METACLASS_RO_$_MGSwipeExpansionSettings
+OBJC_CLASS_NAME_266
+OBJC_METH_VAR_NAME_267
+OBJC_METH_VAR_NAME_268
+OBJC_METH_VAR_NAME_269
+OBJC_METH_VAR_NAME_270
+OBJC_METH_VAR_NAME_271
+l_OBJC_$_INSTANCE_METHODS_MGSwipeExpansionSettings
+OBJC_METH_VAR_NAME_272
+OBJC_METH_VAR_NAME_273
+OBJC_METH_VAR_NAME_274
+OBJC_METH_VAR_NAME_275
+OBJC_METH_VAR_NAME_276
+l_OBJC_$_INSTANCE_VARIABLES_MGSwipeExpansionSettings
+OBJC_PROP_NAME_ATTR_277
+OBJC_PROP_NAME_ATTR_278
+OBJC_PROP_NAME_ATTR_279
+OBJC_PROP_NAME_ATTR_280
+OBJC_PROP_NAME_ATTR_281
+OBJC_PROP_NAME_ATTR_282
+OBJC_PROP_NAME_ATTR_283
+OBJC_PROP_NAME_ATTR_284
+OBJC_PROP_NAME_ATTR_285
+OBJC_PROP_NAME_ATTR_286
+OBJC_PROP_NAME_ATTR_287
+l_OBJC_$_PROP_LIST_MGSwipeExpansionSettings
+l_OBJC_CLASS_RO_$_MGSwipeExpansionSettings
+OBJC_IVAR_$_MGSwipeAnimationData._from
+OBJC_IVAR_$_MGSwipeAnimationData._to
+OBJC_IVAR_$_MGSwipeAnimationData._duration
+OBJC_IVAR_$_MGSwipeAnimationData._start
+OBJC_IVAR_$_MGSwipeAnimationData._animation
+OBJC_CLASS_NAME_288
+l_OBJC_METACLASS_RO_$_MGSwipeAnimationData
+OBJC_CLASS_NAME_289
+OBJC_METH_VAR_NAME_290
+OBJC_METH_VAR_NAME_291
+OBJC_METH_VAR_NAME_292
+OBJC_METH_VAR_NAME_293
+OBJC_METH_VAR_NAME_294
+OBJC_METH_VAR_NAME_295
+OBJC_METH_VAR_NAME_296
+OBJC_METH_VAR_NAME_297
+l_OBJC_$_INSTANCE_METHODS_MGSwipeAnimationData
+OBJC_METH_VAR_NAME_298
+OBJC_METH_VAR_NAME_299
+OBJC_METH_VAR_NAME_300
+OBJC_METH_VAR_NAME_301
+OBJC_METH_VAR_NAME_302
+l_OBJC_$_INSTANCE_VARIABLES_MGSwipeAnimationData
+OBJC_PROP_NAME_ATTR_303
+OBJC_PROP_NAME_ATTR_304
+OBJC_PROP_NAME_ATTR_305
+OBJC_PROP_NAME_ATTR_306
+OBJC_PROP_NAME_ATTR_307
+OBJC_PROP_NAME_ATTR_308
+OBJC_PROP_NAME_ATTR_309
+OBJC_PROP_NAME_ATTR_310
+OBJC_PROP_NAME_ATTR_311
+OBJC_PROP_NAME_ATTR_312
+l_OBJC_$_PROP_LIST_MGSwipeAnimationData
+l_OBJC_CLASS_RO_$_MGSwipeAnimationData
+OBJC_CLASSLIST_SUP_REFS_$_313
+OBJC_IVAR_$_MGSwipeAnimation._duration
+OBJC_IVAR_$_MGSwipeAnimation._easingFunction
+OBJC_CLASS_NAME_314
+l_OBJC_METACLASS_RO_$_MGSwipeAnimation
+OBJC_METH_VAR_NAME_315
+OBJC_METH_VAR_TYPE_316
+OBJC_METH_VAR_NAME_317
+OBJC_METH_VAR_NAME_318
+l_OBJC_$_INSTANCE_METHODS_MGSwipeAnimation
+OBJC_METH_VAR_NAME_319
+l_OBJC_$_INSTANCE_VARIABLES_MGSwipeAnimation
+OBJC_PROP_NAME_ATTR_320
+OBJC_PROP_NAME_ATTR_321
+l_OBJC_$_PROP_LIST_MGSwipeAnimation
+l_OBJC_CLASS_RO_$_MGSwipeAnimation
+OBJC_CLASSLIST_SUP_REFS_$_322
+OBJC_METH_VAR_NAME_323
+OBJC_SELECTOR_REFERENCES_324
+OBJC_METH_VAR_NAME_325
+OBJC_SELECTOR_REFERENCES_326
+OBJC_METH_VAR_NAME_327
+OBJC_SELECTOR_REFERENCES_328
+OBJC_IVAR_$_MGSwipeTableCell._panRecognizer
+OBJC_METH_VAR_NAME_329
+OBJC_SELECTOR_REFERENCES_330
+OBJC_CLASSLIST_REFERENCES_$_331
+OBJC_METH_VAR_NAME_332
+OBJC_SELECTOR_REFERENCES_333
+OBJC_IVAR_$_MGSwipeTableCell._leftButtons
+OBJC_IVAR_$_MGSwipeTableCell._rightButtons
+OBJC_CLASSLIST_REFERENCES_$_334
+OBJC_IVAR_$_MGSwipeTableCell._leftSwipeSettings
+OBJC_IVAR_$_MGSwipeTableCell._rightSwipeSettings
+OBJC_CLASSLIST_REFERENCES_$_335
+OBJC_IVAR_$_MGSwipeTableCell._leftExpansion
+OBJC_IVAR_$_MGSwipeTableCell._rightExpansion
+OBJC_CLASSLIST_REFERENCES_$_336
+OBJC_IVAR_$_MGSwipeTableCell._animationData
+OBJC_CLASSLIST_REFERENCES_$_337
+OBJC_METH_VAR_NAME_338
+OBJC_SELECTOR_REFERENCES_339
+OBJC_METH_VAR_NAME_340
+OBJC_SELECTOR_REFERENCES_341
+OBJC_METH_VAR_NAME_342
+OBJC_SELECTOR_REFERENCES_343
+OBJC_METH_VAR_NAME_344
+OBJC_SELECTOR_REFERENCES_345
+OBJC_IVAR_$_MGSwipeTableCell._activeExpansion
+OBJC_CLASSLIST_REFERENCES_$_346
+OBJC_METH_VAR_NAME_347
+OBJC_SELECTOR_REFERENCES_348
+OBJC_IVAR_$_MGSwipeTableCell._previusHiddenViews
+OBJC_IVAR_$_MGSwipeTableCell._swipeState
+OBJC_IVAR_$_MGSwipeTableCell._triggerStateChanges
+OBJC_IVAR_$_MGSwipeTableCell._allowsSwipeWhenTappingButtons
+OBJC_IVAR_$_MGSwipeTableCell._preservesSelectionStatus
+OBJC_IVAR_$_MGSwipeTableCell._displayLink
+OBJC_METH_VAR_NAME_349
+OBJC_SELECTOR_REFERENCES_350
+OBJC_IVAR_$_MGSwipeTableCell._swipeOverlay
+OBJC_IVAR_$_MGSwipeTableCell._rightView
+OBJC_IVAR_$_MGSwipeTableCell._leftView
+OBJC_METH_VAR_NAME_351
+OBJC_SELECTOR_REFERENCES_352
+OBJC_IVAR_$_MGSwipeTableCell._swipeContentView
+OBJC_METH_VAR_NAME_353
+OBJC_SELECTOR_REFERENCES_354
+OBJC_METH_VAR_NAME_355
+OBJC_SELECTOR_REFERENCES_356
+OBJC_IVAR_$_MGSwipeTableCell._swipeView
+OBJC_METH_VAR_NAME_357
+OBJC_SELECTOR_REFERENCES_358
+OBJC_METH_VAR_NAME_359
+OBJC_SELECTOR_REFERENCES_360
+OBJC_IVAR_$_MGSwipeTableCell._delegate
+OBJC_METH_VAR_NAME_361
+OBJC_SELECTOR_REFERENCES_362
+OBJC_METH_VAR_NAME_363
+OBJC_SELECTOR_REFERENCES_364
+OBJC_CLASSLIST_REFERENCES_$_365
+OBJC_METH_VAR_NAME_366
+OBJC_SELECTOR_REFERENCES_367
+OBJC_METH_VAR_NAME_368
+OBJC_SELECTOR_REFERENCES_369
+OBJC_CLASSLIST_REFERENCES_$_370
+OBJC_IVAR_$_MGSwipeTableCell._allowsButtonsWithDifferentWidth
+OBJC_SELECTOR_REFERENCES_371
+OBJC_SELECTOR_REFERENCES_372
+OBJC_IVAR_$_MGSwipeTableCell._overlayEnabled
+OBJC_METH_VAR_NAME_373
+OBJC_SELECTOR_REFERENCES_374
+OBJC_METH_VAR_NAME_375
+OBJC_SELECTOR_REFERENCES_376
+OBJC_METH_VAR_NAME_377
+OBJC_SELECTOR_REFERENCES_378
+OBJC_METH_VAR_NAME_379
+OBJC_SELECTOR_REFERENCES_380
+OBJC_IVAR_$_MGSwipeTableCell._allowsMultipleSwipe
+OBJC_METH_VAR_NAME_381
+OBJC_SELECTOR_REFERENCES_382
+OBJC_CLASSLIST_REFERENCES_$_383
+OBJC_IVAR_$_MGSwipeTableCell._tableInputOverlay
+OBJC_SELECTOR_REFERENCES_384
+OBJC_METH_VAR_NAME_385
+OBJC_SELECTOR_REFERENCES_386
+OBJC_IVAR_$_MGSwipeTableCell._previusSelectionStyle
+OBJC_METH_VAR_NAME_387
+OBJC_SELECTOR_REFERENCES_388
+OBJC_METH_VAR_NAME_389
+OBJC_SELECTOR_REFERENCES_390
+OBJC_CLASSLIST_REFERENCES_$_391
+OBJC_METH_VAR_NAME_392
+OBJC_SELECTOR_REFERENCES_393
+OBJC_IVAR_$_MGSwipeTableCell._tapRecognizer
+OBJC_METH_VAR_NAME_394
+OBJC_SELECTOR_REFERENCES_395
+OBJC_METH_VAR_NAME_396
+OBJC_SELECTOR_REFERENCES_397
+OBJC_METH_VAR_NAME_398
+OBJC_SELECTOR_REFERENCES_399
+OBJC_METH_VAR_NAME_400
+OBJC_SELECTOR_REFERENCES_401
+OBJC_METH_VAR_NAME_402
+OBJC_SELECTOR_REFERENCES_403
+OBJC_IVAR_$_MGSwipeTableCell._swipeOffset
+OBJC_METH_VAR_NAME_404
+OBJC_SELECTOR_REFERENCES_405
+OBJC_METH_VAR_NAME_406
+OBJC_SELECTOR_REFERENCES_407
+OBJC_METH_VAR_NAME_408
+OBJC_SELECTOR_REFERENCES_409
+OBJC_METH_VAR_NAME_410
+OBJC_SELECTOR_REFERENCES_411
+OBJC_METH_VAR_NAME_412
+OBJC_SELECTOR_REFERENCES_413
+OBJC_METH_VAR_NAME_414
+OBJC_SELECTOR_REFERENCES_415
+OBJC_METH_VAR_NAME_416
+OBJC_SELECTOR_REFERENCES_417
+OBJC_METH_VAR_NAME_418
+OBJC_SELECTOR_REFERENCES_419
+OBJC_METH_VAR_NAME_420
+OBJC_SELECTOR_REFERENCES_421
+OBJC_METH_VAR_NAME_422
+OBJC_SELECTOR_REFERENCES_423
+OBJC_SELECTOR_REFERENCES_424
+OBJC_CLASSLIST_REFERENCES_$_425
+OBJC_METH_VAR_NAME_426
+OBJC_SELECTOR_REFERENCES_427
+OBJC_METH_VAR_NAME_428
+OBJC_SELECTOR_REFERENCES_429
+OBJC_METH_VAR_NAME_430
+OBJC_SELECTOR_REFERENCES_431
+OBJC_METH_VAR_NAME_432
+OBJC_SELECTOR_REFERENCES_433
+.str434
+_unnamed_cfstring_
+OBJC_METH_VAR_NAME_435
+OBJC_SELECTOR_REFERENCES_436
+OBJC_METH_VAR_NAME_437
+OBJC_SELECTOR_REFERENCES_438
+OBJC_METH_VAR_NAME_439
+OBJC_SELECTOR_REFERENCES_440
+OBJC_IVAR_$_MGSwipeTableCell._swipeBackgroundColor
+OBJC_METH_VAR_NAME_441
+OBJC_SELECTOR_REFERENCES_442
+OBJC_IVAR_$_MGSwipeTableCell._cachedParentTable
+OBJC_CLASSLIST_REFERENCES_$_443
+OBJC_METH_VAR_NAME_444
+OBJC_SELECTOR_REFERENCES_445
+OBJC_METH_VAR_NAME_446
+OBJC_SELECTOR_REFERENCES_447
+OBJC_SELECTOR_REFERENCES_448
+OBJC_IVAR_$_MGSwipeTableCell._targetOffset
+OBJC_METH_VAR_NAME_449
+OBJC_SELECTOR_REFERENCES_450
+OBJC_SELECTOR_REFERENCES_451
+OBJC_SELECTOR_REFERENCES_452
+OBJC_SELECTOR_REFERENCES_453
+OBJC_SELECTOR_REFERENCES_454
+OBJC_SELECTOR_REFERENCES_455
+OBJC_SELECTOR_REFERENCES_456
+OBJC_SELECTOR_REFERENCES_457
+OBJC_SELECTOR_REFERENCES_458
+OBJC_SELECTOR_REFERENCES_459
+OBJC_METH_VAR_NAME_460
+OBJC_SELECTOR_REFERENCES_461
+OBJC_METH_VAR_NAME_462
+OBJC_SELECTOR_REFERENCES_463
+OBJC_METH_VAR_NAME_464
+OBJC_SELECTOR_REFERENCES_465
+OBJC_IVAR_$_MGSwipeTableCell._allowSwipeLeftToRight
+OBJC_IVAR_$_MGSwipeTableCell._allowSwipeRightToLeft
+OBJC_SELECTOR_REFERENCES_466
+OBJC_SELECTOR_REFERENCES_467
+OBJC_METH_VAR_NAME_468
+OBJC_SELECTOR_REFERENCES_469
+__block_descriptor_tmp472
+OBJC_SELECTOR_REFERENCES_473
+OBJC_METH_VAR_NAME_474
+OBJC_SELECTOR_REFERENCES_475
+OBJC_SELECTOR_REFERENCES_476
+OBJC_SELECTOR_REFERENCES_477
+OBJC_SELECTOR_REFERENCES_478
+OBJC_SELECTOR_REFERENCES_479
+OBJC_SELECTOR_REFERENCES_480
+OBJC_IVAR_$_MGSwipeTableCell._animationCompletion
+OBJC_SELECTOR_REFERENCES_481
+OBJC_SELECTOR_REFERENCES_482
+OBJC_SELECTOR_REFERENCES_483
+OBJC_CLASSLIST_REFERENCES_$_484
+OBJC_METH_VAR_NAME_485
+OBJC_SELECTOR_REFERENCES_486
+OBJC_METH_VAR_NAME_487
+OBJC_SELECTOR_REFERENCES_488
+OBJC_CLASSLIST_REFERENCES_$_489
+OBJC_METH_VAR_NAME_490
+OBJC_SELECTOR_REFERENCES_491
+OBJC_METH_VAR_NAME_492
+OBJC_SELECTOR_REFERENCES_493
+OBJC_METH_VAR_NAME_494
+OBJC_SELECTOR_REFERENCES_495
+OBJC_METH_VAR_NAME_496
+OBJC_SELECTOR_REFERENCES_497
+OBJC_METH_VAR_NAME_498
+OBJC_SELECTOR_REFERENCES_499
+OBJC_METH_VAR_NAME_500
+OBJC_SELECTOR_REFERENCES_501
+OBJC_METH_VAR_NAME_502
+OBJC_SELECTOR_REFERENCES_503
+OBJC_METH_VAR_NAME_504
+OBJC_SELECTOR_REFERENCES_505
+OBJC_IVAR_$_MGSwipeTableCell._panStartPoint
+OBJC_IVAR_$_MGSwipeTableCell._panStartOffset
+OBJC_METH_VAR_NAME_506
+OBJC_SELECTOR_REFERENCES_507
+OBJC_CLASSLIST_REFERENCES_$_508
+OBJC_METH_VAR_NAME_509
+OBJC_SELECTOR_REFERENCES_510
+OBJC_METH_VAR_NAME_511
+OBJC_SELECTOR_REFERENCES_512
+OBJC_SELECTOR_REFERENCES_513
+OBJC_SELECTOR_REFERENCES_514
+OBJC_SELECTOR_REFERENCES_515
+__block_descriptor_tmp518
+OBJC_METH_VAR_NAME_519
+OBJC_SELECTOR_REFERENCES_520
+OBJC_SELECTOR_REFERENCES_521
+OBJC_METH_VAR_NAME_522
+OBJC_SELECTOR_REFERENCES_523
+OBJC_METH_VAR_NAME_524
+OBJC_SELECTOR_REFERENCES_525
+OBJC_METH_VAR_NAME_526
+OBJC_SELECTOR_REFERENCES_527
+OBJC_CLASS_NAME_528
+l_OBJC_METACLASS_RO_$_MGSwipeTableCell
+OBJC_CLASS_NAME_529
+OBJC_METH_VAR_TYPE_530
+OBJC_METH_VAR_TYPE_531
+OBJC_METH_VAR_NAME_532
+OBJC_METH_VAR_NAME_533
+OBJC_METH_VAR_NAME_534
+OBJC_METH_VAR_NAME_535
+OBJC_METH_VAR_TYPE_536
+OBJC_METH_VAR_TYPE_537
+OBJC_METH_VAR_NAME_538
+OBJC_METH_VAR_TYPE_539
+OBJC_METH_VAR_TYPE_540
+OBJC_METH_VAR_NAME_541
+OBJC_METH_VAR_TYPE_542
+OBJC_METH_VAR_TYPE_543
+OBJC_METH_VAR_TYPE_544
+OBJC_METH_VAR_NAME_545
+OBJC_METH_VAR_TYPE_546
+OBJC_METH_VAR_NAME_547
+OBJC_METH_VAR_NAME_548
+OBJC_METH_VAR_NAME_549
+OBJC_METH_VAR_NAME_550
+OBJC_METH_VAR_NAME_551
+OBJC_METH_VAR_NAME_552
+OBJC_METH_VAR_NAME_553
+OBJC_METH_VAR_NAME_554
+OBJC_METH_VAR_NAME_555
+OBJC_METH_VAR_NAME_556
+OBJC_METH_VAR_NAME_557
+OBJC_METH_VAR_NAME_558
+OBJC_METH_VAR_NAME_559
+OBJC_METH_VAR_NAME_560
+OBJC_METH_VAR_NAME_561
+OBJC_METH_VAR_NAME_562
+OBJC_METH_VAR_NAME_563
+OBJC_METH_VAR_NAME_564
+OBJC_METH_VAR_NAME_565
+l_OBJC_$_INSTANCE_METHODS_MGSwipeTableCell
+OBJC_METH_VAR_NAME_566
+OBJC_METH_VAR_TYPE_567
+OBJC_METH_VAR_NAME_568
+OBJC_METH_VAR_TYPE_569
+OBJC_METH_VAR_NAME_570
+OBJC_METH_VAR_TYPE_571
+OBJC_METH_VAR_NAME_572
+OBJC_METH_VAR_NAME_573
+OBJC_METH_VAR_NAME_574
+OBJC_METH_VAR_NAME_575
+OBJC_METH_VAR_TYPE_576
+OBJC_METH_VAR_NAME_577
+OBJC_METH_VAR_NAME_578
+OBJC_METH_VAR_TYPE_579
+OBJC_METH_VAR_NAME_580
+OBJC_METH_VAR_NAME_581
+OBJC_METH_VAR_NAME_582
+OBJC_METH_VAR_NAME_583
+OBJC_METH_VAR_NAME_584
+OBJC_METH_VAR_TYPE_585
+OBJC_METH_VAR_NAME_586
+OBJC_METH_VAR_NAME_587
+OBJC_METH_VAR_TYPE_588
+OBJC_METH_VAR_NAME_589
+OBJC_METH_VAR_NAME_590
+OBJC_METH_VAR_TYPE_591
+OBJC_METH_VAR_NAME_592
+OBJC_METH_VAR_NAME_593
+OBJC_METH_VAR_TYPE_594
+OBJC_METH_VAR_NAME_595
+OBJC_METH_VAR_TYPE_596
+OBJC_METH_VAR_NAME_597
+OBJC_METH_VAR_TYPE_598
+OBJC_METH_VAR_NAME_599
+OBJC_METH_VAR_NAME_600
+OBJC_METH_VAR_NAME_601
+OBJC_METH_VAR_NAME_602
+OBJC_METH_VAR_NAME_603
+OBJC_METH_VAR_TYPE_604
+OBJC_METH_VAR_NAME_605
+OBJC_METH_VAR_NAME_606
+OBJC_METH_VAR_NAME_607
+OBJC_METH_VAR_TYPE_608
+OBJC_METH_VAR_NAME_609
+OBJC_METH_VAR_NAME_610
+OBJC_METH_VAR_TYPE_611
+OBJC_METH_VAR_NAME_612
+OBJC_METH_VAR_NAME_613
+OBJC_METH_VAR_NAME_614
+OBJC_METH_VAR_NAME_615
+l_OBJC_$_INSTANCE_VARIABLES_MGSwipeTableCell
+OBJC_CLASS_NAME_616
+OBJC_PROP_NAME_ATTR_617
+OBJC_PROP_NAME_ATTR_618
+OBJC_PROP_NAME_ATTR_619
+OBJC_PROP_NAME_ATTR_620
+OBJC_PROP_NAME_ATTR_621
+OBJC_PROP_NAME_ATTR_622
+OBJC_PROP_NAME_ATTR_623
+OBJC_PROP_NAME_ATTR_624
+OBJC_PROP_NAME_ATTR_625
+OBJC_PROP_NAME_ATTR_626
+OBJC_PROP_NAME_ATTR_627
+OBJC_PROP_NAME_ATTR_628
+OBJC_PROP_NAME_ATTR_629
+OBJC_PROP_NAME_ATTR_630
+OBJC_PROP_NAME_ATTR_631
+OBJC_PROP_NAME_ATTR_632
+OBJC_PROP_NAME_ATTR_633
+OBJC_PROP_NAME_ATTR_634
+OBJC_PROP_NAME_ATTR_635
+OBJC_PROP_NAME_ATTR_636
+OBJC_PROP_NAME_ATTR_637
+OBJC_PROP_NAME_ATTR_638
+OBJC_PROP_NAME_ATTR_639
+OBJC_PROP_NAME_ATTR_640
+OBJC_PROP_NAME_ATTR_641
+OBJC_PROP_NAME_ATTR_642
+OBJC_PROP_NAME_ATTR_643
+OBJC_PROP_NAME_ATTR_644
+OBJC_PROP_NAME_ATTR_645
+OBJC_PROP_NAME_ATTR_646
+OBJC_PROP_NAME_ATTR_647
+OBJC_PROP_NAME_ATTR_648
+l_OBJC_$_PROP_LIST_MGSwipeTableCell
+l_OBJC_CLASS_RO_$_MGSwipeTableCell
+switch.table
+/Users/vvolodko/Library/Developer/Xcode/DerivedData/ModuleCache/64599VMJPC1M/ObjectiveC-2CD0WTQVXITO7.pcm
+ObjectiveC
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/usr/include/objc
+/Users/vvolodko/Library/Developer/Xcode/DerivedData/ModuleCache/64599VMJPC1M/QuartzCore-3I7S0M4UEAD0U.pcm
+QuartzCore
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/QuartzCore.framework
+__CGSizeEqualToSize
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CGGeometry.h
+/Users/vvolodko/Projects/killobatt/VKOfflineMusic/Carthage/Checkouts/MGSwipeTableCell/MGSwipeTableCell/MGSwipeTableCell.m
+CGRectMake
+-[MGSwipeTableCell .cxx_destruct]
+-[MGSwipeTableCell swipeOffset]
+/Users/vvolodko/Projects/killobatt/VKOfflineMusic/Carthage/Checkouts/MGSwipeTableCell/MGSwipeTableCell/MGSwipeTableCell.h
+-[MGSwipeTableCell swipeBackgroundColor]
+-[MGSwipeTableCell setPreservesSelectionStatus:]
+-[MGSwipeTableCell preservesSelectionStatus]
+-[MGSwipeTableCell setAllowsSwipeWhenTappingButtons:]
+-[MGSwipeTableCell allowsSwipeWhenTappingButtons]
+-[MGSwipeTableCell setAllowsButtonsWithDifferentWidth:]
+-[MGSwipeTableCell allowsButtonsWithDifferentWidth]
+-[MGSwipeTableCell setAllowsMultipleSwipe:]
+-[MGSwipeTableCell allowsMultipleSwipe]
+-[MGSwipeTableCell swipeState]
+-[MGSwipeTableCell setRightExpansion:]
+-[MGSwipeTableCell rightExpansion]
+-[MGSwipeTableCell setLeftExpansion:]
+-[MGSwipeTableCell leftExpansion]
+-[MGSwipeTableCell setRightSwipeSettings:]
+-[MGSwipeTableCell rightSwipeSettings]
+-[MGSwipeTableCell setLeftSwipeSettings:]
+-[MGSwipeTableCell leftSwipeSettings]
+-[MGSwipeTableCell setRightButtons:]
+-[MGSwipeTableCell rightButtons]
+-[MGSwipeTableCell setLeftButtons:]
+-[MGSwipeTableCell leftButtons]
+-[MGSwipeTableCell setDelegate:]
+-[MGSwipeTableCell delegate]
+-[MGSwipeTableCell setSwipeBackgroundColor:]
+-[MGSwipeTableCell isSwipeGestureActive]
+-[MGSwipeTableCell gestureRecognizerShouldBegin:]
+-[MGSwipeTableCell panHandler:]
+-[MGSwipeTableCell filterSwipe:]
+-[MGSwipeTableCell tapHandler:]
+-[MGSwipeTableCell cancelPanGesture]
+-[MGSwipeTableCell setSwipeOffset:animation:completion:]
+-[MGSwipeTableCell setSwipeOffset:animated:completion:]
+-[MGSwipeTableCell animationTick:]
+-[MGSwipeTableCell expandSwipe:animated:]
+-[MGSwipeTableCell showSwipe:animated:completion:]
+-[MGSwipeTableCell showSwipe:animated:]
+-[MGSwipeTableCell hideSwipeAnimated:]
+-[MGSwipeTableCell hideSwipeAnimated:completion:]
+-[MGSwipeTableCell setSwipeOffset:]
+-[MGSwipeTableCell updateState:]
+-[MGSwipeTableCell parentTable]
+-[MGSwipeTableCell backgroundColorForSwipe]
+-[MGSwipeTableCell setAccesoryViewsHidden:]
+-[MGSwipeTableCell imageFromView:]
+-[MGSwipeTableCell hitTest:withEvent:]
+-[MGSwipeTableCell setEditing:]
+-[MGSwipeTableCell setEditing:animated:]
+-[MGSwipeTableCell prepareForReuse]
+-[MGSwipeTableCell willMoveToSuperview:]
+-[MGSwipeTableCell refreshButtons:]
+-[MGSwipeTableCell refreshContentView]
+-[MGSwipeTableCell hideSwipeOverlayIfNeeded]
+-[MGSwipeTableCell showSwipeOverlayIfNeeded]
+-[MGSwipeTableCell createSwipeViewIfNeeded]
+-[MGSwipeTableCell fetchButtonsIfNeeded]
+-[MGSwipeTableCell layoutSubviews]
+-[MGSwipeTableCell swipeContentView]
+-[MGSwipeTableCell cleanViews]
+-[MGSwipeTableCell initViews:]
+-[MGSwipeTableCell dealloc]
+-[MGSwipeTableCell awakeFromNib]
+-[MGSwipeTableCell initWithCoder:]
+-[MGSwipeTableCell initWithStyle:reuseIdentifier:]
+-[MGSwipeAnimation setEasingFunction:]
+-[MGSwipeAnimation easingFunction]
+-[MGSwipeAnimation setDuration:]
+-[MGSwipeAnimation duration]
+-[MGSwipeAnimation value:duration:from:to:]
+-[MGSwipeAnimation init]
+-[MGSwipeAnimationData .cxx_destruct]
+-[MGSwipeAnimationData setAnimation:]
+-[MGSwipeAnimationData animation]
+-[MGSwipeAnimationData setStart:]
+-[MGSwipeAnimationData start]
+-[MGSwipeAnimationData setDuration:]
+-[MGSwipeAnimationData duration]
+-[MGSwipeAnimationData setTo:]
+-[MGSwipeAnimationData to]
+-[MGSwipeAnimationData setFrom:]
+-[MGSwipeAnimationData from]
+-[MGSwipeExpansionSettings .cxx_destruct]
+-[MGSwipeExpansionSettings setAnimationDuration:]
+-[MGSwipeExpansionSettings animationDuration]
+-[MGSwipeExpansionSettings setTriggerAnimation:]
+-[MGSwipeExpansionSettings triggerAnimation]
+-[MGSwipeExpansionSettings setExpansionLayout:]
+-[MGSwipeExpansionSettings expansionLayout]
+-[MGSwipeExpansionSettings setExpansionColor:]
+-[MGSwipeExpansionSettings expansionColor]
+-[MGSwipeExpansionSettings setThreshold:]
+-[MGSwipeExpansionSettings threshold]
+-[MGSwipeExpansionSettings setFillOnTrigger:]
+-[MGSwipeExpansionSettings fillOnTrigger]
+-[MGSwipeExpansionSettings setButtonIndex:]
+-[MGSwipeExpansionSettings buttonIndex]
+-[MGSwipeExpansionSettings init]
+-[MGSwipeSettings .cxx_destruct]
+-[MGSwipeSettings setOnlySwipeButtons:]
+-[MGSwipeSettings onlySwipeButtons]
+-[MGSwipeSettings setKeepButtonsSwiped:]
+-[MGSwipeSettings keepButtonsSwiped]
+-[MGSwipeSettings setStretchAnimation:]
+-[MGSwipeSettings stretchAnimation]
+-[MGSwipeSettings setHideAnimation:]
+-[MGSwipeSettings hideAnimation]
+-[MGSwipeSettings setShowAnimation:]
+-[MGSwipeSettings showAnimation]
+-[MGSwipeSettings setOffset:]
+-[MGSwipeSettings offset]
+-[MGSwipeSettings setThreshold:]
+-[MGSwipeSettings threshold]
+-[MGSwipeSettings setTransition:]
+-[MGSwipeSettings transition]
+-[MGSwipeSettings animationDuration]
+-[MGSwipeSettings setAnimationDuration:]
+-[MGSwipeSettings init]
+-[MGSwipeButtonsView .cxx_destruct]
+-[MGSwipeButtonsView setBackgroundColorCopy:]
+-[MGSwipeButtonsView backgroundColorCopy]
+-[MGSwipeButtonsView setCell:]
+-[MGSwipeButtonsView cell]
+-[MGSwipeButtonsView transition:percent:]
+-[MGSwipeButtonsView transition3D:]
+-[MGSwipeButtonsView transtitionFloatBorder:]
+-[MGSwipeButtonsView transitionClip:]
+-[MGSwipeButtonsView transitionDrag:]
+-[MGSwipeButtonsView transitionStatic:]
+-[MGSwipeButtonsView buttonClicked:]
+-[MGSwipeButtonsView handleClick:fromExpansion:]
+-[MGSwipeButtonsView getExpandedButton]
+-[MGSwipeButtonsView endExpansionAnimated:]
+-[MGSwipeButtonsView expandToOffset:settings:]
+-[MGSwipeButtonsView expansionBackgroundRect:]
+-[MGSwipeButtonsView layoutSubviews]
+-[MGSwipeButtonsView layoutExpansion:]
+-[MGSwipeButtonsView resetButtons]
+-[MGSwipeButtonsView dealloc]
+-[MGSwipeButtonsView initWithButtons:direction:differentWidth:]
+-[MGSwipeTableInputOverlay .cxx_destruct]
+-[MGSwipeTableInputOverlay setCurrentCell:]
+-[MGSwipeTableInputOverlay currentCell]
+-[MGSwipeTableInputOverlay hitTest:withEvent:]
+-[MGSwipeTableInputOverlay initWithFrame:]
+/Users/vvolodko/Library/Developer/Xcode/DerivedData/MGSwipeTableCell-dkilkikxstpepsafeikveglglonn/Build/Intermediates/MGSwipeTableCell.build/Release-iphoneos/MGSwipeTableCell.build/DerivedSources/MGSwipeTableCell_vers.c
+_ZL15__ARCLite__loadv
+_ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_
+_ZL22add_image_hook_swiftV1PK11mach_headerl
+_ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class
+_ZL13replaceMethodP10objc_classP13objc_selectorPFP11objc_objectS4_S2_zEPS6_
+_ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector
+_ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_
+_ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j
+_ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_
+_ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_
+_ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_
+_ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_
+_ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_
+_ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary
+_ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info
+_ZL32__arclite_objc_allocateClassPairP10objc_classPKcm
+_ZL32__arclite_object_getIndexedIvarsP11objc_object
+_ZL23__arclite_objc_getClassPKc
+_ZL27__arclite_objc_getMetaClassPKc
+_ZL31__arclite_objc_getRequiredClassPKc
+_ZL26__arclite_objc_lookUpClassPKc
+_ZL26__arclite_objc_getProtocolPKc
+_ZL23__arclite_class_getNameP10objc_class
+_ZL26__arclite_protocol_getNameP8Protocol
+_ZL37__arclite_objc_copyClassNamesForImagePKcPj
+_ZL17transcribeMethodsP10objc_classP15glue_class_ro_t
+_ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t
+_ZL20transcribePropertiesP10objc_classP15glue_class_ro_t
+_ZL14initialize_impP11objc_objectP13objc_selector
+_ZL18allocateMaybeSwiftP18glue_swift_class_tm
+_ZL22copySwiftV1MangledNamePKcb
+_ZL13demangledNamePKcb
+_ZL16scanMangledFieldRPKcS0_S1_Ri
+_ZL30arclite_uninitialized_functionv
+_ZL12cxxConstructP11objc_object
+_ZL20fixStringForCoreDataP11objc_object
+OBJC_METACLASS_$___ARCLite__
+_ZL24OBJC_CLASS_$___ARCLite__
+_ZL31OBJC_METACLASS_RO_$___ARCLite__
+_non_lazy_classes
+_ZL27OBJC_CLASS_RO_$___ARCLite__
+_ZL11_class_name
+_ZL32OBJC_$_CLASS_METHODS___ARCLite__
+_ZL17_load_method_name
+_ZL17_load_method_type
+OBJC_METH_VAR_TYPE_6
+l_OBJC_$_PROTOCOL_INSTANCE_METHODS___ARCLiteKeyedSubscripting__
+l_OBJC_$_PROTOCOL_METHOD_TYPES___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_LABEL_PROTOCOL_$___ARCLiteKeyedSubscripting__
+l_OBJC_PROTOCOL_REFERENCE_$___ARCLiteKeyedSubscripting__
+.str7
+.str8
+_ZL30NSUndoManagerProxy_targetClass
+.str11
+.str12
+_ZL29original_NSManagedObject_init
+_ZL40original_NSManagedObject_allocWithEntity
+_ZL35original_NSManagedObject_allocBatch
+_ZL25NSMutableDictionary_class
+.str19
+_ZL22NSConstantString_class
+.str20
+_ZL14NSString_class
+.str21
+OBJC_METH_VAR_NAME_22
+OBJC_SELECTOR_REFERENCES_23
+_ZL36original_NSKKMS_fastIndexForKnownKey
+OBJC_METH_VAR_NAME_24
+OBJC_SELECTOR_REFERENCES_25
+_ZL27original_NSKKMS_indexForKey
+.str26
+_ZL28original_NSKKsD_objectForKey
+_ZL34original_NSKKsD_removeObjectForKey
+_ZL32original_NSKKsD_setObject_forKey
+_ZL40original_NSKKsD_addEntriesFromDictionary
+_ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+_ZGVZL22add_image_hook_swiftV1PK11mach_headerlE7patches
+.str31
+.str32
+_ZL31original_objc_allocateClassPair
+.str33
+_ZL31original_object_getIndexedIvars
+.str34
+_ZL22original_objc_getClass
+.str35
+_ZL26original_objc_getMetaClass
+.str36
+_ZL30original_objc_getRequiredClass
+.str37
+_ZL25original_objc_lookUpClass
+.str38
+_ZL25original_objc_getProtocol
+.str39
+_ZL22original_class_getName
+.str40
+_ZL25original_protocol_getName
+.str41
+_ZL36original_objc_copyClassNamesForImage
+OBJC_METH_VAR_NAME_42
+OBJC_SELECTOR_REFERENCES_43
+OBJC_METH_VAR_NAME_44
+OBJC_SELECTOR_REFERENCES_45
+.str46
+.str47
+.str48
+.str49
+.str50
+.str51
+.str52
+.str53
+_ZL12demangleLock
+_ZL9Demangled
+.str54
+.str55
+.str56
+.str57
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c++ -arch arm64 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=c++11 -Wno-trigraphs -fno-exceptions -fno-rtti -mpascal-strings -Os -Wno-missing-field-initializers -Wmissing-prototypes -Wno-implicit-atomic-properties -Wno-arc-repeated-use-of-weak -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -Wno-c++11-extensions -D NDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.Internal.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -Winvalid-offsetof -miphoneos-version-min=4.3 -g -fno-threadsafe-statics -Wno-sign-conversion -fembed-bitcode -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-generated-files.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-own-target-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-all-target-headers.hmap -iquote /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Objects/arclite.build/arclite_iOS.build/arclite_iphoneos-project-headers.hmap -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Symbols/BuiltProducts/include -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Objects/arclite.build/arclite_iOS.build/DerivedSources/arm64 -I /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Objects/arclite.build/arclite_iOS.build/DerivedSources -F/Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Symbols/BuiltProducts -F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.Internal.sdk/System/Library/PrivateFrameworks -Wall -Wextra -Wno-gcc-compat -fgnu-inline-asm -MMD -MT dependencies -MF /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.d --serialize-diagnostics /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.dia -c /Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-65/source/arclite.mm -o /Library/Caches/com.apple.xbs/Binaries/arclite_iOS/arclite_iOS-65~37/Objects/arclite.build/arclite_iOS.build/Objects-normal/arm64/arclite.o -mlinker-version=253.9
+__arclite_NSKKsD_addEntriesFromDictionary
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-65/source/arclite.mm
+/Library/Caches/com.apple.xbs/Sources/arclite_iOS/arclite-65
+__arclite_NSKKsD_setObject_forKey
+__arclite_NSKKsD_removeObjectForKey
+__arclite_NSKKsD_objectForKey
+__arclite_NSKKMS_indexForKey
+fixStringForCoreData
+__arclite_NSKKMS_fastIndexForKnownKey
+__arclite_NSManagedObject_allocBatch
+__arclite_NSManagedObject_allocWithEntity
+cxxConstruct
+__arclite_NSManagedObject_init
+arclite_uninitialized_function
+replaceMethod
+__arclite_NSUndoManagerProxy_isKindOfClass
+patch_lazy_pointers
+patch_t<const char **(const char *, unsigned int *)>
+__arclite_objc_copyClassNamesForImage
+patch_t<const char *(Protocol *)>
+__arclite_protocol_getName
+patch_t<const char *(Class)>
+__isctype
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.Internal.sdk/usr/include/ctype.h
+isdigit
+scanMangledField
+copySwiftV1DemangledName
+demangledName
+__arclite_class_getName
+patch_t<Protocol *(const char *)>
+__arclite_objc_getProtocol
+__arclite_objc_lookUpClass
+__arclite_objc_getRequiredClass
+__arclite_objc_getMetaClass
+patch_t<Class (const char *)>
+copySwiftV1MangledName
+__arclite_objc_getClass
+patch_t<void *(id)>
+word_align
+__arclite_object_getIndexedIvars
+patch_t<Class (Class, const char *, unsigned long)>
+allocateMaybeSwift
+isSwift
+metaclass
+__arclite_objc_allocateClassPair
+patch_t<Class (Class, const objc_image_info *)>
+initialize_imp
+property_list_nth
+transcribeProperties
+transcribeProtocols
+method_list_nth
+transcribeMethods
+alignment
+max
+ivar_list_nth
+transcribeIvars
+fastFlags
+data
+ro
+__arclite_objc_readClassPair
+add_image_hook_swiftV1
+install_swiftV1
+install_ARC
+objc_collectingEnabled
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.Internal.sdk/usr/include/objc/objc-auto.h
+keyedGetter
+__arclite_NSMutableDictionary__setObject_forKeyedSubscript
+addOrReplaceMethod
+install_dict_nil_value
+install_subscripting
+install_autoreleasepool
+__ARCLite__load

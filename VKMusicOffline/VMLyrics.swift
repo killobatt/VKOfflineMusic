@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VK
+import VKSdkFramework
 import CoreDataStorage
 
 class VMLyrics: NSObject, NSCoding {

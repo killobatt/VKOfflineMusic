@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VK
+import VKSdkFramework
 
 func MIN<T: Comparable>(a: T, b: T) -> T {
     if (a < b) {

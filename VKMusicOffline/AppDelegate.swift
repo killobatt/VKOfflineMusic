@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VK
+import VKSdkFramework
 import Fabric
 import Crashlytics
 
@@ -19,10 +19,13 @@ let kVKAuthScopeFriends = "friends"
 let kVKAuthScopeAudio = "audio"
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDelegate, UISplitViewControllerDelegate {
     
     // MARK: - View Controllers
     var window: UIWindow?
+    var splitViewController: UISplitViewController? {
+        return self.window?.rootViewController as? UISplitViewController
+    }
 
     // MARK: - UIApplicationDelegate
 
@@ -36,15 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
         splitViewController.delegate = self
         splitViewController.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         
-        VKSdk.initializeWithDelegate(self, andAppId:kVKApplicationID)
-        if (VKSdk.wakeUpSession() == false) {
-            self.vkAuthorize()
-        } else if (VKSdk.isLoggedIn() == true) {
-            self.vkGetUserInfo()
-        } else {
-            self.vkAuthorize()
-        }
-
+        let vkSDK = VKSdk.initializeWithAppId(kVKApplicationID)
+        vkSDK.registerDelegate(self)
+        vkSDK.uiDelegate = self
+        
         return true
     }
 
@@ -65,6 +63,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        VKSdk.wakeUpSession([kVKAuthScopeFriends, kVKAuthScopeAudio]) { (state: VKAuthorizationState, error: NSError!) -> Void in
+            switch state {
+            case .Initialized: // SDK initialized and ready to authorize
+                NSLog("Succesfully authorized user")
+                self.vkAuthorize()
+            case .Authorized: // User authorized
+                NSLog("Succesfully authorized user")
+                self.vkGetUserInfo()
+            case .Error: // An error occured, try to wake up session later
+                fallthrough
+            default:
+                self.splitViewController?.presentViewController(UIAlertController(error: error), animated: true, completion: nil)
+            }
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -72,10 +85,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
         VMAudioListManager.sharedInstance.saveOfflineAudioLists()
     }
     
+    @available(iOS 9.0, *)
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        VKSdk.processOpenURL(url, fromApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String)
+        return true
+    }
+    
+    @available(iOS 8.0, *)
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         VKSdk.processOpenURL(url, fromApplication:sourceApplication)
         return true
     }
+    
     
     // MARK: - NSURLSession
     
@@ -120,51 +141,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
     // MARK: - VKSDK Delegate
     
     /**
-    Calls when user must perform captcha-check
-    @param captchaError error returned from API. You can load captcha image from <b>captchaImg</b> property.
-    After user answered current captcha, call answerCaptcha: method with user entered answer.
+    Notifies delegate about authorization was completed, and returns authorization result which presents new token or error.
+    @param result contains new token or error, retrieved after VK authorization
     */
-    func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
-        let vc = VKCaptchaViewController.captchaControllerWithError(captchaError)
-        self.window?.rootViewController?.presentViewController(vc, animated: true, completion:nil)
+    func vkSdkAccessAuthorizationFinishedWithResult(result: VKAuthorizationResult!) {
+        if let _ = result.token {
+            self.vkGetUserInfo()
+        } else if let error = result.error {
+            self.splitViewController?.presentViewController(UIAlertController(error: error), animated: true, completion: nil)
+        }
     }
     
     /**
-    Notifies delegate about existing token has expired
-    @param expiredToken old token that has expired
-    */
+     Notifies delegate about access error, mostly connected with user deauthorized application
+     */
+    func vkSdkUserAuthorizationFailed() {
+        
+    }
+    
+    /**
+     Notifies delegate about access token changed
+     @param newToken new token for API requests
+     @param oldToken previous used token
+     */
+    func vkSdkAccessTokenUpdated(newToken: VKAccessToken!, oldToken: VKAccessToken!) {
+        
+    }
+    
+    /**
+     Notifies delegate about existing token has expired
+     @param expiredToken old token that has expired
+     */
     func vkSdkTokenHasExpired(expiredToken: VKAccessToken!) {
         self.vkAuthorize()
     }
     
-    /**
-    Notifies delegate about user authorization cancelation
-    @param authorizationError error that describes authorization error
-    */
-    func vkSdkUserDeniedAccess(authorizationError: VKError!) {
-        
-    }
+    // MARK - VK UI Delegate
     
     /**
     Pass view controller that should be presented to user. Usually, it's an authorization window
     @param controller view controller that must be shown to user
     */
     func vkSdkShouldPresentViewController(controller: UIViewController!) {
-        self.window?.rootViewController?.presentViewController(controller, animated: true, completion: nil)
+        self.splitViewController?.presentViewController(controller, animated: true, completion: nil)
     }
     
     /**
-    Notifies delegate about receiving new access token
-    @param newToken new token for API requests
-    */
-    func vkSdkReceivedNewToken(newToken: VKAccessToken!) {
-        self.vkGetUserInfo()
+     Calls when user must perform captcha-check
+     @param captchaError error returned from API. You can load captcha image from <b>captchaImg</b> property.
+     After user answered current captcha, call answerCaptcha: method with user entered answer.
+     */
+    func vkSdkNeedCaptchaEnter(captchaError: VKError!) {
+        let vc = VKCaptchaViewController.captchaControllerWithError(captchaError)
+        self.window?.rootViewController?.presentViewController(vc, animated: true, completion:nil)
+    }
+    
+    /**
+     * Called when a controller presented by SDK will be dismissed
+     */
+    func vkSdkWillDismissViewController(controller: UIViewController!) {
+        
+    }
+    
+    /**
+     * Called when a controller presented by SDK did dismiss
+     */
+    func vkSdkDidDismissViewController(controller: UIViewController!) {
+        
     }
     
     // MARK - VK User
     
     func vkAuthorize() {
-        VKSdk.authorize([kVKAuthScopeFriends, kVKAuthScopeAudio], revokeAccess:false, forceOAuth:false, inApp:false)
+        VKSdk.authorize([kVKAuthScopeFriends, kVKAuthScopeAudio])
     }
     
     func vkGetUserInfo() {
@@ -191,3 +240,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, UISplitVie
 
 }
 
+
+extension UIAlertController {
+    
+    convenience init(error: NSError) {
+        var message: String? = nil
+        if let vkMessage = error.userInfo[VkErrorDescriptionKey] as? String {
+            message = vkMessage
+        } else {
+            message = error.userInfo[NSLocalizedDescriptionKey] as? String
+        }
+        self.init(title: "Error", message: message, preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Default) { (action: UIAlertAction) -> Void in
+            self.parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+        }
+        self.addAction(okAction)
+    }
+    
+}

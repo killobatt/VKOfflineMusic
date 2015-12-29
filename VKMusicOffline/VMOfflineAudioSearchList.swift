@@ -42,14 +42,14 @@ class VMOfflineAudioSearchList: VMAudioList, VMAudioListSearching {
         }
     }
     
-    var searchTerm: String! {
+    var searchTerm: String = "" {
         didSet {
             self.filteredAudios = self.getFilteredAudios(self.originalList.audios,
                 searchTerm: self.searchTerm)
         }
     }
     
-    func setSearchTerm(searchTerm: String!, completion:((NSError!) -> Void)?) -> Void {
+    func setSearchTerm(searchTerm: String, completion:((NSError!) -> Void)?) -> Void {
         self.searchTerm = searchTerm;
         if let _completion = completion {
             _completion(nil)

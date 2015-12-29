@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VK
+import VKSdkFramework
 
 class VMRecomendationsAudioList: VMOnlineAudioList {
    

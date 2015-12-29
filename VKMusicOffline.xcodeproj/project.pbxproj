@@ -41,16 +41,17 @@
 		1E512E0719EE64D000CB22CC /* VMAudioListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */; };
 		1E512E1819EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E1719EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift */; };
 		1E512E1E19EFC80B00CB22CC /* NSKeyedArchiver+VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E1D19EFC80B00CB22CC /* NSKeyedArchiver+VM.swift */; };
+		1E77F0381C3333700009334B /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E77F0361C3333700009334B /* MGSwipeTableCell.framework */; };
+		1E77F0391C3333700009334B /* VKSdkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E77F0371C3333700009334B /* VKSdkFramework.framework */; };
+		1E77F03B1C3333E30009334B /* MGSwipeTableCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E77F0361C3333700009334B /* MGSwipeTableCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E77F03C1C3333E30009334B /* VKSdkFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E77F0371C3333700009334B /* VKSdkFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8417F0A21A6C5CEF009F5A0A /* VMSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417F0A11A6C5CEF009F5A0A /* VMSplitViewController.swift */; };
 		843CA3581A1BEDBA00329FB4 /* VMAudioListEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843CA3571A1BEDBA00329FB4 /* VMAudioListEnumerator.swift */; };
-		843CAC781A155F6300FD37E9 /* VK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF8FF819CD9216005CB421 /* VK.framework */; };
 		843CAC7C1A155F7400FD37E9 /* UIViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB8A22219D4677500FD7251 /* UIViews.framework */; };
 		843CAC7D1A155F7400FD37E9 /* UIViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBB8A22219D4677500FD7251 /* UIViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		843CAC811A155F7400FD37E9 /* VK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBBF8FF819CD9216005CB421 /* VK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84708BE91A45F04E0053790A /* VMDownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84708BE81A45F04E0053790A /* VMDownloadCell.swift */; };
 		84A2D52B1A61DA7E00AFE6AB /* VMAudioControllsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A2D5291A61DA7E00AFE6AB /* VMAudioControllsController.swift */; };
 		84EF7F431A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EF7F421A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift */; };
-		84F612671A47251C0075866D /* MGSwipeCells.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84F6125A1A4725000075866D /* MGSwipeCells.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84FE4F2D1A17EBCA00893410 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84FE4F2B1A17EBCA00893410 /* Launch Screen.xib */; };
 		84FE4F301A19178100893410 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84FE4F321A19178100893410 /* Localization.strings */; };
 		CB445DA41AAB368900DEC338 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB445DA21AAB368800DEC338 /* Crashlytics.framework */; };
@@ -101,13 +102,6 @@
 			remoteGlobalIDString = 1E98CCE219704652008B424B;
 			remoteInfo = UIViews;
 		};
-		843CAC7A1A155F6300FD37E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = CBB7A93519CD90A900E95307;
-			remoteInfo = VK;
-		};
 		843CAC7E1A155F7400FD37E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */;
@@ -115,54 +109,12 @@
 			remoteGlobalIDString = 1E98CCE219704652008B424B;
 			remoteInfo = UIViews;
 		};
-		843CAC821A155F7400FD37E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = CBB7A93519CD90A900E95307;
-			remoteInfo = VK;
-		};
-		84F612591A4725000075866D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 84F612381A4724FF0075866D;
-			remoteInfo = MGSwipeCells;
-		};
-		84F6125B1A4725000075866D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 84F612431A4724FF0075866D;
-			remoteInfo = MGSwipeCellsTests;
-		};
-		84F612651A4725160075866D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 84F612371A4724FF0075866D;
-			remoteInfo = MGSwipeCells;
-		};
 		CBB7A91319CD844200E95307 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CBB7A8F619CD844100E95307 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CBB7A8FD19CD844100E95307;
 			remoteInfo = VKMusicOffline;
-		};
-		CBB7A92919CD8B7C00E95307 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F3C7542D182133CC00964716;
-			remoteInfo = VKSdk;
-		};
-		CBB7A92B19CD8B7C00E95307 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F3BACC401865905B003158DA;
-			remoteInfo = VKSdkResources;
 		};
 		CBB8A22119D4677500FD7251 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -178,20 +130,6 @@
 			remoteGlobalIDString = 1E98CCEE19704652008B424B;
 			remoteInfo = UIViewsTests;
 		};
-		CBBF8FF719CD9216005CB421 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CBB7A93619CD90A900E95307;
-			remoteInfo = VK;
-		};
-		CBBF8FF919CD9216005CB421 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CBB7A94019CD90A900E95307;
-			remoteInfo = VKTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -201,10 +139,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				84F612671A47251C0075866D /* MGSwipeCells.framework in Embed Frameworks */,
+				1E77F03B1C3333E30009334B /* MGSwipeTableCell.framework in Embed Frameworks */,
+				1E77F03C1C3333E30009334B /* VKSdkFramework.framework in Embed Frameworks */,
 				1E2267A61B3624C5003980E3 /* CoreDataStorage.framework in Embed Frameworks */,
 				843CAC7D1A155F7400FD37E9 /* UIViews.framework in Embed Frameworks */,
-				843CAC811A155F7400FD37E9 /* VK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,12 +185,14 @@
 		1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListManager.swift; sourceTree = "<group>"; };
 		1E512E1719EFB0F700CB22CC /* VMAudioListsSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListsSelectionViewController.swift; sourceTree = "<group>"; };
 		1E512E1D19EFC80B00CB22CC /* NSKeyedArchiver+VM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSKeyedArchiver+VM.swift"; sourceTree = "<group>"; };
+		1E77F0351C3332360009334B /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
+		1E77F0361C3333700009334B /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGSwipeTableCell.framework; path = Carthage/Build/iOS/MGSwipeTableCell.framework; sourceTree = "<group>"; };
+		1E77F0371C3333700009334B /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VKSdkFramework.framework; path = Carthage/Build/iOS/VKSdkFramework.framework; sourceTree = "<group>"; };
 		8417F0A11A6C5CEF009F5A0A /* VMSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMSplitViewController.swift; sourceTree = "<group>"; };
 		843CA3571A1BEDBA00329FB4 /* VMAudioListEnumerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListEnumerator.swift; sourceTree = "<group>"; };
 		84708BE81A45F04E0053790A /* VMDownloadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMDownloadCell.swift; sourceTree = "<group>"; };
 		84A2D5291A61DA7E00AFE6AB /* VMAudioControllsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioControllsController.swift; sourceTree = "<group>"; };
 		84EF7F421A26902400FC1712 /* VMDownloadsViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMDownloadsViewControllerTableViewController.swift; sourceTree = "<group>"; };
-		84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MGSwipeCells.xcodeproj; path = VKMusicOffline/SDKs/MGSwipeCells/MGSwipeCells.xcodeproj; sourceTree = "<group>"; };
 		84FE4F2C1A17EBCA00893410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/Launch Screen.xib"; sourceTree = "<group>"; };
 		84FE4F341A1919D900893410 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		84FE4F351A1920C900893410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localization.strings; sourceTree = "<group>"; };
@@ -275,7 +215,6 @@
 		CBB7A91219CD844200E95307 /* VKMusicOfflineUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VKMusicOfflineUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB7A91719CD844200E95307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBB7A91819CD844200E95307 /* VKMusicOfflineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKMusicOfflineTests.swift; sourceTree = "<group>"; };
-		CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sdk.xcodeproj; path = "VKMusicOffline/SDKs/vk-ios-sdk-master/sdk/sdk.xcodeproj"; sourceTree = "<group>"; };
 		CBB8A21719D36F0D00FD7251 /* VMMenuAudioListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMMenuAudioListCell.swift; sourceTree = "<group>"; };
 		CBB8A21919D36F3200FD7251 /* VMMenuUserInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMMenuUserInfoCell.swift; sourceTree = "<group>"; };
 		CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UIViews.xcodeproj; path = VKMusicOffline/SDKs/UIViews/UIViews.xcodeproj; sourceTree = "<group>"; };
@@ -301,8 +240,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843CAC781A155F6300FD37E9 /* VK.framework in Frameworks */,
 				1E2267A51B3624C5003980E3 /* CoreDataStorage.framework in Frameworks */,
+				1E77F0391C3333700009334B /* VKSdkFramework.framework in Frameworks */,
+				1E77F0381C3333700009334B /* MGSwipeTableCell.framework in Frameworks */,
 				CB445DA41AAB368900DEC338 /* Crashlytics.framework in Frameworks */,
 				843CAC7C1A155F7400FD37E9 /* UIViews.framework in Frameworks */,
 				CB445DA51AAB368900DEC338 /* Fabric.framework in Frameworks */,
@@ -396,15 +336,6 @@
 			name = Downloads;
 			sourceTree = "<group>";
 		};
-		84F612551A4724FF0075866D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				84F6125A1A4725000075866D /* MGSwipeCells.framework */,
-				84F6125C1A4725000075866D /* MGSwipeCellsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		CB9996D319CDD3090076D5E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,11 +369,11 @@
 			isa = PBXGroup;
 			children = (
 				1E2267271B35CF3C003980E3 /* Default-568h@2x.png */,
-				CBB7A92219CD8B3500E95307 /* SDKs */,
 				CBB7A90019CD844100E95307 /* VKMusicOffline */,
 				CBB7A91519CD844200E95307 /* VKMusicOfflineTests */,
 				1E22678F1B3624C5003980E3 /* CoreDataStorage */,
 				1E22679E1B3624C5003980E3 /* CoreDataStorageTests */,
+				CBB7A92219CD8B3500E95307 /* Frameworks */,
 				CBB7A8FF19CD844100E95307 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -471,6 +402,7 @@
 				84A2D5291A61DA7E00AFE6AB /* VMAudioControllsController.swift */,
 				8417F0A11A6C5CEF009F5A0A /* VMSplitViewController.swift */,
 				CBB7A90319CD844100E95307 /* AppDelegate.swift */,
+				1E77F0351C3332360009334B /* Cartfile */,
 				84FE4F321A19178100893410 /* Localization.strings */,
 				84FE4F2B1A17EBCA00893410 /* Launch Screen.xib */,
 				CBB7A90919CD844100E95307 /* Main.storyboard */,
@@ -506,27 +438,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CBB7A92219CD8B3500E95307 /* SDKs */ = {
+		CBB7A92219CD8B3500E95307 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E77F0361C3333700009334B /* MGSwipeTableCell.framework */,
+				1E77F0371C3333700009334B /* VKSdkFramework.framework */,
 				CB445DA21AAB368800DEC338 /* Crashlytics.framework */,
 				CB445DA31AAB368800DEC338 /* Fabric.framework */,
 				CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */,
-				CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */,
-				84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */,
 			);
-			name = SDKs;
-			sourceTree = "<group>";
-		};
-		CBB7A92519CD8B7B00E95307 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CBB7A92A19CD8B7C00E95307 /* libVKSdk.a */,
-				CBB7A92C19CD8B7C00E95307 /* VKSdkResources.bundle */,
-				CBBF8FF819CD9216005CB421 /* VK.framework */,
-				CBBF8FFA19CD9216005CB421 /* VKTests.xctest */,
-			);
-			name = Products;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CBB8A21B19D36F3E00FD7251 /* Menu */ = {
@@ -606,17 +527,15 @@
 				CBB7A8FA19CD844100E95307 /* Sources */,
 				CBB7A8FB19CD844100E95307 /* Frameworks */,
 				CBB7A8FC19CD844100E95307 /* Resources */,
+				1E77F03A1C3333A80009334B /* Copy Carthage Frameworks */,
 				843CAC841A155F7500FD37E9 /* Embed Frameworks */,
-				CB445D9C1AAB35DB00DEC338 /* ShellScript */,
+				CB445D9C1AAB35DB00DEC338 /* Run Fabric scripts */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				84F612661A4725160075866D /* PBXTargetDependency */,
 				843CAC761A155F5E00FD37E9 /* PBXTargetDependency */,
-				843CAC7B1A155F6300FD37E9 /* PBXTargetDependency */,
 				843CAC7F1A155F7400FD37E9 /* PBXTargetDependency */,
-				843CAC831A155F7400FD37E9 /* PBXTargetDependency */,
 				1E2267A41B3624C5003980E3 /* PBXTargetDependency */,
 			);
 			name = VKMusicOffline;
@@ -692,14 +611,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 84F612551A4724FF0075866D /* Products */;
-					ProjectRef = 84F612541A4724FF0075866D /* MGSwipeCells.xcodeproj */;
-				},
-				{
-					ProductGroup = CBB7A92519CD8B7B00E95307 /* Products */;
-					ProjectRef = CBB7A92419CD8B7B00E95307 /* sdk.xcodeproj */;
-				},
-				{
 					ProductGroup = CBB8A21D19D4677100FD7251 /* Products */;
 					ProjectRef = CBB8A21C19D4677100FD7251 /* UIViews.xcodeproj */;
 				},
@@ -715,34 +626,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		84F6125A1A4725000075866D /* MGSwipeCells.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = MGSwipeCells.framework;
-			remoteRef = 84F612591A4725000075866D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		84F6125C1A4725000075866D /* MGSwipeCellsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = MGSwipeCellsTests.xctest;
-			remoteRef = 84F6125B1A4725000075866D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CBB7A92A19CD8B7C00E95307 /* libVKSdk.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libVKSdk.a;
-			remoteRef = CBB7A92919CD8B7C00E95307 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CBB7A92C19CD8B7C00E95307 /* VKSdkResources.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = VKSdkResources.bundle;
-			remoteRef = CBB7A92B19CD8B7C00E95307 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		CBB8A22219D4677500FD7251 /* UIViews.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -755,20 +638,6 @@
 			fileType = wrapper.cfbundle;
 			path = UIViewsTests.xctest;
 			remoteRef = CBB8A22319D4677500FD7251 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CBBF8FF819CD9216005CB421 /* VK.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = VK.framework;
-			remoteRef = CBBF8FF719CD9216005CB421 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CBBF8FFA19CD9216005CB421 /* VKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = VKTests.xctest;
-			remoteRef = CBBF8FF919CD9216005CB421 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -810,13 +679,30 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CB445D9C1AAB35DB00DEC338 /* ShellScript */ = {
+		1E77F03A1C3333A80009334B /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/MGSwipeTableCell.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/VKSdkFramework.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CB445D9C1AAB35DB00DEC338 /* Run Fabric scripts */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Fabric scripts";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -924,25 +810,10 @@
 			name = UIViews;
 			targetProxy = 843CAC751A155F5E00FD37E9 /* PBXContainerItemProxy */;
 		};
-		843CAC7B1A155F6300FD37E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = VK;
-			targetProxy = 843CAC7A1A155F6300FD37E9 /* PBXContainerItemProxy */;
-		};
 		843CAC7F1A155F7400FD37E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = UIViews;
 			targetProxy = 843CAC7E1A155F7400FD37E9 /* PBXContainerItemProxy */;
-		};
-		843CAC831A155F7400FD37E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = VK;
-			targetProxy = 843CAC821A155F7400FD37E9 /* PBXContainerItemProxy */;
-		};
-		84F612661A4725160075866D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = MGSwipeCells;
-			targetProxy = 84F612651A4725160075866D /* PBXContainerItemProxy */;
 		};
 		CBB7A91419CD844200E95307 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1165,6 +1036,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = VKMusicOffline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1186,6 +1058,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = VKMusicOffline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

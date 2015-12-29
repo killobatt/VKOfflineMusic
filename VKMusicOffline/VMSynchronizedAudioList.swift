@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import VK
+import VKSdkFramework
 import CoreDataStorage
 
 class VMSynchronizedAudioList: VMOfflineAudioList {

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import VK
+import VKSdkFramework
 
 class VMMenuViewController: UITableViewController {
     

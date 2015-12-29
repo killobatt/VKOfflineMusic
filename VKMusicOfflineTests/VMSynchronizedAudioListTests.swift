@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import VKMusicOffline
+import VKSdkFrameworkMusicOffline
 
 class VMSynchronizedAudioListTests: XCTestCase {
 

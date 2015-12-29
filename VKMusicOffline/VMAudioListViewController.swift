@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import VK
-import MGSwipeCells
+import VKSdkFramework
+import MGSwipeTableCell
 
 class VMAudioListViewController: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, VMAudioListDelegate
 {
