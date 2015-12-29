@@ -36,8 +36,7 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
     private var request: VKRequest? {
         if let user = self.user {
             return VKApi.requestWithMethod("audio.get",
-                andParameters:[VK_API_OWNER_ID: user.id],
-                andHttpMethod:"GET")
+                andParameters:[VK_API_OWNER_ID: user.id])
         } else {
             return nil
         }
@@ -120,7 +119,7 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
     
     override func addAudio(audio: VMAudio) {
         let parameters = ["audio_id": audio.id, "owner_id": audio.ownerID]
-        let request = VKApi.requestWithMethod("audio.add", andParameters: parameters, andHttpMethod: "GET")
+        let request = VKApi.requestWithMethod("audio.add", andParameters: parameters)
         request.executeWithResultBlock({ (vkResponse: VKResponse!) -> Void in
             if let response = vkResponse {
                 // Should be new audio ID
@@ -136,7 +135,7 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
         let audio = self.audios[index]
         
         let parameters = ["audio_id": audio.id, "owner_id": audio.ownerID]
-        let request = VKApi.requestWithMethod("audio.delete", andParameters: parameters, andHttpMethod: "GET")
+        let request = VKApi.requestWithMethod("audio.delete", andParameters: parameters)
         request.executeWithResultBlock({ (vkResponse: VKResponse!) -> Void in
             if let response = vkResponse {
                 NSLog("Received response: \(response.json)")
@@ -166,7 +165,7 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
             parameters["after"] = afterAudio.id
         }
         
-        let request = VKApi.requestWithMethod("audio.reorder", andParameters: parameters, andHttpMethod: "GET")
+        let request = VKApi.requestWithMethod("audio.reorder", andParameters: parameters)
         request.executeWithResultBlock({ (vkResponse: VKResponse!) -> Void in
             if let response = vkResponse {
                 NSLog("Received response: \(response.json)")

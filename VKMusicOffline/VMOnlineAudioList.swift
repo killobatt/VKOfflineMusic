@@ -36,9 +36,7 @@ class VMOnlineAudioList: VMAudioList {
     }
 
     func createRequest() -> VKRequest {
-        return VKApi.requestWithMethod(self.method,
-            andParameters:self.parameters as [NSObject : AnyObject],
-            andHttpMethod:"GET")
+        return VKApi.requestWithMethod(self.method, andParameters:self.parameters as [NSObject : AnyObject])
     }
     
     private var request: VKRequest! = nil

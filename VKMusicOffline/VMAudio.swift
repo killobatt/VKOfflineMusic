@@ -111,9 +111,7 @@ extension VMAudio {
     }
     
     private var request: VKRequest {
-        return VKRequest(method: "audio.getById",
-            andParameters: self.requestParameters,
-            andHttpMethod: "GET")
+        return VKRequest(method: "audio.getById", andParameters: self.requestParameters)
     }
     
     func refreshURL(completion:(audio:VMAudio?, error:NSError?) -> ()) {
