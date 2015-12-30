@@ -46,7 +46,7 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
         self.synchronize()
     }
     
-    func synchronize() {
+    func synchronize(completion: ((change: VMAudioListChangeInfo?, error: NSError?) -> Void)? = nil) {
         self.request?.executeWithResultBlock({ (response: VKResponse!) -> Void in
             if response != nil {
                 if let vkAudios = VKAudios(dictionary:(response.json as! [NSObject : AnyObject])) {
@@ -105,11 +105,18 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
                     
                     self.audios = updatedAudios
                     
-                    self.delegate?.autioList(self, didChangeWithInfo: changeInfo)
+                    self.delegate?.audioList(self, didChangeWithInfo: changeInfo)
+                    
+                    if let completion = completion {
+                        completion(change: changeInfo, error: nil)
+                    }
                 }
             }
         }, errorBlock: { (error: NSError!) -> Void in
-            
+            NSLog("Error syncing: \(error)")
+            if let completion = completion {
+                completion(change: nil, error: error)
+            }
         })
     }
     

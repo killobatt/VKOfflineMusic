@@ -40,8 +40,6 @@ class VMAudioListManager: NSObject {
         self.migrateToCoreDataStorage()
         
         self.loadOfflineAudioLists()
-        
-//        self.loadLegacyOfflineAudioLists()
     }
     
     deinit {
@@ -132,7 +130,7 @@ class VMAudioListManager: NSObject {
                 self.popularEnglishAudioList.loadNextPage(completion: nil)
                 
                 self.syncAudioList.user = newUser
-                self.syncAudioList.synchronize()
+//                self.syncAudioList.synchronize()
                 
                 self.willChangeValueForKey("audioLists")
                 self.willChangeValueForKey("offlineAudioLists")

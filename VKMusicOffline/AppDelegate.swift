@@ -39,9 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDel
         splitViewController.delegate = self
         splitViewController.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
         
-        let vkSDK = VKSdk.initializeWithAppId(kVKApplicationID)
-        vkSDK.registerDelegate(self)
-        vkSDK.uiDelegate = self
+        self.vkInitialize()
+        
+        // Background fetch interval
+        application.setMinimumBackgroundFetchInterval(60*60)    // 1 hour
         
         return true
     }
@@ -64,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDel
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
-        VKSdk.wakeUpSession([kVKAuthScopeFriends, kVKAuthScopeAudio]) { (state: VKAuthorizationState, error: NSError!) -> Void in
+        VKSdk.wakeUpSession(self.vkScope) { (state: VKAuthorizationState, error: NSError!) -> Void in
             switch state {
             case .Initialized: // SDK initialized and ready to authorize
                 NSLog("Succesfully authorized user")
@@ -97,8 +98,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDel
         return true
     }
     
+    // MARK: Background fetch
     
-    // MARK: - NSURLSession
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        NSLog("Background fetch begins...")
+        self.vkInitialize()
+        VKSdk.wakeUpSession(self.vkScope) { (state: VKAuthorizationState, error: NSError!) -> Void in
+            guard state == .Authorized else {
+                NSLog("Background fetch end: VK user is not authorized")
+                completionHandler(.Failed)
+                return
+            }
+            
+            VMUserManager.sharedInstance.loadCurrentUser(completionBlock: { (user: VKUser) -> Void in
+                VMAudioListManager.sharedInstance.user = user
+                VMAudioListManager.sharedInstance.syncAudioList.synchronize { (change, error) -> Void in
+                    if let error = error {
+                        completionHandler(.Failed)
+                        NSLog("Background fetch end: sync failed with error \(error)")
+                        return
+                    }
+                    
+                    if let changeInfo = change where (changeInfo.insertedAudios.count > 0 ||
+                        changeInfo.movedAudios.count > 0 || changeInfo.removedAudios.count > 0) {                            
+                            NSLog("Background fetch end; have new data: \(changeInfo)")
+                            completionHandler(.NewData)
+                    } else {
+                        NSLog("Background fetch end: no new data")
+                        completionHandler(.NoData)
+                    }
+                }
+                })
+            { (error: NSError!) -> Void in
+                NSLog("Background fetch end: VKUser data loading failed: \(error)")
+                completionHandler(.Failed)
+            }
+        }
+    }
+    
+    
+    // MARK: NSURLSession
     
     func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
         let downloadManager = VMAudioListManager.sharedInstance.downloadManager
@@ -210,7 +249,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDel
         
     }
     
-    // MARK - VK User
+    // MARK - VK 
+    
+    func vkInitialize() {
+        let vkSDK = VKSdk.initializeWithAppId(kVKApplicationID)
+        vkSDK.registerDelegate(self)
+        vkSDK.uiDelegate = self
+    }
     
     func vkAuthorize() {
         VKSdk.authorize([kVKAuthScopeFriends, kVKAuthScopeAudio])
@@ -226,6 +271,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDel
                     self.vkAuthorize()
             }
         }
+    }
+    
+    var vkScope: [String] {
+        return [kVKAuthScopeFriends, kVKAuthScopeAudio]
     }
     
     // MARK: - Crashlytics

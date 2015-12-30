@@ -313,7 +313,7 @@ class VMAudioListViewController: UITableViewController, UISearchResultsUpdating,
         self.tableView.beginUpdates()
     }
     
-    func autioList(audioList: VMAudioList, didChangeWithInfo changeInfo: VMAudioListChangeInfo) {
+    func audioList(audioList: VMAudioList, didChangeWithInfo changeInfo: VMAudioListChangeInfo) {
         let insertedIndexPaths: [NSIndexPath] = changeInfo.insertedAudios.keys.map { NSIndexPath(forRow: $0, inSection: 0) }
         self.tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: UITableViewRowAnimation.Top)
         

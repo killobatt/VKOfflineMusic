@@ -105,7 +105,7 @@ class VMAudioDownloadManager: NSObject, NSURLSessionDownloadDelegate {
     }
     
     func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
-        NSLog("URLSessionDidFinishEventsForBackgroundURLSession: \(session.sessionDescription)")
+        NSLog("URLSessionDidFinishEventsForBackgroundURLSession: \(session.configuration.identifier)")
         self.backgroundURLSessionCompletionHandler?()
     }
 

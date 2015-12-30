@@ -44,7 +44,7 @@ class VMAudioList: NSObject {
     func reload() {}
 }
 
-class VMAudioListChangeInfo {
+class VMAudioListChangeInfo: CustomStringConvertible {
     var insertedAudios: [Int: VMAudio] = [:]
     var removedAudios:  [Int: VMAudio] = [:]
     var movedAudios: [(audio: VMAudio, from: Int, to: Int)] = []
@@ -57,12 +57,16 @@ class VMAudioListChangeInfo {
             return dictionary
         }
     }
+    
+    var description: String {
+        return "VMAudioListChangeInfo: inserted: \(insertedAudios.count), moved: \(movedAudios.count), removed: \(removedAudios.count)"
+    }
 }
 
 protocol VMAudioListDelegate {
     func audioListWasReloaded(audioList: VMAudioList)
     func audioListWillChange(audioList: VMAudioList)
-    func autioList(audioList: VMAudioList, didChangeWithInfo changeInfo: VMAudioListChangeInfo)
+    func audioList(audioList: VMAudioList, didChangeWithInfo changeInfo: VMAudioListChangeInfo)
 }
 
 // Editable list
