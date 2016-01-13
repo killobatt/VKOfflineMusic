@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDel
         self.vkInitialize()
         
         // Background fetch interval
-        application.setMinimumBackgroundFetchInterval(60*60)    // 1 hour
+        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)    // 1 hour
         
         return true
     }
@@ -68,10 +68,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDel
         VKSdk.wakeUpSession(self.vkScope) { (state: VKAuthorizationState, error: NSError!) -> Void in
             switch state {
             case .Initialized: // SDK initialized and ready to authorize
-                NSLog("Succesfully authorized user")
+                VMLog("Succesfully authorized user")
                 self.vkAuthorize()
             case .Authorized: // User authorized
-                NSLog("Succesfully authorized user")
+                VMLog("Succesfully authorized user")
                 self.vkGetUserInfo()
             case .Error: // An error occured, try to wake up session later
                 fallthrough
@@ -101,11 +101,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDel
     // MARK: Background fetch
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        NSLog("Background fetch begins...")
+        VMLog("Background fetch begins...")
         self.vkInitialize()
         VKSdk.wakeUpSession(self.vkScope) { (state: VKAuthorizationState, error: NSError!) -> Void in
             guard state == .Authorized else {
-                NSLog("Background fetch end: VK user is not authorized")
+                VMLog("Background fetch end: VK user is not authorized")
                 completionHandler(.Failed)
                 return
             }
@@ -115,22 +115,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, VKSdkDelegate, VKSdkUIDel
                 VMAudioListManager.sharedInstance.syncAudioList.synchronize { (change, error) -> Void in
                     if let error = error {
                         completionHandler(.Failed)
-                        NSLog("Background fetch end: sync failed with error \(error)")
+                        VMLog("Background fetch end: sync failed with error \(error)")
                         return
                     }
                     
                     if let changeInfo = change where (changeInfo.insertedAudios.count > 0 ||
                         changeInfo.movedAudios.count > 0 || changeInfo.removedAudios.count > 0) {                            
-                            NSLog("Background fetch end; have new data: \(changeInfo)")
+                            VMLog("Background fetch end; have new data: \(changeInfo)")
                             completionHandler(.NewData)
                     } else {
-                        NSLog("Background fetch end: no new data")
+                        VMLog("Background fetch end: no new data")
                         completionHandler(.NoData)
                     }
                 }
                 })
             { (error: NSError!) -> Void in
-                NSLog("Background fetch end: VKUser data loading failed: \(error)")
+                VMLog("Background fetch end: VKUser data loading failed: \(error)")
                 completionHandler(.Failed)
             }
         }

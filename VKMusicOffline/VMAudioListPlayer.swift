@@ -159,23 +159,22 @@ class VMAudioListPlayer: NSObject {
     }
     
     func play() {
-        NSLog("VMAudioListPlayer play")
+        VMLog("VMAudioListPlayer play")
         self.player?.play()
         self.isPlaying = true
         
-        var error: NSError? = nil
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setActive(true)
-        } catch let error1 as NSError {
-            error = error1
-            NSLog("Could not activate audio session: \(error)")
+        } catch let error as NSError {
+            VMLog("Could not activate audio session: \(error)")
+            VMLogError(error)
             self.pause()
         }
     }
     
     func pause() {
-        NSLog("VMAudioListPlayer pause")
+        VMLog("VMAudioListPlayer pause")
         self.player?.pause()
         self.isPlaying = false
     }
@@ -199,7 +198,7 @@ class VMAudioListPlayer: NSObject {
         if let newTrackIndex = self.audioListEnumerator?.nextIndex {
             self.currentTrackIndex = newTrackIndex
         } else {
-            NSLog("Error: VMAudioListPlayer has no audioListEnumerator")
+            VMLog("Error: VMAudioListPlayer has no audioListEnumerator")
         }
     }
     
@@ -207,7 +206,7 @@ class VMAudioListPlayer: NSObject {
         if let newTrackIndex = self.audioListEnumerator?.previousIndex {
             self.currentTrackIndex = newTrackIndex
         } else {
-            NSLog("Error: VMAudioListPlayer has no audioListEnumerator")
+            VMLog("Error: VMAudioListPlayer has no audioListEnumerator")
         }
     }
     
@@ -314,7 +313,7 @@ class VMAudioListPlayer: NSObject {
             if keyPath == "status" {
                 switch playerItem.status {
                 case AVPlayerItemStatus.ReadyToPlay:
-                    NSLog("VMAudioListPlayer: AVPlayerItem ready to play")
+                    VMLog("VMAudioListPlayer: AVPlayerItem ready to play")
                     self.state = State.ReadyToPlay
                     
                     let timeInterval = CMTimeMakeWithSeconds(0.1, 600)
@@ -330,7 +329,7 @@ class VMAudioListPlayer: NSObject {
                     }
                     self.updateNowPlayingInfoCenter()
                 case AVPlayerItemStatus.Failed:
-                    NSLog("VMAudioListPlayer: AVPlayerItem: Failed with error \(playerItem.error)")
+                    VMLog("VMAudioListPlayer: AVPlayerItem: Failed with error \(playerItem.error)")
                     switch self.state {
                         case .RecoveringFromError(_):
                             self.state = State.Failed(error: playerItem.error)
@@ -353,7 +352,7 @@ class VMAudioListPlayer: NSObject {
                     }
                     self.player = nil
                 case AVPlayerItemStatus.Unknown:
-                    NSLog("VMAudioListPlayer: AVPlayerItem: Unknown status, eror \(playerItem.error)")
+                    VMLog("VMAudioListPlayer: AVPlayerItem: Unknown status, eror \(playerItem.error)")
                     self.state = .Idle
                     self.player = nil
                 }
@@ -368,19 +367,18 @@ class VMAudioListPlayer: NSObject {
     // MARK: AudioSession
     
     func setupAudioSession() {
-        var error: NSError? = nil
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setCategory(AVAudioSessionCategoryPlayback)
-        } catch let error1 as NSError {
-            error = error1
-            NSLog("Error setting AVAudioSession category \(AVAudioSessionCategoryPlayback): \(error)")
+        } catch let error as NSError {
+            VMLog("Error setting AVAudioSession category \(AVAudioSessionCategoryPlayback): \(error)")
+            VMLogError(error)
         }
         
         
         self.interruptionNotificationObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVAudioSessionInterruptionNotification, object: nil, queue: NSOperationQueue.mainQueue()) {
             (notification: NSNotification) -> Void in
-            NSLog("Got interruption: \(notification.userInfo)")
+            VMLog("Got interruption: \(notification.userInfo)")
             
             let rawValueNumber = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? NSNumber
             if let rawValue = rawValueNumber?.unsignedIntegerValue {
@@ -388,12 +386,12 @@ class VMAudioListPlayer: NSObject {
                     switch interruptionType {
                     case AVAudioSessionInterruptionType.Began:
                         if (self.isPlaying) {
-                            NSLog("Interruption began. Pausing...")
+                            VMLog("Interruption began. Pausing...")
                             self.player?.pause()
                         }
                     case AVAudioSessionInterruptionType.Ended:
                         if (self.isPlaying) {
-                            NSLog("Interruption ended. Resuming...")
+                            VMLog("Interruption ended. Resuming...")
                             self.player?.play()
                         }
                     }

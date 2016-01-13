@@ -24,7 +24,8 @@ extension CDLyrics {
         do {
             storedLyrics = try context.executeFetchRequest(request).first as? CDLyrics
         } catch let error as NSError {
-            NSLog("Error fetching stored lyrics: \(error)")
+            VMLog("Error fetching stored lyrics: \(error)")
+            VMLogError(error)
         }
         
         if storedLyrics == nil {

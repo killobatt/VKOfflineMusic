@@ -35,6 +35,10 @@
 		1E2600381B3B05A40043AED4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E2267C11B3626C8003980E3 /* Model.xcdatamodeld */; };
 		1E26003A1B3BDD640043AED4 /* VMSynchronizedAudioList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2600391B3BDD640043AED4 /* VMSynchronizedAudioList.swift */; };
 		1E26003C1B3BDE1B0043AED4 /* VMAudioDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E26003B1B3BDE1B0043AED4 /* VMAudioDownloadManager.swift */; };
+		1E357C3E1C46FA9300FBD83C /* VMLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E357C3D1C46FA9300FBD83C /* VMLogging.swift */; };
+		1E357C401C46FC5F00FBD83C /* CDLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E357C3F1C46FC5F00FBD83C /* CDLogging.swift */; };
+		1E357C411C46FC8400FBD83C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB445DA21AAB368800DEC338 /* Crashlytics.framework */; };
+		1E357C421C46FCDF00FBD83C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB445DA31AAB368800DEC338 /* Fabric.framework */; };
 		1E38FCCE19E66F90002ECA34 /* VMOfflineAudioSearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */; };
 		1E38FCD419E6706C002ECA34 /* VMAudioListSearching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */; };
 		1E512E0719EE64D000CB22CC /* VMAudioListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */; };
@@ -161,6 +165,8 @@
 		1E2267D21B371E53003980E3 /* VMOfflineAudioList+CDAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VMOfflineAudioList+CDAudioList.swift"; sourceTree = "<group>"; };
 		1E2600391B3BDD640043AED4 /* VMSynchronizedAudioList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMSynchronizedAudioList.swift; sourceTree = "<group>"; };
 		1E26003B1B3BDE1B0043AED4 /* VMAudioDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioDownloadManager.swift; sourceTree = "<group>"; };
+		1E357C3D1C46FA9300FBD83C /* VMLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMLogging.swift; sourceTree = "<group>"; };
+		1E357C3F1C46FC5F00FBD83C /* CDLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDLogging.swift; sourceTree = "<group>"; };
 		1E38FCCD19E66F90002ECA34 /* VMOfflineAudioSearchList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOfflineAudioSearchList.swift; sourceTree = "<group>"; };
 		1E38FCD319E6706C002ECA34 /* VMAudioListSearching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListSearching.swift; sourceTree = "<group>"; };
 		1E512E0619EE64D000CB22CC /* VMAudioListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAudioListManager.swift; sourceTree = "<group>"; };
@@ -211,6 +217,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E357C411C46FC8400FBD83C /* Crashlytics.framework in Frameworks */,
+				1E357C421C46FCDF00FBD83C /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +268,7 @@
 				1E2267BB1B3626C8003980E3 /* CoreDataFiles */,
 				1E2267C11B3626C8003980E3 /* Model.xcdatamodeld */,
 				1E2267B61B3626C8003980E3 /* CDModel.swift */,
+				1E357C3F1C46FC5F00FBD83C /* CDLogging.swift */,
 				1E2267901B3624C5003980E3 /* Supporting Files */,
 			);
 			path = CoreDataStorage;
@@ -367,6 +376,7 @@
 				843CA3571A1BEDBA00329FB4 /* VMAudioListEnumerator.swift */,
 				1E512E1D19EFC80B00CB22CC /* NSKeyedArchiver+VM.swift */,
 				1E1A85651B444F4600ABD6BC /* NSUUID+VM.swift */,
+				1E357C3D1C46FA9300FBD83C /* VMLogging.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -732,6 +742,7 @@
 				1E2267CC1B3626C8003980E3 /* Model.xcdatamodeld in Sources */,
 				1E2267C81B3626C8003980E3 /* CDAudioList.swift in Sources */,
 				1E2267C61B3626C8003980E3 /* _CDLyrics.swift in Sources */,
+				1E357C401C46FC5F00FBD83C /* CDLogging.swift in Sources */,
 				1E2267C91B3626C8003980E3 /* CDLyrics.swift in Sources */,
 				1E2267C41B3626C8003980E3 /* _CDAudio.swift in Sources */,
 			);
@@ -784,6 +795,7 @@
 				1E512E0719EE64D000CB22CC /* VMAudioListManager.swift in Sources */,
 				1E0F3F261BB92CD700B83B8E /* VMPopularAudioList.swift in Sources */,
 				CBB8A21819D36F0D00FD7251 /* VMMenuAudioListCell.swift in Sources */,
+				1E357C3E1C46FA9300FBD83C /* VMLogging.swift in Sources */,
 				1E512E1E19EFC80B00CB22CC /* NSKeyedArchiver+VM.swift in Sources */,
 				CB85503B19D2186600B4EF0A /* VMOfflineAudioList.swift in Sources */,
 				CBB8A21A19D36F3200FD7251 /* VMMenuUserInfoCell.swift in Sources */,
@@ -877,6 +889,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -906,6 +922,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = CoreDataStorage/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1200,6 +1220,7 @@
 				1E77F0671C3341180009334B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CBB7A8F919CD844100E95307 /* Build configuration list for PBXProject "VKMusicOffline" */ = {
 			isa = XCConfigurationList;

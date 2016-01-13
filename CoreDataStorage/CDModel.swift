@@ -38,11 +38,11 @@ public class CDModel: NSObject {
     
     public init(storageURL:NSURL) {
         super.init()
-        NSLog("Using model \(self.modelFileURL)")
+        CDLog("Using model \(self.modelFileURL)")
         self.model = NSManagedObjectModel(contentsOfURL: self.modelFileURL!)
         
         self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.model)
-        NSLog("Using persistentStore: \(storageURL)")
+        CDLog("Using persistentStore: \(storageURL)")
         if let _ = try? self.persistentStoreCoordinator.addPersistentStoreWithType(NSSQLiteStoreType,
             configuration: nil, URL: storageURL, options: nil) {
             self.mainContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
@@ -53,9 +53,10 @@ public class CDModel: NSObject {
     public func save() {
         do {
             try self.mainContext.save()
-            NSLog("Model saved.")
+            CDLog("Model saved.")
         } catch let error as NSError {
-            NSLog("Error saving model: \(error)")
+            CDLog("Error saving model: \(error)")
+            CDLogError(error)
         }
     }
     
@@ -64,7 +65,8 @@ public class CDModel: NSObject {
             let audioLists = try self.mainContext.executeFetchRequest(fetchRequest)
             return audioLists as! [NSManagedObject]
         } catch let error as NSError {
-            NSLog("Fetch request \(fetchRequest) for \(fetchRequest.entityName) failed with error: \(error)")
+            CDLog("Fetch request \(fetchRequest) for \(fetchRequest.entityName) failed with error: \(error)")
+            CDLogError(error)
             return []
         }
     }

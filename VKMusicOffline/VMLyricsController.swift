@@ -58,10 +58,10 @@ class VMLyricsController: UIViewController {
             self.title = audio.title as String?
         }
         
-        NSLog("self.parentViewController: \(self.parentViewController)")
+        VMLog("self.parentViewController: \(self.parentViewController)")
         
         if let _ = self.navigationBar {
-            NSLog("self.navigationBar.topItem: \(self.navigationBar.topItem)")
+            VMLog("self.navigationBar.topItem: \(self.navigationBar.topItem)")
         
             self.navigationBar.topItem?.title = self.title
             

@@ -57,7 +57,7 @@ class VMOnlineAudioList: VMAudioList {
             self.request = self.createRequest()
         }
         
-        NSLog("VMOnlineAudioList.loadNextPage starts (loading \(self.pageSize) audios with offset \(self.currentPageOffset) ...")
+        VMLog("VMOnlineAudioList.loadNextPage starts (loading \(self.pageSize) audios with offset \(self.currentPageOffset) ...")
         self.request.executeWithResultBlock({(response: VKResponse!) -> Void in
             
             var audios : VKAudios! = nil
@@ -78,12 +78,12 @@ class VMOnlineAudioList: VMAudioList {
             
             self.currentPageOffset += self.pageSize
             
-            NSLog("VMOnlineAudioList.loadNextPage got audios: \(response.json)")
+            VMLog("VMOnlineAudioList.loadNextPage got audios: \(response.json)")
             if let _completion = completion {
                 _completion(nil)
             }
         }, errorBlock: {(error: NSError!) -> Void in
-            NSLog("VMOnlineAudioList.loadNextPage got error: \(error)")
+            VMLog("VMOnlineAudioList.loadNextPage got error: \(error)")
             if let _completion = completion {
                 _completion(error)
             }
@@ -97,7 +97,7 @@ class VMOnlineAudioList: VMAudioList {
         
         if let request = self.request {
             if request.isExecuting {
-                NSLog("Cancelling request: \(self.request)")
+                VMLog("Cancelling request: \(self.request)")
                 self.request.cancel()
             }
             self.request = nil

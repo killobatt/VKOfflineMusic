@@ -21,7 +21,8 @@ extension CDAudioList {
         do {
             storedAudioList = try context.executeFetchRequest(request).first as? CDAudioList
         } catch let error as NSError {
-            NSLog("Failed to fetch stored audio list: \(error)")
+            VMLog("Failed to fetch stored audio list: \(error)")
+            VMLogError(error)
         }
         
         if storedAudioList == nil {

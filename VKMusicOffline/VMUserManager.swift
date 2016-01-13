@@ -36,14 +36,14 @@ class VMUserManager: NSObject {
     }
     
     func loadCurrentUser(completionBlock completionBlock:((VKUser) -> Void), errorBlock:((NSError!) -> Void)) -> Void {
-        NSLog("VMUserManager.loadCurrentUser starts...")
+        VMLog("VMUserManager.loadCurrentUser starts...")
         self.userRequest.executeWithResultBlock({(response: VKResponse!) -> Void in
             print(response.json)
             print(response.parsedModel)
             if (response.parsedModel is VKUsersArray) {
                 let userList : VKUsersArray = response.parsedModel as! VKUsersArray
                 if (userList.count > 0) {
-                    NSLog("VMUserManager.loadCurrentUser got user : \(response.json)")
+                    VMLog("VMUserManager.loadCurrentUser got user : \(response.json)")
                     let user = userList[0] as! VKUser
                     self.currentUser = user
                     completionBlock(user)
@@ -51,10 +51,10 @@ class VMUserManager: NSObject {
                 }
             }
             // TODO: insert error here
-            NSLog("VMUserManager.loadCurrentUser got invalid json : \(response.json)")
+            VMLog("VMUserManager.loadCurrentUser got invalid json : \(response.json)")
             errorBlock(nil)
             }, errorBlock:{(error: NSError!) -> Void in
-                NSLog("VMUserManager.loadCurrentUser got error: \(error)")
+                VMLog("VMUserManager.loadCurrentUser got error: \(error)")
                 errorBlock(error)
         })
     }

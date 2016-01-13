@@ -113,7 +113,7 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
                 }
             }
         }, errorBlock: { (error: NSError!) -> Void in
-            NSLog("Error syncing: \(error)")
+            VMLog("Error syncing: \(error)")
             if let completion = completion {
                 completion(change: nil, error: error)
             }
@@ -130,11 +130,11 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
         request.executeWithResultBlock({ (vkResponse: VKResponse!) -> Void in
             if let response = vkResponse {
                 // Should be new audio ID
-                NSLog("Received response: \(response.json)")
+                VMLog("Received response: \(response.json)")
                 self.synchronize()
             }
         }, errorBlock: { (error:NSError!) -> Void in
-            NSLog("Received error: \(error)")
+            VMLog("Received error: \(error)")
         })
     }
     
@@ -145,11 +145,11 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
         let request = VKApi.requestWithMethod("audio.delete", andParameters: parameters)
         request.executeWithResultBlock({ (vkResponse: VKResponse!) -> Void in
             if let response = vkResponse {
-                NSLog("Received response: \(response.json)")
+                VMLog("Received response: \(response.json)")
                 // Should be 1
             }
             }, errorBlock: { (error:NSError!) -> Void in
-                NSLog("Received error: \(error)")
+                VMLog("Received error: \(error)")
         })
         
         super.deleteTrackAtIndex(index)
@@ -175,11 +175,11 @@ class VMSynchronizedAudioList: VMOfflineAudioList {
         let request = VKApi.requestWithMethod("audio.reorder", andParameters: parameters)
         request.executeWithResultBlock({ (vkResponse: VKResponse!) -> Void in
             if let response = vkResponse {
-                NSLog("Received response: \(response.json)")
+                VMLog("Received response: \(response.json)")
                 // Should be 1
             }
             }, errorBlock: { (error:NSError!) -> Void in
-                NSLog("Received error: \(error)")
+                VMLog("Received error: \(error)")
         })
         
         

@@ -46,7 +46,8 @@ extension CDAudio {
         do {
             storedAudio = try context.executeFetchRequest(request).first as? CDAudio
         } catch let error as NSError {
-            NSLog("Error fetching stored audio: \(error)")
+            VMLog("Error fetching stored audio: \(error)")
+            VMLogError(error)
         }
         
         if storedAudio == nil {

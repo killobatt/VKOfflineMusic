@@ -74,7 +74,7 @@ class VMSplitViewController: UISplitViewController {
                 case .RemoteControlNextTrack:
                     player.playNextTrack()
                 default:
-                    NSLog("Got event unprocesed event: \(event)")
+                    VMLog("Got event unprocesed event: \(event)")
                 }
             }
         }

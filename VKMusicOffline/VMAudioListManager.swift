@@ -176,29 +176,31 @@ class VMAudioListManager: NSObject {
     private func removeFileForAudio(audio:VMAudio) {
 //        if let fileName = audio.localFileName {
 //            if !NSFileManager.defaultManager().removeItemAtPath(listPath, error: &error) {
-//                NSLog("Could not remove list \(list.title) at path: \(listPath): \(error)")
+//                VMLog("Could not remove list \(list.title) at path: \(listPath): \(error)")
 //            }
 //        }
     }
     
     private func removeFilesForList(list:VMOfflineAudioList) {
         let listURL = self.URLForLegacyList(list)
-        NSLog("Removin list \(list.title) at path: \(listURL)...)")
+        VMLog("Removin list \(list.title) at path: \(listURL)...)")
         do {
             try NSFileManager.defaultManager().removeItemAtURL(listURL)
-        } catch let error {
-            NSLog("Could not remove list \(list.title) at path: \(listURL): \(error)")
+        } catch let error as NSError {
+            VMLog("Could not remove list \(list.title) at path: \(listURL): \(error)")
+            VMLogError(error)
         }
     }
     
     func createAudioListsDirectoryIfNeeded() {
         let fileManager = NSFileManager.defaultManager()
         if !self.offlineAudioListDirectoryExists {
-            NSLog("Creating audio list directory at path '\(self.offlineAudioListDirectoryURL)'")
+            VMLog("Creating audio list directory at path '\(self.offlineAudioListDirectoryURL)'")
             do {
                 try fileManager.createDirectoryAtURL(self.offlineAudioListDirectoryURL, withIntermediateDirectories: true, attributes: nil)
             } catch let error as NSError {
-                NSLog("Error creating audio list directory: \(error)")
+                VMLog("Error creating audio list directory: \(error)")
+                VMLogError(error)
             }
         }
     }
@@ -208,7 +210,7 @@ class VMAudioListManager: NSObject {
         
         for list in self.offlineAudioLists {
             let url = self.URLForLegacyList(list)
-            NSLog("Saving list '\(list.title)' with \(list.audios.count) audios to file '\(url)'...")
+            VMLog("Saving list '\(list.title)' with \(list.audios.count) audios to file '\(url)'...")
             NSKeyedArchiver.archiveRootObject(list, toFile: url.absoluteString)
         }
     }
@@ -218,22 +220,23 @@ class VMAudioListManager: NSObject {
         
         let fileManager = NSFileManager.defaultManager()
         if (self.offlineAudioListDirectoryExists) {
-            NSLog("Scanning folder '\(self.offlineAudioListDirectoryURL)' for legacy lists...")
+            VMLog("Scanning folder '\(self.offlineAudioListDirectoryURL)' for legacy lists...")
             do {
                 let listURLs = try fileManager.contentsOfDirectoryAtURL(self.offlineAudioListDirectoryURL, includingPropertiesForKeys: [], options: [])
                 for listURL in listURLs {
                     if (listURL.pathExtension != "list") {
                         continue
                     }
-                    NSLog("Loading legacy list from file '\(listURL)'...")
+                    VMLog("Loading legacy list from file '\(listURL)'...")
                     if let listPath = listURL.path {
                         let list = NSKeyedUnarchiver.unarchiveObjectWithFile(listPath) as! VMOfflineAudioList
                         offlineAudioLists.append(list)
-                        NSLog("Loaded legacy list '\(list.title)' with \(list.audios.count) audios")
+                        VMLog("Loaded legacy list '\(list.title)' with \(list.audios.count) audios")
                     }
                 }
             } catch let error as NSError {
-                NSLog("Error loading contents of dir \(self.offlineAudioListDirectoryURL) : \(error)")
+                VMLog("Error loading contents of dir \(self.offlineAudioListDirectoryURL) : \(error)")
+                VMLogError(error)
                 return []
             }
         }
@@ -252,7 +255,7 @@ class VMAudioListManager: NSObject {
                 list = VMOfflineAudioList(storedAudioList: storedAudioList)
             }
             self.offlineAudioLists.append(list)
-            NSLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
+            VMLog("Loaded list '\(list.title)' with \(list.audios.count) audios")
         }
     }
     
@@ -267,7 +270,8 @@ class VMAudioListManager: NSObject {
             do {
                 try context.save()
             } catch let error as NSError {
-                NSLog("Error saving child context: \(error)")
+                VMLog("Error saving child context: \(error)")
+                VMLogError(error)
             }
             
             self.model.mainContext.performBlockAndWait() {
@@ -318,12 +322,12 @@ extension VMAudioListManager: VMAudioDownloadManagerDelegate {
     
     func downloadManager(downloadManager: VMAudioDownloadManager, didLoadFile url: NSURL, forAudioWithID audioID: NSNumber) {
         
-        NSLog("downloadManager audio: \(audioID) was loaded to temp file: \(url)")
+        VMLog("downloadManager audio: \(audioID) was loaded to temp file: \(url)")
         let audioURL = self.URLForAudioID(audioID.stringValue)
         
         do {
             try NSFileManager.defaultManager().moveItemAtURL(url, toURL: audioURL)
-            NSLog("downloadManager audio: \(audioID) was moved to file: \(audioURL)")
+            VMLog("downloadManager audio: \(audioID) was copied to file: \(audioURL)")
             
             let allAudios = self.offlineAudioLists.reduce([]) { result, list in result + list.audios }
             let audiosToUpdate = allAudios.filter { audio in audio.id == audioID }
@@ -332,9 +336,10 @@ extension VMAudioListManager: VMAudioDownloadManagerDelegate {
             }
             self.saveOfflineAudioLists()
         } catch let error as NSError {
-            NSLog("Error moving item: \(error)")
+            VMLog("Error moving item: \(error)")
+            VMLogError(error)
         } catch _ {
-            NSLog("Unknown shit happened")
+            VMLog("Unknown shit happened")
         }
         
     }
@@ -347,7 +352,7 @@ extension VMAudioListManager: VMAudioDownloadManagerDelegate {
 extension VMAudioListManager: NSFileManagerDelegate {
     func fileManager(fileManager: NSFileManager, shouldProceedAfterError error: NSError, movingItemAtURL srcURL: NSURL, toURL dstURL: NSURL) -> Bool {
         if error.code == NSFileWriteFileExistsError {
-            NSLog("will overwrite file at path: \(dstURL)")
+            VMLog("will overwrite file at path: \(dstURL)")
             return true
         }
         return false
@@ -386,9 +391,9 @@ extension VMAudioListManager {
             let path = self.URLForLegacyList(legacyList)
             do {
                 try NSFileManager.defaultManager().removeItemAtURL(path)
-                NSLog("Removed legacy list \(legacyList.title) file \(path)")
+                VMLog("Removed legacy list \(legacyList.title) file \(path)")
             } catch let error {
-                NSLog("Error removing list \(legacyList.title) file: \(path), error: \(error)")
+                VMLog("Error removing list \(legacyList.title) file: \(path), error: \(error)")
             }
         }
         self.model.save()
