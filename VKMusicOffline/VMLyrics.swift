@@ -25,18 +25,14 @@ class VMLyrics: NSObject, NSCoding {
         let lyricsRequest = VKApi.requestWithMethod("audio.getLyrics", andParameters: ["lyrics_id" : self.id])
         
         lyricsRequest.executeWithResultBlock({ (response: VKResponse!) -> Void in
-            VMLog("VMLyrics.loadText got text: \(response.json)")
-            if response.json is NSDictionary {
-                let vkObject = response.json as! NSDictionary
-                self.text = vkObject["text"] as! String
+            if let vkObject = response.json as? NSDictionary,
+                let text = vkObject["text"] as? String {
+                self.text = text
+                VMLog("VMLyrics.loadText got text: \(text.stringByPaddingToLength(50, withString: "...", startingAtIndex: 0))")
             }
-            if let _completion = completion {
-                _completion(nil)
-            }
+            completion?(nil)
         }, errorBlock: { (error:NSError!) -> Void in
-            if let _completion = completion {
-                _completion(error)
-            }
+            completion?(error)
         })
     }
     
